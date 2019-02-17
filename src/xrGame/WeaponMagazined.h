@@ -69,7 +69,7 @@ public:
 	virtual void	Load			(LPCSTR section);
 			void	LoadSilencerKoeffs();
 	virtual CWeaponMagazined*cast_weapon_magazined	()		 {return this;}
-
+	virtual bool    UseScopeTexture ();
 	virtual void	SetDefaults		();
 	virtual void	FireStart		();
 	virtual void	FireEnd			();

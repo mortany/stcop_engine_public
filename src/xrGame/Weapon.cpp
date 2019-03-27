@@ -1428,18 +1428,23 @@ void CWeapon::UpdateHUDAddonsVisibility()
 
 //.	return;
 
-	if(ScopeAttachable())
+	u16 bone_id = HudItemData()->m_model->LL_BoneID(wpn_scope);
+
+	if (bone_id != BI_NONE)
 	{
-		HudItemData()->set_bone_visible(wpn_scope, IsScopeAttached() );
+		if (ScopeAttachable())
+		{
+			HudItemData()->set_bone_visible(wpn_scope, IsScopeAttached());
+		}
+
+		if (m_eScopeStatus == ALife::eAddonDisabled)
+		{
+			HudItemData()->set_bone_visible(wpn_scope, FALSE, TRUE);
+		}
+		else
+			if (m_eScopeStatus == ALife::eAddonPermanent)
+				HudItemData()->set_bone_visible(wpn_scope, TRUE, TRUE);
 	}
-
-	if(m_eScopeStatus==ALife::eAddonDisabled )
-	{
-		HudItemData()->set_bone_visible(wpn_scope, FALSE, TRUE );
-	}else
-		if(m_eScopeStatus==ALife::eAddonPermanent)
-			HudItemData()->set_bone_visible(wpn_scope, TRUE, TRUE );
-
 	if(SilencerAttachable())
 	{
 		HudItemData()->set_bone_visible(wpn_silencer, IsSilencerAttached());
@@ -1479,10 +1484,10 @@ void CWeapon::UpdateAddonsVisibility()
 	{
 		if(IsScopeAttached())
 		{
-			if(!pWeaponVisual->LL_GetBoneVisible		(bone_id))
+			if(!pWeaponVisual->LL_GetBoneVisible		(bone_id) && bone_id!=BI_NONE)
 			pWeaponVisual->LL_SetBoneVisible				(bone_id,TRUE,TRUE);
 		}else{
-			if(pWeaponVisual->LL_GetBoneVisible				(bone_id))
+			if(pWeaponVisual->LL_GetBoneVisible				(bone_id) && bone_id != BI_NONE)
 				pWeaponVisual->LL_SetBoneVisible			(bone_id,FALSE,TRUE);
 		}
 	}

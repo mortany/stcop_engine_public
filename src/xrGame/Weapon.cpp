@@ -507,13 +507,16 @@ void CWeapon::Load		(LPCSTR section)
 	m_zoom_params.m_bZoomEnabled		= !!pSettings->r_bool(section,"zoom_enabled");
 	m_zoom_params.m_fZoomRotateTime		= pSettings->r_float(section,"zoom_rotate_time");
 
-	UseAltScope = pSettings->line_exist(section, "scopes");
+	m_zoom_params.m_bUseDynamicZoom = FALSE;
+	m_zoom_params.m_sUseZoomPostprocess = 0;
+	m_zoom_params.m_sUseBinocularVision = 0;
+
+	UseAltScope = (bool)pSettings->line_exist(section, "scopes");
 
 	if (UseAltScope)
 	{
 		if (m_eScopeStatus == ALife::eAddonAttachable)
 		{
-
 			LPCSTR str = pSettings->r_string(section, "scopes");
 			for (int i = 0, count = _GetItemCount(str); i < count; ++i)
 			{
@@ -522,7 +525,7 @@ void CWeapon::Load		(LPCSTR section)
 
 				if (!xr_strcmp(scope_section, "none"))
 				{
-					UseAltScope = 0;
+					UseAltScope = false;
 				}
 				else
 				{
@@ -655,10 +658,6 @@ void CWeapon::Load		(LPCSTR section)
 		m_hit_probability[i]		= READ_IF_EXISTS(pSettings,r_float,section,temp,1.f);
 	}
 
-	
-	m_zoom_params.m_bUseDynamicZoom				= READ_IF_EXISTS(pSettings,r_bool,section,"scope_dynamic_zoom",FALSE);
-	m_zoom_params.m_sUseZoomPostprocess			= 0;
-	m_zoom_params.m_sUseBinocularVision			= 0;
 }
 
 void CWeapon::LoadFireParams		(LPCSTR section)

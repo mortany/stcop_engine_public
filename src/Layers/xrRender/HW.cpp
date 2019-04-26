@@ -67,9 +67,16 @@ void CHW::Reset		(HWND hwnd)
 	// Windoze
 	DevPP.SwapEffect			= bWindowed?D3DSWAPEFFECT_COPY:D3DSWAPEFFECT_DISCARD;
 	DevPP.Windowed				= bWindowed;
-	DevPP.PresentationInterval	= D3DPRESENT_INTERVAL_IMMEDIATE;
-	if( !bWindowed )		DevPP.FullScreen_RefreshRateInHz	= selectRefresh	(DevPP.BackBufferWidth,DevPP.BackBufferHeight,Caps.fTarget);
-	else					DevPP.FullScreen_RefreshRateInHz	= D3DPRESENT_RATE_DEFAULT;
+	if (!bWindowed)
+	{
+		DevPP.PresentationInterval = selectPresentInterval();
+		DevPP.FullScreen_RefreshRateInHz = selectRefresh(DevPP.BackBufferWidth, DevPP.BackBufferHeight, Caps.fTarget);
+	}
+	else
+	{
+		DevPP.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+		DevPP.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
+	}
 #endif
 
 	while	(TRUE)	{
@@ -351,9 +358,16 @@ void		CHW::CreateDevice		(HWND m_hWnd, bool move_window)
 	P.Flags					= 0;	//. D3DPRESENTFLAG_DISCARD_DEPTHSTENCIL;
 
 	// Refresh rate
-	P.PresentationInterval	= D3DPRESENT_INTERVAL_IMMEDIATE;
-    if( !bWindowed )		P.FullScreen_RefreshRateInHz	= selectRefresh	(P.BackBufferWidth, P.BackBufferHeight,fTarget);
-    else					P.FullScreen_RefreshRateInHz	= D3DPRESENT_RATE_DEFAULT;
+	if (!bWindowed)
+	{
+		P.PresentationInterval = selectPresentInterval(); // Vsync (R1\R2)
+		P.FullScreen_RefreshRateInHz = selectRefresh(P.BackBufferWidth, P.BackBufferHeight, fTarget);
+	}
+	else
+	{
+		P.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+		P.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
+	}
 
     // Create the device
 	u32 GPU		= selectGPU();	

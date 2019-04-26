@@ -340,7 +340,9 @@ void dxRenderDeviceRender::End()
 	DoAsyncScreenshot();
 
 #if defined(USE_DX10) || defined(USE_DX11)
-	HW.m_pSwapChain->Present( 0, 0 );
+	//HW.m_pSwapChain->Present( 0, 0 );
+	bool bUseVSync = psDeviceFlags.is(rsFullscreen) && psDeviceFlags.test(rsVSync);
+	HW.m_pSwapChain->Present(bUseVSync ? 1 : 0, 0);
 #else	//	USE_DX10
 	CHK_DX				(HW.pDevice->EndScene());
 

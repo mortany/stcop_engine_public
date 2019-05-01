@@ -5,6 +5,7 @@
 
 XRCORE_API CInifile const* pSettings = NULL;
 XRCORE_API CInifile const* pSettingsAuth = NULL;
+XRCORE_API CInifile const* pFFSettings = NULL;
 
 CInifile* CInifile::Create(const char* szFileName, BOOL ReadOnly)
 {

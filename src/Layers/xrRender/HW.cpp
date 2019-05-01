@@ -67,14 +67,13 @@ void CHW::Reset		(HWND hwnd)
 	// Windoze
 	DevPP.SwapEffect			= bWindowed?D3DSWAPEFFECT_COPY:D3DSWAPEFFECT_DISCARD;
 	DevPP.Windowed				= bWindowed;
+	DevPP.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 	if (!bWindowed)
-	{
-		DevPP.PresentationInterval = selectPresentInterval();
+	{		
 		DevPP.FullScreen_RefreshRateInHz = selectRefresh(DevPP.BackBufferWidth, DevPP.BackBufferHeight, Caps.fTarget);
 	}
 	else
 	{
-		DevPP.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 		DevPP.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
 	}
 #endif
@@ -356,16 +355,15 @@ void		CHW::CreateDevice		(HWND m_hWnd, bool move_window)
 	P.EnableAutoDepthStencil= TRUE;
     P.AutoDepthStencilFormat= fDepth;
 	P.Flags					= 0;	//. D3DPRESENTFLAG_DISCARD_DEPTHSTENCIL;
+	P.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 
 	// Refresh rate
 	if (!bWindowed)
 	{
-		P.PresentationInterval = selectPresentInterval(); // Vsync (R1\R2)
 		P.FullScreen_RefreshRateInHz = selectRefresh(P.BackBufferWidth, P.BackBufferHeight, fTarget);
 	}
 	else
-	{
-		P.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+	{		
 		P.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
 	}
 

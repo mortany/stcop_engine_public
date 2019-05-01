@@ -212,6 +212,19 @@ struct path_excluder_predicate
     xr_auth_strings_t const* m_ignore;
 };
 
+template <typename T>
+void InitConfig(T& config, pcstr name, bool fatal = true,
+	bool readOnly = true, bool loadAtStart = true, bool saveAtEnd = true,
+	u32 sectCount = 0, const CInifile::allow_include_func_t& allowIncludeFunc = nullptr)
+{
+	string_path fname;
+	FS.update_path(fname, "$game_config$", name);
+	config = new CInifile(fname, readOnly, loadAtStart, saveAtEnd, sectCount, allowIncludeFunc);
+
+	CHECK_OR_EXIT(config->section_count() || !fatal,
+		make_string("Cannot find file %s.\nReinstalling application may fix this problem.", fname));
+}
+
 PROTECT_API void InitSettings()
 {
 #ifndef DEDICATED_SERVER
@@ -220,31 +233,19 @@ PROTECT_API void InitSettings()
 
     string_path fname;
     FS.update_path(fname, "$game_config$", "system.ltx");
-#ifdef DEBUG
-    Msg("Updated path to system.ltx is %s", fname);
-#endif // #ifdef DEBUG
     pSettings = xr_new<CInifile>(fname, TRUE);
     CHECK_OR_EXIT(0 != pSettings->section_count(), make_string("Cannot find file %s.\nReinstalling application may fix this problem.", fname));
 
-    xr_auth_strings_t tmp_ignore_pathes;
-    xr_auth_strings_t tmp_check_pathes;
+    xr_auth_strings_t tmp_ignore_pathes, tmp_check_pathes;
     fill_auth_check_params(tmp_ignore_pathes, tmp_check_pathes);
-
     path_excluder_predicate tmp_excluder(&tmp_ignore_pathes);
-    CInifile::allow_include_func_t tmp_functor;
-    tmp_functor.bind(&tmp_excluder, &path_excluder_predicate::is_allow_include);
-    pSettingsAuth = xr_new<CInifile>(
-                        fname,
-                        TRUE,
-                        TRUE,
-                        FALSE,
-                        0,
-                        tmp_functor
-                    );
+    CInifile::allow_include_func_t includeFilter;
+	includeFilter.bind(&tmp_excluder, &path_excluder_predicate::is_allow_include);
 
-    FS.update_path(fname, "$game_config$", "game.ltx");
-    pGameIni = xr_new<CInifile>(fname, TRUE);
-    CHECK_OR_EXIT(0 != pGameIni->section_count(), make_string("Cannot find file %s.\nReinstalling application may fix this problem.", fname));
+	InitConfig(pSettings, "system.ltx");
+	InitConfig(pSettingsAuth, "system.ltx", true, true, true, false, 0, includeFilter);
+	InitConfig(pFFSettings, "stcop_config.ltx", false, true, true, false);
+	InitConfig(pGameIni, "game.ltx");
 }
 PROTECT_API void InitConsole()
 {

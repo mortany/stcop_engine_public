@@ -340,6 +340,10 @@ public:
 
     bool m_paused;
 #endif // #ifdef _EDITOR
+	//[FF]Mortan: thx to OpenXray 1.6
+	bool useDynamicSunDir;
+	float sunDirAzimuth;
+	//End
 
     CInifile* m_ambients_config;
     CInifile* m_sound_channels_config;

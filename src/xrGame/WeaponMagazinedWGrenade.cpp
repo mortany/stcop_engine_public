@@ -861,60 +861,73 @@ void CWeaponMagazinedWGrenade::net_Spawn_install_upgrades	( Upgrades_type saved_
 
 
 #include "string_table.h"
-bool CWeaponMagazinedWGrenade::GetBriefInfo( II_BriefInfo& info )
+bool CWeaponMagazinedWGrenade::GetBriefInfo(II_BriefInfo& info)
 {
 	VERIFY(m_pInventory);
-/*
-	if(!inherited::GetBriefInfo(info))
-		return false;
-*/
-	string32 int_str;
+	/*
+		if(!inherited::GetBriefInfo(info))
+			return false;
+	*/
+	string32	int_str, fire_mode, ammo = "";
 	int	ae = GetAmmoElapsed();
 	xr_sprintf(int_str, "%d", ae);
 	info.cur_ammo._set(int_str);
-	if(HasFireModes())
+	info.fire_mode._set("");
+
+	if (HasFireModes())
 	{
-		if(m_iQueueSize == WEAPON_ININITE_QUEUE)
+		if (m_iQueueSize == WEAPON_ININITE_QUEUE)
 			info.fire_mode._set("A");
 		else
 		{
-			xr_sprintf(int_str, "%d", m_iQueueSize);
-			info.fire_mode._set(int_str);
+			xr_sprintf(fire_mode, "%d", m_iQueueSize);
+			info.fire_mode._set(fire_mode);
 		}
-	}	
-	if(m_pInventory->ModifyFrame() <= m_BriefInfo_CalcFrame)
+	}
+	if (m_pInventory->ModifyFrame() <= m_BriefInfo_CalcFrame)
 		return false;
 
 	GetSuitableAmmoTotal();
 
 	u32 at_size = m_bGrenadeMode ? m_ammoTypes2.size() : m_ammoTypes.size();
-	if(unlimited_ammo() || at_size == 0)
+	if (unlimited_ammo() || at_size == 0)
 	{
 		info.fmj_ammo._set("--");
 		info.ap_ammo._set("--");
 	}
 	else
 	{
-		u8 ammo_type = m_bGrenadeMode ? m_ammoType2 : m_ammoType;
-		xr_sprintf(int_str, "%d", m_bGrenadeMode ? GetAmmoCount2(0) : GetAmmoCount(0));
-		if(ammo_type==0)
-			info.fmj_ammo._set(int_str);
-		else
-			info.ap_ammo._set(int_str);
+		info.fmj_ammo._set("");
+		info.ap_ammo._set("");
 
-		if(at_size == 2)
+		if (at_size >= 1 && at_size < 3)
 		{
-			xr_sprintf(int_str, "%d", m_bGrenadeMode ? GetAmmoCount2(1) : GetAmmoCount(1));
-			if(ammo_type==0)
-				info.ap_ammo._set(int_str);
-			else
-				info.fmj_ammo._set(int_str);
+			xr_sprintf(ammo, "%d", m_bGrenadeMode ? GetAmmoCount2(0) : GetAmmoCount(0));
+			info.fmj_ammo._set(ammo);
 		}
-		else
-			info.ap_ammo._set("");
+		if (at_size == 2)
+		{
+			xr_sprintf(ammo, "%d", m_bGrenadeMode ? GetAmmoCount2(1) : GetAmmoCount(1));
+			info.ap_ammo._set(ammo);
+		}
+		if (at_size >= 3)
+		{
+			xr_sprintf(ammo, "%d", m_bGrenadeMode ? GetAmmoCount2(m_ammoType) : GetAmmoCount(m_ammoType));
+			info.fmj_ammo._set(ammo);
+			u8 m = 0;
+			u64 ap = 0;
+			while (m < at_size)
+			{
+				if (m != m_ammoType)
+					ap += m_bGrenadeMode ? GetAmmoCount2(m) : GetAmmoCount(m);
+				m++;
+			}
+			xr_sprintf(ammo, "%d", ap);
+			info.ap_ammo._set(ammo);
+		}
 	}
 
-	if(ae != 0 && m_magazine.size() != 0)
+	if (ae != 0 && m_magazine.size() != 0)
 	{
 		LPCSTR ammo_type = m_ammoTypes[m_magazine.back().m_LocalAmmoType].c_str();
 		info.name._set(CStringTable().translate(pSettings->r_string(ammo_type, "inv_name_short")));
@@ -927,24 +940,24 @@ bool CWeaponMagazinedWGrenade::GetBriefInfo( II_BriefInfo& info )
 		info.icon._set(ammo_type);
 	}
 
-	if(!IsGrenadeLauncherAttached())
+	if (!IsGrenadeLauncherAttached())
 	{
 		info.grenade = "";
 		return false;
 	}
 
 	int total2 = m_bGrenadeMode ? GetAmmoCount(0) : GetAmmoCount2(0);
-	if(unlimited_ammo())
+	if (unlimited_ammo())
 		xr_sprintf(int_str, "--");
 	else
 	{
-		if(total2)
+		if (total2)
 			xr_sprintf(int_str, "%d", total2);
 		else
 			xr_sprintf(int_str, "X");
 	}
-	info.grenade	= int_str;
-	
+	info.grenade = int_str;
+
 	return true;
 }
 

@@ -1273,76 +1273,89 @@ void CWeaponMagazined::net_Import	(NET_Packet& P)
 }
 
 #include "string_table.h"
-bool CWeaponMagazined::GetBriefInfo( II_BriefInfo& info )
+bool CWeaponMagazined::GetBriefInfo(II_BriefInfo& info)
 {
-	VERIFY( m_pInventory );
-	string32	int_str;
+	VERIFY(m_pInventory);
+	string32	int_str, fire_mode, ammo = "";
 
-	int	ae				= GetAmmoElapsed();
-	xr_sprintf			( int_str, "%d", ae );
-	info.cur_ammo		= int_str;
+	int	ae = GetAmmoElapsed();
+	xr_sprintf(int_str, "%d", ae);
+	info.cur_ammo = int_str;
+	info.fire_mode._set("");
 
-	if ( HasFireModes() )
+	if (HasFireModes())
 	{
 		if (m_iQueueSize == WEAPON_ININITE_QUEUE)
 		{
-			info.fire_mode		= "A" ;
-		}else
-		{
-			xr_sprintf			( int_str, "%d", m_iQueueSize );
-			info.fire_mode		= int_str;
+			info.fire_mode = "A";
 		}
-	}else
-		info.fire_mode			= "";
-	
-	if ( m_pInventory->ModifyFrame() <= m_BriefInfo_CalcFrame )
+		else
+		{
+			xr_sprintf(fire_mode, "%d", m_iQueueSize);
+			info.fire_mode = fire_mode;
+		}
+	}
+	else
+		info.fire_mode = "";
+
+	if (m_pInventory->ModifyFrame() <= m_BriefInfo_CalcFrame)
 	{
 		return false;
 	}
 	GetSuitableAmmoTotal();//update m_BriefInfo_CalcFrame
-	info.grenade				= "";
+	info.grenade = "";
 
 	u32 at_size = m_ammoTypes.size();
-	if ( unlimited_ammo() || at_size == 0 )
+	if (unlimited_ammo() || at_size == 0)
 	{
-		info.fmj_ammo._set( "--" );
-		info.ap_ammo._set( "--" );
+		info.fmj_ammo._set("--");
+		info.ap_ammo._set("--");
 	}
 	else
 	{
 		//GetSuitableAmmoTotal(); //mp = all type
 
-		xr_sprintf( int_str, "%d", GetAmmoCount( 0 ) ); // !!!!!!!!!!! == 0 temp
-		if(m_ammoType==0)
-			info.fmj_ammo			= int_str;
-		else
-			info.ap_ammo			= int_str;
+		info.fmj_ammo._set("");
+		info.ap_ammo._set("");
 
-		if ( at_size == 2 )
+		if (at_size >= 1 && at_size < 3)
 		{
-			xr_sprintf( int_str, "%d", GetAmmoCount( 1 ) );
-			if(m_ammoType==0)
-				info.ap_ammo		= int_str;
-			else
-				info.fmj_ammo		= int_str;
+			xr_sprintf(ammo, "%d", GetAmmoCount(0));
+			info.fmj_ammo._set(ammo);
 		}
-		else
+		if (at_size == 2)
 		{
-			info.ap_ammo			= "";
+			xr_sprintf(ammo, "%d", GetAmmoCount(1));
+			info.ap_ammo._set(ammo);
+		}
+		if (at_size >= 3)
+		{
+			xr_sprintf(ammo, "%d", GetAmmoCount(m_ammoType));
+			info.fmj_ammo._set(ammo);
+			u8 m = 0;
+			u64 ap = 0;
+			while (m < at_size)
+			{
+				if (m != m_ammoType)
+					ap += GetAmmoCount(m);
+				m++;
+			}
+			xr_sprintf(ammo, "%d", ap);
+			info.ap_ammo._set(ammo);
 		}
 	}
-	
-	if ( ae != 0 && m_magazine.size() != 0 )
+
+	if (ae != 0 && m_magazine.size() != 0)
 	{
 		LPCSTR ammo_type = m_ammoTypes[m_magazine.back().m_LocalAmmoType].c_str();
-		info.name		= CStringTable().translate( pSettings->r_string(ammo_type, "inv_name_short") );
-		info.icon		= ammo_type;
+		info.name = CStringTable().translate(pSettings->r_string(ammo_type, "inv_name_short"));
+		info.icon = ammo_type;
 	}
 	else
 	{
-		LPCSTR ammo_type	= m_ammoTypes[m_ammoType].c_str();
-		info.name			= CStringTable().translate( pSettings->r_string(ammo_type, "inv_name_short") );
-		info.icon			= ammo_type;
+		LPCSTR ammo_type = m_ammoTypes[m_ammoType].c_str();
+		info.name = CStringTable().translate(pSettings->r_string(ammo_type, "inv_name_short"));
+		info.icon = ammo_type;
 	}
 	return true;
 }

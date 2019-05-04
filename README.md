@@ -1,9 +1,10 @@
 X-Ray Engine 1.6 + STCoP WP
 ==========================
 
-This repository contains X-Ray Engine sources based on version 1.6.02. and code for STCoP Weapon Pack mod;
-The original engine is used in S.T.A.L.K.E.R. Call of Pripyat game released by GSC Game World.
-Current task:
-* Update vanila scopes system
-* More stable code
-* Integrate new scopes system into original
+Данный репозиторий содержит код для работы мода STCoP Weapon Pack, поддерживает версии начиная с 3.1
+* - [x] Обновление оригинальной системы установки аддонов
+* - [x] Более стабильный код
+* - [x] Полная совместимость с оригинальной системой установки аддонов
+* - [ ] Поддержка шейдера для коллиматоров в R1 рендере
+==========================
+P.S. Если хотите поддержать дальнейшую работу над модом то можете это сделать при помощи ЯД 410018894778222

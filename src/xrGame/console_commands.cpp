@@ -97,6 +97,8 @@ extern float	g_smart_cover_factor;
 extern int		g_upgrades_log;
 extern float	g_smart_cover_animation_speed_factor;
 
+bool bCheatEnable = READ_IF_EXISTS(pFFSettings, r_bool, "debug", "cheats_mode", false);
+
 extern	BOOL	g_ai_use_old_vision;
 float			g_aim_predict_time = 0.44f;
 int				g_keypress_on_start	= 1;
@@ -1973,10 +1975,14 @@ CMD4(CCC_Integer,			"hit_anims_tune",						&tune_hit_anims,		0, 1);
 	CMD3(CCC_Mask,				"g_no_clip",					&psActorFlags,	AF_NO_CLIP	);
 #endif // DEBUG
 
+	if (bCheatEnable)
+	{
+		CMD3(CCC_Mask, "g_god", &psActorFlags, AF_GODMODE);
+		CMD3(CCC_Mask, "g_unlimitedammo", &psActorFlags, AF_UNLIMITEDAMMO);
+	}
+
 #ifndef MASTER_GOLD
 	CMD1(CCC_JumpToLevel,	"jump_to_level"		);
-	CMD3(CCC_Mask,			"g_god",			&psActorFlags,	AF_GODMODE	);
-	CMD3(CCC_Mask,			"g_unlimitedammo",	&psActorFlags,	AF_UNLIMITEDAMMO);
 	CMD1(CCC_Script,		"run_script");
 	CMD1(CCC_ScriptCommand,	"run_string");
 	CMD1(CCC_TimeFactor,	"time_factor");		

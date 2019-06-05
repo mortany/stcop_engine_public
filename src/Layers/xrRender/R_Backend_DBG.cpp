@@ -13,7 +13,6 @@ void CBackend::dbg_DIP(D3DPRIMITIVETYPE pt, ref_geom geom, u32 baseV, u32 startV
 	RCache.Render			(pt,baseV,startV,countV,startI,PC);
 }
 
-#ifdef DEBUG
 
 void CBackend::dbg_Draw			(D3DPRIMITIVETYPE T, FVF::L* pVerts, int vcnt, u16* pIdx, int pcnt)
 {
@@ -178,4 +177,3 @@ void CBackend::dbg_DrawEllipse(Fmatrix& T, u32 C)
 #endif	//	USE_DX10
 }
 
-#endif

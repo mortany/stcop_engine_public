@@ -50,14 +50,12 @@
 #include "xrPhysics/IPHWorld.h"
 #include "xrPhysics/console_vars.h"
 
-#ifdef DEBUG
 #include "level_debug.h"
 #include "ai/stalker/ai_stalker.h"
 #include "debug_renderer.h"
 #include "PhysicObject.h"
 #include "PHDebug.h"
 #include "debug_text_tree.h"
-#endif
 
 ENGINE_API bool g_dedicated_server;
 extern CUISequencer* g_tutorial;
@@ -93,10 +91,8 @@ CLevel::CLevel() :
         m_space_restriction_manager = xr_new<CSpaceRestrictionManager>();
         m_client_spawn_manager = xr_new<CClientSpawnManager>();
         m_autosave_manager = xr_new<CAutosaveManager>();
-#ifdef DEBUG
         m_debug_renderer = xr_new<CDebugRenderer>();
-        m_level_debug = xr_new<CLevelDebug>();
-#endif
+        //m_level_debug = xr_new<CLevelDebug>();
     }
     m_ph_commander = xr_new<CPHCommander>();
     m_ph_commander_scripts = xr_new<CPHCommander>();
@@ -144,9 +140,7 @@ CLevel::~CLevel()
     xr_delete(m_seniority_hierarchy_holder);
     xr_delete(m_client_spawn_manager);
     xr_delete(m_autosave_manager);
-#ifdef DEBUG
     xr_delete(m_debug_renderer);
-#endif
     if (!g_dedicated_server)
         ai().script_engine().remove_script_process(ScriptEngine::eScriptProcessorLevel);
     xr_delete(game);

@@ -7,8 +7,7 @@
 ////////////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
-#ifdef DEBUG
-#	include "debug_renderer.h"
+#include "debug_renderer.h"
 
 void CDebugRenderer::add_lines		(Fvector const *vertices, u32 const &vertex_count, u16 const *pairs, u32 const &pair_count, u32 const &color)
 {
@@ -137,4 +136,3 @@ void CDebugRenderer::draw_ellipse	(const Fmatrix &matrix, const u32 &color)
 
 	add_lines						((Fvector*)&vertices[0], sizeof(vertices)/sizeof(Fvector), &pairs[0], sizeof(pairs)/(2*sizeof(u16)), color);
 }
-#endif // DEBUG

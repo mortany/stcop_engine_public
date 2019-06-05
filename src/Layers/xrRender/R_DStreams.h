@@ -17,9 +17,7 @@ private :
 	u32							mDiscardID;		// ID of discard - usually for caching
 public:
 	ID3DVertexBuffer*		old_pVB;
-#ifdef DEBUG
 	u32							dbg_lock;
-#endif
 private:
 	void						_clear			();
 public:

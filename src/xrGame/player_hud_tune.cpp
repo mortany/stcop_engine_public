@@ -15,8 +15,8 @@ u32 hud_adj_mode		= 0;
 u32 hud_adj_item_idx	= 0;
 // "press SHIFT+NUM 0-return 1-hud_pos 2-hud_rot 3-itm_pos 4-itm_rot 5-fire_point 6-fire_2_point 7-shell_point";
 
-float _delta_pos			= 0.0005f;
-float _delta_rot			= 0.05f;
+float _delta_pos			= READ_IF_EXISTS(pFFSettings, r_float, "hud_adj", "_delta_pos", 0.0005f);
+float _delta_rot			= READ_IF_EXISTS(pFFSettings, r_float, "hud_adj", "_delta_rot", 0.05f);
 
 bool is_attachable_item_tuning_mode()
 {
@@ -107,7 +107,6 @@ void calc_cam_diff_rot(Fmatrix item_transform, Fvector diff, Fvector& res)
 
 void attachable_hud_item::tune(Ivector values)
 {
-#ifndef MASTER_GOLD
 	if(!is_attachable_item_tuning_mode() )
 		return;
 
@@ -178,12 +177,10 @@ void attachable_hud_item::tune(Ivector values)
 			Log("-----------");
 		}
 	}
-#endif // #ifndef MASTER_GOLD
 }
 
 void attachable_hud_item::debug_draw_firedeps()
 {
-#ifdef DEBUG
 	bool bForce = (hud_adj_mode==3||hud_adj_mode==4);
 
 	if(hud_adj_mode==5||hud_adj_mode==6||hud_adj_mode==7 ||bForce)
@@ -202,13 +199,11 @@ void attachable_hud_item::debug_draw_firedeps()
 		if(hud_adj_mode==7)
 			render.draw_aabb(fd.vLastSP,0.005f,0.005f,0.005f,D3DCOLOR_XRGB(0,255,0));
 	}
-#endif // DEBUG
 }
 
 
 void player_hud::tune(Ivector _values)
 {
-#ifndef MASTER_GOLD
 	Ivector				values;
 	tune_remap			(_values,values);
 
@@ -283,7 +278,6 @@ void player_hud::tune(Ivector _values)
 		if(!hi)	return;
 		hi->tune(values);
 	}
-#endif // #ifndef MASTER_GOLD
 }
 
 void hud_draw_adjust_mode()

@@ -110,7 +110,7 @@ void CAI_Stalker::reinit			()
 	animation().reinit				();
 //	movement().reinit				();
 
-	//загрузка спецевической звуковой схемы для сталкера согласно m_SpecificCharacter
+	//Р·Р°РіСЂСѓР·РєР° СЃРїРµС†РµРІРёС‡РµСЃРєРѕР№ Р·РІСѓРєРѕРІРѕР№ СЃС…РµРјС‹ РґР»СЏ СЃС‚Р°Р»РєРµСЂР° СЃРѕРіР»Р°СЃРЅРѕ m_SpecificCharacter
 	sound().sound_prefix			(SpecificCharacter().sound_voice_prefix());
 
 #ifdef DEBUG_MEMORY_MANAGER
@@ -470,20 +470,23 @@ void CAI_Stalker::Die				(CObject* who)
 
 	SelectAnimation					(XFORM().k,movement().detail().direction(),movement().speed());
 
-	if(m_death_sound_enabled)
-	{
-		sound().set_sound_mask		((u32)eStalkerSoundMaskDie);
-		if (is_special_killer(who))
-			sound().play			(eStalkerSoundDieInAnomaly);
-		else
-			sound().play			(eStalkerSoundDie);
-	}
+	bool bDieSoundEnable = READ_IF_EXISTS(pFFSettings, r_bool, "gameplay", "death_sound_enable",false);
+
+	if (bDieSoundEnable)
+		sound().set_sound_mask(0);
+	else
+		sound().set_sound_mask((u32)eStalkerSoundMaskDie);
+
+	if (is_special_killer(who))
+		sound().play(eStalkerSoundDieInAnomaly);
+	else
+		sound().play(eStalkerSoundDie);
 	
 	m_hammer_is_clutched			= m_clutched_hammer_enabled && !CObjectHandler::planner().m_storage.property(ObjectHandlerSpace::eWorldPropertyStrapped) && !::Random.randI(0,2);
 
 	inherited::Die					(who);
 	
-	//запретить использование слотов в инвенторе
+	//Р·Р°РїСЂРµС‚РёС‚СЊ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ СЃР»РѕС‚РѕРІ РІ РёРЅРІРµРЅС‚РѕСЂРµ
 	inventory().SetSlotsUseful		(false);
 
 	if (inventory().GetActiveSlot() == NO_ACTIVE_SLOT)
@@ -588,7 +591,7 @@ BOOL CAI_Stalker::net_Spawn			(CSE_Abstract* DC)
 	if (!g_Alive())
 		sound().set_sound_mask(u32(eStalkerSoundMaskDie));
 
-	//загрузить иммунитеты из модельки сталкера
+	//Р·Р°РіСЂСѓР·РёС‚СЊ РёРјРјСѓРЅРёС‚РµС‚С‹ РёР· РјРѕРґРµР»СЊРєРё СЃС‚Р°Р»РєРµСЂР°
 	IKinematics* pKinematics = smart_cast<IKinematics*>(Visual()); VERIFY(pKinematics);
 	CInifile* ini = pKinematics->LL_UserData();
 	if(ini)
@@ -605,7 +608,7 @@ BOOL CAI_Stalker::net_Spawn			(CSE_Abstract* DC)
 		}
 	}
 
-	//вычислить иммунета в зависимости от ранга
+	//РІС‹С‡РёСЃР»РёС‚СЊ РёРјРјСѓРЅРµС‚Р° РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ СЂР°РЅРіР°
 	static float novice_rank_immunity			= pSettings->r_float("ranks_properties", "immunities_novice_k");
 	static float expirienced_rank_immunity		= pSettings->r_float("ranks_properties", "immunities_experienced_k");
 

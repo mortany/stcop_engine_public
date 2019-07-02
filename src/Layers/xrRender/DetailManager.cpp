@@ -321,6 +321,7 @@ void CDetailManager::Render	()
 	MT_SYNC					();
 
 	RDEVICE.Statistic->RenderDUMP_DT_Render.Begin	();
+	g_pGamePersistent->m_pGShaderConstants->m_blender_mode.w = 1.0f; //--#SM+#-- Флаг начала рендера травы [begin of grass render]
 
 #ifndef _EDITOR
 	float factor			= g_pGamePersistent->Environment().wind_strength_factor;
@@ -334,6 +335,7 @@ void CDetailManager::Render	()
 	if (UseVS())			hw_Render	();
 	else					soft_Render	();
 	RCache.set_CullMode		(CULL_CCW);
+	g_pGamePersistent->m_pGShaderConstants->m_blender_mode.w = 0.0f; //--#SM+#-- Флаг конца рендера травы [end of grass render]
 	RDEVICE.Statistic->RenderDUMP_DT_Render.End	();
 	m_frame_rendered		= RDEVICE.dwFrame;
 }

@@ -15,6 +15,7 @@
 #include "../xrphysics/mathutils.h"
 #include "object_broker.h"
 #include "player_hud.h"
+#include "HUDManager.h"
 #include "gamepersistent.h"
 #include "effectorFall.h"
 #include "debug_renderer.h"
@@ -27,6 +28,8 @@
 
 #define WEAPON_REMOVE_TIME		60000
 #define ROTATION_TIME			0.25f
+
+ENGINE_API extern float psHUD_FOV_def;
 
 BOOL	b_toggle_weapon_aim		= FALSE;
 extern CUIXml*	pWpnScopeXml;
@@ -80,6 +83,7 @@ CWeapon::CWeapon()
 
 	UseAltScope = false;
 	ScopeIsHasTexture = false;
+	m_nearwall_last_hud_fov = psHUD_FOV_def;
 }
 
 const shared_str CWeapon::GetScopeName() const
@@ -906,7 +910,7 @@ void CWeapon::OnH_B_Independent	(bool just_before_destroy)
 	m_strapped_mode				= false;
 	m_zoom_params.m_bIsZoomModeNow	= false;
 	UpdateXForm					();
-
+	m_nearwall_last_hud_fov		= psHUD_FOV_def;
 }
 
 void CWeapon::OnH_A_Independent	()
@@ -979,6 +983,7 @@ void CWeapon::OnH_B_Chield		()
 
 	OnZoomOut					();
 	m_set_next_ammoType_on_reload = undefined_ammo_type;
+	m_nearwall_last_hud_fov = psHUD_FOV_def;
 }
 
 extern u32 hud_adj_mode;
@@ -2140,4 +2145,33 @@ u32 CWeapon::Cost() const
 	}
 	return res;
 
+}
+
+// Получить HUD FOV текущего оружия
+float CWeapon::GetHudFov()
+{
+	// Рассчитываем HUD FOV от бедра (с учётом упирания в стены)
+	if (ParentIsActor() && Level().CurrentViewEntity() == H_Parent())
+	{
+		// Получаем расстояние от камеры до точки в прицеле
+		collide::rq_result& RQ = HUD().GetCurrentRayQuery();
+		float dist = RQ.range;
+
+		// Интерполируем расстояние в диапазон от 0 (min) до 1 (max)
+		clamp(dist, m_nearwall_dist_min, m_nearwall_dist_max);
+		float fDistanceMod =
+			((dist - m_nearwall_dist_min) / (m_nearwall_dist_max - m_nearwall_dist_min)); // 0.f ... 1.f
+
+		// Рассчитываем базовый HUD FOV от бедра
+		float fBaseFov = psHUD_FOV_def + m_hud_fov_add_mod;
+		clamp(fBaseFov, 0.0f, FLT_MAX);
+
+		// Плавно высчитываем итоговый FOV от бедра
+		float src = m_nearwall_speed_mod * Device.fTimeDelta;
+		clamp(src, 0.f, 1.f);
+
+		float fTrgFov = m_nearwall_target_hud_fov + fDistanceMod * (fBaseFov - m_nearwall_target_hud_fov);
+		m_nearwall_last_hud_fov = m_nearwall_last_hud_fov * (1 - src) + fTrgFov * src;
+	}
+	return m_nearwall_last_hud_fov;
 }

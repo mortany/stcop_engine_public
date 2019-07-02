@@ -187,7 +187,7 @@ m_ambients_config(0)
 
     xr_delete(config);
 
-	//[FF]Mortan: thx to OpenXray 1.6 https://github.com/OpenXRay/xray-16
+	//[FFT++]: thx to OpenXray 1.6 https://github.com/OpenXRay/xray-16
 	useDynamicSunDir = READ_IF_EXISTS(pFFSettings, r_bool, "environment", "dynamic_sun_dir", true);
 	sunDirAzimuth = READ_IF_EXISTS(pFFSettings, r_float, "environment", "sun_dir_azimuth", 0.0f);
 	clamp(sunDirAzimuth, 0.0f, 360.0f);

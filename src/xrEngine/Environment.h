@@ -340,7 +340,7 @@ public:
 
     bool m_paused;
 #endif // #ifdef _EDITOR
-	//[FF]Mortan: thx to OpenXray 1.6
+	//[FFT++]: thx to OpenXray 1.6
 	bool useDynamicSunDir;
 	float sunDirAzimuth;
 	//End

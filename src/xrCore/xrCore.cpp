@@ -117,6 +117,7 @@ void xrCore::_initialize(LPCSTR _ApplicationName, LogCallback cb, BOOL init_fs, 
         FS._initialize(flags, 0, fs_fname);
         //Msg("'%s' build %d, %s\n", "xrCore", build_id, build_date);
 		Msg("Build: %d\nBuild date: %s\nBuild Created by Forward Frontier Team: Mortan, weteran\n", build_id, build_date);
+		Msg("Non-open source build");
         EFS._initialize();
 #ifdef DEBUG
 #ifndef _EDITOR

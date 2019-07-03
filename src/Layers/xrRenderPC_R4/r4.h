@@ -338,8 +338,8 @@ public:
 	virtual void		_BCL		OnFrame						();
 
 	// [FFT++]
-	void BeforeWorldRender() override; //--#SM+#-- +SecondVP+ Вызывается перед началом рендера мира и пост-эффектов
-	void AfterWorldRender() override;  //--#SM+#-- +SecondVP+ Вызывается после рендера мира и перед UI
+	virtual void BeforeWorldRender(); //--#SM+#-- +SecondVP+ Вызывается перед началом рендера мира и пост-эффектов
+	virtual void AfterWorldRender();  //--#SM+#-- +SecondVP+ Вызывается после рендера мира и перед UI
 
 	// Render mode
 	virtual void					rmNear						();

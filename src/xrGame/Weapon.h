@@ -58,6 +58,15 @@ public:
 	shared_str				GetNameWithAttachment();
 
 
+	//SWM3.0 Второй рендер
+	float CWeapon::GetSecondVPFov() const;
+	IC float GetZRotatingFactor()    const { return m_zoom_params.m_fZoomRotationFactor; }
+	IC float GetSecondVPZoomFactor() const { return m_zoom_params.m_fSecondVPFovFactor; }
+	IC float IsSecondVPZoomPresent() const { return GetSecondVPZoomFactor() > 0.000f; }
+
+	void UpdateSecondVP();
+
+
 	// SWM3.0 hud collision
 	float					m_hud_fov_add_mod;
 	float					m_nearwall_dist_max;
@@ -223,6 +232,8 @@ protected:
 		float			m_fScopeZoomFactor;		//коэффициент увеличения прицела
 
 		float			m_fZoomRotationFactor;
+
+		float           m_fSecondVPFovFactor;
 		
 //		Fvector			m_ZoomDof;
 //		Fvector4		m_ReloadDof;

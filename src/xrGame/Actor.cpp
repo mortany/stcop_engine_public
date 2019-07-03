@@ -1027,11 +1027,11 @@ void CActor::UpdateCL	()
 			psHUD_Flags.set( HUD_DRAW_RT,		pWeapon->show_indicators() );
 
 			// Обновляем двойной рендер от оружия [Update SecondVP with weapon data]
-			//pWeapon->UpdateSecondVP(); //--#SM+#-- +SecondVP+
+			pWeapon->UpdateSecondVP(); //--#SM+#-- +SecondVP+
 
 			// Обновляем информацию об оружии в шейдерах
-			//g_pGamePersistent->m_pGShaderConstants->hud_params.x = pWeapon->GetZRotatingFactor(); //--#SM+#--
-			//g_pGamePersistent->m_pGShaderConstants->hud_params.y = pWeapon->GetSecondVP_FovFactor(); //--#SM+#--
+			g_pGamePersistent->m_pGShaderConstants->hud_params.x = pWeapon->GetZRotatingFactor(); //--#SM+#--
+			g_pGamePersistent->m_pGShaderConstants->hud_params.y = pWeapon->GetSecondVPZoomFactor(); //--#SM+#--
 		}
 
 	}

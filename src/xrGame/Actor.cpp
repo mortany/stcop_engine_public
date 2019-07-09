@@ -1029,9 +1029,11 @@ void CActor::UpdateCL	()
 			// Обновляем двойной рендер от оружия [Update SecondVP with weapon data]
 			pWeapon->UpdateSecondVP(); //--#SM+#-- +SecondVP+
 
+			bool bUseMark = !!pWeapon->IsZoomed();
+
 			// Обновляем информацию об оружии в шейдерах
-			g_pGamePersistent->m_pGShaderConstants->hud_params.x = pWeapon->GetZRotatingFactor(); //--#SM+#--
-			g_pGamePersistent->m_pGShaderConstants->hud_params.y = pWeapon->GetSecondVPZoomFactor(); //--#SM+#--
+			g_pGamePersistent->m_pGShaderConstants->hud_params.x = bUseMark; //--#SM+#--
+			//g_pGamePersistent->m_pGShaderConstants->hud_params.y = pWeapon->GetSecondVPZoomFactor(); //--#SM+#--
 		}
 
 	}

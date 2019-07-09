@@ -57,12 +57,16 @@ public:
 	bool					ScopeIsHasTexture;
 	shared_str				GetNameWithAttachment();
 
+	void LoadModParams(LPCSTR section);
+
+
+	IC bool bInZoomRightNow() const { return m_zoom_params.m_fZoomRotationFactor > 0.05; }
 
 	//SWM3.0 Второй рендер
 	float CWeapon::GetSecondVPFov() const;
 	IC float GetZRotatingFactor()    const { return m_zoom_params.m_fZoomRotationFactor; }
 	IC float GetSecondVPZoomFactor() const { return m_zoom_params.m_fSecondVPFovFactor; }
-	IC float IsSecondVPZoomPresent() const { return GetSecondVPZoomFactor() > 0.000f; }
+	IC float IsSecondVPZoomPresent() const { return GetSecondVPZoomFactor() > 0.005f; }
 
 	void UpdateSecondVP();
 

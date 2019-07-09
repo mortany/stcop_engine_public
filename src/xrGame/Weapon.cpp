@@ -516,6 +516,8 @@ void CWeapon::Load		(LPCSTR section)
 	m_zoom_params.m_sUseZoomPostprocess = 0;
 	m_zoom_params.m_sUseBinocularVision = 0;
 
+	LoadModParams(section);
+
 	UseAltScope = (bool)pSettings->line_exist(section, "scopes");
 
 	if (UseAltScope)
@@ -690,7 +692,17 @@ void CWeapon::LoadFireParams		(LPCSTR section)
 	CShootingObject::LoadFireParams(section);
 };
 
+void CWeapon::LoadModParams(LPCTSTR section)
+{
+	// Модификатор для HUD FOV от бедра
+	m_hud_fov_add_mod = READ_IF_EXISTS(pSettings, r_float, section, "hud_fov_addition_modifier", 0.f);
 
+	// Параметры изменения HUD FOV, когда игрок стоит вплотную к стене
+	m_nearwall_dist_min = READ_IF_EXISTS(pSettings, r_float, section, "nearwall_dist_min", 0.5f);
+	m_nearwall_dist_max = READ_IF_EXISTS(pSettings, r_float, section, "nearwall_dist_max", 1.f);
+	m_nearwall_target_hud_fov = READ_IF_EXISTS(pSettings, r_float, section, "nearwall_target_hud_fov", 0.27f);
+	m_nearwall_speed_mod = READ_IF_EXISTS(pSettings, r_float, section, "nearwall_speed_mod", 10.f);
+}
 
 BOOL CWeapon::net_Spawn		(CSE_Abstract* DC)
 {

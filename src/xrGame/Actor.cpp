@@ -399,6 +399,11 @@ if(!g_dedicated_server)
 		m_BloodSnd.create		(pSettings->r_string(section,"heavy_blood_snd"), st_Effect,SOUND_TYPE_MONSTER_INJURING);
 		m_DangerSnd.create		(pSettings->r_string(section,"heavy_danger_snd"), st_Effect,SOUND_TYPE_MONSTER_INJURING);
 	}
+	if (this == Level().CurrentEntity()) //--#SM+#-- Сбрасываем режим рендеринга в дефолтный [reset some render flags]
+	{
+		g_pGamePersistent->m_pGShaderConstants->m_blender_mode.set(0.f, 0.f, 0.f, 0.f);
+	}
+
 }
 	if( psActorFlags.test(AF_PSP) )
 		cam_Set					(eacLookAt);
@@ -1030,10 +1035,14 @@ void CActor::UpdateCL	()
 			pWeapon->UpdateSecondVP(); //--#SM+#-- +SecondVP+
 
 			bool bUseMark = !!pWeapon->IsZoomed();
+			bool bInZoom  = !!pWeapon->bInZoomRightNow();
+			bool bNVEnbl  = !!pWeapon->NVScopeSecondVP;
 
 			// Обновляем информацию об оружии в шейдерах
-			g_pGamePersistent->m_pGShaderConstants->hud_params.x = bUseMark; //--#SM+#--
-			//g_pGamePersistent->m_pGShaderConstants->hud_params.y = pWeapon->GetSecondVPZoomFactor(); //--#SM+#--
+			g_pGamePersistent->m_pGShaderConstants->hud_params.x = bInZoom;  //--#SM+#--
+			g_pGamePersistent->m_pGShaderConstants->hud_params.y = pWeapon->GetSecondVPFov(); //--#SM+#--
+			g_pGamePersistent->m_pGShaderConstants->hud_params.z = bUseMark; //--#SM+#--
+			g_pGamePersistent->m_pGShaderConstants->m_blender_mode.x = bNVEnbl;  //--#SM+#--
 		}
 
 	}
@@ -1046,6 +1055,8 @@ void CActor::UpdateCL	()
 
 			// Очищаем информацию об оружии в шейдерах
 			g_pGamePersistent->m_pGShaderConstants->hud_params.set(0.f, 0.f, 0.f, 0.f); //--#SM+#--
+			g_pGamePersistent->m_pGShaderConstants->m_blender_mode.set(0.f, 0.f, 0.f, 0.f); //--#SM+#--
+
 
 			// Отключаем второй вьюпорт [Turn off SecondVP]
 			//CWeapon::UpdateSecondVP();

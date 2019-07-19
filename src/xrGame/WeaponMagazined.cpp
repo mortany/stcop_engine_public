@@ -24,16 +24,7 @@
 
 ENGINE_API	bool	g_dedicated_server;
 
-CUIXml*				pWpnScopeXml = NULL;
-
-void createWpnScopeXML()
-{
-	if(!pWpnScopeXml)
-	{
-		pWpnScopeXml			= xr_new<CUIXml>();
-		pWpnScopeXml->Load		(CONFIG_PATH, UI_PATH, "scopes.xml");
-	}
-}
+//CUIXml*				pWpnScopeXml = NULL;
 
 CWeaponMagazined::CWeaponMagazined(ESoundTypes eSoundType) : CWeapon()
 {
@@ -1007,37 +998,9 @@ void CWeaponMagazined::InitAddons()
 	m_zoom_params.m_fIronSightZoomFactor = READ_IF_EXISTS( pSettings, r_float, cNameSect(), "ironsight_zoom_factor", 50.0f );
 	if ( IsScopeAttached() )
 	{
-		shared_str scope_tex_name;
 		if ( m_eScopeStatus == ALife::eAddonAttachable )
 		{
-			ScopeIsHasTexture = false;
-			if (pSettings->line_exist(GetScopeName(), "scope_texture"))
-			{
-				scope_tex_name = pSettings->r_string(GetScopeName(), "scope_texture");
-				if (xr_strcmp(scope_tex_name, "none") != 0)
-					ScopeIsHasTexture = true;
-			}
-
-			m_zoom_params.m_fScopeZoomFactor	= pSettings->r_float( GetScopeName(), "scope_zoom_factor");
-
-			if (ScopeIsHasTexture)
-			{
-				m_zoom_params.m_sUseZoomPostprocess = READ_IF_EXISTS(pSettings, r_string, GetScopeName(), "scope_nightvision", 0);
-				m_zoom_params.m_bUseDynamicZoom = READ_IF_EXISTS(pSettings, r_bool, GetScopeName(), "scope_dynamic_zoom", FALSE);
-				m_zoom_params.m_sUseBinocularVision = READ_IF_EXISTS(pSettings, r_string, GetScopeName(), "scope_alive_detector", 0);
-			}
-			m_fRTZoomFactor = m_zoom_params.m_fScopeZoomFactor;
-			if ( m_UIScope )
-			{
-				xr_delete( m_UIScope );
-			}
-
-			if (ScopeIsHasTexture)
-			{
-				m_UIScope				= xr_new<CUIWindow>();
-				createWpnScopeXML		();
-				CUIXmlInit::InitWindow	(*pWpnScopeXml, scope_tex_name.c_str(), 0, m_UIScope);
-			}
+			LoadCurrentScopeParams(GetScopeName().c_str());
 		}
 	}
 	else

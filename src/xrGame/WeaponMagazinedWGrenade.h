@@ -50,6 +50,8 @@ public:
 
 	virtual void	UpdateSounds	();
 
+	virtual void UpdateSecondVP(bool bInGrenade = false);
+
 	//переключение в режим подствольника
 	virtual bool	SwitchMode		();
 	void			PerformSwitchGL	();

@@ -55,9 +55,14 @@ public:
 	bool					UseAltScope;
 	void					UpdateAltScope();
 	bool					ScopeIsHasTexture;
+	bool                    NVScopeSecondVP;
 	shared_str				GetNameWithAttachment();
 
 	void LoadModParams(LPCSTR section);
+	void Load3DScopeParams(LPCSTR section);
+	BOOL LoadAltScopesParams(LPCSTR section);
+	void LoadOriginalScopesParams(LPCSTR section);
+	void LoadCurrentScopeParams(LPCSTR section);
 
 
 	IC bool bInZoomRightNow() const { return m_zoom_params.m_fZoomRotationFactor > 0.05; }
@@ -66,9 +71,13 @@ public:
 	float CWeapon::GetSecondVPFov() const;
 	IC float GetZRotatingFactor()    const { return m_zoom_params.m_fZoomRotationFactor; }
 	IC float GetSecondVPZoomFactor() const { return m_zoom_params.m_fSecondVPFovFactor; }
-	IC float IsSecondVPZoomPresent() const { return GetSecondVPZoomFactor() > 0.005f; }
+	IC bool  IsSecondVPZoomPresent() const { return GetSecondVPZoomFactor() > 0.000f; }
+	void ZoomDynamicMod(bool bIncrement, bool bForceLimit);
+	float m_fScopeInertionFactor;
+	virtual float GetControlInertionFactor() const;
 
-	void UpdateSecondVP();
+	virtual void UpdateSecondVP(bool bInGrenade = false);
+	
 
 
 	// SWM3.0 hud collision

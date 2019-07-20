@@ -44,8 +44,6 @@ enum	EGameActions
 	kWPN_FUNC,
 	kWPN_FIREMODE_PREV,
 	kWPN_FIREMODE_NEXT,
-
-	kWPN_NV_CHANGE,
 						
 	kPAUSE,
 	kDROP,
@@ -82,6 +80,7 @@ enum	EGameActions
 	kQUICK_SAVE,
 	kQUICK_LOAD,
 	kALIFE_CMD,
+	kWPN_NV_CHANGE,
 
 	kLASTACTION,
 	kNOTBINDED,

@@ -134,9 +134,11 @@ void CWeapon::UpdateAltScope()
 bool CWeapon::ChangeNVSecondVPStatus()
 {
 	if (!bNVsecondVPavaible || !IsZoomed())
-		return;
+		return false;
 
 	bNVsecondVPstatus = !bNVsecondVPstatus;
+
+	return true;
 }
 
 shared_str CWeapon::GetNameWithAttachment()

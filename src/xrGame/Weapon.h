@@ -43,6 +43,7 @@ public:
 	IC		bool			bInZoomRightNow() const { return m_zoom_params.m_fZoomRotationFactor > 0.05; }
 	IC		bool			IsSecondVPZoomPresent() const { return GetSecondVPZoomFactor() > 0.000f; }
 			BOOL			LoadAltScopesParams(LPCSTR section);
+			bool            ChangeNVSecondVPStatus();
 
 
 	virtual void			UpdateSecondVP(bool bInGrenade = false);
@@ -52,7 +53,6 @@ public:
 			void			LoadCurrentScopeParams(LPCSTR section);
 			void			ZoomDynamicMod(bool bIncrement, bool bForceLimit);
 			void			UpdateAltScope();
-			void            ChangeNVSecondVPStatus();
 
 	virtual float			GetControlInertionFactor() const;
 	IC		float			GetZRotatingFactor()    const { return m_zoom_params.m_fZoomRotationFactor; }

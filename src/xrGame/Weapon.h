@@ -34,6 +34,46 @@ public:
 							CWeapon				();
 	virtual					~CWeapon			();
 
+	// [FFT++]: аддоны и управление аддонами
+			bool			UseAltScope;
+			bool			ScopeIsHasTexture;
+			bool            bNVsecondVPavaible;
+			bool            bNVsecondVPstatus;
+
+	IC		bool			bInZoomRightNow() const { return m_zoom_params.m_fZoomRotationFactor > 0.05; }
+	IC		bool			IsSecondVPZoomPresent() const { return GetSecondVPZoomFactor() > 0.000f; }
+			BOOL			LoadAltScopesParams(LPCSTR section);
+
+
+	virtual void			UpdateSecondVP(bool bInGrenade = false);
+			void			LoadModParams(LPCSTR section);
+			void			Load3DScopeParams(LPCSTR section);
+			void			LoadOriginalScopesParams(LPCSTR section);
+			void			LoadCurrentScopeParams(LPCSTR section);
+			void			ZoomDynamicMod(bool bIncrement, bool bForceLimit);
+			void			UpdateAltScope();
+			void            ChangeNVSecondVPStatus();
+
+	virtual float			GetControlInertionFactor() const;
+	IC		float			GetZRotatingFactor()    const { return m_zoom_params.m_fZoomRotationFactor; }
+	IC		float			GetSecondVPZoomFactor() const { return m_zoom_params.m_fSecondVPFovFactor; }
+			float			GetHudFov();
+			float			GetSecondVPFov() const;
+
+			shared_str		GetNameWithAttachment();
+
+
+			float			m_fScopeInertionFactor;
+	// SWM3.0 hud collision
+			float			m_hud_fov_add_mod;
+			float			m_nearwall_dist_max;
+			float			m_nearwall_dist_min;
+			float			m_nearwall_last_hud_fov;
+			float			m_nearwall_target_hud_fov;
+			float			m_nearwall_speed_mod;
+
+	//End=================================
+
 	// Generic
 	virtual void			Load				(LPCSTR section);
 
@@ -50,46 +90,6 @@ public:
 	virtual void			save				(NET_Packet &output_packet);
 	virtual void			load				(IReader &input_packet);
 	virtual BOOL			net_SaveRelevant	()								{return inherited::net_SaveRelevant();}
-
-	// [FFT++]: ������ � ���������� ��������
-	bool					UseAltScope;
-	void					UpdateAltScope();
-	bool					ScopeIsHasTexture;
-	bool                    NVScopeSecondVP;
-	shared_str				GetNameWithAttachment();
-
-	void LoadModParams(LPCSTR section);
-	void Load3DScopeParams(LPCSTR section);
-	BOOL LoadAltScopesParams(LPCSTR section);
-	void LoadOriginalScopesParams(LPCSTR section);
-	void LoadCurrentScopeParams(LPCSTR section);
-
-
-	IC bool bInZoomRightNow() const { return m_zoom_params.m_fZoomRotationFactor > 0.05; }
-
-	//SWM3.0 ������ ������
-	float CWeapon::GetSecondVPFov() const;
-	IC float GetZRotatingFactor()    const { return m_zoom_params.m_fZoomRotationFactor; }
-	IC float GetSecondVPZoomFactor() const { return m_zoom_params.m_fSecondVPFovFactor; }
-	IC bool  IsSecondVPZoomPresent() const { return GetSecondVPZoomFactor() > 0.000f; }
-	void ZoomDynamicMod(bool bIncrement, bool bForceLimit);
-	float m_fScopeInertionFactor;
-	virtual float GetControlInertionFactor() const;
-
-	virtual void UpdateSecondVP(bool bInGrenade = false);
-	
-
-
-	// SWM3.0 hud collision
-	float					m_hud_fov_add_mod;
-	float					m_nearwall_dist_max;
-	float					m_nearwall_dist_min;
-	float					m_nearwall_last_hud_fov;
-	float					m_nearwall_target_hud_fov;
-	float					m_nearwall_speed_mod;
-
-	float					GetHudFov();
-	//End
 
 	virtual void			UpdateCL			();
 	virtual void			shedule_Update		(u32 dt);
@@ -189,8 +189,8 @@ public:
 	virtual bool UseScopeTexture() {return true;};
 
 	//обновление видимости для косточек аддонов
-			void UpdateAddonsVisibility();
-			void UpdateHUDAddonsVisibility();
+	void UpdateAddonsVisibility();
+	void UpdateHUDAddonsVisibility();
 	//инициализация свойств присоединенных аддонов
 	virtual void InitAddons();
 
@@ -342,29 +342,29 @@ protected:
 	virtual void			OnAnimationEnd			(u32 state);
 
 	//трассирование полета пули
-	virtual	void			FireTrace			(const Fvector& P, const Fvector& D);
-	virtual float			GetWeaponDeterioration	();
+	virtual	void			FireTrace(const Fvector& P, const Fvector& D);
+	virtual float			GetWeaponDeterioration();
 
-	virtual void			FireStart			() {CShootingObject::FireStart();}
-	virtual void			FireEnd				();
+	virtual void			FireStart() { CShootingObject::FireStart(); }
+	virtual void			FireEnd();
 
-	virtual void			Reload				();
-			void			StopShooting		();
-    
+	virtual void			Reload();
+	void			StopShooting();
+
 
 	// обработка визуализации выстрела
-	virtual void			OnShot				(){};
-	virtual void			AddShotEffector		();
-	virtual void			RemoveShotEffector	();
-	virtual	void			ClearShotEffector	();
-	virtual	void			StopShotEffector	();
+	virtual void			OnShot() {};
+	virtual void			AddShotEffector();
+	virtual void			RemoveShotEffector();
+	virtual	void			ClearShotEffector();
+	virtual	void			StopShotEffector();
 
 public:
-	float					GetBaseDispersion	(float cartridge_k);
-	float					GetFireDispersion	(bool with_cartridge, bool for_crosshair = false);
-	virtual float			GetFireDispersion	(float cartridge_k, bool for_crosshair = false);
-	virtual	int				ShotsFired			() { return 0; }
-	virtual	int				GetCurrentFireMode	() { return 1; }
+	float					GetBaseDispersion(float cartridge_k);
+	float					GetFireDispersion(bool with_cartridge, bool for_crosshair = false);
+	virtual float			GetFireDispersion(float cartridge_k, bool for_crosshair = false);
+	virtual	int				ShotsFired() { return 0; }
+	virtual	int				GetCurrentFireMode() { return 1; }
 
 	//параметы оружия в зависимоти от его состояния исправности
 	float					GetConditionDispersionFactor	() const;
@@ -417,11 +417,11 @@ protected:
 	float					m_fMinRadius;
 	float					m_fMaxRadius;
 
-protected:	
+protected:
 	//для второго ствола
-			void			StartFlameParticles2();
-			void			StopFlameParticles2	();
-			void			UpdateFlameParticles2();
+	void			StartFlameParticles2();
+	void			StopFlameParticles2();
+	void			UpdateFlameParticles2();
 protected:
 	shared_str				m_sFlameParticles2;
 	//объект партиклов для стрельбы из 2-го ствола

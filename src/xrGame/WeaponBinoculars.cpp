@@ -105,7 +105,6 @@ void CWeaponBinoculars::render_item_ui()
 	inherited::render_item_ui	();
 }
 
-void GetZoomData(const float scope_factor, float& delta, float& min_zoom_factor);
 void CWeaponBinoculars::ZoomInc()
 {
 	float delta,min_zoom_factor;

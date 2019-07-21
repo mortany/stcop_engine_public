@@ -51,6 +51,7 @@ public:
 			void			Load3DScopeParams(LPCSTR section);
 			void			LoadOriginalScopesParams(LPCSTR section);
 			void			LoadCurrentScopeParams(LPCSTR section);
+			void			GetZoomData(const float scope_factor, float& delta, float& min_zoom_factor);
 			void			ZoomDynamicMod(bool bIncrement, bool bForceLimit);
 			void			UpdateAltScope();
 
@@ -64,6 +65,8 @@ public:
 
 
 			float			m_fScopeInertionFactor;
+			float           m_fZoomStepCount;
+			float           m_fZoomMinKoeff;
 	// SWM3.0 hud collision
 			float			m_hud_fov_add_mod;
 			float			m_nearwall_dist_max;

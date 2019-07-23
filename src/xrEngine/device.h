@@ -16,7 +16,9 @@
 //#include "shader.h"
 //#include "R_Backend.h"
 
-#define VIEWPORT_NEAR 0.05f //--#SM+#-- (Old: 0.2f)
+extern ENGINE_API float VIEWPORT_NEAR;
+
+//#define VIEWPORT_NEAR 0.05f //--#SM+#-- (Old: 0.2f)
 
 #define DEVICE_RESET_PRECACHE_FRAME_COUNT 10
 
@@ -113,12 +115,12 @@ class ENGINE_API CRenderDevice : public CRenderDeviceBase
 public:
 	class ENGINE_API CSecondVPParams //--#SM+#-- +SecondVP+
 	{
-		bool isActive; // Флаг активации рендера во второй вьюпорт
-		u8 frameDelay;  // На каком кадре с момента прошлого рендера во второй вьюпорт мы начнём новый
-						  //(не может быть меньше 2 - каждый второй кадр, чем больше тем более низкий FPS во втором вьюпорте)
+		bool isActive; // Р¤Р»Р°Рі Р°РєС‚РёРІР°С†РёРё СЂРµРЅРґРµСЂР° РІРѕ РІС‚РѕСЂРѕР№ РІСЊСЋРїРѕСЂС‚
+		u8 frameDelay;  // РќР° РєР°РєРѕРј РєР°РґСЂРµ СЃ РјРѕРјРµРЅС‚Р° РїСЂРѕС€Р»РѕРіРѕ СЂРµРЅРґРµСЂР° РІРѕ РІС‚РѕСЂРѕР№ РІСЊСЋРїРѕСЂС‚ РјС‹ РЅР°С‡РЅС‘Рј РЅРѕРІС‹Р№
+						  //(РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РјРµРЅСЊС€Рµ 2 - РєР°Р¶РґС‹Р№ РІС‚РѕСЂРѕР№ РєР°РґСЂ, С‡РµРј Р±РѕР»СЊС€Рµ С‚РµРј Р±РѕР»РµРµ РЅРёР·РєРёР№ FPS РІРѕ РІС‚РѕСЂРѕРј РІСЊСЋРїРѕСЂС‚Рµ)
 
 	public:
-		bool isCamReady; // Флаг готовности камеры (FOV, позиция, и т.п) к рендеру второго вьюпорта
+		bool isCamReady; // Р¤Р»Р°Рі РіРѕС‚РѕРІРЅРѕСЃС‚Рё РєР°РјРµСЂС‹ (FOV, РїРѕР·РёС†РёСЏ, Рё С‚.Рї) Рє СЂРµРЅРґРµСЂСѓ РІС‚РѕСЂРѕРіРѕ РІСЊСЋРїРѕСЂС‚Р°
 
 		IC bool IsSVPActive() { return isActive; }
 		IC void SetSVPActive(bool bState) { isActive = bState; }

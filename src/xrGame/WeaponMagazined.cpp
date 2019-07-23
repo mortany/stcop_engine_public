@@ -110,7 +110,7 @@ void CWeaponMagazined::Load	(LPCSTR section)
 
 bool CWeaponMagazined::UseScopeTexture()
 {
-	return ScopeIsHasTexture;
+	return bScopeIsHasTexture;
 }
 
 void CWeaponMagazined::FireStart		()
@@ -787,7 +787,7 @@ bool CWeaponMagazined::CanAttach(PIItem pIItem)
 		SCOPES_VECTOR_IT it = m_scopes.begin();
 		for(; it!=m_scopes.end(); it++)
 		{
-			if (UseAltScope)
+			if (bUseAltScope)
 			{
 				if (*it == pIItem->object().cNameSect())
 					return true;
@@ -823,7 +823,7 @@ bool CWeaponMagazined::CanDetach(const char* item_section_name)
 		SCOPES_VECTOR_IT it = m_scopes.begin();
 		for(; it!=m_scopes.end(); it++)
 		{
-			if (UseAltScope)
+			if (bUseAltScope)
 			{
 				if (*it == item_section_name)
 					return true;
@@ -865,7 +865,7 @@ bool CWeaponMagazined::Attach(PIItem pIItem, bool b_send_event)
 		SCOPES_VECTOR_IT it = m_scopes.begin();
 		for(; it!=m_scopes.end(); it++)
 		{
-			if (UseAltScope)
+			if (bUseAltScope)
 			{
 				if (*it == pIItem->object().cNameSect())
 					m_cur_scope = u8(it - m_scopes.begin());
@@ -898,7 +898,7 @@ bool CWeaponMagazined::Attach(PIItem pIItem, bool b_send_event)
 
 	if(result)
 	{
-		if (pScope && UseAltScope)
+		if (pScope && bUseAltScope)
 		{
 			bNVsecondVPstatus = !!pSettings->line_exist(pIItem->object().cNameSect(), "scope_nightvision");
 		}
@@ -926,7 +926,7 @@ bool CWeaponMagazined::DetachScope(const char* item_section_name, bool b_spawn_i
 	shared_str iter_scope_name = "none";
 	for(; it!=m_scopes.end(); it++)
 	{
-		if (UseAltScope)
+		if (bUseAltScope)
 		{
 			iter_scope_name = (*it);
 		}

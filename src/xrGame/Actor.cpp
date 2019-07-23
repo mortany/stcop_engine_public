@@ -1034,7 +1034,7 @@ void CActor::UpdateCL	()
 			// Обновляем двойной рендер от оружия [Update SecondVP with weapon data]
 			pWeapon->UpdateSecondVP(); //--#SM+#-- +SecondVP+
 
-			bool bUseMark = !!pWeapon->IsZoomed();
+			bool bUseMark = !!pWeapon->bMarkCanShow();
 			bool bInZoom  = !!pWeapon->bInZoomRightNow();
 			bool bNVEnbl  = !!pWeapon->bNVsecondVPstatus;
 

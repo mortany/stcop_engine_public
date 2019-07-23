@@ -692,8 +692,9 @@ public:
 };
 
 
-ENGINE_API float psHUD_FOV_def = 0.35f; //--#SM+#--	Дефолтный HUD FOV (В % от Camera FOV) [default hud_fov (perc. of g_fov)]
-ENGINE_API float psHUD_FOV = psHUD_FOV_def; //--#SM+#-- Текущий HUD FOV (В % от Camera FOV) [current hud_fov (perc. of g_fov)]
+ENGINE_API float psHUD_FOV_def = 0.35f; //--#SM+#--	Р”РµС„РѕР»С‚РЅС‹Р№ HUD FOV (Р’ % РѕС‚ Camera FOV) [default hud_fov (perc. of g_fov)]
+ENGINE_API float psHUD_FOV = psHUD_FOV_def; //--#SM+#-- РўРµРєСѓС‰РёР№ HUD FOV (Р’ % РѕС‚ Camera FOV) [current hud_fov (perc. of g_fov)]
+ENGINE_API float VIEWPORT_NEAR = 0.05f; //--#SM+#-- (Old: 0.2f)
 
 //extern int psSkeletonUpdate;
 extern int rsDVB_Size;
@@ -766,6 +767,7 @@ void CCC_Register()
     CMD3(CCC_Mask, "rs_refresh_60hz", &psDeviceFlags, rsRefresh60hz);
     CMD3(CCC_Mask, "rs_stats", &psDeviceFlags, rsStatistic);
     CMD4(CCC_Float, "rs_vis_distance", &psVisDistance, 0.4f, 1.5f);
+	CMD4(CCC_Float, "r_viewport_near", &VIEWPORT_NEAR, 0.05f, 1.f);
 
     CMD3(CCC_Mask, "rs_cam_pos", &psDeviceFlags, rsCameraPos);
 #ifdef DEBUG

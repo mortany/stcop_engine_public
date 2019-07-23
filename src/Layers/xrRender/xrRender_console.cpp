@@ -82,9 +82,9 @@ xr_token							qminmax_sm_token					[ ]={
 	{ 0,							0												}
 };
 
-//	ìOffî
-//	ìDX10.0 style [Standard]î
-//	ìDX10.1 style [Higher quality]î
+//	‚ÄúOff‚Äù
+//	‚ÄúDX10.0 style [Standard]‚Äù
+//	‚ÄúDX10.1 style [Higher quality]‚Äù
 
 // Common
 extern int			psSkeletonUpdate;
@@ -224,6 +224,24 @@ float		ps_r3_dyn_wet_surf_near		= 10.f;				// 10.0f
 float		ps_r3_dyn_wet_surf_far		= 30.f;				// 30.0f
 int			ps_r3_dyn_wet_surf_sm_res	= 256;				// 256
 
+//AVO: detail draw radius
+Flags32 ps_common_flags = { 0 }; // r1-only
+u32 ps_steep_parallax = 0;
+int ps_r__detail_radius = 49;
+u32 dm_size = 24;
+u32 dm_cache1_line = 12; //dm_size*2/dm_cache1_count
+u32 dm_cache_line = 49; //dm_size+1+dm_size
+u32 dm_cache_size = 2401; //dm_cache_line*dm_cache_line
+float dm_fade = 47.5; //float(2*dm_size)-.5f;
+u32 dm_current_size = 24;
+u32 dm_current_cache1_line = 12; //dm_current_size*2/dm_cache1_count
+u32 dm_current_cache_line = 49; //dm_current_size+1+dm_current_size
+u32 dm_current_cache_size = 2401; //dm_current_cache_line*dm_current_cache_line
+float dm_current_fade = 47.5; //float(2*dm_current_size)-.5f;
+float ps_current_detail_density = 0.6;
+xr_token ext_quality_token[] = { {"qt_off", 0}, {"qt_low", 1}, {"qt_medium", 2},
+	{"qt_high", 3}, {"qt_extreme", 4}, {nullptr, 0} };
+//-AVO
 
 //- Mad Max
 float		ps_r2_gloss_factor			= 4.0f;
@@ -487,6 +505,35 @@ public:
 };
 #endif
 
+//AVO: detail draw radius
+class CCC_detail_radius : public CCC_Integer
+{
+public:
+	void apply()
+	{
+		dm_current_size = iFloor((float)ps_r__detail_radius / 4) * 2;
+		dm_current_cache1_line = dm_current_size * 2 / 4; // assuming cache1_count = 4
+		dm_current_cache_line = dm_current_size + 1 + dm_current_size;
+		dm_current_cache_size = dm_current_cache_line * dm_current_cache_line;
+		dm_current_fade = float(2 * dm_current_size) - .5f;
+	}
+
+	CCC_detail_radius(LPCSTR N, int* V, int _min = 0, int _max = 999) : CCC_Integer(N, V, _min, _max) {};
+
+	void Execute(LPCSTR args) override
+	{
+		CCC_Integer::Execute(args);
+		apply();
+	}
+
+	void Status(TStatus& S) override
+	{
+		CCC_Integer::Status(S);
+	}
+};
+
+//-AVO
+
 class CCC_DofFar : public CCC_Float
 {
 public:
@@ -685,8 +732,9 @@ void		xrRender_initconsole	()
 //.	CMD4(CCC_Float,		"r__geometry_lod_pow",	&ps_r__LOD_Power,			0,		2		);
 
 //.	CMD4(CCC_Float,		"r__detail_density",	&ps_r__Detail_density,		.05f,	0.99f	);
-	CMD4(CCC_Float,		"r__detail_density",	&ps_r__Detail_density,		.2f,	0.6f	);
-
+	//CMD4(CCC_Float,		"r__detail_density",	&ps_r__Detail_density,		.2f,	0.6f	);
+	CMD4(CCC_Float,		"r__detail_density",	&ps_current_detail_density, 0.04f,	0.6f		); //AVO: extended from 0.2f to 0.04f and replaced variable
+	CMD4(CCC_detail_radius, "r__detail_radius", &ps_r__detail_radius,		49,		200			);
 #ifdef DEBUG
 	CMD4(CCC_Float,		"r__detail_l_ambient",	&ps_r__Detail_l_ambient,	.5f,	.95f	);
 	CMD4(CCC_Float,		"r__detail_l_aniso",	&ps_r__Detail_l_aniso,		.1f,	.5f		);

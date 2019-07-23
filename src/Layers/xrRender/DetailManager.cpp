@@ -117,8 +117,14 @@ CDetailManager::CDetailManager	()
 	*/
 }
 
-CDetailManager::~CDetailManager	()
+CDetailManager::~CDetailManager()
 {
+	if (dtFS)
+	{
+		FS.r_close(dtFS);
+		dtFS = NULL;
+	}
+
 	for (u32 i = 0; i < dm_cache_size; ++i)
 		cache_pool[i].~Slot();
 	Memory.mem_free(cache_pool);
@@ -223,6 +229,7 @@ void CDetailManager::Unload		()
 	m_visibles[1].clear	();
 	m_visibles[2].clear	();
 	FS.r_close			(dtFS);
+	dtFS = NULL;
 }
 
 extern ECORE_API float r_ssaDISCARD;

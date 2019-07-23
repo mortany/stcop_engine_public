@@ -136,6 +136,10 @@ public:
 	virtual void				on_b_hud_detach			();
 	IC BOOL						HudInertionEnabled		()	const			{ return m_huditem_flags.test(fl_inertion_enable);}
 	IC BOOL						HudInertionAllowed		()	const			{ return m_huditem_flags.test(fl_inertion_allow);}
+
+	virtual float				GetInertionFactor		()					{ return 1.f; }; //--#SM+#--
+	virtual float				GetInertionPowerFactor	()					{ return 1.f; }; //--#SM+#--
+
 	virtual void				render_hud_mode			()					{};
 	virtual bool				need_renderable			()					{return true;};
 	virtual void				render_item_3d_ui		()					{}
@@ -147,7 +151,7 @@ protected:
 	IC		void				SetPending			(BOOL H)			{ m_huditem_flags.set(fl_pending, H);}
 	shared_str					hud_sect;
 
-	//кадры момента пересчета XFORM и FirePos
+	//РєР°РґСЂС‹ РјРѕРјРµРЅС‚Р° РїРµСЂРµСЃС‡РµС‚Р° XFORM Рё FirePos
 	u32							dwFP_Frame;
 	u32							dwXF_Frame;
 

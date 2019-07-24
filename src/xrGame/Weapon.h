@@ -40,7 +40,7 @@ public:
 			bool            bNVsecondVPavaible;
 			bool            bNVsecondVPstatus;
 
-	IC		bool			bInZoomRightNow() const { return m_zoom_params.m_fZoomRotationFactor > 0.05; }
+	virtual	bool			bInZoomRightNow() const { return m_zoom_params.m_fZoomRotationFactor > 0.05; }
 	IC		bool			bIsSecondVPZoomPresent() const { return GetSecondVPZoomFactor() > 0.000f; }
 			BOOL			bLoadAltScopesParams(LPCSTR section);
 	virtual	bool            bMarkCanShow() { return IsZoomed(); }

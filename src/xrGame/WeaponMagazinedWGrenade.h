@@ -28,6 +28,8 @@ public:
 
 	// Mortan: Новые параметры здеся
 	virtual	bool    bMarkCanShow() { return IsZoomed() && !m_bGrenadeMode; }
+	virtual	bool	bInZoomRightNow() const { return (m_zoom_params.m_fZoomRotationFactor > 0.05) && !m_bGrenadeMode; }
+
 
 	virtual void	UpdateSecondVP(bool bInGrenade = false);
 

@@ -470,7 +470,7 @@ void CAI_Stalker::Die				(CObject* who)
 
 	SelectAnimation					(XFORM().k,movement().detail().direction(),movement().speed());
 
-	bool bDieSoundEnable = READ_IF_EXISTS(pFFSettings, r_bool, "gameplay", "death_sound_enable",false);
+	bool bDieSoundEnable = !!READ_IF_EXISTS(pFFSettings, r_bool, "gameplay", "death_sound_enable",false);
 
 	if (bDieSoundEnable)
 		sound().set_sound_mask(0);

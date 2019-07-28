@@ -1037,7 +1037,11 @@ void CActor::UpdateCL	()
 			pWeapon->UpdateSecondVP(); //--#SM+#-- +SecondVP+
 
 			bool bUseMark = !!pWeapon->bMarkCanShow();
-			bool bInZoom  = !!pWeapon->bInZoomRightNow();
+
+			bool bInZoom  = !!(pWeapon->bInZoomRightNow() && pWeapon->bIsSecondVPZoomPresent());
+
+			//float fVPRotFactor = pWeapon->bNVsecondVPstatus ? pWeapon->GetZRotatingFactor() : 0.0f;
+
 			bool bNVEnbl  = !!pWeapon->bNVsecondVPstatus;
 
 			// Обновляем информацию об оружии в шейдерах

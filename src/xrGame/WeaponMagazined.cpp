@@ -1011,14 +1011,13 @@ void CWeaponMagazined::InitAddons()
 	else
 	{
 		if ( m_UIScope )
-		{
 			xr_delete( m_UIScope );
-		}
-		
+
+		if(bIsSecondVPZoomPresent())
+			m_zoom_params.m_fSecondVPFovFactor = 0.0f;
+
 		if ( IsZoomEnabled() )
-		{
 			m_zoom_params.m_fIronSightZoomFactor = pSettings->r_float( cNameSect(), "scope_zoom_factor" );
-		}
 	}
 
 	if ( IsSilencerAttached()/* && SilencerAttachable() */)

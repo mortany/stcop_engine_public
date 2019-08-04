@@ -624,6 +624,7 @@ void CLevel::OnRender()
 	::Render->AfterWorldRender(); //--#SM+#-- +SecondVP+
 
     HUD().RenderUI();
+	debug_renderer().render();
 #ifdef DEBUG
     draw_wnds_rects();
     physics_world()->OnRender();

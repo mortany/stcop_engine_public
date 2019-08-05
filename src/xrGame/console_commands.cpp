@@ -72,7 +72,7 @@ extern	u64		g_qwStartGameTime;
 extern	u64		g_qwEStartGameTime;
 
 ENGINE_API
-extern  float	psHUD_FOV_def; //--#SM+#-- Команда для смены FOV теперь меняет это [it's now used in hud_fov]
+extern  float	psHUD_FOV_def; //--#SM+#-- РљРѕРјР°РЅРґР° РґР»СЏ СЃРјРµРЅС‹ FOV С‚РµРїРµСЂСЊ РјРµРЅСЏРµС‚ СЌС‚Рѕ [it's now used in hud_fov]
 extern	float	psSqueezeVelocity;
 extern	int		psLUA_GCSTEP;
 
@@ -1420,6 +1420,51 @@ struct CCC_TimeFactorSingle : public CCC_Float {
 
 };
 
+#include "attachable_item.h"
+#include "attachment_owner.h"
+#include "InventoryOwner.h"
+#include "Inventory.h"
+class CCC_TuneAttachableItem : public IConsole_Command
+{
+public:
+	CCC_TuneAttachableItem(LPCSTR N) :IConsole_Command(N) {};
+	virtual void	Execute(LPCSTR args)
+	{
+		if (CAttachableItem::m_dbgItem) {
+			CAttachableItem::m_dbgItem = NULL;
+			Msg("CCC_TuneAttachableItem switched to off");
+			return;
+		};
+
+		CObject* obj = Level().CurrentViewEntity();	VERIFY(obj);
+		shared_str ssss = args;
+
+		CAttachmentOwner* owner = smart_cast<CAttachmentOwner*>(obj);
+		CAttachableItem* itm = owner->attachedItem(ssss);
+		if (itm)
+		{
+			CAttachableItem::m_dbgItem = itm;
+		}
+		else
+		{
+			CInventoryOwner* iowner = smart_cast<CInventoryOwner*>(obj);
+			PIItem active_item = iowner->m_inventory->ActiveItem();
+			if (active_item && active_item->object().cNameSect() == ssss)
+				CAttachableItem::m_dbgItem = active_item->cast_attachable_item();
+		}
+
+		if (CAttachableItem::m_dbgItem)
+			Msg("CCC_TuneAttachableItem switched to ON for [%s]", args);
+		else
+			Msg("CCC_TuneAttachableItem cannot find attached item [%s]", args);
+	}
+
+	virtual void	Info(TInfo& I)
+	{
+		xr_sprintf(I, "allows to change bind rotation and position offsets for attached item, <section_name> given as arguments");
+	}
+};
+
 #ifdef DEBUG
 class CCC_RadioGroupMask2;
 class CCC_RadioMask :public CCC_Mask
@@ -1494,49 +1539,6 @@ struct CCC_DbgBullets : public CCC_Integer {
 	}
 };
 
-#include "attachable_item.h"
-#include "attachment_owner.h"
-#include "InventoryOwner.h"
-#include "Inventory.h"
-class CCC_TuneAttachableItem : public IConsole_Command
-{
-public		:
-	CCC_TuneAttachableItem(LPCSTR N):IConsole_Command(N){};
-	virtual void	Execute	(LPCSTR args)
-	{
-		if( CAttachableItem::m_dbgItem){
-			CAttachableItem::m_dbgItem = NULL;	
-			Msg("CCC_TuneAttachableItem switched to off");
-			return;
-		};
-
-		CObject* obj			= Level().CurrentViewEntity();	VERIFY(obj);
-		shared_str ssss			= args;
-
-		CAttachmentOwner* owner = smart_cast<CAttachmentOwner*>(obj);
-		CAttachableItem* itm	= owner->attachedItem(ssss);
-		if(itm)
-		{
-			CAttachableItem::m_dbgItem = itm;
-		}else
-		{
-			CInventoryOwner* iowner = smart_cast<CInventoryOwner*>(obj);
-			PIItem active_item = iowner->m_inventory->ActiveItem();
-			if(active_item && active_item->object().cNameSect()==ssss )
-				CAttachableItem::m_dbgItem = active_item->cast_attachable_item();
-		}
-
-		if(CAttachableItem::m_dbgItem)
-			Msg("CCC_TuneAttachableItem switched to ON for [%s]",args);
-		else
-			Msg("CCC_TuneAttachableItem cannot find attached item [%s]",args);
-	}
-
-	virtual void	Info	(TInfo& I)
-	{	
-		xr_sprintf(I,"allows to change bind rotation and position offsets for attached item, <section_name> given as arguments");
-	}
-};
 
 class CCC_Crash : public IConsole_Command {
 public:
@@ -1837,7 +1839,7 @@ void CCC_RegisterCommands()
 	CMD3(CCC_Mask,				"hud_crosshair",		&psHUD_Flags,	HUD_CROSSHAIR);
 	CMD3(CCC_Mask,				"hud_crosshair_dist",	&psHUD_Flags,	HUD_CROSSHAIR_DIST);
 
-	CMD4(CCC_Float,				"hud_fov",				&psHUD_FOV_def,		0.1f,	1.0f); // [FFT++]: изменено в коллизии шокера
+	CMD4(CCC_Float,				"hud_fov",				&psHUD_FOV_def,		0.1f,	1.0f); // [FFT++]: РёР·РјРµРЅРµРЅРѕ РІ РєРѕР»Р»РёР·РёРё С€РѕРєРµСЂР°
 	CMD4(CCC_Float,				"fov",					&g_fov,			5.0f,	180.0f);
 
 	// Demo
@@ -1951,7 +1953,6 @@ CMD4(CCC_Integer,			"hit_anims_tune",						&tune_hit_anims,		0, 1);
 	
 	CMD1(CCC_ShowMonsterInfo,	"ai_monster_info");
 	CMD1(CCC_DebugFonts,		"debug_fonts");
-	CMD1(CCC_TuneAttachableItem,"dbg_adjust_attachable_item");
 
 
 	CMD1(CCC_ShowAnimationStats,"ai_show_animation_stats");
@@ -1991,6 +1992,7 @@ CMD4(CCC_Integer,			"hit_anims_tune",						&tune_hit_anims,		0, 1);
 	CMD3(CCC_Mask,		"g_autopickup",			&psActorFlags,	AF_AUTOPICKUP);
 	CMD3(CCC_Mask,		"g_dynamic_music",		&psActorFlags,	AF_DYNAMIC_MUSIC);
 	CMD3(CCC_Mask,		"g_important_save",		&psActorFlags,	AF_IMPORTANT_SAVE);
+	CMD1(CCC_TuneAttachableItem, "dbg_adjust_attachable_item");
 	
 #ifdef DEBUG
 	CMD1(CCC_LuaHelp,				"lua_help");

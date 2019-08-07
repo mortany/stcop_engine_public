@@ -457,7 +457,7 @@ void R_dsgraph_structure::r_dsgraph_render_graph	(u32	_priority, bool _clear)
 }
 
 /*
-Предназначен для установки режима отрисовки HUD и возврата оригинального после отрисовки.
+РџСЂРµРґРЅР°Р·РЅР°С‡РµРЅ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё СЂРµР¶РёРјР° РѕС‚СЂРёСЃРѕРІРєРё HUD Рё РІРѕР·РІСЂР°С‚Р° РѕСЂРёРіРёРЅР°Р»СЊРЅРѕРіРѕ РїРѕСЃР»Рµ РѕС‚СЂРёСЃРѕРІРєРё.
 */
 class hud_transform_helper
 {
@@ -473,7 +473,7 @@ public:
 		Pold = Device.mProject;
 		FTold = Device.mFullTransform;
 		Device.mProject.build_projection(deg2rad(psHUD_FOV * Device.fFOV /* *Device.fASPECT*/), Device.fASPECT,
-			VIEWPORT_NEAR, g_pGamePersistent->Environment().CurrentEnv->far_plane);
+			0.05f, g_pGamePersistent->Environment().CurrentEnv->far_plane);
 
 		Device.mFullTransform.mul(Device.mProject, Device.mView);
 		RCache.set_xform_project(Device.mProject);

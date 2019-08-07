@@ -13,7 +13,9 @@ XRAPI_API IUIRender* UIRender = NULL;
 //XRAPI_API CSound_manager_interface*	Sound = NULL;
 XRAPI_API CGameMtlLibrary*	PGMLib = NULL;
 #endif
-XRAPI_API IDebugRender*	DRender = NULL;
+#ifdef DEBUG
+	XRAPI_API IDebugRender*	DRender = NULL;
+#endif // DEBUG
 
 /*
 // This is an example of an exported variable

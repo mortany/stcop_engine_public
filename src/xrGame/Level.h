@@ -34,7 +34,9 @@ class message_filter;
 class demoplay_control;
 class demo_info;
 
+#ifdef DEBUG
 class CDebugRenderer;
+#endif
 
 extern float g_fov;
 
@@ -68,7 +70,9 @@ protected:
     CSeniorityHierarchyHolder* m_seniority_hierarchy_holder = nullptr;
     CClientSpawnManager* m_client_spawn_manager = nullptr;
     CAutosaveManager* m_autosave_manager = nullptr;
+#ifdef DEBUG
     CDebugRenderer* m_debug_renderer = nullptr;
+#endif
     CPHCommander* m_ph_commander = nullptr;
     CPHCommander* m_ph_commander_scripts = nullptr;
     CPHCommander* m_ph_commander_physics_worldstep = nullptr;
@@ -248,7 +252,9 @@ public:
     IC CSeniorityHierarchyHolder& seniority_holder();
     IC CClientSpawnManager& client_spawn_manager();
     IC CAutosaveManager& autosave_manager();
+#ifdef DEBUG
     IC CDebugRenderer& debug_renderer();
+#endif
     void __stdcall script_gc(); // GC-cycle
     IC CPHCommander& ph_commander();
     IC CPHCommander& ph_commander_scripts();
@@ -256,7 +262,7 @@ public:
 
     CLevel();
     virtual ~CLevel();
-    // РЅР°Р·РІР°РЅРёСЏРµ С‚РµРєСѓС‰РµРіРѕ СѓСЂРѕРІРЅСЏ
+    // названияе текущего уровня
     virtual shared_str name() const;
     // this method can be used ONLY from CCC_ChangeGameType
     // XXX nitrocaster: why c_str?
@@ -265,9 +271,9 @@ public:
     // gets the time from the game simulation
     ALife::_TIME_ID GetStartGameTime();
     ALife::_TIME_ID GetGameTime();
-    // РІРѕР·РІСЂР°С‰Р°РµС‚ РІСЂРµРјСЏ РґР»СЏ СЌРЅРІР°Р№СЂРѕРЅРјРµРЅС‚Р° РІ РјРёР»РёСЃРµРєСѓРЅРґР°С… РѕС‚РЅРѕСЃРёС‚РµР»СЊРЅРѕ РЅР°С‡Р°Р»Р° РёРіСЂС‹
+    // возвращает время для энвайронмента в милисекундах относительно начала игры
     ALife::_TIME_ID GetEnvironmentGameTime();
-    // РёРіСЂРѕРІРѕРµ РІСЂРµРјСЏ РІ РѕС‚С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРЅРѕРј РІРёРґРµ
+    // игровое время в отформатированном виде
     void GetGameDateTime(u32& year, u32& month, u32& day, u32& hours, u32& mins, u32& secs, u32& milisecs);
     float GetGameTimeFactor();
     void SetGameTimeFactor(const float fTimeFactor);
@@ -359,11 +365,13 @@ IC CAutosaveManager& CLevel::autosave_manager()
     return *m_autosave_manager;
 }
 
+#ifdef DEBUG
 IC CDebugRenderer& CLevel::debug_renderer()
 {
     VERIFY(m_debug_renderer);
     return *m_debug_renderer;
 }
+#endif
 
 IC CPHCommander& CLevel::ph_commander()
 {

@@ -1,5 +1,6 @@
 #pragma once
 
+#ifdef DEBUG
 
 // Lain: added
 namespace debug { class text_tree; }
@@ -241,3 +242,5 @@ private:
 	TEXT_INFO_MAP		m_text_info;
 	LEVEL_INFO_MAP		m_level_info;
 };
+
+#endif

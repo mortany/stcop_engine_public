@@ -3,10 +3,15 @@
 #include "../xrEngine/xr_object.h"
 #include "level.h"
 
-#include "debug_renderer.h"
-#include "debug_text_tree.h"
-#include "ai/monsters/basemonster/base_monster.h"
-#include "ui_base.h"
+#ifdef DEBUG
+#	include "debug_renderer.h"
+// Lain: added
+#	include "debug_text_tree.h"
+#	include "ai/monsters/basemonster/base_monster.h"
+#	include "ui_base.h"
+#endif
+
+#ifdef DEBUG
 
 // Lain: added text_tree
 CLevelDebug::CLevelDebug() : m_p_texttree( xr_new<debug::text_tree>() ), m_texttree_offs(0)
@@ -170,7 +175,7 @@ void CLevelDebug::draw_object_info()
 	// handle all of the objects
 	for (OBJECT_INFO_MAP_IT it = m_objects_info.begin(); it != m_objects_info.end(); ++it) {
 
-		// ÐµÑÐ»Ð¸ Ð¾Ð±ÑŠÐµÐºÑ‚ Ð½ÐµÐ²Ð°Ð»Ð¸Ð´Ð½Ñ‹Ð¹ - ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸ÑŽ
+		// åñëè îáúåêò íåâàëèäíûé - óäàëèòü èíôîðìàöèþ
 		if (!it->first || it->first->getDestroy()) {
 			for (CLASS_INFO_MAP_IT it_class = it->second.begin(); it_class != it->second.end(); ++it_class){
 				xr_delete(it_class->second);
@@ -337,7 +342,7 @@ void CLevelDebug::on_destroy_object(CObject *obj)
 {
 	// handle all of the objects
 	for (OBJECT_INFO_MAP_IT it = m_objects_info.begin(); it != m_objects_info.end(); ++it) {
-		// ÐµÑÐ»Ð¸ Ð¾Ð±ÑŠÐµÐºÑ‚ Ð½ÐµÐ²Ð°Ð»Ð¸Ð´Ð½Ñ‹Ð¹ - ÑƒÐ´Ð°Ð»Ð¸Ñ‚ÑŒ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸ÑŽ
+		// åñëè îáúåêò íåâàëèäíûé - óäàëèòü èíôîðìàöèþ
 		if (it->first == obj) {
 			for (CLASS_INFO_MAP_IT it_class = it->second.begin(); it_class != it->second.end(); ++it_class){
 				xr_delete(it_class->second);
@@ -347,3 +352,5 @@ void CLevelDebug::on_destroy_object(CObject *obj)
 		}
 	}
 }
+
+#endif

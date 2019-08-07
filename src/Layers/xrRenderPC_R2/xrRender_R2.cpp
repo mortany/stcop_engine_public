@@ -20,7 +20,9 @@ BOOL APIENTRY DllMain( HANDLE hModule,
 		::DU						= &DUImpl;
 		//::vid_mode_token			= inited by HW;
 		UIRender					= &UIRenderImpl;
+#ifdef DEBUG
 		DRender						= &DebugRenderImpl;
+#endif
 		xrRender_initconsole		();
 		break	;
 	case DLL_THREAD_ATTACH	:

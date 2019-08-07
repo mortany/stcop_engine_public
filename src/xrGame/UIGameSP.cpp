@@ -138,13 +138,14 @@ bool CUIGameSP::IR_UIOnKeyboardPress(int dik)
 
 	return false;
 }
+#ifdef DEBUG
 void CUIGameSP::Render()
 {
 	inherited::Render();
 	hud_draw_adjust_mode();
 	attach_draw_adjust_mode();
 }
-
+#endif
 
 void  CUIGameSP::StartTrade(CInventoryOwner* pActorInv, CInventoryOwner* pOtherOwner)
 {

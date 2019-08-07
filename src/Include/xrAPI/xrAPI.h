@@ -32,8 +32,10 @@ class CGameMtlLibrary;
 extern XRAPI_API CGameMtlLibrary *			PGMLib;
 #endif
 
+#ifdef DEBUG
 class IDebugRender;
-extern XRAPI_API IDebugRender*	DRender;
+extern XRAPI_API IDebugRender* DRender;
+#endif // DEBUG
 
 #else
 	class	CRender;

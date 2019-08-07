@@ -2477,7 +2477,7 @@ bool CWeapon::ZoomHideCrosshair()
 
 void CWeapon::debug_draw_firedeps()
 {
-	if(hud_adj_mode==5||hud_adj_mode==6||hud_adj_mode==7)
+	/*if(hud_adj_mode==5||hud_adj_mode==6||hud_adj_mode==7)
 	{
 		CDebugRenderer			&render = Level().debug_renderer();
 
@@ -2489,7 +2489,7 @@ void CWeapon::debug_draw_firedeps()
 
 		if(hud_adj_mode==7)
 			render.draw_aabb(get_LastSP(),		0.005f,0.005f,0.005f,D3DCOLOR_XRGB(0,255,0));
-	}
+	}*/
 }
 
 const float &CWeapon::hit_probability	() const

@@ -1016,6 +1016,8 @@ void CWeaponMagazined::InitAddons()
 		if(bIsSecondVPZoomPresent())
 			m_zoom_params.m_fSecondVPFovFactor = 0.0f;
 
+		m_fSecondRTZoomFactor = -1.0f;
+
 		if ( IsZoomEnabled() )
 			m_zoom_params.m_fIronSightZoomFactor = pSettings->r_float( cNameSect(), "scope_zoom_factor" );
 	}

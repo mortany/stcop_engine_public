@@ -1029,7 +1029,6 @@ void CActor::UpdateCL	()
 
 			psHUD_Flags.set( HUD_CROSSHAIR_RT2, B );
 			
-
 			
 			psHUD_Flags.set( HUD_DRAW_RT,		pWeapon->show_indicators() );
 
@@ -1038,7 +1037,7 @@ void CActor::UpdateCL	()
 
 			bool bUseMark = !!pWeapon->bMarkCanShow();
 
-			bool bInZoom  = !!(pWeapon->bInZoomRightNow() && pWeapon->bIsSecondVPZoomPresent());
+			bool bInZoom  = !!(pWeapon->bInZoomRightNow() && pWeapon->bIsSecondVPZoomPresent() && psActorFlags.test(AF_3DSCOPE_ENABLE));
 
 			//float fVPRotFactor = pWeapon->bNVsecondVPstatus ? pWeapon->GetZRotatingFactor() : 0.0f;
 

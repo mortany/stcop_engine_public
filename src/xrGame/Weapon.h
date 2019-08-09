@@ -42,7 +42,7 @@ public:
 
 	virtual	bool			bInZoomRightNow() const { return m_zoom_params.m_fZoomRotationFactor > 0.05; }
 	IC		bool			bIsSecondVPZoomPresent() const { return GetSecondVPZoomFactor() > 0.000f; }
-			BOOL			bLoadAltScopesParams(LPCSTR section);
+			bool			bLoadAltScopesParams(LPCSTR section);
 	virtual	bool            bMarkCanShow() { return IsZoomed(); }
 			bool            bChangeNVSecondVPStatus();
 
@@ -199,7 +199,7 @@ public:
 	ALife::EWeaponAddonStatus	get_ScopeStatus				() const { return m_eScopeStatus; }
 	ALife::EWeaponAddonStatus	get_SilencerStatus			() const { return m_eSilencerStatus; }
 
-	virtual bool UseScopeTexture() {return true;};
+	virtual bool UseScopeTexture() {return bScopeIsHasTexture;};
 
 	//обновление видимости для косточек аддонов
 	void UpdateAddonsVisibility();
@@ -257,6 +257,8 @@ protected:
 		float			m_fIronSightZoomFactor;	//коэффициент увеличения прицеливания
 		float			m_fScopeZoomFactor;		//коэффициент увеличения прицела
 
+		float           m_f3dZoomFactor;        //коэффициент мирового зума при использовании второго вьюпорта
+
 		float			m_fZoomRotationFactor;
 
 		float           m_fSecondVPFovFactor;
@@ -271,7 +273,8 @@ protected:
 
 	} m_zoom_params;
 	
-		float			m_fRTZoomFactor; //run-time zoom factor
+		float			m_fRTZoomFactor;		//run-time zoom factor
+		float           m_fSecondRTZoomFactor;  //текущий зум для 3д прицела
 		CUIWindow*		m_UIScope;
 public:
 

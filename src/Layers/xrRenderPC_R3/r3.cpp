@@ -1457,7 +1457,7 @@ static inline bool match_shader		( LPCSTR const debug_shader_id, LPCSTR const fu
 
 static inline bool match_shader_id	( LPCSTR const debug_shader_id, LPCSTR const full_shader_id, FS_FileSet const& file_set, string_path& result )
 {
-#if 0
+#if 1
 	strcpy_s					( result, "" );
 	return						false;
 #else // #if 1

@@ -36,6 +36,8 @@ public:
 	// Mortan: Новые параметры здеся
 	virtual	bool    bMarkCanShow() { return IsZoomed(); }
 protected:
+	int iMagSizeCurrent;
+
 	virtual void	OnMagazineEmpty	();
 
 	virtual void	switch2_Idle	();
@@ -45,7 +47,8 @@ protected:
 	virtual void	switch2_Hiding	();
 	virtual void	switch2_Hidden	();
 	virtual void	switch2_Showing	();
-	
+	virtual void    switch2_Unmis	();
+
 	virtual void	OnShot			();	
 	
 	virtual void	OnEmptyClick	();
@@ -161,7 +164,9 @@ protected:
 	virtual void	PlayAnimIdle		();
 	virtual void	PlayAnimShoot		();
 	virtual void	PlayReloadSound		();
-	virtual void	PlayAnimAim			();
+	virtual void	PlayAnimAim			();	
+
+	bool WeaponSoundExist(LPCSTR section, LPCSTR sound_name) const;
 
 	virtual	int		ShotsFired			() { return m_iShotNum; }
 	virtual float	GetWeaponDeterioration	();

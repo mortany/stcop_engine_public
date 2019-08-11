@@ -122,6 +122,8 @@ public:
 	public:
 		bool isCamReady; // Флаг готовности камеры (FOV, позиция, и т.п) к рендеру второго вьюпорта
 
+		bool isR1;
+
 		IC bool IsSVPActive() { return isActive; }
 		IC void SetSVPActive(bool bState);
 		bool    IsSVPFrame();
@@ -223,6 +225,8 @@ public:
 		m_SecondViewport.SetSVPActive(false);
 		m_SecondViewport.SetSVPFrameDelay(2);
 		m_SecondViewport.isCamReady = false;
+		m_SecondViewport.isR1 = false;
+
     };
 
     void Pause(BOOL bOn, BOOL bTimer, BOOL bSound, LPCSTR reason);

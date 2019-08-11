@@ -64,7 +64,7 @@ BOOL CRenderTarget::Create	()
 	}
 	//RImplementation.o.color_mapping = RT_color_map->valid();
 
-	RT_SecondVP.create(RTname_SecondVP, rtWidth, rtHeight, HW.Caps.fTarget); //--#SM+#-- +SecondVP+
+	RT_SecondVP.create(RTname_SecondVP, rtWidth/u32(2), rtHeight/u32(2), HW.Caps.fTarget); //--#SM+#-- +SecondVP+
 
 	if ((rtHeight!=Device.dwHeight) || (rtWidth!=Device.dwWidth))	{
 		R_CHK		(HW.pDevice->CreateDepthStencilSurface	(rtWidth,rtHeight,HW.Caps.fDepth,D3DMULTISAMPLE_NONE,0,TRUE,&ZB,NULL));

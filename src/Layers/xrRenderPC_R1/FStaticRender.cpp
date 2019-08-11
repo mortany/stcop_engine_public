@@ -1000,7 +1000,13 @@ static inline bool match_shader_id	( LPCSTR const debug_shader_id, LPCSTR const 
 }
 
 // Перед началом рендера мира --#SM+#-- +SecondVP+
-void CRender::BeforeWorldRender() {}
+void CRender::BeforeWorldRender() 
+{
+	if (Device.m_SecondViewport.IsSVPFrame())
+	{
+		Device.m_SecondViewport.isR1 = true;
+	}
+}
 
 // После рендера мира и пост-эффектов --#SM+#-- +SecondVP+
 void CRender::AfterWorldRender()

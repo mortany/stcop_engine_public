@@ -331,7 +331,7 @@ void CCameraManager::Update(const Fvector& P, const Fvector& D, const Fvector& N
 	{
 		float fov = g_pGamePersistent->m_pGShaderConstants->hud_params.y;  //-V595
 
-		// ÷òî áû èçíà÷àëüíî ïðèöåë âêëþ÷àëñÿ áûñòðî, à ïðè èçìåíåíèè ïðèáëèæåíèÿ áûë ýôôåêò íàåçäà êàìåðû
+		// Ñ‡Ñ‚Ð¾ Ð±Ñ‹ Ð¸Ð·Ð½Ð°Ñ‡Ð°Ð»ÑŒÐ½Ð¾ Ð¿Ñ€Ð¸Ñ†ÐµÐ» Ð²ÐºÐ»ÑŽÑ‡Ð°Ð»ÑÑ Ð±Ñ‹ÑÑ‚Ñ€Ð¾, Ð° Ð¿Ñ€Ð¸ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ð¸ Ð¿Ñ€Ð¸Ð±Ð»Ð¸Ð¶ÐµÐ½Ð¸Ñ Ð±Ñ‹Ð» ÑÑ„Ñ„ÐµÐºÑ‚ Ð½Ð°ÐµÐ·Ð´Ð° ÐºÐ°Ð¼ÐµÑ€Ñ‹
 		if (fis_zero(fFovSecond))
 		{
 			fFovSecond = fov;
@@ -456,18 +456,18 @@ void CCameraManager::ApplyDevice(float _viewport_near)
     //Device.mProject.build_projection(deg2rad(m_cam_info.fFov), m_cam_info.fAspect, _viewport_near, m_cam_info.fFar);
 
 	//--#SM+# Begin-- +SecondVP+
-	// Ïåðåñ÷èòûâàåì FOV äëÿ âòîðîãî âüþïîðòà [Recalculate scene FOV for SecondVP frame]
+	// ÐŸÐµÑ€ÐµÑÑ‡Ð¸Ñ‚Ñ‹Ð²Ð°ÐµÐ¼ FOV Ð´Ð»Ñ Ð²Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ Ð²ÑŒÑŽÐ¿Ð¾Ñ€Ñ‚Ð° [Recalculate scene FOV for SecondVP frame]
 	if (Device.m_SecondViewport.IsSVPFrame())
 	{
-		// Äëÿ âòîðîãî âüþïîðòà FOV âûñòàâëÿåì çäåñü
+		// Ð”Ð»Ñ Ð²Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ Ð²ÑŒÑŽÐ¿Ð¾Ñ€Ñ‚Ð° FOV Ð²Ñ‹ÑÑ‚Ð°Ð²Ð»ÑÐµÐ¼ Ð·Ð´ÐµÑÑŒ
 		Device.fFOV = fFovSecond;
-		// Ïðåäóïðåæäàåì ÷òî ìû èçìåíèëè íàñòðîéêè êàìåðû
+		// ÐŸÑ€ÐµÐ´ÑƒÐ¿Ñ€ÐµÐ¶Ð´Ð°ÐµÐ¼ Ñ‡Ñ‚Ð¾ Ð¼Ñ‹ Ð¸Ð·Ð¼ÐµÐ½Ð¸Ð»Ð¸ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ ÐºÐ°Ð¼ÐµÑ€Ñ‹
 		Device.m_SecondViewport.isCamReady = true;
 	}
 	else
 		Device.m_SecondViewport.isCamReady = false;
 
-	Device.mProject.build_projection(deg2rad(Device.fFOV), m_cam_info.fAspect, _viewport_near, m_cam_info.fFar);
+	Device.mProject.build_projection(deg2rad(Device.fFOV), (Device.m_SecondViewport.isR1 ? 1.0f: m_cam_info.fAspect), _viewport_near, m_cam_info.fFar);
 	//--#SM+# End--
 
     if (g_pGamePersistent && g_pGamePersistent->m_pMainMenu->IsActive())

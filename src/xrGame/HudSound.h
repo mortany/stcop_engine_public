@@ -44,8 +44,8 @@ struct HUD_SOUND_ITEM
 
 	struct SSnd		{
 		ref_sound	snd;
-		float		delay;		//задержка перед проигрыванием
-		float		volume;		//громкость
+		float		delay;		//Р·Р°РґРµСЂР¶РєР° РїРµСЂРµРґ РїСЂРѕРёРіСЂС‹РІР°РЅРёРµРј
+		float		volume;		//РіСЂРѕРјРєРѕСЃС‚СЊ
 	};
 	shared_str		m_alias;
 	SSnd*			m_activeSnd;
@@ -57,16 +57,19 @@ struct HUD_SOUND_ITEM
 
 class HUD_SOUND_COLLECTION
 {
-	xr_vector<HUD_SOUND_ITEM>	m_sound_items;
-	HUD_SOUND_ITEM*				FindSoundItem	(	LPCSTR alias, bool b_assert);
 public:
 								~HUD_SOUND_COLLECTION();
+
+	xr_vector<HUD_SOUND_ITEM>	m_sound_items;
+
 	void						PlaySound		(	LPCSTR alias, 
 													const Fvector& position,
 													const CObject* parent,
 													bool hud_mode,
 													bool looped = false,
 													u8 index=u8(-1));
+
+	HUD_SOUND_ITEM* FindSoundItem(LPCSTR alias, bool b_assert);
 
 	void						StopSound		(	LPCSTR alias);
 

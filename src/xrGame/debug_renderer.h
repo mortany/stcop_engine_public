@@ -1,14 +1,13 @@
 ////////////////////////////////////////////////////////////////////////////
 //	Module 		: debug_renderer.h
 //	Created 	: 19.06.2006
-//  Modified 	: 19.06.2006
+//  Modified 	: 02.06.2019
 //	Author		: Dmitriy Iassenev
 //	Description : debug renderer
 ////////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
-#ifdef DEBUG
 
 #include "../Include/xrRender/DebugRender.h"
 
@@ -27,5 +26,3 @@ public:
 };
 
 #include "debug_renderer_inline.h"
-
-#endif // DEBUG

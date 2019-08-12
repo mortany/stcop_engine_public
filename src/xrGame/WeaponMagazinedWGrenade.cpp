@@ -130,6 +130,8 @@ void CWeaponMagazinedWGrenade::switch2_Reload()
 	VERIFY(GetState()==eReload);
 	if(m_bGrenadeMode) 
 	{
+		iMagSizeCurrent = iMagazineSize;
+
 		PlaySound("sndReloadG", get_LastFP2());
 
 		PlayHUDMotion("anm_reload_g", FALSE, this, GetState());
@@ -614,8 +616,8 @@ void CWeaponMagazinedWGrenade::PlayAnimReload()
 	if (IsGrenadeLauncherAttached())
 	{
 		if (iAmmoElapsed == 0)
-			if (isHUDAnimationExist("anm_reload_w_gl_empty"))
-				PlayHUDMotion("anm_reload_w_gl_empty", TRUE, this, GetState());
+			if (isHUDAnimationExist("anm_reload_empty_w_gl"))
+				PlayHUDMotion("anm_reload_empty_w_gl", TRUE, this, GetState());
 			else
 				PlayHUDMotion("anm_reload_w_gl", TRUE, this, GetState());
 		else
@@ -1010,10 +1012,10 @@ void CWeaponMagazinedWGrenade::switch2_Unmis()
 				PlaySound("sndReload", get_LastFP());
 		}
 
-		if (isHUDAnimationExist("anm_reload_w_gl_misfire"))
-			PlayHUDMotion("anm_reload_w_gl_misfire", TRUE, this, GetState());
-		else if (isHUDAnimationExist("anm_reload_w_gl_empty"))
-			PlayHUDMotion("anm_reload_w_gl_empty", TRUE, this, GetState());
+		if (isHUDAnimationExist("anm_reload_misfire_w_gl"))
+			PlayHUDMotion("anm_reload_misfire_w_gl", TRUE, this, GetState());
+		else if (isHUDAnimationExist("anm_reload_empty_w_gl"))
+			PlayHUDMotion("anm_reload_empty_w_gl", TRUE, this, GetState());
 		else
 			PlayHUDMotion("anm_reload_w_gl", TRUE, this, GetState());
 	}

@@ -453,6 +453,7 @@ void CCameraManager::ApplyDevice(float _viewport_near)
     // projection
     Device.fFOV = m_cam_info.fFov;
     Device.fASPECT = m_cam_info.fAspect;
+	float aspect = m_cam_info.fAspect;
     //Device.mProject.build_projection(deg2rad(m_cam_info.fFov), m_cam_info.fAspect, _viewport_near, m_cam_info.fFar);
 
 	//--#SM+# Begin-- +SecondVP+
@@ -461,13 +462,17 @@ void CCameraManager::ApplyDevice(float _viewport_near)
 	{
 		// Для второго вьюпорта FOV выставляем здесь
 		Device.fFOV = fFovSecond;
+
+		if(Device.m_SecondViewport.isR1)
+			aspect = 1.0f;
+
 		// Предупреждаем что мы изменили настройки камеры
 		Device.m_SecondViewport.isCamReady = true;
 	}
 	else
 		Device.m_SecondViewport.isCamReady = false;
 
-	Device.mProject.build_projection(deg2rad(Device.fFOV), (Device.m_SecondViewport.isR1 ? 1.0f: m_cam_info.fAspect), _viewport_near, m_cam_info.fFar);
+	Device.mProject.build_projection(deg2rad(Device.fFOV), aspect, _viewport_near, m_cam_info.fFar);
 	//--#SM+# End--
 
     if (g_pGamePersistent && g_pGamePersistent->m_pMainMenu->IsActive())

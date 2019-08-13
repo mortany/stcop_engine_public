@@ -463,9 +463,6 @@ void CCameraManager::ApplyDevice(float _viewport_near)
 		// Для второго вьюпорта FOV выставляем здесь
 		Device.fFOV = fFovSecond;
 
-		if(Device.m_SecondViewport.isR1)
-			aspect = 1.0f;
-
 		// Предупреждаем что мы изменили настройки камеры
 		Device.m_SecondViewport.isCamReady = true;
 	}

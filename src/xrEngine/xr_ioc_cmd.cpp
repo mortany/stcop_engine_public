@@ -710,6 +710,8 @@ extern Flags32 psEnvFlags;
 
 extern int g_ErrorLineCount;
 
+BOOL debugSecondVP = FALSE;
+
 ENGINE_API int ps_r__Supersample = 1;
 void CCC_Register()
 {
@@ -840,6 +842,8 @@ void CCC_Register()
 #ifdef DEBUG
     CMD1(CCC_DumpOpenFiles, "dump_open_files");
 #endif
+
+	CMD4(CCC_Integer, "rs_debug_second_vp", &debugSecondVP, FALSE, TRUE);
 
     CMD1(CCC_ExclusiveMode, "input_exclusive_mode");
 

@@ -355,4 +355,8 @@ void IGame_Level::SoundEvent_OnDestDestroy(Feel::Sound* obj)
         snd_Events.end());
 }
 
+void IGame_Level::ApplyCamera()
+{
+
+}
 

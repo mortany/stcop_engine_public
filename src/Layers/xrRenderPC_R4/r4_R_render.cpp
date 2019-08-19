@@ -201,7 +201,8 @@ void CRender::Render		()
 	rmNormal();
 
 	bool	_menu_pp		= g_pGamePersistent?g_pGamePersistent->OnRenderPPUI_query():false;
-	if (_menu_pp)			{
+	if (currentViewPort == MAIN_VIEWPORT && _menu_pp)
+	{
 		render_menu			()	;
 		return					;
 	};
@@ -535,7 +536,7 @@ void CRender::BeforeWorldRender() {}
 // После рендера мира и пост-эффектов --#SM+#-- +SecondVP+
 void CRender::AfterWorldRender()
 {
-	if (Device.m_SecondViewport.IsSVPFrame())
+	if (currentViewPort == SECONDARY_WEAPON_SCOPE)
 	{
 		// Делает копию бэкбуфера (текущего экрана) в рендер-таргет второго вьюпорта
 		ID3DTexture2D* pBuffer = NULL;

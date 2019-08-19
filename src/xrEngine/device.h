@@ -108,34 +108,33 @@ class ENGINE_API CRenderDeviceBase :
 public:
 };
 
+class ENGINE_API CSecondVPParams //--#SM+#-- +SecondVP+
+{
+	bool isActive; // Флаг активации рендера во второй вьюпорт
+	u8 frameDelay;  // На каком кадре с момента прошлого рендера во второй вьюпорт мы начнём новый
+					  //(не может быть меньше 2 - каждый второй кадр, чем больше тем более низкий FPS во втором вьюпорте)
+
+public:
+	bool isCamReady; // Флаг готовности камеры (FOV, позиция, и т.п) к рендеру второго вьюпорта
+
+	bool isR1;
+
+	IC bool IsSVPActive() { return isActive; }
+	IC void SetSVPActive(bool bState);
+	bool    IsSVPFrame();
+
+	IC u8 GetSVPFrameDelay() { return frameDelay; }
+	void  SetSVPFrameDelay(u8 iDelay)
+	{
+		frameDelay = iDelay;
+		clamp<u8>(frameDelay, 2, u8(-1));
+	}
+};
+
 #pragma pack(pop)
 // refs
 class ENGINE_API CRenderDevice : public CRenderDeviceBase
 {
-public:
-	class ENGINE_API CSecondVPParams //--#SM+#-- +SecondVP+
-	{
-		bool isActive; // Флаг активации рендера во второй вьюпорт
-		u8 frameDelay;  // На каком кадре с момента прошлого рендера во второй вьюпорт мы начнём новый
-						  //(не может быть меньше 2 - каждый второй кадр, чем больше тем более низкий FPS во втором вьюпорте)
-
-	public:
-		bool isCamReady; // Флаг готовности камеры (FOV, позиция, и т.п) к рендеру второго вьюпорта
-
-		bool isR1;
-
-		IC bool IsSVPActive() { return isActive; }
-		IC void SetSVPActive(bool bState);
-		bool    IsSVPFrame();
-
-		IC u8 GetSVPFrameDelay() { return frameDelay; }
-		void  SetSVPFrameDelay(u8 iDelay)
-		{
-			frameDelay = iDelay;
-			clamp<u8>(frameDelay, 2, u8(-1));
-		}
-	};
-
 private:
     // Main objects used for creating and rendering the 3D scene
     u32 m_dwWindowStyle;
@@ -195,11 +194,20 @@ public:
     CRegistrator <pureDeviceReset > seqDeviceReset;
     xr_vector <fastdelegate::FastDelegate0<> > seqParallel;
 	CSecondVPParams m_SecondViewport;	//--#SM+#-- +SecondVP+
+
+	xr_vector<ViewPort> viewPortsThisFrame;
+
     // Dependent classes
 
     CStats* Statistic;
 
     Fmatrix mInvFullTransform;
+
+	// Saved main viewport params
+	Fvector mainVPCamPosSaved;
+	Fmatrix mainVPFullTrans;
+	Fmatrix mainVPViewSaved;
+	Fmatrix mainVPProjectSaved;
 
     CRenderDevice()
         :
@@ -223,7 +231,7 @@ public:
         m_bNearer = FALSE;
 		//--#SM+#-- +SecondVP+
 		m_SecondViewport.SetSVPActive(false);
-		m_SecondViewport.SetSVPFrameDelay(2);
+		m_SecondViewport.SetSVPFrameDelay(1); // Change it to 2-3, if you want to save perfomance. Will cause skips in updating image in scope
 		m_SecondViewport.isCamReady = false;
 		m_SecondViewport.isR1 = false;
 

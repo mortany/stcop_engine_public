@@ -1031,6 +1031,18 @@ void CLevel::OnSessionTerminate(LPCSTR reason)
     MainMenu()->OnSessionTerminate(reason);
 }
 
+#include "../xrEngine/CameraManager.h"
+
+void CLevel::ApplyCamera()
+{
+	inherited::ApplyCamera();
+
+	if (g_actor)
+	{
+		Actor()->Cameras().ApplyDevice(VIEWPORT_NEAR);
+	}
+}
+
 u32	GameID()
 {
     return Game().Type();

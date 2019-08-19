@@ -327,7 +327,9 @@ void CCameraManager::Update(const Fvector& P, const Fvector& D, const Fvector& N
     m_cam_info.fAspect = m_cam_info.fAspect*dst + (fASPECT_Dest*aspect)*src;
     m_cam_info.dont_apply = false;
 
-	if (Device.m_SecondViewport.IsSVPActive())
+#pragma todo("Rafa: I guess this thingie needs to be moved to viewports loop or be done when we draw secondary vp. May be into ApplyCamera?")
+	/*
+	if (Render->currentViewPort == SECONDARY_WEAPON_SCOPE)
 	{
 		float fov = g_pGamePersistent->m_pGShaderConstants->hud_params.y;  //-V595
 
@@ -344,7 +346,10 @@ void CCameraManager::Update(const Fvector& P, const Fvector& D, const Fvector& N
 	else
 	{
 		fFovSecond = 0;
-	}
+	}*/
+
+	fFovSecond = 0;
+
     UpdateCamEffectors();
 
     UpdatePPEffectors();
@@ -458,7 +463,7 @@ void CCameraManager::ApplyDevice(float _viewport_near)
 
 	//--#SM+# Begin-- +SecondVP+
 	// Пересчитываем FOV для второго вьюпорта [Recalculate scene FOV for SecondVP frame]
-	if (Device.m_SecondViewport.IsSVPFrame())
+	if (Render->currentViewPort == SECONDARY_WEAPON_SCOPE)
 	{
 		// Для второго вьюпорта FOV выставляем здесь
 		Device.fFOV = fFovSecond;

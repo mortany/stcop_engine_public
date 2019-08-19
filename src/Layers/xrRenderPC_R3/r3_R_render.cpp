@@ -535,7 +535,7 @@ void CRender::BeforeWorldRender() {}
 // После рендера мира и пост-эффектов --#SM+#-- +SecondVP+
 void CRender::AfterWorldRender()
 {
-	if (Device.m_SecondViewport.IsSVPFrame())
+	if (currentViewPort == SECONDARY_WEAPON_SCOPE)
 	{
 		// Делает копию бэкбуфера (текущего экрана) в рендер-таргет второго вьюпорта
 		ID3D10Texture2D* pBuffer = NULL;

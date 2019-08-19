@@ -337,11 +337,12 @@ void dxRenderDeviceRender::End()
 	RCache.OnFrameEnd	();
 	Memory.dbg_check		();
 
-	DoAsyncScreenshot();
+	if(RImplementation.currentViewPort == MAIN_VIEWPORT)
+		DoAsyncScreenshot();
 
 #if defined(USE_DX10) || defined(USE_DX11)
 	//HW.m_pSwapChain->Present( 0, 0 );
-	if (!Device.m_SecondViewport.IsSVPFrame() && !Device.m_SecondViewport.isCamReady) //--#SM+#-- +SecondVP+ Не выводим кадр из второго рендера на экран
+	if (RImplementation.needPresenting) //--#SM+#-- +SecondVP+ Не выводим кадр из второго рендера на экран
 	{
 		bool bUseVSync = psDeviceFlags.is(rsFullscreen) && psDeviceFlags.test(rsVSync); // xxx: weird tearing glitches when VSync turned on for windowed mode in DX10\11
 		HW.m_pSwapChain->Present(bUseVSync ? 1 : 0, 0);
@@ -349,7 +350,7 @@ void dxRenderDeviceRender::End()
 #else	//	USE_DX10
 	CHK_DX				(HW.pDevice->EndScene());
 
-	if (!Device.m_SecondViewport.IsSVPFrame() && !Device.m_SecondViewport.isCamReady) //--#SM+#-- +SecondVP+ Не выводим кадр из второго рендера на экран
+	if (RImplementation.needPresenting) //--#SM+#-- +SecondVP+ Не выводим кадр из второго рендера на экран
 		HW.pDevice->Present(NULL, NULL, NULL, NULL);
 #endif	//	USE_DX10
 	//HRESULT _hr		= HW.pDevice->Present( NULL, NULL, NULL, NULL );

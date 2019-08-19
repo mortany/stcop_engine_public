@@ -466,7 +466,8 @@ void CCameraManager::ApplyDevice(float _viewport_near)
 	if (Render->currentViewPort == SECONDARY_WEAPON_SCOPE)
 	{
 		// Для второго вьюпорта FOV выставляем здесь
-		Device.fFOV = fFovSecond;
+		//Device.fFOV = fFovSecond;
+		Device.fFOV = g_pGamePersistent->m_pGShaderConstants->hud_params.y;
 
 		// Предупреждаем что мы изменили настройки камеры
 		Device.m_SecondViewport.isCamReady = true;

@@ -1032,6 +1032,7 @@ void CLevel::OnSessionTerminate(LPCSTR reason)
 }
 
 #include "../xrEngine/CameraManager.h"
+#include "ActorEffector.h"
 
 void CLevel::ApplyCamera()
 {

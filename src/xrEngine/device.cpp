@@ -324,6 +324,7 @@ void CRenderDevice::on_idle()
 		Render->currentViewPort = Render->viewPortsThisFrame[i];
 		Render->needPresenting = (Render->currentViewPort == MAIN_VIEWPORT || debugSecondVP) ? true : false;
 
+		if (g_pGameLevel)
 		g_pGameLevel->ApplyCamera(); // Apply camera params of vp, so that we create a correct full transform matrix
 
 		// Matrices
@@ -345,7 +346,7 @@ void CRenderDevice::on_idle()
 		vCameraPosition_saved = vCameraPosition;
 		mFullTransform_saved = mFullTransform;
 		mView_saved = mView;
-		mProject_saved = mProject;
+		mainVPProjectSaved = mProject;
 
 		// *** Resume threads
 		// Capture end point - thread must run only ONE cycle

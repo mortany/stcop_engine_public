@@ -346,7 +346,7 @@ void CRenderDevice::on_idle()
 		vCameraPosition_saved = vCameraPosition;
 		mFullTransform_saved = mFullTransform;
 		mView_saved = mView;
-		mainVPProjectSaved = mProject;
+		mProject_saved = mProject;
 
 		// *** Resume threads
 		// Capture end point - thread must run only ONE cycle

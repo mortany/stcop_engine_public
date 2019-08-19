@@ -338,7 +338,7 @@ void CRenderDevice::on_idle()
 			mainVPCamPosSaved = vCameraPosition;
 			mainVPFullTrans = mFullTransform;
 			mainVPViewSaved = mView;
-			mProject_saved = mProject;
+			mainVPProjectSaved = mProject;
 		}
 
 		// Set "_saved" for this frame each vport
@@ -377,7 +377,7 @@ void CRenderDevice::on_idle()
 	vCameraPosition_saved = mainVPCamPosSaved;
 	mFullTransform_saved = mainVPFullTrans;
 	mView_saved = mainVPViewSaved;
-	mProject_saved = mProject_saved;
+	mProject_saved = mainVPProjectSaved;
 
 	Statistic->RenderTOTAL_Real.End();
 	Statistic->RenderTOTAL_Real.FrameEnd();

@@ -127,7 +127,7 @@ public:
 	void  SetSVPFrameDelay(u8 iDelay)
 	{
 		frameDelay = iDelay;
-		clamp<u8>(frameDelay, 2, u8(-1));
+		clamp<u8>(frameDelay, 1, u8(-1));
 	}
 };
 

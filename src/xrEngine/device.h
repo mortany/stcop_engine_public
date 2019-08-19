@@ -195,8 +195,6 @@ public:
     xr_vector <fastdelegate::FastDelegate0<> > seqParallel;
 	CSecondVPParams m_SecondViewport;	//--#SM+#-- +SecondVP+
 
-	xr_vector<ViewPort> viewPortsThisFrame;
-
     // Dependent classes
 
     CStats* Statistic;

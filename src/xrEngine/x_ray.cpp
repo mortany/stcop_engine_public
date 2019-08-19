@@ -1243,11 +1243,18 @@ void CApplication::destroy_loading_shaders()
 
 //u32 calc_progress_color(u32, u32, int, int);
 
+#include "Render.h"
+
 PROTECT_API void CApplication::LoadDraw()
 {
     if (g_appLoaded) return;
+
     Device.dwFrame += 1;
 
+	Render->firstViewPort = MAIN_VIEWPORT;
+	Render->lastViewPort = MAIN_VIEWPORT;
+	Render->currentViewPort = MAIN_VIEWPORT;
+	Render->needPresenting = true;
 
     if (!Device.Begin()) return;
 

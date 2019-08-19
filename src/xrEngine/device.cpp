@@ -290,21 +290,21 @@ void CRenderDevice::on_idle()
 	{
 		if (debugSecondVP)
 		{
-			viewPortsThisFrame.push_back(SECONDARY_WEAPON_SCOPE);
+			Render->viewPortsThisFrame.push_back(SECONDARY_WEAPON_SCOPE);
 			Render->firstViewPort = SECONDARY_WEAPON_SCOPE;
 			Render->lastViewPort = SECONDARY_WEAPON_SCOPE;
 		}
 		else
 		{
-			viewPortsThisFrame.push_back(MAIN_VIEWPORT);
-			viewPortsThisFrame.push_back(SECONDARY_WEAPON_SCOPE);
+			Render->viewPortsThisFrame.push_back(MAIN_VIEWPORT);
+			Render->viewPortsThisFrame.push_back(SECONDARY_WEAPON_SCOPE);
 			Render->firstViewPort = MAIN_VIEWPORT;
 			Render->lastViewPort = SECONDARY_WEAPON_SCOPE;
 		}
 	}
 	else
 	{
-		viewPortsThisFrame.push_back(MAIN_VIEWPORT);
+		Render->viewPortsThisFrame.push_back(MAIN_VIEWPORT);
 		Render->firstViewPort = MAIN_VIEWPORT;
 		Render->lastViewPort = MAIN_VIEWPORT;
 	}
@@ -316,12 +316,12 @@ void CRenderDevice::on_idle()
 	u32 stored_cur_frame = dwFrame;
 #endif
 
-	for (size_t i = 0; i < viewPortsThisFrame.size(); i++)
+	for (size_t i = 0; i < Render->viewPortsThisFrame.size(); i++)
 	{
 #ifdef MOVE_CURRENT_FRAME_COUNTR
 		dwFrame += 1;
 #endif
-		Render->currentViewPort = viewPortsThisFrame[i];
+		Render->currentViewPort = Render->viewPortsThisFrame[i];
 		Render->needPresenting = (Render->currentViewPort == MAIN_VIEWPORT || debugSecondVP) ? true : false;
 
 		g_pGameLevel->ApplyCamera(); // Apply camera params of vp, so that we create a correct full transform matrix
@@ -383,7 +383,7 @@ void CRenderDevice::on_idle()
 	Statistic->RenderTOTAL_Real.FrameEnd();
 	Statistic->RenderTOTAL.accum = Statistic->RenderTOTAL_Real.accum;
 
-	viewPortsThisFrame.clear();
+	Render->viewPortsThisFrame.clear();
 
 #ifdef MOVE_CURRENT_FRAME_COUNTR
 	dwFrame += stored_cur_frame;

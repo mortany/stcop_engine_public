@@ -311,6 +311,9 @@ public:
 	ViewPort currentViewPort;
 	ViewPort firstViewPort;
 	ViewPort lastViewPort;
+
+	xr_vector<ViewPort> viewPortsThisFrame;
+
 	bool needPresenting;
 
     // Constructor/destructor

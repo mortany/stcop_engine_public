@@ -479,6 +479,10 @@ void CRender::add_leafs_Dynamic	(dxRender_Visual *pVisual, bool bIgnoreOpt)
 	switch (pVisual->Type) {
 	case MT_PARTICLE_GROUP:
 		{
+#if RENDER!=R_R1
+			if (phase == PHASE_SMAP)
+				return;
+#endif
 			// Add all children, doesn't perform any tests
 			PS::CParticleGroup* pG	= (PS::CParticleGroup*)pVisual;
 			for (PS::CParticleGroup::SItemVecIt i_it=pG->items.begin(); i_it!=pG->items.end(); i_it++)	{
@@ -623,6 +627,17 @@ IC bool IsValuableToRender(dxRender_Visual* pVisual, bool sm)
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 void CRender::add_leafs_Static(dxRender_Visual *pVisual)
 {
+
+	// Check frustum visibility and calculate distance to visual's center
+	EFC_Visible	VIS;
+	vis_data& vis = pVisual->vis;
+
+	u32 planes_v = View->getMask();
+
+	VIS = View->testSAABB(vis.sphere.P, vis.sphere.R, vis.box.data(), planes_v);
+
+	if (VIS == fcvNone)
+		return;
 
 #if RENDER!=R_R1
 	if (!IsValuableToRender(pVisual, phase == PHASE_SMAP))

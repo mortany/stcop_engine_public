@@ -16,7 +16,6 @@ class CRenderTarget		: public IRender_Target
 private:
 	u32							dwWidth;
 	u32							dwHeight;
-	u32							dwAccumulatorClearMark;
 public:
 	enum	eStencilOptimizeMode
 	{
@@ -25,6 +24,8 @@ public:
 	};
 
 	u32							dwLightMarkerID;
+	bool						needClearAccumulator;
+
 	// 
 	IBlender*					b_occq;
 	IBlender*					b_accum_mask;

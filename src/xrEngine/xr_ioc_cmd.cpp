@@ -696,6 +696,11 @@ ENGINE_API float psHUD_FOV_def = 0.35f; //--#SM+#--	Дефолтный HUD FOV (
 ENGINE_API float psHUD_FOV = psHUD_FOV_def; //--#SM+#-- Текущий HUD FOV (В % от Camera FOV) [current hud_fov (perc. of g_fov)]
 ENGINE_API float VIEWPORT_NEAR = 0.2f; //--#SM+#-- (Old: 0.2f)
 
+ENGINE_API float devfloat1 = 0.f;
+ENGINE_API float devfloat2 = 0.f;
+ENGINE_API float devfloat3 = 0.f;
+ENGINE_API float devfloat4 = 0.f;
+
 //extern int psSkeletonUpdate;
 extern int rsDVB_Size;
 extern int rsDIB_Size;
@@ -844,6 +849,11 @@ void CCC_Register()
 #endif
 
 	CMD4(CCC_Integer, "rs_debug_second_vp", &debugSecondVP, FALSE, TRUE);
+
+	CMD4(CCC_Float, "developer_float_1", &devfloat1, -100000.f, 100000.f);
+	CMD4(CCC_Float, "developer_float_2", &devfloat2, -100000.f, 100000.f);
+	CMD4(CCC_Float, "developer_float_3", &devfloat3, -100000.f, 100000.f);
+	CMD4(CCC_Float, "developer_float_4", &devfloat4, -100000.f, 100000.f);
 
     CMD1(CCC_ExclusiveMode, "input_exclusive_mode");
 

@@ -58,7 +58,7 @@ public:
 
 	virtual float			GetControlInertionFactor() const;
 	IC		float			GetZRotatingFactor()    const { return m_zoom_params.m_fZoomRotationFactor; }
-	IC		float			GetSecondVPZoomFactor() const { return m_zoom_params.m_fSecondVPFovFactor; }
+			float			GetSecondVPZoomFactor() const;
 			float			GetHudFov();
 			float			GetSecondVPFov() const;
 

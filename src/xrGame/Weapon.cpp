@@ -2638,14 +2638,25 @@ float CWeapon::GetHudFov()
 	return m_nearwall_last_hud_fov;
 }
 
+float CWeapon::GetSecondVPZoomFactor() const 
+{ 
+	float dist_k = (100.f / m_zoom_params.m_f3dZoomFactor);
+
+	clamp(dist_k, 0.0f, 1.0f);
+
+	float result = (m_zoom_params.m_fSecondVPFovFactor / dist_k);
+
+	return result;
+}
+
 // Получить FOV от текущего оружия игрока для второго рендера
 
 float CWeapon::GetSecondVPFov() const
 {
 	if (m_zoom_params.m_bUseDynamicZoom && bIsSecondVPZoomPresent())
-		return (m_fSecondRTZoomFactor / 100.f) * 75.0f;//g_fov;
+		return (m_fSecondRTZoomFactor / 100.f) * 75.f;//g_fov; 75.f
 
-	return GetSecondVPZoomFactor() * 75.0f;//g_fov;
+	return GetSecondVPZoomFactor() * 75.f;//g_fov; 75.f
 }
 
 // Обновление необходимости включения второго вьюпорта +SecondVP+

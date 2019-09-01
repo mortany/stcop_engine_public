@@ -350,4 +350,10 @@ public:
 };
 extern ENGINE_API CLoadScreenRenderer load_screen_renderer;
 
+// These variables have corrensponding console commands, and can be used to quickly tune or test smth, without quiting from game
+extern ENGINE_API float devfloat1;
+extern ENGINE_API float devfloat2;
+extern ENGINE_API float devfloat3;
+extern ENGINE_API float devfloat4;
+
 #endif

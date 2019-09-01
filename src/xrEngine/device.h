@@ -229,7 +229,7 @@ public:
         m_bNearer = FALSE;
 		//--#SM+#-- +SecondVP+
 		m_SecondViewport.SetSVPActive(false);
-		m_SecondViewport.SetSVPFrameDelay(3); // Change it to 2-3, if you want to save perfomance. Will cause skips in updating image in scope
+		m_SecondViewport.SetSVPFrameDelay(1); // Change it to 2-3, if you want to save perfomance. Will cause skips in updating image in scope
 		m_SecondViewport.isCamReady = false;
 		m_SecondViewport.isR1 = false;
 

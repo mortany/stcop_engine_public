@@ -275,7 +275,7 @@ void CRender::Render		()
 	//*******
 	// Sync point
 	Device.Statistic->RenderDUMP_Wait_S.Begin	();
-	if (1)
+	if (currentViewPort == MAIN_VIEWPORT)
 	{
 		CTimer	T;							T.Start	();
 		BOOL	result						= FALSE;
@@ -532,18 +532,18 @@ void CRender::render_forward				()
 	RImplementation.o.distortion				= FALSE;				// disable distorion
 }
 
-// œÂÂ‰ Ì‡˜‡ÎÓÏ ÂÌ‰Â‡ ÏË‡ --#SM+#-- +SecondVP+
+// –ü–µ—Ä–µ–¥ –Ω–∞—á–∞–ª–æ–º —Ä–µ–Ω–¥–µ—Ä–∞ –º–∏—Ä–∞ --#SM+#-- +SecondVP+
 void CRender::BeforeWorldRender() {}
 
-// œÓÒÎÂ ÂÌ‰Â‡ ÏË‡ Ë ÔÓÒÚ-˝ÙÙÂÍÚÓ‚ --#SM+#-- +SecondVP+
+// –ü–æ—Å–ª–µ —Ä–µ–Ω–¥–µ—Ä–∞ –º–∏—Ä–∞ –∏ –ø–æ—Å—Ç-—ç—Ñ—Ñ–µ–∫—Ç–æ–≤ --#SM+#-- +SecondVP+
 void CRender::AfterWorldRender()
 {
 	if (currentViewPort == SECONDARY_WEAPON_SCOPE)
 	{
-		// ƒÂÎ‡ÂÚ ÍÓÔË˛ ·˝Í·ÛÙÂ‡ (ÚÂÍÛ˘Â„Ó ˝Í‡Ì‡) ‚ ÂÌ‰Â-Ú‡„ÂÚ ‚ÚÓÓ„Ó ‚¸˛ÔÓÚ‡
+		// –î–µ–ª–∞–µ—Ç –∫–æ–ø–∏—é –±—ç–∫–±—É—Ñ–µ—Ä–∞ (—Ç–µ–∫—É—â–µ–≥–æ —ç–∫—Ä–∞–Ω–∞) –≤ —Ä–µ–Ω–¥–µ—Ä-—Ç–∞—Ä–≥–µ—Ç –≤—Ç–æ—Ä–æ–≥–æ –≤—å—é–ø–æ—Ä—Ç–∞
 		ID3DTexture2D* pBuffer = NULL;
 		HW.m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)& pBuffer);
 		HW.pContext->CopyResource(Target->rt_secondVP->pSurface, pBuffer);
-		pBuffer->Release(); //  ÓÂÍÚÌÓ Ó˜Ë˘‡ÂÏ ÒÒ˚ÎÍÛ Ì‡ ·˝Í·ÛÙÂ (ËÌ‡˜Â Ë„‡ Á‡‚ËÒÌÂÚ ‚ ÓÔˆËˇı)
+		pBuffer->Release(); // –ö–æ—Ä—Ä–µ–∫—Ç–Ω–æ –æ—á–∏—â–∞–µ–º —Å—Å—ã–ª–∫—É –Ω–∞ –±—ç–∫–±—É—Ñ–µ—Ä (–∏–Ω–∞—á–µ –∏–≥—Ä–∞ –∑–∞–≤–∏—Å–Ω–µ—Ç –≤ –æ–ø—Ü–∏—è—Ö)
 	}
 }

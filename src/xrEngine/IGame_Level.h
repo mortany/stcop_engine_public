@@ -67,6 +67,8 @@ public:
     BOOL bReady;
 
     CInifile* pLevel;
+	fastdelegate::FastDelegate1<float>		lastApplyCamera;
+	float									lastApplyCameraVPNear;
 public: // deferred sound events
     struct _esound_delegate
     {

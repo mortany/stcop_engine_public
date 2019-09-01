@@ -1038,10 +1038,14 @@ void CLevel::ApplyCamera()
 {
 	inherited::ApplyCamera();
 
-	if (g_actor)
+	/*if (g_actor)
 	{
-		Actor()->Cameras().ApplyDevice(VIEWPORT_NEAR);
-	}
+		Actor()->Cameras().ApplyDevice(VIEWPORT_NEAR);		
+	}*/
+
+	if (lastApplyCameraVPNear > -1.f)
+		lastApplyCamera(lastApplyCameraVPNear);
+
 }
 
 u32	GameID()

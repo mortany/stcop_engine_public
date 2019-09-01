@@ -25,6 +25,7 @@ IGame_Level::IGame_Level()
     bReady = false;
     pCurrentEntity = NULL;
     pCurrentViewEntity = NULL;
+	lastApplyCameraVPNear = -1.f;
     Device.DumpResourcesMemoryUsage();
 }
 

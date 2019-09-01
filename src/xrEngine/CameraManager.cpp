@@ -443,9 +443,13 @@ void CCameraManager::UpdatePPEffectors()
     pp_affected.validate("after applying pp");
 }
 
-
-
 void CCameraManager::ApplyDevice(float _viewport_near)
+{
+	g_pGameLevel->lastApplyCamera = fastdelegate::FastDelegate1<float>(this, &CCameraManager::ApplyDeviceInternal);
+	g_pGameLevel->lastApplyCameraVPNear = _viewport_near;
+}
+
+void CCameraManager::ApplyDeviceInternal(float _viewport_near)
 {
     // Device params
     Device.mView.build_camera_dir(m_cam_info.p, m_cam_info.d, m_cam_info.n);

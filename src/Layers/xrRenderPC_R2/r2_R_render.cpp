@@ -255,7 +255,7 @@ void CRender::Render		()
 	//*******
 	// Sync point
 	Device.Statistic->RenderDUMP_Wait_S.Begin	();
-	if (1)
+	if (currentViewPort == MAIN_VIEWPORT)
 	{
 		CTimer	T;							T.Start	();
 		BOOL	result						= FALSE;

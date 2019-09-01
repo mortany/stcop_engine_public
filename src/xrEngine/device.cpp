@@ -385,7 +385,11 @@ void CRenderDevice::on_idle()
 	Statistic->RenderTOTAL.accum = Statistic->RenderTOTAL_Real.accum;
 
 	Render->viewPortsThisFrame.clear();
+	
+	if (g_pGameLevel) // reapply camera params as for the main vp, for next frame stuff(we dont want to use last vp camera in next frame possible usages)
+		g_pGameLevel->ApplyCamera();
 
+	
 #ifdef MOVE_CURRENT_FRAME_COUNTR
 	dwFrame += stored_cur_frame;
 #endif

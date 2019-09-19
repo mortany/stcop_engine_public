@@ -35,16 +35,17 @@ DWORD WINAPI ttapiThreadProc( LPVOID lpParameter )
 
 		// Fast
 		for ( i = 0 ; i < dwFastIter ; ++i ) {
-			if ( pParams->vlFlag == 0 ) {
+			if (!_InterlockedCompareExchange(&pParams->vlFlag, 0, 0)) {
 				// Msg( "0x%8.8X Fast %u" , dwId , i );
 				goto process;
 			}
-			__asm pause;
+			//__asm pause;
+			_mm_pause();
 		}
 
 		// Moderate
 		for ( i = 0 ; i < dwSlowIter ; ++i ) {
-			if ( pParams->vlFlag == 0 ) {
+			if (!_InterlockedCompareExchange(&pParams->vlFlag, 0, 0)) {
 				// Msg( "0x%8.8X Moderate %u" , dwId , i );
 				goto process;
 			}
@@ -52,7 +53,7 @@ DWORD WINAPI ttapiThreadProc( LPVOID lpParameter )
 		}
 
 		// Slow
-		while ( pParams->vlFlag ) {
+		while (!_InterlockedCompareExchange(&pParams->vlFlag, 0, 0)) {
 			Sleep( 100 );
 			//Msg( "Shit" );
 		}

@@ -35,8 +35,15 @@ protected:
 public:
 	// Mortan: Новые параметры здеся
 	virtual	bool    bMarkCanShow() { return IsZoomed(); }
+	virtual void    CheckMagazine();
+	virtual void	UnloadMagazine(bool spawn_ammo = true);
+
+	bool            m_bHasReloadEmpty;
+	bool            m_bNeedBulletInGun;
+
+	bool            m_bCustomShotSounds;
+
 protected:
-	int iMagSizeCurrent;
 
 	virtual void	OnMagazineEmpty	();
 
@@ -99,7 +106,6 @@ public:
 
 	virtual bool	Action			(u16 cmd, u32 flags);
 	bool			IsAmmoAvailable	();
-	virtual void	UnloadMagazine	(bool spawn_ammo = true);
 
 	virtual bool	GetBriefInfo	(II_BriefInfo& info);
 

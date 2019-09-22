@@ -130,8 +130,6 @@ void CWeaponMagazinedWGrenade::switch2_Reload()
 	VERIFY(GetState()==eReload);
 	if(m_bGrenadeMode) 
 	{
-		iMagSizeCurrent = iMagazineSize;
-
 		PlaySound("sndReloadG", get_LastFP2());
 
 		PlayHUDMotion("anm_reload_g", FALSE, this, GetState());
@@ -999,8 +997,11 @@ int CWeaponMagazinedWGrenade::GetAmmoCount2( u8 ammo2_type ) const
 
 void CWeaponMagazinedWGrenade::switch2_Unmis()
 {
+	if (m_bGrenadeMode) return;
+
 	VERIFY(GetState() == eUnMisfire);
-	if (m_bGrenadeMode)
+
+	if (GrenadeLauncherAttachable() && IsGrenadeLauncherAttached())
 	{
 		if (m_sounds_enabled)
 		{
@@ -1011,7 +1012,6 @@ void CWeaponMagazinedWGrenade::switch2_Unmis()
 			else
 				PlaySound("sndReload", get_LastFP());
 		}
-
 		if (isHUDAnimationExist("anm_reload_misfire_w_gl"))
 			PlayHUDMotion("anm_reload_misfire_w_gl", TRUE, this, GetState());
 		else if (isHUDAnimationExist("anm_reload_empty_w_gl"))
@@ -1021,8 +1021,18 @@ void CWeaponMagazinedWGrenade::switch2_Unmis()
 	}
 	else
 		inherited::switch2_Unmis();
+}
 
+void CWeaponMagazinedWGrenade::CheckMagazine()
+{
+	if (m_bGrenadeMode) return;
 
-
-
+	if (m_bHasReloadEmpty == true && iAmmoElapsed >= 1 && m_bNeedBulletInGun == false)
+	{
+		m_bNeedBulletInGun = true;
+	}
+	else if (m_bHasReloadEmpty == true && iAmmoElapsed == 0 && m_bNeedBulletInGun == true)
+	{
+		m_bNeedBulletInGun = false;
+	}
 }

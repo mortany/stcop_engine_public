@@ -43,7 +43,8 @@ CWeaponMagazined::CWeaponMagazined(ESoundTypes eSoundType) : CWeapon()
 	m_fOldBulletSpeed			= 0;
 	m_iQueueSize				= WEAPON_ININITE_QUEUE;
 	m_bLockType					= false;
-	iMagSizeCurrent				= 0;
+	m_bHasReloadEmpty			= false;
+	m_bNeedBulletInGun			= false;
 }
 
 CWeaponMagazined::~CWeaponMagazined()
@@ -61,7 +62,9 @@ void CWeaponMagazined::net_Destroy()
 void CWeaponMagazined::Load	(LPCSTR section)
 {
 	inherited::Load		(section);
-		
+	
+	m_bHasReloadEmpty = isHUDAnimationExist("anm_reload_empty");
+
 	// Sounds
 	m_sounds.LoadSound(section,"snd_draw",		   "sndShow"					, false, m_eSoundShow		);
 	m_sounds.LoadSound(section,"snd_holster",	   "sndHide"					, false, m_eSoundHide		);
@@ -74,6 +77,19 @@ void CWeaponMagazined::Load	(LPCSTR section)
 	if (WeaponSoundExist(section, "snd_reload_misfire"))
 		m_sounds.LoadSound(section, "snd_reload_misfire", "sndReloadMisfire", true, m_eSoundReload);
 	
+	m_bCustomShotSounds = WeaponSoundExist(section, "snd_shoot_auto");
+
+	if (m_bCustomShotSounds)
+	{
+		if(WeaponSoundExist(section, "snd_shoot_auto"))
+			m_sounds.LoadSound(section, "snd_shoot_auto", "sndShot_a", false, m_eSoundShot);
+
+		if (WeaponSoundExist(section, "snd_shoot_echo"))
+			m_sounds.LoadSound(section, "snd_shoot_echo", "sndShotEcho", false, m_eSoundShot);
+
+	}
+
+
 	m_sSndShotCurrent = "sndShot";
 		
 	//звуки и партиклы глушителя, еслит такой есть
@@ -85,6 +101,9 @@ void CWeaponMagazined::Load	(LPCSTR section)
 			m_sSilencerSmokeParticles = pSettings->r_string(section, "silencer_smoke_particles");
 		
 		m_sounds.LoadSound(section,"snd_silncer_shot", "sndSilencerShot", false, m_eSoundShot);
+
+		if (WeaponSoundExist(section, "snd_silncer_shoot_auto"))
+			m_sounds.LoadSound(section, "snd_silncer_shoot_auto", "sndSilencerShot_a", false, m_eSoundShot);
 	}
 
 	m_iBaseDispersionedBulletsCount = READ_IF_EXISTS(pSettings, r_u8, section, "base_dispersioned_bullets_count", 0);
@@ -253,8 +272,8 @@ void CWeaponMagazined::OnMagazineEmpty()
 void CWeaponMagazined::UnloadMagazine(bool spawn_ammo)
 {
 	xr_map<LPCSTR, u16> l_ammo;
-	
-	while(!m_magazine.empty()) 
+
+	while(!m_magazine.empty())
 	{
 		CCartridge &l_cartridge = m_magazine.back();
 		xr_map<LPCSTR, u16>::iterator l_it;
@@ -342,25 +361,22 @@ void CWeaponMagazined::ReloadMagazine()
 		}
 	}
 
-
-
 	//нет патронов для перезарядки
 	if(!m_pCurrentAmmo && !unlimited_ammo() ) return;
 
+	//Модернизируем проверку на соотвествие патронов, будем проверять так же последний патрон
 	//разрядить магазин, если загружаем патронами другого типа
-	if (!m_bLockType && !m_magazine.empty() && (!m_pCurrentAmmo || xr_strcmp(m_pCurrentAmmo->cNameSect(), *m_magazine.back().m_ammoSect)))
+	if (!m_bLockType && !m_magazine.empty() && (!m_pCurrentAmmo || xr_strcmp(m_pCurrentAmmo->cNameSect(), *m_magazine.front().m_ammoSect)))
 	{
-		iMagSizeCurrent = iMagazineSize;
 		UnloadMagazine();
 	}
-		
-
+	
 	VERIFY((u32)iAmmoElapsed == m_magazine.size());
 
 	if (m_DefaultCartridge.m_LocalAmmoType != m_ammoType)
 		m_DefaultCartridge.Load( m_ammoTypes[m_ammoType].c_str(), m_ammoType );
 	CCartridge l_cartridge = m_DefaultCartridge;
-	while(iAmmoElapsed < iMagSizeCurrent)
+	while(iAmmoElapsed < iMagazineSize)
 	{
 		if (!unlimited_ammo())
 		{
@@ -377,7 +393,7 @@ void CWeaponMagazined::ReloadMagazine()
 	if(m_pCurrentAmmo && !m_pCurrentAmmo->m_boxCurr && OnServer()) 
 		m_pCurrentAmmo->SetDropManual(TRUE);
 
-	if(iMagSizeCurrent > iAmmoElapsed)
+	if(iMagazineSize > iAmmoElapsed)
 	{ 
 		m_bLockType = true; 
 		ReloadMagazine(); 
@@ -389,6 +405,14 @@ void CWeaponMagazined::ReloadMagazine()
 
 void CWeaponMagazined::OnStateSwitch	(u32 S)
 {
+
+	if (GetState() == eFire)
+	{
+		if (S == eIdle || S == eMisfire || S == eMagEmpty || S == eReload)
+			if(xr_strcmp(m_sSndShotCurrent.c_str(), "sndSilencerShot") != 0)
+				if(m_sounds.FindSoundItem("sndShotEcho", false)) PlaySound("sndShotEcho", get_LastFP());
+	}
+
 	inherited::OnStateSwitch(S);
 	CInventoryOwner* owner = smart_cast<CInventoryOwner*>(this->H_Parent());
 	switch (S)
@@ -556,17 +580,6 @@ void CWeaponMagazined::state_Fire(float dt)
 
 	if(fShotTimeCounter<0)
 	{
-/*
-		if(bDebug && H_Parent() && (H_Parent()->ID() != Actor()->ID()))
-		{
-			Msg("stop shooting w=[%s] magsize=[%d] sshot=[%s] qsize=[%d] shotnum=[%d]",
-					IsWorking()?"true":"false", 
-					m_magazine.size(),
-					m_bFireSingleShot?"true":"false",
-					m_iQueueSize,
-					m_iShotNum);
-		}
-*/
 		if(iAmmoElapsed == 0)
 			OnMagazineEmpty();
 
@@ -601,7 +614,13 @@ void CWeaponMagazined::SetDefaults	()
 void CWeaponMagazined::OnShot()
 {
 	// Sound
-	PlaySound					(m_sSndShotCurrent.c_str(), get_LastFP());
+	// Проверим новые звуки
+	if (m_bCustomShotSounds)
+	{
+		shared_str custom_snd = xr_strcmp(m_sSndShotCurrent.c_str(), "sndSilencerShot") == 0 ? "sndSilencerShot_a" : "sndShot_a";
+		PlaySound(m_iShotNum > 1 ? custom_snd.c_str() : m_sSndShotCurrent.c_str(), get_LastFP());
+	}
+	else PlaySound(m_sSndShotCurrent.c_str(), get_LastFP());
 
 	// Camera	
 	AddShotEffector				();
@@ -632,14 +651,40 @@ void CWeaponMagazined::OnAnimationEnd(u32 state)
 {
 	switch(state) 
 	{
-		case eReload:	ReloadMagazine();	SwitchState(eIdle);	break;	// End of reload animation
+		case eReload:
+		{
+			CheckMagazine(); // Основано на механизме из Lost Alpha: New Project
+							 // Авторы: rafa & Kondr48
+
+			CCartridge FirstBulletInGun;
+
+			bool bNeedputBullet = iAmmoElapsed > 0;
+
+			if (m_bNeedBulletInGun && bNeedputBullet)
+			{
+				FirstBulletInGun = m_magazine.back();
+				m_magazine.pop_back();
+				iAmmoElapsed--;
+			}
+
+			ReloadMagazine();
+
+			if (m_bNeedBulletInGun && bNeedputBullet)
+			{
+				m_magazine.push_back(FirstBulletInGun);
+				iAmmoElapsed++;
+			}
+
+			SwitchState(eIdle);
+
+		}break;// End of reload animation
 		case eHiding:	SwitchState(eHidden);   break;	// End of Hide
 		case eShowing:	SwitchState(eIdle);		break;	// End of Show
 		case eIdle:		switch2_Idle();			break;  // Keep showing idle
 		case eUnMisfire:
 		{
 			bMisfire = false;
-			--iAmmoElapsed;
+			iAmmoElapsed--;
 			SwitchState(eIdle);
 		}break; // End of UnMisfire animation
 	}
@@ -686,16 +731,6 @@ void CWeaponMagazined::switch2_Fire	()
 		return;
 #endif // DEBUG
 
-//
-//	VERIFY2(
-//		io && (ii == io->inventory().ActiveItem()),
-//		make_string(
-//			"item[%s], parent[%s]",
-//			*cName(),
-//			H_Parent() ? *H_Parent()->cName() : "no_parent"
-//		)
-//	);
-
 	m_bStopedAfterQueueFired = false;
 	m_bFireSingleShot = true;
 	m_iShotNum = 0;
@@ -735,10 +770,6 @@ void CWeaponMagazined::PlayReloadSound()
 void CWeaponMagazined::switch2_Reload()
 {
 	CWeapon::FireEnd	();
-
-	bool bEmptyEnable = iAmmoElapsed > 0 && isHUDAnimationExist("anm_reload_empty");
-
-	iMagSizeCurrent = bEmptyEnable ? iMagazineSize + 1 : iMagazineSize;
 
 	PlayReloadSound		();
 	PlayAnimReload		();
@@ -1545,4 +1576,16 @@ bool CWeaponMagazined::WeaponSoundExist(LPCSTR section, LPCSTR sound_name) const
 	Msg("~ [WARNING] ------ Sound [%s] does not exist in [%s]", sound_name, section);
 #endif
 	return false;
+}
+
+void CWeaponMagazined::CheckMagazine()
+{
+	if (m_bHasReloadEmpty == true && iAmmoElapsed >= 1 && m_bNeedBulletInGun == false)
+	{
+		m_bNeedBulletInGun = true;
+	}
+	else if (m_bHasReloadEmpty == true && iAmmoElapsed == 0 && m_bNeedBulletInGun == true)
+	{
+		m_bNeedBulletInGun = false;
+	}
 }

@@ -522,20 +522,27 @@ public:
         VERIFY(_abs(v) > 0.000001f);
         return mul(1.0f / v);
     }
-    // fov
-    IC SelfRef build_projection(T fFOV, T fAspect, T fNearPlane, T fFarPlane)
-    {
-        return build_projection_HAT(tanf(fFOV / 2.f), fAspect, fNearPlane, fFarPlane);
-    }
+	//  fov based, aspected
+	IC	SelfRef	build_projection(T fFOV, T fAspect, T fNearPlane, T fFarPlane)
+	{
+		return build_projection_HAT(tanf(fFOV / 2.f), fAspect, T(1), fNearPlane, fFarPlane);
+	}
+
+	// fov based, controlled _11/_22 (allows to controll "width" and "height" coeficients of projection, so that you can create squared projection)
+	IC	SelfRef	build_projection(T fFOV, T width_k, T height_k, T fNearPlane, T fFarPlane)
+	{
+		return build_projection_HAT(tanf(fFOV / 2.f), width_k, height_k, fNearPlane, fFarPlane);
+	}
+
     // half_fov-angle-tangent
-    IC SelfRef build_projection_HAT(T HAT, T fAspect, T fNearPlane, T fFarPlane)
+	IC	SelfRef	build_projection_HAT(T HAT, T width_k, T height_k, T fNearPlane, T fFarPlane)
     {
         VERIFY(_abs(fFarPlane - fNearPlane) > EPS_S);
         VERIFY(_abs(HAT) > EPS_S);
 
         T cot = T(1) / HAT;
-        T w = fAspect * cot;
-        T h = T(1) * cot;
+		T w = width_k * cot;
+		T h = height_k * cot;
         T Q = fFarPlane / (fFarPlane - fNearPlane);
 
         _11 = w;

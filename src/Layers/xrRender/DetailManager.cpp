@@ -239,7 +239,7 @@ void CDetailManager::UpdateVisibleM()
 {
 	for (int i = 0; i != 3; ++i)
 		for (auto& vis : m_visibles[i])
-			vis.clear(); // Mortan: Maybe in this old engine .clear_not_free()?
+			vis.clear_not_free(); // Mortan: Maybe in this old engine .clear_not_free()?
 
 	Fvector		EYE				= RDEVICE.vCameraPosition_saved;
 
@@ -279,10 +279,6 @@ void CDetailManager::UpdateVisibleM()
 				Slot*	PS		= *MS.slots[_i];
 				Slot& 	S 		= *PS;
 
-//				if ( ( _i + 1 ) < dwCC );
-//					_mm_prefetch( (char *) *MS.slots[ _i + 1 ]  , _MM_HINT_T1 );
-
-				// if slot empty - continue
 				if (S.empty)
 				{
 					continue;
@@ -297,12 +293,10 @@ void CDetailManager::UpdateVisibleM()
 						continue;	// invisible-view frustum
 					}
 				}
-#ifndef _EDITOR
 				if (!RImplementation.HOM.visible(S.vis))
 				{
 					continue;	// invisible-occlusion
 				}
-#endif
 				// Add to visibility structures
 				if (RDEVICE.dwFrame>S.frame){
 					// Calc fade factor	(per slot)
@@ -337,8 +331,6 @@ void CDetailManager::UpdateVisibleM()
 							if (ssa > r_ssaCHEAP)	vis_id = Item.vis_ID;
 							
 							sp.r_items[vis_id].push_back	(*siIT);
-
-//2							visible[vis_id][sp.id].push_back(&Item);
 						}
 					}
 				}
@@ -366,10 +358,8 @@ void CDetailManager::UpdateVisibleM()
 
 void CDetailManager::Render	()
 {
-#ifndef _EDITOR
 	if (0==dtFS)						return;
 	if (!psDeviceFlags.is(rsDetails))	return;
-#endif
 
 	// MT
 	MT_SYNC					();

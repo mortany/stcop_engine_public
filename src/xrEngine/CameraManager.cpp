@@ -449,6 +449,11 @@ void CCameraManager::ApplyDevice(float _viewport_near)
 	g_pGameLevel->lastApplyCameraVPNear = _viewport_near;
 }
 
+extern ENGINE_API float psSVP1FrustumFovK;
+extern ENGINE_API float psSVP1FrustumWidthK;
+extern ENGINE_API float psSVP1FrustumHeightK;
+extern ENGINE_API BOOL psSVP1FrustumOptimize;
+
 void CCameraManager::ApplyDeviceInternal(float _viewport_near)
 {
     // Device params
@@ -480,7 +485,25 @@ void CCameraManager::ApplyDeviceInternal(float _viewport_near)
 		Device.m_SecondViewport.isCamReady = false;
 
 	Device.mProject.build_projection(deg2rad(Device.fFOV), aspect, _viewport_near, m_cam_info.fFar);
-	//--#SM+# End--
+
+	/*if (Render->currentViewPort == SECONDARY_WEAPON_SCOPE)
+	{
+		// Create shrinked projection matrix, for better geometry cutoff in svp
+		Fmatrix second_vp_shrinked_project_m;
+
+		if (psSVP1FrustumOptimize)
+			second_vp_shrinked_project_m.build_projection(deg2rad(Device.fFOV * psSVP1FrustumFovK), psSVP1FrustumWidthK, psSVP1FrustumHeightK, _viewport_near, m_cam_info.fFar);
+		else
+			second_vp_shrinked_project_m.build_projection(deg2rad(Device.fFOV), m_cam_info.fAspect, _viewport_near, m_cam_info.fFar);
+
+		Fmatrix second_vp_shrinked_full_m;
+		// now create fulltransform
+		second_vp_shrinked_full_m.mul(second_vp_shrinked_project_m, Device.mView);
+
+		Device.SetShrinkedFullTransform_saved(second_vp_shrinked_full_m);
+
+	}*/
+
 
     if (g_pGamePersistent && g_pGamePersistent->m_pMainMenu->IsActive())
         ResetPP();

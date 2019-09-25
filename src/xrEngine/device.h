@@ -206,6 +206,7 @@ public:
 	Fmatrix mainVPFullTrans;
 	Fmatrix mainVPViewSaved;
 	Fmatrix mainVPProjectSaved;
+	//Fmatrix	secVPTransShrinked;
 
     CRenderDevice()
         :
@@ -247,6 +248,12 @@ public:
 
     void overdrawBegin();
     void overdrawEnd();
+
+	//Frustum
+	//IC Fmatrix GetShrinkedFullTransform_saved() const { return secVPTransShrinked; };
+
+	//void SetShrinkedFullTransform_saved(const Fmatrix& m) { secVPTransShrinked = m; };
+
 
     // Mode control
     void DumpFlags();

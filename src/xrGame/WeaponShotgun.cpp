@@ -9,7 +9,7 @@
 
 CWeaponShotgun::CWeaponShotgun()
 {
-	m_eSoundClose			= ESoundTypes(SOUND_TYPE_WEAPON_SHOOTING);
+	m_eSoundClose_2			= ESoundTypes(SOUND_TYPE_WEAPON_SHOOTING);
 	m_eSoundAddCartridge	= ESoundTypes(SOUND_TYPE_WEAPON_SHOOTING);
 }
 
@@ -34,7 +34,7 @@ void CWeaponShotgun::Load	(LPCSTR section)
 
 		m_sounds.LoadSound(section, "snd_add_cartridge", "sndAddCartridge", false, m_eSoundAddCartridge);
 
-		m_sounds.LoadSound(section, "snd_close_weapon", "sndClose", false, m_eSoundClose);
+		m_sounds.LoadSound(section, "snd_close_weapon", "sndClose_2", false, m_eSoundClose_2);
 	};
 
 }
@@ -52,7 +52,7 @@ bool CWeaponShotgun::Action			(u16 cmd, u32 flags)
 
 	if(	m_bTriStateReload && GetState()==eReload &&
 		cmd==kWPN_FIRE && flags&CMD_START &&
-		m_sub_state==eSubstateReloadInProcess		)//остановить перезагрузку
+		m_sub_state==eSubstateReloadInProcess		)//РѕСЃС‚Р°РЅРѕРІРёС‚СЊ РїРµСЂРµР·Р°РіСЂСѓР·РєСѓ
 	{
 		AddCartridge(1);
 		m_sub_state = eSubstateReloadEnd;
@@ -151,7 +151,7 @@ void CWeaponShotgun::switch2_AddCartgidge	()
 void CWeaponShotgun::switch2_EndReload	()
 {
 	SetPending			(FALSE);
-	PlaySound			("sndClose",get_LastFP());
+	PlaySound			("sndClose_2",get_LastFP());
 	PlayAnimCloseWeapon	();
 }
 
@@ -230,7 +230,7 @@ u8 CWeaponShotgun::AddCartridge		(u8 cnt)
 
 	VERIFY((u32)iAmmoElapsed == m_magazine.size());
 
-	//выкинуть коробку патронов, если она пустая
+	//РІС‹РєРёРЅСѓС‚СЊ РєРѕСЂРѕР±РєСѓ РїР°С‚СЂРѕРЅРѕРІ, РµСЃР»Рё РѕРЅР° РїСѓСЃС‚Р°СЏ
 	if(m_pCurrentAmmo && !m_pCurrentAmmo->m_boxCurr && OnServer()) 
 		m_pCurrentAmmo->SetDropManual(TRUE);
 

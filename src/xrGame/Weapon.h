@@ -80,9 +80,6 @@ public:
 			float			m_fLR_CameraFactor; // Фактор бокового наклона худа при движении камеры [-1; +1]
 			float			m_fLR_InertiaFactor; // Фактор горизонтальной инерции худа при движении камеры [-1; +1]
 			float			m_fUD_InertiaFactor; // Фактор вертикальной инерции худа при движении камеры [-1; +1]
-
-
-
 			Fvector			m_strafe_offset[4][2]; //pos,rot,data1,data2/ normal,aim-GL --#SM+#--
 
 	//End=================================
@@ -481,18 +478,6 @@ protected:
 
 public:
 	xr_vector<shared_str>	m_ammoTypes;
-/*
-	struct SScopes
-	{
-		shared_str			m_sScopeName;
-		int					m_iScopeX;
-		int					m_iScopeY;
-	};
-	DEFINE_VECTOR(SScopes*, SCOPES_VECTOR, SCOPES_VECTOR_IT);
-	SCOPES_VECTOR			m_scopes;
-
-	u8						cur_scope;
-*/
 
 	DEFINE_VECTOR(shared_str, SCOPES_VECTOR, SCOPES_VECTOR_IT);
 	SCOPES_VECTOR			m_scopes;
@@ -500,7 +485,6 @@ public:
 
 	CWeaponAmmo*			m_pCurrentAmmo;
 	u8						m_ammoType;
-//-	shared_str				m_ammoName; <== deleted
 	bool					m_bHasTracers;
 	u8						m_u8TracerColorID;
 	u8						m_set_next_ammoType_on_reload;
@@ -521,8 +505,6 @@ public:
 	virtual u32				ef_weapon_type		() const;
 
 protected:
-	// This is because when scope is attached we can't ask scope for these params
-	// therefore we should hold them by ourself :-((
 	float					m_addon_holder_range_modifier;
 	float					m_addon_holder_fov_modifier;
 

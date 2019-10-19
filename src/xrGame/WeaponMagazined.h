@@ -28,6 +28,7 @@ protected:
 	ESoundTypes		m_eSoundShot;
 	ESoundTypes		m_eSoundEmptyClick;
 	ESoundTypes		m_eSoundReload;
+	ESoundTypes		m_eSoundClose;
 	bool			m_sounds_enabled;
 	// General
 	//кадр момента пересчета UpdateSounds
@@ -38,7 +39,6 @@ public:
 	virtual void    CheckMagazine();
 	virtual void	UnloadMagazine(bool spawn_ammo = true);
 
-	bool            m_bHasReloadEmpty;
 	bool            m_bNeedBulletInGun;
 
 	bool            m_bCustomShotSounds;
@@ -170,7 +170,30 @@ protected:
 	virtual void	PlayAnimIdle		();
 	virtual void	PlayAnimShoot		();
 	virtual void	PlayReloadSound		();
-	virtual void	PlayAnimAim			();	
+	virtual void	PlayAnimAim			();
+	virtual void	PlayAnimBore		();
+	virtual void	PlayAnimIdleSprint	();
+	virtual void	PlayAnimIdleMoving	();
+
+	// Флаги наличия анимаций, будем их искать заранее, так будет намного проще мейби
+	enum {
+		ANM_SHOW_EMPTY       = (1 << 0),
+		ANM_HIDE_EMPTY       = (1 << 1),
+		ANM_AIM_EMPTY        = (1 << 2),
+		ANM_BORE_EMPTY		 = (1 << 3),
+		ANM_SHOT_EMPTY		 = (1 << 4),
+		ANM_SPRINT_EMPTY	 = (1 << 5),
+		ANM_MOVING_EMPTY	 = (1 << 6),
+		ANM_RELOAD_EMPTY	 = (1 << 7),
+		ANM_RELOAD_EMPTY_GL  = (1 << 8),
+		ANM_SHOT_AIM		 = (1 << 9),
+		ANM_SHOT_AIM_GL		 = (1 << 10),
+		ANM_MISFIRE			 = (1 << 11),
+		ANM_MISFIRE_GL		 = (1 << 12),
+		ANM_IDLE_EMPTY		 = (1 << 13),
+	};
+
+	Flags32 psWpnAnimsFlag;
 
 	bool WeaponSoundExist(LPCSTR section, LPCSTR sound_name) const;
 

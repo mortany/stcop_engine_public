@@ -528,6 +528,11 @@ public:
 		return build_projection_HAT(tanf(fFOV / 2.f), fAspect, T(1), fNearPlane, fFarPlane);
 	}
 
+	IC	SelfRef	build_projection_l(T HAT, T fAspect, T fNearPlane, T fFarPlane)
+	{
+		return build_projection_HAT(HAT, fAspect, T(1), fNearPlane, fFarPlane);
+	}
+
 	// fov based, controlled _11/_22 (allows to controll "width" and "height" coeficients of projection, so that you can create squared projection)
 	IC	SelfRef	build_projection(T fFOV, T width_k, T height_k, T fNearPlane, T fFarPlane)
 	{

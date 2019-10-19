@@ -409,8 +409,8 @@ void CWeaponMagazined::OnStateSwitch	(u32 S)
 	if (GetState() == eFire)
 	{
 		if (S == eIdle || S == eMisfire || S == eMagEmpty || S == eReload)
-			if(xr_strcmp(m_sSndShotCurrent.c_str(), "sndSilencerShot") != 0)
-				if(m_sounds.FindSoundItem("sndShotEcho", false)) PlaySound("sndShotEcho", get_LastFP());
+			if((xr_strcmp(m_sSndShotCurrent.c_str(), "sndSilencerShot") != 0) && !IsMisfire())
+				if(m_sounds.FindSoundItem("sndShotEcho", false) ) PlaySound("sndShotEcho", get_LastFP());
 	}
 
 	inherited::OnStateSwitch(S);

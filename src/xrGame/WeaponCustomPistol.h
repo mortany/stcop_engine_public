@@ -12,4 +12,5 @@ public:
 protected:
 	virtual void	FireEnd				();
 	virtual void	switch2_Fire		();
+	virtual	int		GetCurrentFireMode();
 };

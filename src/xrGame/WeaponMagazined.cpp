@@ -47,6 +47,7 @@ CWeaponMagazined::CWeaponMagazined(ESoundTypes eSoundType) : CWeapon()
 	m_iQueueSize				= WEAPON_ININITE_QUEUE;
 	m_bLockType					= false;
 	m_bNeedBulletInGun			= false;
+	m_bHasDifferentFireModes	= false;
 }
 
 CWeaponMagazined::~CWeaponMagazined()
@@ -60,23 +61,30 @@ void CWeaponMagazined::net_Destroy()
 	inherited::net_Destroy();
 }
 
+void CWeaponMagazined::SetAnimFlag(u32 flag, LPCSTR anim_name)
+{
+	if (pSettings->line_exist(hud_sect, anim_name))
+		psWpnAnimsFlag.set(flag, TRUE);
+	else 
+		psWpnAnimsFlag.set(flag, FALSE);
+}
 
 void CWeaponMagazined::Load	(LPCSTR section)
 {
 	inherited::Load		(section);
 	
 	// Проверяем наличие анимаций
-	psWpnAnimsFlag.set(ANM_SHOW_EMPTY,   isHUDAnimationExist("anm_show_empty"));
-	psWpnAnimsFlag.set(ANM_HIDE_EMPTY,   isHUDAnimationExist("anm_hide_empty"));
-	psWpnAnimsFlag.set(ANM_IDLE_EMPTY,   isHUDAnimationExist("anm_idle_empty"));
-	psWpnAnimsFlag.set(ANM_AIM_EMPTY,    isHUDAnimationExist("anm_idle_aim_empty"));
-	psWpnAnimsFlag.set(ANM_BORE_EMPTY,   isHUDAnimationExist("anm_bore_empty"));
-	psWpnAnimsFlag.set(ANM_SHOT_EMPTY,   isHUDAnimationExist("anm_shot_l"));
-	psWpnAnimsFlag.set(ANM_SPRINT_EMPTY, isHUDAnimationExist("anm_idle_sprint_empty"));
-	psWpnAnimsFlag.set(ANM_MOVING_EMPTY, isHUDAnimationExist("anm_idle_moving_empty"));
-	psWpnAnimsFlag.set(ANM_RELOAD_EMPTY, isHUDAnimationExist("anm_reload_empty"));
-	psWpnAnimsFlag.set(ANM_MISFIRE,		 isHUDAnimationExist("anm_reload_misfire"));
-	psWpnAnimsFlag.set(ANM_SHOT_AIM,	 isHUDAnimationExist("anm_shots_when_aim"));
+	SetAnimFlag(ANM_SHOW_EMPTY,"anm_show_empty");
+	SetAnimFlag(ANM_HIDE_EMPTY,"anm_hide_empty");
+	SetAnimFlag(ANM_IDLE_EMPTY,"anm_idle_empty");
+	SetAnimFlag(ANM_AIM_EMPTY,"anm_idle_aim_empty");
+	SetAnimFlag(ANM_BORE_EMPTY,"anm_bore_empty");
+	SetAnimFlag(ANM_SHOT_EMPTY,"anm_shot_l");
+	SetAnimFlag(ANM_SPRINT_EMPTY,"anm_idle_sprint_empty");
+	SetAnimFlag(ANM_MOVING_EMPTY,"anm_idle_moving_empty");
+	SetAnimFlag(ANM_RELOAD_EMPTY,"anm_reload_empty");
+	SetAnimFlag(ANM_MISFIRE,"anm_reload_misfire");
+	SetAnimFlag(ANM_SHOT_AIM,"anm_shots_when_aim");
 
 	// Sounds
 	m_sounds.LoadSound(section,"snd_draw",		   "sndShow"					, false, m_eSoundShow		);
@@ -145,10 +153,8 @@ void CWeaponMagazined::Load	(LPCSTR section)
 	else
 	{
 		m_bHasDifferentFireModes = false;
-		m_iCurFireMode = 0;
-		m_aFireModes.push_back(1);
-
 	}
+
 	LoadSilencerKoeffs();
 }
 
@@ -1212,7 +1218,6 @@ void CWeaponMagazined::PlayAnimShow()
 {
 	VERIFY(GetState()==eShowing);
 
-
 	if (iAmmoElapsed == 0 && psWpnAnimsFlag.test(ANM_SHOW_EMPTY))
 		PlayHUDMotion("anm_show_empty", FALSE, this, GetState());
 	else
@@ -1290,7 +1295,7 @@ void CWeaponMagazined::PlayAnimShoot()
 {
 	VERIFY(GetState()==eFire);
 
-	if (IsZoomed() && psWpnAnimsFlag.test(ANM_SHOT_AIM))
+	if (IsZoomed() && psWpnAnimsFlag.test(ANM_SHOT_AIM) && IsScopeAttached())
 		PlayHUDMotion("anm_shots_when_aim", FALSE, this, GetState());
 	else if(iAmmoElapsed == 1 && psWpnAnimsFlag.test(ANM_SHOT_EMPTY))
 		PlayHUDMotion("anm_shot_l", FALSE, this, GetState());
@@ -1638,11 +1643,11 @@ bool CWeaponMagazined::WeaponSoundExist(LPCSTR section, LPCSTR sound_name) const
 
 void CWeaponMagazined::CheckMagazine()
 {
-	if (psWpnAnimsFlag.test(ANM_RELOAD_EMPTY) == true && iAmmoElapsed >= 1 && m_bNeedBulletInGun == false)
+	if (psWpnAnimsFlag.test(ANM_RELOAD_EMPTY) && iAmmoElapsed >= 1 && m_bNeedBulletInGun == false)
 	{
 		m_bNeedBulletInGun = true;
 	}
-	else if (psWpnAnimsFlag.test(ANM_RELOAD_EMPTY) == true && iAmmoElapsed == 0 && m_bNeedBulletInGun == true)
+	else if (psWpnAnimsFlag.test(ANM_RELOAD_EMPTY) && iAmmoElapsed == 0 && m_bNeedBulletInGun == true)
 	{
 		m_bNeedBulletInGun = false;
 	}

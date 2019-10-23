@@ -32,18 +32,16 @@ void CWeaponMagazinedWGrenade::Load	(LPCSTR section)
 	inherited::Load			(section);
 	CRocketLauncher::Load	(section);
 	
-	psWpnAnimsFlag.set(ANM_RELOAD_EMPTY_GL, isHUDAnimationExist("anm_reload_empty_w_gl"));
-	psWpnAnimsFlag.set(ANM_SHOT_AIM_GL,		isHUDAnimationExist("anm_shots_w_gl_when_aim"));
-	psWpnAnimsFlag.set(ANM_MISFIRE_GL,		isHUDAnimationExist("anm_reload_misfire_w_gl"));
+	SetAnimFlag(ANM_RELOAD_EMPTY_GL, "anm_reload_empty_w_gl");
+	SetAnimFlag(ANM_SHOT_AIM_GL,"anm_shots_w_gl_when_aim");
+	SetAnimFlag(ANM_MISFIRE_GL,"anm_reload_misfire_w_gl");
 	
 	//// Sounds
 	m_sounds.LoadSound(section,"snd_shoot_grenade"	, "sndShotG"		, false, m_eSoundShot);
 	m_sounds.LoadSound(section,"snd_reload_grenade"	, "sndReloadG"	, true, m_eSoundReload);
 	m_sounds.LoadSound(section,"snd_switch"			, "sndSwitch"		, true, m_eSoundReload);
 	
-
 	m_sFlameParticles2 = pSettings->r_string(section, "grenade_flame_particles");
-
 	
 	if(m_eGrenadeLauncherStatus == ALife::eAddonPermanent)
 	{
@@ -585,29 +583,29 @@ float	CWeaponMagazinedWGrenade::CurrentZoomFactor	()
 void CWeaponMagazinedWGrenade::PlayAnimShow()
 {
 	VERIFY(GetState()==eShowing);
-	if(IsGrenadeLauncherAttached())
+	if (IsGrenadeLauncherAttached())
 	{
-		if(!m_bGrenadeMode)
+		if (!m_bGrenadeMode)
 			PlayHUDMotion("anm_show_w_gl", FALSE, this, GetState());
 		else
 			PlayHUDMotion("anm_show_g", FALSE, this, GetState());
-	}	
+	}
 	else
-		PlayHUDMotion("anm_show", FALSE, this, GetState());
+		inherited::PlayAnimShow();
 }
 
 void CWeaponMagazinedWGrenade::PlayAnimHide()
 {
 	VERIFY(GetState()==eHiding);
 	
-	if(IsGrenadeLauncherAttached())
-		if(!m_bGrenadeMode)
+	if (IsGrenadeLauncherAttached())
+		if (!m_bGrenadeMode)
 			PlayHUDMotion("anm_hide_w_gl", TRUE, this, GetState());
 		else
 			PlayHUDMotion("anm_hide_g", TRUE, this, GetState());
 
 	else
-		PlayHUDMotion("anm_hide", TRUE, this, GetState());
+		inherited::PlayAnimHide();
 }
 
 void CWeaponMagazinedWGrenade::PlayAnimReload()
@@ -693,7 +691,7 @@ void CWeaponMagazinedWGrenade::PlayAnimShoot()
 		VERIFY(GetState()==eFire);
 		if (IsGrenadeLauncherAttached())
 		{
-			if (IsZoomed() && psWpnAnimsFlag.test(ANM_SHOT_AIM_GL))
+			if (IsZoomed() && psWpnAnimsFlag.test(ANM_SHOT_AIM_GL) && IsScopeAttached())
 				PlayHUDMotion("anm_shots_w_gl_when_aim", FALSE, this, GetState());
 			else
 				PlayHUDMotion("anm_shots_w_gl", FALSE, this, GetState());
@@ -1020,11 +1018,11 @@ void CWeaponMagazinedWGrenade::CheckMagazine()
 {
 	if (m_bGrenadeMode) return;
 
-	if (psWpnAnimsFlag.test(ANM_RELOAD_EMPTY_GL) == true && iAmmoElapsed >= 1 && m_bNeedBulletInGun == false)
+	if (psWpnAnimsFlag.test(ANM_RELOAD_EMPTY_GL) && iAmmoElapsed >= 1 && m_bNeedBulletInGun == false)
 	{
 		m_bNeedBulletInGun = true;
 	}
-	else if (psWpnAnimsFlag.test(ANM_RELOAD_EMPTY_GL) == true && iAmmoElapsed == 0 && m_bNeedBulletInGun == true)
+	else if (psWpnAnimsFlag.test(ANM_RELOAD_EMPTY_GL) && iAmmoElapsed == 0 && m_bNeedBulletInGun == true)
 	{
 		m_bNeedBulletInGun = false;
 	}

@@ -26,8 +26,6 @@ void CWeaponCustomPistol::switch2_Fire	()
 
 }
 
-
-
 void CWeaponCustomPistol::FireEnd() 
 {
 	if(fShotTimeCounter<=0 && GetCurrentFireMode() == 1)
@@ -40,3 +38,8 @@ void CWeaponCustomPistol::FireEnd()
 		inherited::FireEnd();
 	}
 }
+
+int	CWeaponCustomPistol::GetCurrentFireMode() 
+{ 
+	return m_bHasDifferentFireModes ? m_aFireModes[m_iCurFireMode] : 1;
+};

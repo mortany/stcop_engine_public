@@ -175,6 +175,8 @@ protected:
 	virtual void	PlayAnimIdleSprint	();
 	virtual void	PlayAnimIdleMoving	();
 
+	virtual void    SetAnimFlag(u32 flag, LPCSTR anim_name);
+
 	// Флаги наличия анимаций, будем их искать заранее, так будет намного проще мейби
 	enum {
 		ANM_SHOW_EMPTY       = (1 << 0),
@@ -192,6 +194,8 @@ protected:
 		ANM_MISFIRE_GL		 = (1 << 12),
 		ANM_IDLE_EMPTY		 = (1 << 13),
 	};
+
+	
 
 	Flags32 psWpnAnimsFlag;
 

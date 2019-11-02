@@ -1018,11 +1018,11 @@ void CWeaponMagazinedWGrenade::CheckMagazine()
 {
 	if (m_bGrenadeMode) return;
 
-	if (psWpnAnimsFlag.test(ANM_RELOAD_EMPTY_GL) && iAmmoElapsed >= 1 && m_bNeedBulletInGun == false)
+	if ((psWpnAnimsFlag.test(ANM_RELOAD_EMPTY_GL) || psWpnAnimsFlag.test(ANM_RELOAD_EMPTY)) && iAmmoElapsed >= 1 && m_bNeedBulletInGun == false)
 	{
 		m_bNeedBulletInGun = true;
 	}
-	else if (psWpnAnimsFlag.test(ANM_RELOAD_EMPTY_GL) && iAmmoElapsed == 0 && m_bNeedBulletInGun == true)
+	else if ((psWpnAnimsFlag.test(ANM_RELOAD_EMPTY_GL) || psWpnAnimsFlag.test(ANM_RELOAD_EMPTY)) && iAmmoElapsed == 0 && m_bNeedBulletInGun == true)
 	{
 		m_bNeedBulletInGun = false;
 	}

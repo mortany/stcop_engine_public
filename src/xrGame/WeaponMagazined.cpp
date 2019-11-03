@@ -1647,6 +1647,12 @@ bool CWeaponMagazined::WeaponSoundExist(LPCSTR section, LPCSTR sound_name) const
 
 void CWeaponMagazined::CheckMagazine()
 {
+	if (!ParentIsActor())
+	{
+		m_bNeedBulletInGun = false;
+		return;
+	}
+
 	if (psWpnAnimsFlag.test(ANM_RELOAD_EMPTY) && iAmmoElapsed >= 1 && m_bNeedBulletInGun == false)
 	{
 		m_bNeedBulletInGun = true;

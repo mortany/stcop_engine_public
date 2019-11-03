@@ -1016,7 +1016,11 @@ void CWeaponMagazinedWGrenade::switch2_Unmis()
 
 void CWeaponMagazinedWGrenade::CheckMagazine()
 {
-	if (m_bGrenadeMode) return;
+	if (m_bGrenadeMode || !ParentIsActor())
+	{
+		m_bNeedBulletInGun = false;
+		return;
+	}
 
 	if ((psWpnAnimsFlag.test(ANM_RELOAD_EMPTY_GL) || psWpnAnimsFlag.test(ANM_RELOAD_EMPTY)) && iAmmoElapsed >= 1 && m_bNeedBulletInGun == false)
 	{

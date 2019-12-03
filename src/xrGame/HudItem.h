@@ -130,6 +130,11 @@ public:
 	u32							PlayHUDMotion_noCB	(const shared_str& M, BOOL bMixIn);
 	void						StopCurrentAnimWithoutCallback();
 
+	//Mortan: новые параметры для системы аддонов
+	virtual void				UpdateAddonsTransform(bool for_hud = false) {}; // FFT++ Обновление положения аддонов на худе каждый кадр
+	virtual void				UpdateAddonsHudParams() {};                     // FFT++ Обновление параметров худа с помощью аддонов, вероятно не потребуется если будем использовать фейковый скелет
+	bool						NeedUpdateHudParams;                            // FFT++ Флаг обновления параметров с помощью аддонов
+
 	IC void						RenderHud				(BOOL B)	{ m_huditem_flags.set(fl_renderhud, B);}
 	IC BOOL						RenderHud				()			{ return m_huditem_flags.test(fl_renderhud);}
 	attachable_hud_item*		HudItemData				();

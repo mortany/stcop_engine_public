@@ -98,6 +98,8 @@ CWeapon::CWeapon()
 	m_zoom_params.m_fSecondVPFovFactor = 0.0f;
 
 	m_fSecondRTZoomFactor			   = -1.0f;
+
+	NeedUpdateHudParams				   = false;
 }
 
 const shared_str CWeapon::GetScopeName() const
@@ -2677,3 +2679,13 @@ void CWeapon::UpdateSecondVP(bool bInGrenade)
 	Device.m_SecondViewport.SetSVPActive(bCond_1 && bCond_2 && bCond_3 && !bInGrenade);
 }
 
+void CWeapon::UpdateAddonsHudParams()
+{
+
+}
+
+
+void CWeapon::UpdateAddonsTransform(bool for_hud)
+{
+
+}

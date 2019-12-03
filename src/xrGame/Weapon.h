@@ -46,6 +46,8 @@ public:
 	virtual	bool            bMarkCanShow() { return IsZoomed(); }
 			bool            bChangeNVSecondVPStatus();
 
+	virtual void			UpdateAddonsTransform(bool for_hud = false); // FFT++
+	virtual void			UpdateAddonsHudParams(); // FFT++
 
 	virtual void			UpdateSecondVP(bool bInGrenade = false);
 			void			LoadModParams(LPCSTR section);

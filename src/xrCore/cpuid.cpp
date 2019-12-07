@@ -384,7 +384,7 @@ NO_CPUID:
 		if ( pa_mask_test & 0x01 ) {
 			// Switch thread to specific CPU
 			ta_mask = ( 1 << n_cpu );
-			SetThreadAffinityMask( GetCurrentThread() , ta_mask );
+			//SetThreadAffinityMask( GetCurrentThread() , ta_mask );
 			Sleep( 100 );
 			// get APIC ID
 			__asm {
@@ -421,7 +421,7 @@ NO_CPUID:
 	}
 
 	// restore original saved affinity mask
-	SetThreadAffinityMask( GetCurrentThread() , pa_mask_save );
+	//SetThreadAffinityMask( GetCurrentThread() , pa_mask_save );
 	Sleep( 100 );
 
 	// Create recommended mask

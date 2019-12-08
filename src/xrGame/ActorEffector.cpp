@@ -278,6 +278,8 @@ BOOL CCameraEffectorControlled::Valid()
 
 SndShockEffector::SndShockEffector	()
 {
+	m_life_time				= 0.0f;
+	m_end_time			    = 0.0f;
 	m_snd_length			= 0.0f;
 	m_cur_length			= 0.0f;
 	m_stored_volume			= -1.0f;
@@ -411,7 +413,7 @@ BOOL CControllerPsyHitCamEffector::ProcessCam(SCamEffectorInfo& info)
 	
 	//////////////////////////////////////////////////////////////////////////
 
-	// Óñòàíîâèòü óãëû ñìåùåíèÿ
+	// Ð£ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ ÑƒÐ³Ð»Ñ‹ ÑÐ¼ÐµÑ‰ÐµÐ½Ð¸Ñ
 	Fmatrix		R;
 	if (m_time_current > m_time_total) 
 		R.identity	();

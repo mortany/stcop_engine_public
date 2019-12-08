@@ -85,7 +85,7 @@ void xrMemory::_initialize(BOOL bDebug)
     {
         // initialize POOLs
         u32 element = mem_pools_ebase;
-        u32 sector = mem_pools_ebase * 1024;
+        u32 sector = mem_pools_ebase * 4096;
         for (u32 pid = 0; pid < mem_pools_count; pid++)
         {
             mem_pools[pid]._initialize(element, sector, 0x1);

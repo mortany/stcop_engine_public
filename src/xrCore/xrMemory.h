@@ -135,8 +135,8 @@ IC void operator delete[] (void* p) { xr_free(p); }
 
 
 // POOL-ing
-const u32 mem_pools_count = 54;
-const u32 mem_pools_ebase = 64;
+const u32 mem_pools_count = 64;
+const u32 mem_pools_ebase = 32;
 const u32 mem_generic = mem_pools_count + 1;
 extern MEMPOOL mem_pools[mem_pools_count];
 extern BOOL mem_initialized;

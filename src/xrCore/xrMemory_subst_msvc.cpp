@@ -126,6 +126,7 @@ void* xrMemory::mem_alloc(size_t size
 #ifdef USE_MEMORY_MONITOR
     memory_monitor::monitor_alloc(_ptr, size, _name);
 #endif // USE_MEMORY_MONITOR
+	memset(_ptr, 0, size);
     return _ptr;
 }
 

@@ -81,6 +81,7 @@ CScriptGameObject *CScriptGameObject::Parent				() const
 
 int	CScriptGameObject::clsid				() const
 {
+	if (!this) return -1;
 	return			(object().clsid());
 }
 

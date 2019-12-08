@@ -183,6 +183,7 @@ void CMovementManager::update_path				()
 			}
 			case ePathTypeLevelPath : {
 				m_path_state	= ePathStateBuildLevelPath;
+				if (ai().level_graph().valid_vertex_id(level_path().dest_vertex_id()))
 				if (!restrictions().accessible(level_path().dest_vertex_id())) {
 					Fvector							temp;
 					level_path().set_dest_vertex	(restrictions().accessible_nearest(ai().level_graph().vertex_position(level_path().dest_vertex_id()),temp));

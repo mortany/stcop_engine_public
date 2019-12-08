@@ -256,8 +256,10 @@ void CALifeSimulator__release					(CALifeSimulator *self, CSE_Abstract *object, 
 //	self->release						(object,true);
 
 	THROW								(object);
+	if (!object) return;
 	CSE_ALifeObject						*alife_object = smart_cast<CSE_ALifeObject*>(object);
 	THROW								(alife_object);
+	if (!alife_object) return;
 	if (!alife_object->m_bOnline) {
 		self->release					(object,true);
 		return;

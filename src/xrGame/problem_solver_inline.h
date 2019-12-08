@@ -346,6 +346,7 @@ TEMPLATE_SPECIALIZATION
 IC	typename CProblemSolverAbstract::_operator_ptr CProblemSolverAbstract::get_operator (const _edge_type &operator_id)
 {
 	OPERATOR_VECTOR::iterator	I = std::lower_bound(m_operators.begin(), m_operators.end(),operator_id);
+	if (m_operators.end() == I) return 0;
 	THROW						(m_operators.end() != I);
 	return						((*I).get_operator());
 }

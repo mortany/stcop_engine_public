@@ -143,6 +143,37 @@ IC u32 IReaderBase<T>::find_chunk (u32 ID, BOOL* bCompressed)
             }
             else
             {
+				if ((ID & 0x7ffffff0) == 0x810) // is it a thm chunk ID?
+				{
+					const u32 pos = (u32)impl().tell();
+					const u32 size = (u32)impl().length();
+					u32 length = dwSize;
+
+					if (pos + length != size) // not the last chunk in the file?
+					{
+						bool ok = true;
+						if (pos + length > size - 8) ok = false; // size too large?
+						if (ok)
+						{
+							impl().seek(pos + length);
+							if ((r_u32() & 0x7ffffff0) != 0x810) ok = false; // size too small?
+						}
+						if (!ok) // size incorrect?
+						{
+							length = 0;
+							while (pos + length < size) // find correct size, up to eof
+							{
+								impl().seek(pos + length);
+								if (pos + length <= size - 8 && (r_u32() & 0x7ffffff0) == 0x810) break; // found start of next section
+								length++;
+							}
+							Msg("THM chunk %d fixed, wrong size = %d, correct size = %d", ID, dwSize, length);
+						}
+					}
+
+					impl().seek(pos); // go back to beginning of chunk
+					dwSize = length; // use correct(ed) size
+				}
                 impl().advance(dwSize);
             }
         }

@@ -68,7 +68,7 @@ void occRasterizer::clear		()
 {
 	u32 size			= occ_dim*occ_dim;
 	float f				= 1.f;
-	Memory.mem_fill32	(bufFrame,0,size);
+	Memory.mem_fill32	(bufFrame, 0, size * (sizeof(void*) / 4));
 	Memory.mem_fill32	(bufDepth,*LPDWORD(&f),size);
 }
 
@@ -95,18 +95,22 @@ void occRasterizer::propagade	()
 			// Y2-connect
 			int	pos			= oy*occ_dim+ox;
 			int	pos_up		= pos-occ_dim;
+			if (pos_up < 0) pos_up = pos;
 			int	pos_down	= pos+occ_dim;
-			int	pos_down2	= pos_down+occ_dim;
+			if (pos_down >= occ_dim_0 * occ_dim_0) pos_down = pos;
+			int	pos_down2 = pos_down + occ_dim;
+			if (pos_down2 >= occ_dim_0 * occ_dim_0) pos_down2 = pos_down;
 			
 			occTri* Tu1		= pFrame	[pos_up];
 			if (Tu1) {
 				// We has pixel 1scan up
-				if (shared(Tu1,pFrame[pos_down]))
+				if (pFrame[pos_down] && shared(Tu1, pFrame[pos_down]))
 				{
 					// We has pixel 1scan down
 					float ZR			= (pDepth[pos_up]+pDepth[pos_down])/2;
 					if (ZR<pDepth[pos])	{ pFrame[pos] = Tu1; pDepth[pos] = ZR; }
-				} else if (shared(Tu1,pFrame[pos_down2])) 
+				}
+				else if (pFrame[pos_down2] && shared(Tu1, pFrame[pos_down2]))
 				{
 					// We has pixel 2scan down
 					float ZR			= (pDepth[pos_up]+pDepth[pos_down2])/2;

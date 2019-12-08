@@ -1,7 +1,14 @@
 #include "stdafx.h"
 #pragma hdrstop
 
-#include <lua/library_linkage.h>
+//AVO: lua re-org
+#ifdef USE_LUAJIT_ONE //defined in project props
+#pragma comment(lib, "LuaJIT-1.1.8.lib")
+#else
+#pragma comment(lib, "lua51.lib" )
+#endif
+//#include "lua/library_linkage.h"
+//-AVO
 
 #include	"../../xrEngine/Render.h"
 #include	"ResourceManager.h"
@@ -160,7 +167,12 @@ static void *lua_alloc		(void *ud, void *ptr, size_t osize, size_t nsize) {
 // export
 void	CResourceManager::LS_Load			()
 {
-	LSVM			= lua_newstate(lua_alloc, NULL);
+#ifdef USE_GSC_MEM_ALLOC
+	LSVM = lua_newstate(lua_alloc, NULL);
+#else
+	LSVM = luaL_newstate();
+#endif //-USE_GSC_MEM_ALLOC
+
 	if (!LSVM)		{
 		Msg			("! ERROR : Cannot initialize LUA VM!");
 		return;

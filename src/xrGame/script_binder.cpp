@@ -48,7 +48,7 @@ void CScriptBinder::clear			()
 void CScriptBinder::reinit			()
 {
 #ifdef DEBUG_MEMORY_MANAGER
-	u32									start = 0;
+	size_t									start = 0;
 	if (g_bMEMO)
 		start							= Memory.mem_usage();
 #endif // DEBUG_MEMORY_MANAGER
@@ -76,7 +76,7 @@ void CScriptBinder::Load			(LPCSTR section)
 void CScriptBinder::reload			(LPCSTR section)
 {
 #ifdef DEBUG_MEMORY_MANAGER
-	u32									start = 0;
+	size_t									start = 0;
 	if (g_bMEMO)
 		start							= Memory.mem_usage();
 #endif // DEBUG_MEMORY_MANAGER
@@ -122,7 +122,7 @@ void CScriptBinder::reload			(LPCSTR section)
 BOOL CScriptBinder::net_Spawn		(CSE_Abstract* DC)
 {
 #ifdef DEBUG_MEMORY_MANAGER
-	u32									start = 0;
+	size_t									start = 0;
 	if (g_bMEMO)
 		start							= Memory.mem_usage();
 #endif // DEBUG_MEMORY_MANAGER

@@ -10,11 +10,29 @@
     <xrLibDir>$(SolutionDir)..\lib\$(Configuration)\</xrLibDir>
     <xrIntDir>$(SolutionDir)..\intermediate\$(Configuration)\</xrIntDir>
     <xrSdkDir>$(SolutionDir)..\sdk\</xrSdkDir>
+    <dxSdkDir>$(xrSdkDir)include\dxsdk\</dxSdkDir>
+    <xr3rdPartyDir>$(SolutionDir)3rd party\</xr3rdPartyDir>
   </PropertyGroup>
-  <PropertyGroup />
-  <ItemDefinitionGroup />
+  <PropertyGroup>
+    <IncludePath>$(SolutionDir)..\src\3rd party;$(IncludePath);$(xrSdkDir)include;$(xrSdkDir)include\OpenAutomate;$(xrSdkDir)include\nvapi;$(xrSdkDir)include\dxsdk</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <UndefinePreprocessorDefinitions>USE_LUAJIT_ONE</UndefinePreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <MinimalRebuild>true</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemGroup>
-      <BuildMacro Include="xrBinRootDir">
+    <BuildMacro Include="xrBinRootDir">
       <Value>$(xrBinRootDir)</Value>
     </BuildMacro>
     <BuildMacro Include="xrBinPlugRootDir">
@@ -37,6 +55,15 @@
     </BuildMacro>
     <BuildMacro Include="xrSdkDir">
       <Value>$(xrSdkDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="dxSdkDir">
+      <Value>$(dxSdkDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="xr3rdPartyDir">
+      <Value>$(xr3rdPartyDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
   </ItemGroup>
 </Project>

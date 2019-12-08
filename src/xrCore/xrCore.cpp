@@ -24,7 +24,7 @@ extern void Detect();
 
 static u32 init_counter = 0;
 
-extern char g_application_path[256];
+//extern char g_application_path[256];
 
 //. extern xr_vector<shared_str>* LogFile;
 
@@ -54,7 +54,7 @@ void xrCore::_initialize(LPCSTR _ApplicationName, LogCallback cb, BOOL init_fs, 
         _splitpath(fn, dr, di, 0, 0);
         strconcat(sizeof(ApplicationPath), ApplicationPath, dr, di);
 #ifndef _EDITOR
-        xr_strcpy(g_application_path, sizeof(g_application_path), ApplicationPath);
+        //xr_strcpy(g_application_path, sizeof(g_application_path), ApplicationPath);
 #endif
 
 #ifdef _EDITOR

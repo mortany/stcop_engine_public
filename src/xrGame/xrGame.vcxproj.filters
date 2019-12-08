@@ -6747,18 +6747,6 @@
     <ClInclude Include="ui\UITaskWnd.h">
       <Filter>UI\Common\PDA\Tasks</Filter>
     </ClInclude>
-    <ClInclude Include="ui\FactionState.h">
-      <Filter>UI\Common\PDA\FactionWar</Filter>
-    </ClInclude>
-    <ClInclude Include="ui\FactionState_inline.h">
-      <Filter>UI\Common\PDA\FactionWar</Filter>
-    </ClInclude>
-    <ClInclude Include="ui\UIFactionWarWnd.h">
-      <Filter>UI\Common\PDA\FactionWar</Filter>
-    </ClInclude>
-    <ClInclude Include="ui\UIWarState.h">
-      <Filter>UI\Common\PDA\FactionWar</Filter>
-    </ClInclude>
     <ClInclude Include="ui\UILogsWnd.h">
       <Filter>UI\Common\PDA\logs</Filter>
     </ClInclude>
@@ -7377,6 +7365,10 @@
     <ClInclude Include="ui\ChangeWeatherDialog.hpp">
       <Filter>UI\Multiplayer\Voting</Filter>
     </ClInclude>
+    <ClInclude Include="AmebaZone.h" />
+    <ClInclude Include="WeaponCustomAuto.h" />
+    <ClInclude Include="WeaponRevolver.h" />
+    <ClInclude Include="HolderEntityObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="damage_manager.cpp">
@@ -10331,9 +10323,6 @@
     <ClCompile Include="ui\UIAchievements.cpp">
       <Filter>UI\Common\PDA\Statistics &amp; Rankings</Filter>
     </ClCompile>
-    <ClCompile Include="ui\UIRankFraction.cpp">
-      <Filter>UI\Common\PDA\Statistics &amp; Rankings</Filter>
-    </ClCompile>
     <ClCompile Include="ui\UIRankingWnd.cpp">
       <Filter>UI\Common\PDA\Statistics &amp; Rankings</Filter>
     </ClCompile>
@@ -10345,15 +10334,6 @@
     </ClCompile>
     <ClCompile Include="ui\UITaskWnd.cpp">
       <Filter>UI\Common\PDA\Tasks</Filter>
-    </ClCompile>
-    <ClCompile Include="ui\FactionState.cpp">
-      <Filter>UI\Common\PDA\FactionWar</Filter>
-    </ClCompile>
-    <ClCompile Include="ui\UIFactionWarWnd.cpp">
-      <Filter>UI\Common\PDA\FactionWar</Filter>
-    </ClCompile>
-    <ClCompile Include="ui\UIWarState.cpp">
-      <Filter>UI\Common\PDA\FactionWar</Filter>
     </ClCompile>
     <ClCompile Include="ui\UILogsWnd.cpp">
       <Filter>UI\Common\PDA\logs</Filter>
@@ -11024,6 +11004,8 @@
     <ClCompile Include="ui\ChangeWeatherDialog.cpp">
       <Filter>UI\Multiplayer\Voting</Filter>
     </ClCompile>
+    <ClCompile Include="AmebaZone.cpp" />
+    <ClCompile Include="ui\UIRankingsCoC.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ai\monsters\chimera\chimera_attack_state.h">
@@ -11041,8 +11023,9 @@
     <CustomBuild Include="Explosive.h">
       <Filter>Core\Client\Objects\items &amp; weapons\Explosives</Filter>
     </CustomBuild>
-    <CustomBuild Include="ui\UIRankFaction.h">
-      <Filter>UI\Common\PDA\Statistics &amp; Rankings</Filter>
-    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Players.cd" />
+    <None Include="Weapons.cd" />
   </ItemGroup>
 </Project>

@@ -6,7 +6,7 @@ This class is a paper-thin layer around the DBGHELP.DLL symbol engine.
 
 This class wraps only those functions that take the unique
 HANDLE value. Other DBGHELP.DLL symbol engine functions are global in
-scope, so I didn’t wrap them with this class.
+scope, so I didnâ€™t wrap them with this class.
 
 ------------------------------------------------------------------------
 Compilation Defines:
@@ -24,7 +24,7 @@ USE_BUGSLAYERUTIL - If defined, the class will have another
                     BUGSLAYERUTIL.H to include this file.
 ----------------------------------------------------------------------*/
 
-#ifndef _SYMBOLENGINE_H
+#if 0 //_SYMBOLENGINE_H
 #define _SYMBOLENGINE_H
 
 // You could include either IMAGEHLP.DLL or DBGHELP.DLL.
@@ -41,7 +41,7 @@ USE_BUGSLAYERUTIL - If defined, the class will have another
 // that have size fields came from fellow MSJ columnist, Paul DiLascia.
 // Thanks, Paul!
 
-// I didn’t wrap IMAGEHLP_SYMBOL because that is a variable-size
+// I didnâ€™t wrap IMAGEHLP_SYMBOL because that is a variable-size
 // structure.
 
 // The IMAGEHLP_MODULE wrapper class
@@ -337,7 +337,7 @@ public      :
 #else
         // The problem is that the symbol engine finds only those source
         // line addresses (after the first lookup) that fall exactly on
-        // a zero displacement. I’ll walk backward 100 bytes to
+        // a zero displacement. Iâ€™ll walk backward 100 bytes to
         // find the line and return the proper displacement.
         DWORD dwTempDis = 0 ;
         while ( FALSE == ::SymGetLineFromAddr ( m_hProcess          ,
@@ -435,7 +435,7 @@ public      :
 ----------------------------------------------------------------------*/
 protected   :
     // The unique value that will be used for this instance of the
-    // symbol engine. This value doesn’t have to be an actual
+    // symbol engine. This value doesnâ€™t have to be an actual
     // process value, just a unique value.
     HANDLE      m_hProcess      ;
 

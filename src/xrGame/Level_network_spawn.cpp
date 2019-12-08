@@ -84,7 +84,7 @@ void CLevel::g_cl_Spawn		(LPCSTR name, u8 rp, u16 flags, Fvector pos)
 void CLevel::g_sv_Spawn		(CSE_Abstract* E)
 {
 #ifdef DEBUG_MEMORY_MANAGER
-	u32							E_mem = 0;
+	size_t							E_mem = 0;
 	if (g_bMEMO)	{
 		lua_gc					(ai().script_engine().lua(),LUA_GCCOLLECT,0);
 		lua_gc					(ai().script_engine().lua(),LUA_GCCOLLECT,0);
@@ -192,7 +192,7 @@ void CLevel::g_sv_Spawn		(CSE_Abstract* E)
 	if (g_bMEMO) {
 		lua_gc					(ai().script_engine().lua(),LUA_GCCOLLECT,0);
 		lua_gc					(ai().script_engine().lua(),LUA_GCCOLLECT,0);
-		Msg						("* %20s : %d bytes, %d ops", *E->s_name,Memory.mem_usage()-E_mem, Memory.stat_calls );
+		Msg("* %20s : %lld bytes, %d ops", *E->s_name, Memory.mem_usage() - E_mem, Memory.stat_calls);
 	}
 #endif // DEBUG_MEMORY_MANAGER
 }
@@ -208,7 +208,7 @@ CSE_Abstract *CLevel::spawn_item		(LPCSTR section, const Fvector &position, u32 
 			dynamic_object->m_tGraphID	= ai().cross_table().vertex(level_vertex_id).game_vertex_id();
 	}
 
-	//оружие спавним с полным магазинои
+	//РѕСЂСѓР¶РёРµ СЃРїР°РІРЅРёРј СЃ РїРѕР»РЅС‹Рј РјР°РіР°Р·РёРЅРѕРё
 	CSE_ALifeItemWeapon* weapon = smart_cast<CSE_ALifeItemWeapon*>(abstract);
 	if(weapon)
 		weapon->a_elapsed	= weapon->get_ammo_magsize();

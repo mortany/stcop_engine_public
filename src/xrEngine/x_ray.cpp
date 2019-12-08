@@ -416,7 +416,7 @@ void Startup()
     destroyEngine();
 }
 
-static BOOL CALLBACK logDlgProc(HWND hw, UINT msg, WPARAM wp, LPARAM lp)
+static INT_PTR CALLBACK logDlgProc(HWND hw, UINT msg, WPARAM wp, LPARAM lp)
 {
     switch (msg)
     {
@@ -609,7 +609,7 @@ struct damn_keys_filter
 #undef dwFilterKeysStructSize
 #undef dwToggleKeysStructSize
 
-// Ôóíöèÿ äëÿ òóïûõ òðåáîâàíèé THQ è òóïûõ àìåðèêàíñêèõ ïîëüçîâàòåëåé
+// Ð¤ÑƒÐ½Ñ†Ð¸Ñ Ð´Ð»Ñ Ñ‚ÑƒÐ¿Ñ‹Ñ… Ñ‚Ñ€ÐµÐ±Ð¾Ð²Ð°Ð½Ð¸Ð¹ THQ Ð¸ Ñ‚ÑƒÐ¿Ñ‹Ñ… Ð°Ð¼ÐµÑ€Ð¸ÐºÐ°Ð½ÑÐºÐ¸Ñ… Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¹
 BOOL IsOutOfVirtualMemory()
 {
 #define VIRT_ERROR_SIZE 256
@@ -633,7 +633,7 @@ BOOL IsOutOfVirtualMemory()
     dwPageFileInMB = (DWORD)(statex.ullTotalPageFile / (1024 * 1024));
     dwPhysMemInMB = (DWORD)(statex.ullTotalPhys / (1024 * 1024));
 
-    // Äîâîëüíî îòôîíàðíîå óñëîâèå
+    // Ð”Ð¾Ð²Ð¾Ð»ÑŒÐ½Ð¾ Ð¾Ñ‚Ñ„Ð¾Ð½Ð°Ñ€Ð½Ð¾Ðµ ÑƒÑÐ»Ð¾Ð²Ð¸Ðµ
     if ((dwPhysMemInMB > 500) && ((dwPageFileInMB + dwPhysMemInMB) > 2500))
         return 0;
 
@@ -1226,7 +1226,7 @@ void CApplication::LoadEnd()
     if (0 == ll_dwReference)
     {
         Msg("* phase time: %d ms", phase_timer.GetElapsed_ms());
-        Msg("* phase cmem: %d K", Memory.mem_usage() / 1024);
+		Msg("* phase cmem: %lld K", Memory.mem_usage() / 1024);
         Console->Execute("stat_memory");
         g_appLoaded = TRUE;
         // DUMP_PHASE;
@@ -1280,7 +1280,7 @@ void CApplication::LoadStage()
     VERIFY(ll_dwReference);
     Msg("* phase time: %d ms", phase_timer.GetElapsed_ms());
     phase_timer.Start();
-    Msg("* phase cmem: %d K", Memory.mem_usage() / 1024);
+	Msg("* phase cmem: %lld K", Memory.mem_usage() / 1024);
 
     if (g_pGamePersistent->GameType() == 1 && strstr(Core.Params, "alife"))
         max_load_stage = 17;

@@ -107,17 +107,17 @@ void	CSoundRender_TargetA::update			()
 	{
         while (processed)
 		{
-			ALint state;
-			A_CHK(alGetSourcei(pSource, AL_SOURCE_STATE, &state));
-			if (state == AL_STOPPED)
-				A_CHK(alSourcePlay(pSource));
-
 			ALuint			BufferID;
             A_CHK			(alSourceUnqueueBuffers(pSource, 1, &BufferID));
             fill_block		(BufferID);
             A_CHK			(alSourceQueueBuffers(pSource, 1, &BufferID));
             --processed;
         }
+
+		ALint state;
+		A_CHK(alGetSourcei(pSource, AL_SOURCE_STATE, &state));
+		if (state == AL_STOPPED)
+			A_CHK(alSourcePlay(pSource));
     }else{ 
     	// processed == 0
         // check play status -- if stopped then queue is not being filled fast enough

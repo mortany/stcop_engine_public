@@ -219,6 +219,11 @@ void change_game_time(u32 days, u32 hours, u32 mins)
 
 float high_cover_in_direction(u32 level_vertex_id, const Fvector &direction)
 {
+	if (!ai().level_graph().valid_vertex_id(level_vertex_id))
+	{
+		return 0;
+	}
+
 	float			y,p;
 	direction.getHP	(y,p);
 	return			(ai().level_graph().high_cover_in_direction(y,level_vertex_id));
@@ -226,6 +231,11 @@ float high_cover_in_direction(u32 level_vertex_id, const Fvector &direction)
 
 float low_cover_in_direction(u32 level_vertex_id, const Fvector &direction)
 {
+	if (!ai().level_graph().valid_vertex_id(level_vertex_id))
+	{
+		return 0;
+	}
+
 	float			y,p;
 	direction.getHP	(y,p);
 	return			(ai().level_graph().low_cover_in_direction(y,level_vertex_id));
@@ -238,6 +248,10 @@ float rain_factor()
 
 u32	vertex_in_direction(u32 level_vertex_id, Fvector direction, float max_distance)
 {
+	if (!ai().level_graph().valid_vertex_id(level_vertex_id))
+	{
+		return u32(-1);
+	}
 	direction.normalize_safe();
 	direction.mul	(max_distance);
 	Fvector			start_position = ai().level_graph().vertex_position(level_vertex_id);
@@ -249,6 +263,10 @@ u32	vertex_in_direction(u32 level_vertex_id, Fvector direction, float max_distan
 
 Fvector vertex_position(u32 level_vertex_id)
 {
+	if (!ai().level_graph().valid_vertex_id(level_vertex_id))
+	{
+		return Fvector{};
+	}
 	return			(ai().level_graph().vertex_position(level_vertex_id));
 }
 

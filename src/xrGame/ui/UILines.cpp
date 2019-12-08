@@ -22,6 +22,8 @@ CUILines::CUILines()
 	m_dwTextColor					= 0xffffffff;
 	m_TextOffset.set				(0.0f,0.0f);
 	m_text							="";
+	m_wndSize.set(0.0f, 0.0f);
+	m_wndPos.set(0.0f, 0.0f);
 	uFlags.zero();
 	uFlags.set(flNeedReparse,		FALSE);
 	uFlags.set(flComplexMode,		FALSE);

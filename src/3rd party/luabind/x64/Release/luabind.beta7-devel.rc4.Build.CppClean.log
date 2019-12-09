@@ -1,28 +1,32 @@
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\weak_ref.obj
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\stack_content_by_name.obj
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\scope.obj
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\ref.obj
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\pcall.obj
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\open.obj
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\object_rep.obj
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\object.obj
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\link_compatibility.obj
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\implicit_cast.obj
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\luabind.beta7-devel.rc4.pch
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\vc120.pdb
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\pch.obj
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\vc120.idb
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\vc140.pdb
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\vc140.idb
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\luabind_memory.obj
 c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\function.obj
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\ref.obj
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\weak_ref.obj
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\library_linkage.obj
 c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\find_best_match.obj
 c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\error.obj
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\implicit_cast.obj
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\object_rep.obj
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\open.obj
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\scope.obj
 c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\create_class.obj
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\class_rep.obj
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\class_registry.obj
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\class_info.obj
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\class.obj
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\luabind_memory.obj
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\library_linkage.obj
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\link_compatibility.obj
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\object.obj
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\pcall.obj
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\stack_content_by_name.obj
 c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\wrapper_base.obj
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\luabind.beta7-devel.rc4.pch
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\pch.obj
-c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\vc120.pdb
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\class_info.obj
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\class_registry.obj
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\class.obj
+c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\class_rep.obj
 c:\x-ray\stcop\rgs\src\x64\release\luabind.beta7-devel.rc4.dll
+c:\x-ray\stcop\rgs\src\x64\release\luabind.beta7-devel.rc4.pdb
 c:\x-ray\stcop\rgs\lib\release\luabind.beta7-devel.rc4.lib
 c:\x-ray\stcop\rgs\lib\release\luabind.beta7-devel.rc4.exp
 c:\x-ray\stcop\rgs\src\3rd party\luabind\x64\release\luabind..cc52e0b3.tlog\cl.command.1.tlog

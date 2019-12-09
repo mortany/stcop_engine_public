@@ -47,7 +47,7 @@ enum {
   dContactApprox1	= 0x3000
 };
 
-
+#pragma pack(push,4)
 typedef struct dSurfaceParameters {
   /* must always be defined */
   int mode;
@@ -81,8 +81,7 @@ typedef struct dContact {
   dContactGeom geom;
   dVector3 fdir1;
 } dContact;
-
-
+#pragma pack(pop)
 #ifdef __cplusplus
 }
 #endif

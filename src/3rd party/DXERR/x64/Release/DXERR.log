@@ -12,29 +12,34 @@
        The "SolutionDir" property is a global property, and cannot be modified.
        Property reassignment: $(MSBuildAllProjects)=";C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.targets;C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj.user" (previous value: ";C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.targets") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.Default.props (169,5)
        Property reassignment: $(ConfigurationType)="StaticLibrary" (previous value: "Application") at C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj (46,5)
-       Property reassignment: $(PlatformToolset)="v120" (previous value: "v100") at C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj (48,5)
+       Property reassignment: $(PlatformToolset)="v140" (previous value: "v100") at C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj (48,5)
        Property reassignment: $(WholeProgramOptimization)="true" (previous value: "false") at C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj (49,5)
        Property reassignment: $(CharacterSet)="Unicode" (previous value: "NotSet") at C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj (50,5)
-       Property reassignment: $(_VCTargetsPathForToolset)="C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\" (previous value: "") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.Redirect.12.props (16,5)
-       Property reassignment: $(VCTargetsPath)="C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\" (previous value: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.ToolsetLocation.props (17,5)
-       Property reassignment: $(TargetExt)=".lib" (previous value: "") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.Cpp.Common.props (43,5)
-       Property reassignment: $(WindowsSDK_ExecutablePath_x86)="C:\Program Files (x86)\Windows Kits\8.1\bin\x86;;C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools" (previous value: "C:\Program Files (x86)\Windows Kits\8.1\bin\x86;") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.Cpp.Common.props (120,5)
-       Property reassignment: $(WindowsSDK_ExecutablePath_x64)="C:\Program Files (x86)\Windows Kits\8.1\bin\x64;;C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools\x64" (previous value: "C:\Program Files (x86)\Windows Kits\8.1\bin\x64;") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.Cpp.Common.props (121,5)
-       Property reassignment: $(_PropertySheetDisplayName)="Unicode Support" (previous value: "Core Windows Libraries") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.Cpp.unicodesupport.props (15,5)
-       Property reassignment: $(_PropertySheetDisplayName)="Whole Program Optimization" (previous value: "Unicode Support") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.Cpp.WholeProgramOptimization.props (15,5)
-       Property reassignment: $(VCTargetsPath)="C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\" (previous value: "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.ToolsetLocation.props (56,5)
-       Property reassignment: $(ExcludePath)="C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include;C:\Program Files (x86)\Windows Kits\8.1\Include\um;C:\Program Files (x86)\Windows Kits\8.1\Include\shared;C:\Program Files (x86)\Windows Kits\8.1\Include\winrt;;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin;C:\Windows\Microsoft.NET\Framework\v4.0.30319\;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\lib\amd64;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\lib\amd64;;C:\Windows" (previous value: "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include;C:\Program Files (x86)\Windows Kits\8.1\Include\um;C:\Program Files (x86)\Windows Kits\8.1\Include\shared;C:\Program Files (x86)\Windows Kits\8.1\Include\winrt;;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin;C:\Windows\Microsoft.NET\Framework\v4.0.30319\;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\lib\amd64;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\lib\amd64;") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.Redirect.14.props (32,5)
-       Property reassignment: $(IncludePath)="C:\X-RAY\stcop\rgs\src\..\src\3rd party;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include;C:\Program Files (x86)\Windows Kits\8.1\Include\um;C:\Program Files (x86)\Windows Kits\8.1\Include\shared;C:\Program Files (x86)\Windows Kits\8.1\Include\winrt;;;C:\X-RAY\stcop\rgs\src\..\sdk\include;C:\X-RAY\stcop\rgs\src\..\sdk\include\OpenAutomate;C:\X-RAY\stcop\rgs\src\..\sdk\include\nvapi;C:\X-RAY\stcop\rgs\src\..\sdk\include\dxsdk" (previous value: "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include;C:\Program Files (x86)\Windows Kits\8.1\Include\um;C:\Program Files (x86)\Windows Kits\8.1\Include\shared;C:\Program Files (x86)\Windows Kits\8.1\Include\winrt;;") at C:\X-RAY\stcop\rgs\src\Common.props (17,5)
+       Property reassignment: $(_VCTargetsPathForToolset)="C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\" (previous value: "") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.Redirect.14.props (15,5)
+       Property reassignment: $(VCTargetsPath)="C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\" (previous value: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.ToolsetLocation.props (17,5)
+       Property reassignment: $(TargetPlatformVersion)="8.1" (previous value: "") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Cpp.WindowsSDK.props (31,5)
+       Property reassignment: $(TargetExt)=".lib" (previous value: "") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Cpp.Common.props (49,5)
+       Property reassignment: $(WindowsSdkDir)="C:\Program Files (x86)\Windows Kits\8.1\" (previous value: "C:\Program Files (x86)\Windows Kits\10\") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Cpp.Common.props (103,5)
+       Property reassignment: $(SDKDisplayName)="Windows" (previous value: "Windows 10") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Cpp.Common.props (127,5)
+       Property reassignment: $(WindowsSDK_ExecutablePath_x86)="C:\Program Files (x86)\Windows Kits\8.1\bin\x86;;C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools" (previous value: "C:\Program Files (x86)\Windows Kits\8.1\bin\x86;") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Cpp.Common.props (153,5)
+       Property reassignment: $(WindowsSDK_ExecutablePath_x64)="C:\Program Files (x86)\Windows Kits\8.1\bin\x64;;C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.1 Tools\x64" (previous value: "C:\Program Files (x86)\Windows Kits\8.1\bin\x64;") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Cpp.Common.props (154,5)
+       Property reassignment: $(_PropertySheetDisplayName)="Unicode Support" (previous value: "Core Windows Libraries") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Cpp.unicodesupport.props (15,5)
+       Property reassignment: $(_PropertySheetDisplayName)="Whole Program Optimization" (previous value: "Unicode Support") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Cpp.WholeProgramOptimization.props (15,5)
+       Property reassignment: $(VCTargetsPath)="C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\" (previous value: "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.ToolsetLocation.props (56,5)
+       Property reassignment: $(VCProjectUpgraderObjectName)="" (previous value: "WindowsSDKVersionUpgrader") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.Redirect.14.props (30,5)
+       Property reassignment: $(ExcludePath)="C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include;;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\include;;C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt;;;C:\Program Files (x86)\Windows Kits\8.1\Include\um;C:\Program Files (x86)\Windows Kits\8.1\Include\shared;C:\Program Files (x86)\Windows Kits\8.1\Include\winrt;;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin;C:\Windows\Microsoft.NET\Framework\v4.0.30319\;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\amd64;;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\lib\amd64;;C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x64;;;;C:\Windows" (previous value: "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include;;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\include;;C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt;;;C:\Program Files (x86)\Windows Kits\8.1\Include\um;C:\Program Files (x86)\Windows Kits\8.1\Include\shared;C:\Program Files (x86)\Windows Kits\8.1\Include\winrt;;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin;C:\Windows\Microsoft.NET\Framework\v4.0.30319\;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib\amd64;;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\lib\amd64;;C:\Program Files (x86)\Windows Kits\10\lib\10.0.10240.0\ucrt\x64;;;") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.Redirect.14.props (32,5)
+       Property reassignment: $(IncludePath)="C:\X-RAY\stcop\rgs\src\..\src\3rd party;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include;;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\include;;C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt;;;C:\Program Files (x86)\Windows Kits\8.1\Include\um;C:\Program Files (x86)\Windows Kits\8.1\Include\shared;C:\Program Files (x86)\Windows Kits\8.1\Include\winrt;;;C:\X-RAY\stcop\rgs\src\..\sdk\include;C:\X-RAY\stcop\rgs\src\..\sdk\include\OpenAutomate;C:\X-RAY\stcop\rgs\src\..\sdk\include\nvapi;C:\X-RAY\stcop\rgs\src\..\sdk\include\dxsdk" (previous value: "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include;;C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\atlmfc\include;;C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt;;;C:\Program Files (x86)\Windows Kits\8.1\Include\um;C:\Program Files (x86)\Windows Kits\8.1\Include\shared;C:\Program Files (x86)\Windows Kits\8.1\Include\winrt;;") at C:\X-RAY\stcop\rgs\src\Common.props (17,5)
        Property reassignment: $(TargetName)="DxErr" (previous value: "DXERR") at C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj (86,5)
        Property reassignment: $(_Redirect)="false" (previous value: "true") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.Redirect.targets (19,5)
-       Property reassignment: $(VCTargetsPath)="C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\" (previous value: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.ToolsetLocation.targets (16,5)
+       Property reassignment: $(VCTargetsPath)="C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\" (previous value: "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.ToolsetLocation.targets (16,5)
        The "SolutionExt" property is a global property, and cannot be modified.
-       Property reassignment: $(ExtensionsToDeleteOnClean)="*.cdf;*.cache;*.obj;*.ilk;*.resources;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.tlog;*.manifest;*.res;*.pch;*.exp;*.idb;*.rep;*.xdc;*.pdb;*_manifest.rc;*.bsc;*.sbr;*.xml;*.metagen;*.bi;C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.lib.manifest;C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.tlb;C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.pdb;C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.lib;C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.bsc;C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.ilk;C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.lib.intermediate.manifest" (previous value: "*.cdf;*.cache;*.obj;*.ilk;*.resources;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.tlog;*.manifest;*.res;*.pch;*.exp;*.idb;*.rep;*.xdc;*.pdb;*_manifest.rc;*.bsc;*.sbr;*.xml;*.metagen;*.bi") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets (35,5)
+       Property reassignment: $(ExtensionsToDeleteOnClean)="*.cdf;*.cache;*.obj;*.obj.enc;*.ilk;*.ipdb;*.iobj;*.resources;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.tlog;*.manifest;*.res;*.pch;*.exp;*.idb;*.rep;*.xdc;*.pdb;*_manifest.rc;*.bsc;*.sbr;*.xml;*.metagen;*.bi;C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.lib.manifest;C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.tlb;C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.pdb;C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.lib;C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.bsc;C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.ilk;C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.lib.intermediate.manifest" (previous value: "*.cdf;*.cache;*.obj;*.obj.enc;*.ilk;*.ipdb;*.iobj;*.resources;*.tlb;*.tli;*.tlh;*.tmp;*.rsp;*.pgc;*.pgd;*.meta;*.tlog;*.manifest;*.res;*.pch;*.exp;*.idb;*.rep;*.xdc;*.pdb;*_manifest.rc;*.bsc;*.sbr;*.xml;*.metagen;*.bi") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets (35,5)
        Search paths being used for $(MSBuildExtensionsPath) are C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild;$(MSBuildProgramFiles32)\MSBuild
        Search paths being used for $(MSBuildExtensionsPath) are C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild;$(MSBuildProgramFiles32)\MSBuild
        Trying to import C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\$(MSBuildToolsVersion)\Microsoft.Common.targets\ImportBefore\* using extensions path C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild
        Search paths being used for $(MSBuildExtensionsPath) are C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild;$(MSBuildProgramFiles32)\MSBuild
        Search paths being used for $(MSBuildExtensionsPath) are C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild;$(MSBuildProgramFiles32)\MSBuild
+       Property reassignment: $(TargetPlatformSdkMetadataLocation)="C:\Program Files (x86)\Windows Kits\8.1\References\CommonConfiguration\Neutral" (previous value: "C:\Program Files (x86)\Windows Kits\8.1\Windows Metadata") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets (94,5)
        The "Configuration" property is a global property, and cannot be modified.
        Property reassignment: $(_DocumentationFileProduced)="false" (previous value: "true") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets (157,5)
        Property reassignment: $(TargetDir)="C:\X-RAY\stcop\rgs\src\x64\Release\" (previous value: "C:\X-RAY\stcop\rgs\src\x64\Release") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets (283,5)
@@ -47,6 +52,7 @@
        Property reassignment: $(ProcessorArchitecture)="amd64" (previous value: "x64") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets (473,5)
        Property reassignment: $(DelaySign)="" (previous value: "false") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets (525,5)
        Property reassignment: $(_SGenGenerateSerializationAssembliesConfig)="Auto" (previous value: "") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets (3500,5)
+       Property reassignment: $(CAExcludePath)="C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt;;C:\Program Files (x86)\Windows Kits\8.1\Include\um;C:\Program Files (x86)\Windows Kits\8.1\Include\shared;C:\Program Files (x86)\Windows Kits\8.1\Include\winrt;;" (previous value: "C:\Program Files (x86)\Windows Kits\8.1\Include\um;C:\Program Files (x86)\Windows Kits\8.1\Include\shared;C:\Program Files (x86)\Windows Kits\8.1\Include\winrt;;") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VisualStudio\v16.0\CodeAnalysis\Microsoft.CodeAnalysis.targets (230,5)
        Property reassignment: $(PrepareForBuildDependsOn)="GetFrameworkPaths;GetReferenceAssemblyPaths;AssignLinkMetadata;SetCABuildNativeEnvironmentVariables" (previous value: "GetFrameworkPaths;GetReferenceAssemblyPaths;AssignLinkMetadata") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VisualStudio\v16.0\CodeAnalysis\Microsoft.CodeAnalysis.targets (235,5)
        Search paths being used for $(MSBuildExtensionsPath) are C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild;$(MSBuildProgramFiles32)\MSBuild
        Property reassignment: $(ResolveReferencesDependsOn)="
@@ -325,7 +331,7 @@
              CoreBuild;
              AfterBuild
            
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.BuildSteps.Targets (89,5)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.BuildSteps.Targets (88,5)
        Property reassignment: $(RebuildDependsOn)="
              _PrepareForRebuild;
              
@@ -339,7 +345,7 @@
              Clean;
              Build;
              AfterRebuild;
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.BuildSteps.Targets (96,5)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.BuildSteps.Targets (95,5)
        Property reassignment: $(CleanDependsOn)="
              _PrepareForClean;
              
@@ -363,7 +369,7 @@
              AfterClean
            ;
              EntityClean;
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.BuildSteps.Targets (101,5)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.BuildSteps.Targets (100,5)
        Property reassignment: $(BeforeBuildGenerateSourcesTargets)="
              
              ;
@@ -372,7 +378,7 @@
            " (previous value: "
              ;
              BeforeBuildGenerateSources;
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (53,5)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (53,5)
        Property reassignment: $(AfterBuildGenerateSourcesTargets)="
              
              ;
@@ -382,10 +388,11 @@
            " (previous value: "
              ;
              AfterBuildGenerateSources;
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (64,5)
-       Property reassignment: $(BuildGenerateSourcesAction)="_BuildGenerateSourcesAction" (previous value: "Build") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (117,5)
-       Property reassignment: $(BuildCompileAction)="_BuildCompileAction" (previous value: "Build") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (118,5)
-       Property reassignment: $(BuildLinkAction)="_BuildLinkAction" (previous value: "Build") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (119,5)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (64,5)
+       Property reassignment: $(BuildGenerateSourcesAction)="_BuildGenerateSourcesAction" (previous value: "Build") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (117,5)
+       Property reassignment: $(BuildCompileAction)="_BuildCompileAction" (previous value: "Build") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (118,5)
+       Property reassignment: $(BuildLinkAction)="_BuildLinkAction" (previous value: "Build") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (119,5)
+       Property reassignment: $(DetermineProjectTypeTargets)="_PrepareForReferenceResolution;_PrepareForReferenceResolution;" (previous value: "_PrepareForReferenceResolution;") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (206,5)
        Property reassignment: $(ResolveReferencesDependsOn)="_PrepareForReferenceResolution;ComputeCrtSDKReference;
              
              
@@ -418,7 +425,7 @@
              ImplicitlyExpandDesignTimeFacades
            ;
              ResolveTestReferences
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (247,5)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (258,5)
        Property reassignment: $(ResolveAssemblyReferencesDependsOn)="_PrepareForReferenceResolution;
              ResolveProjectReferences;
              FindInvalidProjectReferences;
@@ -435,12 +442,12 @@
              PrepareForBuild;
              ResolveSDKReferences;
              ExpandSDKReferences;
-           ;ResolveNuGetPackageAssets") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (248,5)
+           ;ResolveNuGetPackageAssets") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (259,5)
        Property reassignment: $(ResolveSDKReferencesDependsOn)="_PrepareForReferenceResolution;ComputeCrtSDKReference;
              GetInstalledSDKLocations
            " (previous value: "
              GetInstalledSDKLocations
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (249,5)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (260,5)
        Property reassignment: $(ComputeLinkInputsTargets)="
              
              ;
@@ -450,7 +457,7 @@
            " (previous value: "
              ;
              ComputeRCGeneratedLinkInputs;
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (815,5)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (816,5)
        Property reassignment: $(ComputeCompileInputsTargets)="
              
              ;
@@ -462,7 +469,7 @@
            " (previous value: "
              ;
              ComputeMIDLGeneratedCompileInputs;
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (955,5)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (957,5)
        Property reassignment: $(ComputeLinkInputsTargets)="
              
              
@@ -478,7 +485,7 @@
              ComputeRCGeneratedLinkInputs;
            ;
              ComputeManifestGeneratedLinkerInputs;
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (997,5)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (999,5)
        Property reassignment: $(ComputeLibInputsTargets)="
              
              ;
@@ -488,7 +495,7 @@
            " (previous value: "
              ;
              ComputeRCGeneratedLibInputs;
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (1004,5)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (1006,5)
        Property reassignment: $(ComputeImpLibInputsTargets)="
              
              
@@ -504,7 +511,7 @@
              ComputeRCGeneratedLibInputs;
            ;
              ComputeRCGeneratedImpLibInputs;
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (1011,5)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (1013,5)
        Property reassignment: $(ComputeLinkInputsTargets)="
              
              
@@ -526,7 +533,7 @@
              ComputeManifestGeneratedLinkerInputs;
            ;
              ComputeCustomBuildOutput;
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (1071,5)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (1073,5)
        Property reassignment: $(ComputeLibInputsTargets)="
              
              
@@ -542,7 +549,7 @@
              ComputeRCGeneratedLibInputs;
            ;
              ComputeCustomBuildOutput;
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (1086,5)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (1088,5)
        Property reassignment: $(ComputeImpLibInputsTargets)="
              
              
@@ -564,7 +571,7 @@
              ComputeRCGeneratedImpLibInputs;
            ;
              ComputeCustomBuildOutput;
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (1101,5)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (1103,5)
        Property reassignment: $(ComputeLinkInputsTargets)="
                
              
@@ -592,7 +599,7 @@
              ComputeCustomBuildOutput;
            ;
              ComputeCLGeneratedLinkInputs;
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (1131,7)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (1134,7)
        Property reassignment: $(ComputeLibInputsTargets)="
                
              
@@ -614,7 +621,7 @@
              ComputeCustomBuildOutput;
            ;
              ComputeCLGeneratedLibInputs;
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (1149,7)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (1152,7)
        Property reassignment: $(ComputeImpLibInputsTargets)="
                
              
@@ -642,7 +649,7 @@
              ComputeCustomBuildOutput;
            ;
              ComputeCLGeneratedImpLibInputs;
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (1167,7)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (1170,7)
        Property reassignment: $(ComputeLinkInputsTargets)="
              
                
@@ -676,7 +683,7 @@
              ComputeCLGeneratedLinkInputs;
            ;
                ComputeLinkInputsFromProject;
-             ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (1302,5)
+             ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (1305,5)
        Property reassignment: $(ComputeLibInputsTargets)="
              
                
@@ -704,7 +711,7 @@
              ComputeCLGeneratedLibInputs;
            ;
                ComputeLibInputsFromProject;
-             ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (1335,5)
+             ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (1338,5)
        Property reassignment: $(ComputeLibInputsTargets)="
              ComputeLibAdditionalOptions;
              
@@ -738,11 +745,32 @@
                ComputeLibInputsFromProject;
              ;
              ComputeReferenceLibInputs;
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (1392,5)
-       Property reassignment: $(DocumentationProjectOutputGroupDependsOn)="ResolvedXDCMake;ComputeCLCompileGeneratedXDCFiles" (previous value: "") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (1812,5)
-       Property reassignment: $(ContentFilesProjectOutputGroupDependsOn)="PrepareForBuild;AssignTargetPaths;PrepareForBuild;AssignTargetPaths;MakeDirsForFxc" (previous value: "PrepareForBuild;AssignTargetPaths") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets (1878,5)
-       Property reassignment: $(BuildingProject)="true" (previous value: "false") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets (1314,5)
-       Property reassignment: $(PrepareForBuildDependsOn)="PlatformPrepareForBuild;GetFrameworkPaths;GetReferenceAssemblyPaths;AssignLinkMetadata;SetCABuildNativeEnvironmentVariables" (previous value: "GetFrameworkPaths;GetReferenceAssemblyPaths;AssignLinkMetadata;SetCABuildNativeEnvironmentVariables") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.Cpp.Platform.targets (41,5)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (1395,5)
+       Property reassignment: $(DocumentationProjectOutputGroupDependsOn)="ResolvedXDCMake;ComputeCLCompileGeneratedXDCFiles" (previous value: "") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (1817,5)
+       Property reassignment: $(ContentFilesProjectOutputGroupDependsOn)="PrepareForBuild;AssignTargetPaths;PrepareForBuild;AssignTargetPaths;MakeDirsForFxc" (previous value: "PrepareForBuild;AssignTargetPaths") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets (1883,5)
+       Property reassignment: $(ComputeCompileInputsTargets)="
+             
+             
+             ;
+             ComputeMIDLGeneratedCompileInputs;
+           ;
+             ComputeCLInputPDBName;
+             ComputeReferenceCLInput;
+             WarnCompileDuplicatedFilename
+           ;
+             FixupCLCompileOptions;
+           " (previous value: "
+             
+             ;
+             ComputeMIDLGeneratedCompileInputs;
+           ;
+             ComputeCLInputPDBName;
+             ComputeReferenceCLInput;
+             WarnCompileDuplicatedFilename
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets (211,5)
+       Property reassignment: $(BuildingProject)="true" (previous value: "false") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets (1454,5)
+       Property reassignment: $(PrepareForBuildDependsOn)="Desktop_PlatformPrepareForBuild;GetFrameworkPaths;GetReferenceAssemblyPaths;AssignLinkMetadata;SetCABuildNativeEnvironmentVariables" (previous value: "GetFrameworkPaths;GetReferenceAssemblyPaths;AssignLinkMetadata;SetCABuildNativeEnvironmentVariables") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Platforms\x64\PlatformToolsets\v140\Toolset.targets (23,5)
+       Property reassignment: $(PrepareForBuildDependsOn)="PlatformPrepareForBuild;Desktop_PlatformPrepareForBuild;GetFrameworkPaths;GetReferenceAssemblyPaths;AssignLinkMetadata;SetCABuildNativeEnvironmentVariables" (previous value: "Desktop_PlatformPrepareForBuild;GetFrameworkPaths;GetReferenceAssemblyPaths;AssignLinkMetadata;SetCABuildNativeEnvironmentVariables") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Cpp.Platform.targets (34,5)
        Property reassignment: $(CleanDependsOn)="
              
              _PrepareForClean;
@@ -772,7 +800,7 @@
            ;
              EntityClean;
            ;
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppClean.targets (22,5)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppClean.targets (22,5)
        Property reassignment: $(CppCleanDependsOn)="
              BeforeCppClean;
              ;
@@ -783,7 +811,8 @@
              ;
              CoreCppClean;
              AfterCppClean;
-           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppClean.targets (91,5)
+           ") at C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppClean.targets (91,5)
+       Property reassignment: $(RequiredBundles)="" (previous value: "VC_140ToolsAndLibs;") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.Redirect.14.targets (30,5)
        Property reassignment: $(_ImportMicrosoftCppDesignTime)="true" (previous value: "false") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.Redirect.targets (27,5)
        Property reassignment: $(BuildDependsOn)="SetTelemetryEnvironmentVariables;
              _PrepareForBuild;
@@ -827,58 +856,57 @@
              AfterRebuild;
            ;
            ") at C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.DesignTime.targets (478,5)
-       Property reassignment: $(MSBuildAllProjects)="C:\X-RAY\stcop\rgs\src\Common.props;;C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.targets;C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj.user;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Xaml.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\CommonExtensions\Microsoft\NuGet\NuGet.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Microsoft.Common.targets\ImportAfter\Microsoft.NET.Build.Extensions.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\Microsoft.NET.Build.Extensions.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\Microsoft.NET.Build.Extensions.NETFramework.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\Microsoft.NET.Build.Extensions.ConflictResolution.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\Microsoft.NET.DefaultPackageConflictOverrides.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\NuGet\16.0\Microsoft.NuGet.targets" (previous value: ";C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.targets;C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj.user;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Xaml.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\CommonExtensions\Microsoft\NuGet\NuGet.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Microsoft.Common.targets\ImportAfter\Microsoft.NET.Build.Extensions.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\Microsoft.NET.Build.Extensions.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\Microsoft.NET.Build.Extensions.NETFramework.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\Microsoft.NET.Build.Extensions.ConflictResolution.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\Microsoft.NET.DefaultPackageConflictOverrides.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\NuGet\16.0\Microsoft.NuGet.targets") at 
+       Property reassignment: $(MSBuildAllProjects)="C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj;;C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.targets;C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj.user;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Xaml.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\CommonExtensions\Microsoft\NuGet\NuGet.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Microsoft.Common.targets\ImportAfter\Microsoft.NET.Build.Extensions.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\Microsoft.NET.Build.Extensions.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\Microsoft.NET.Build.Extensions.NETFramework.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\Microsoft.NET.Build.Extensions.ConflictResolution.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\Microsoft.NET.DefaultPackageConflictOverrides.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\NuGet\16.0\Microsoft.NuGet.targets" (previous value: ";C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.targets;C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj.user;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Xaml.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\CommonExtensions\Microsoft\NuGet\NuGet.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Microsoft.Common.targets\ImportAfter\Microsoft.NET.Build.Extensions.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\Microsoft.NET.Build.Extensions.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\Microsoft.NET.Build.Extensions.NETFramework.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\Microsoft.NET.Build.Extensions.ConflictResolution.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\Microsoft.NET.DefaultPackageConflictOverrides.targets;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\NuGet\16.0\Microsoft.NuGet.targets") at 
        Overriding target "GetFrameworkPaths" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "GetFrameworkPaths" from project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.NETFramework.CurrentVersion.targets".
        Overriding target "SatelliteDllsProjectOutputGroup" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "SatelliteDllsProjectOutputGroup" from project "C:\Windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.WinFx.targets".
-       Overriding target "GenerateTargetFrameworkMonikerAttribute" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "GenerateTargetFrameworkMonikerAttribute" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.BuildSteps.Targets".
-       Overriding target "Build" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "Build" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.BuildSteps.Targets".
-       Overriding target "Rebuild" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "Rebuild" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.BuildSteps.Targets".
-       Overriding target "AfterBuild" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "AfterBuild" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.BuildSteps.Targets".
-       Overriding target "_PrepareForReferenceResolution" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.Redirect.14.targets" with target "_PrepareForReferenceResolution" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets".
-       Overriding target "PrepareForBuild" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "PrepareForBuild" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets".
-       Overriding target "GetTargetPath" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "GetTargetPath" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets".
-       Overriding target "ComputeIntermediateSatelliteAssemblies" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "ComputeIntermediateSatelliteAssemblies" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets".
-       Overriding target "ClCompile" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" with target "ClCompile" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets".
-       Overriding target "ResourceCompile" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" with target "ResourceCompile" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets".
-       Overriding target "Lib" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" with target "Lib" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets".
-       Overriding target "Link" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" with target "Link" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets".
-       Overriding target "AllProjectOutputGroups" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "AllProjectOutputGroups" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets".
-       Overriding target "BuiltProjectOutputGroup" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "BuiltProjectOutputGroup" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets".
-       Overriding target "DebugSymbolsProjectOutputGroup" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "DebugSymbolsProjectOutputGroup" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets".
-       Overriding target "DocumentationProjectOutputGroup" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "DocumentationProjectOutputGroup" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets".
-       Overriding target "SourceFilesProjectOutputGroup" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "SourceFilesProjectOutputGroup" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets".
-       Overriding target "ContentFilesProjectOutputGroup" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "ContentFilesProjectOutputGroup" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets".
-       Overriding target "AllProjectOutputGroupsDependencies" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "AllProjectOutputGroupsDependencies" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets".
-       Overriding target "BuiltProjectOutputGroupDependencies" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "BuiltProjectOutputGroupDependencies" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets".
-       Overriding target "DebugSymbolsProjectOutputGroupDependencies" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "DebugSymbolsProjectOutputGroupDependencies" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets".
-       Overriding target "DocumentationProjectOutputGroupDependencies" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "DocumentationProjectOutputGroupDependencies" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets".
-       Overriding target "PreBuildEvent" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "PreBuildEvent" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets".
-       Overriding target "PostBuildEvent" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "PostBuildEvent" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets".
-       Overriding target "ClCompile" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" with target "ClCompile" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets".
-       Overriding target "Link" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" with target "Link" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets".
-       Overriding target "Lib" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" with target "Lib" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets".
-       Overriding target "ImpLib" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" with target "ImpLib" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets".
-       Overriding target "Midl" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" with target "Midl" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets".
-       Overriding target "ResourceCompile" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" with target "ResourceCompile" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets".
-       Overriding target "BeforeResGen" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "BeforeResGen" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets".
-       Overriding target "ResGen" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "ResGen" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets".
-       Overriding target "GenerateSatelliteAssemblies" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "GenerateSatelliteAssemblies" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets".
-       Overriding target "Manifest" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" with target "Manifest" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets".
-       Overriding target "XdcMake" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" with target "XdcMake" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets".
-       Overriding target "BscMake" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" with target "BscMake" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets".
-       Overriding target "ComputeMetaGenInputs" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.MetaGen.targets" with target "ComputeMetaGenInputs" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets".
-       Overriding target "GetNativeManifest" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "GetNativeManifest" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets".
-       Overriding target "CustomBuildStep" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets" with target "CustomBuildStep" from project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.Redirect.14.targets".
+       Overriding target "GenerateTargetFrameworkMonikerAttribute" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "GenerateTargetFrameworkMonikerAttribute" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.BuildSteps.Targets".
+       Overriding target "Build" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "Build" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.BuildSteps.Targets".
+       Overriding target "Rebuild" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "Rebuild" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.BuildSteps.Targets".
+       Overriding target "AfterBuild" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "AfterBuild" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.BuildSteps.Targets".
+       Overriding target "_PrepareForReferenceResolution" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.Redirect.14.targets" with target "_PrepareForReferenceResolution" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets".
+       Overriding target "PrepareForBuild" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "PrepareForBuild" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets".
+       Overriding target "GetTargetPath" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "GetTargetPath" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets".
+       Overriding target "ComputeIntermediateSatelliteAssemblies" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "ComputeIntermediateSatelliteAssemblies" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets".
+       Overriding target "ClCompile" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets" with target "ClCompile" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets".
+       Overriding target "ResourceCompile" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets" with target "ResourceCompile" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets".
+       Overriding target "Lib" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets" with target "Lib" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets".
+       Overriding target "Link" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets" with target "Link" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets".
+       Overriding target "AllProjectOutputGroups" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "AllProjectOutputGroups" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets".
+       Overriding target "BuiltProjectOutputGroup" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "BuiltProjectOutputGroup" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets".
+       Overriding target "DebugSymbolsProjectOutputGroup" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "DebugSymbolsProjectOutputGroup" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets".
+       Overriding target "DocumentationProjectOutputGroup" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "DocumentationProjectOutputGroup" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets".
+       Overriding target "SourceFilesProjectOutputGroup" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "SourceFilesProjectOutputGroup" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets".
+       Overriding target "ContentFilesProjectOutputGroup" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "ContentFilesProjectOutputGroup" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets".
+       Overriding target "AllProjectOutputGroupsDependencies" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "AllProjectOutputGroupsDependencies" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets".
+       Overriding target "BuiltProjectOutputGroupDependencies" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "BuiltProjectOutputGroupDependencies" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets".
+       Overriding target "DebugSymbolsProjectOutputGroupDependencies" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "DebugSymbolsProjectOutputGroupDependencies" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets".
+       Overriding target "DocumentationProjectOutputGroupDependencies" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "DocumentationProjectOutputGroupDependencies" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets".
+       Overriding target "PreBuildEvent" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "PreBuildEvent" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets".
+       Overriding target "PostBuildEvent" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "PostBuildEvent" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets".
+       Overriding target "ClCompile" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets" with target "ClCompile" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets".
+       Overriding target "Link" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets" with target "Link" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets".
+       Overriding target "Lib" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets" with target "Lib" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets".
+       Overriding target "ImpLib" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets" with target "ImpLib" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets".
+       Overriding target "Midl" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets" with target "Midl" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets".
+       Overriding target "ResourceCompile" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets" with target "ResourceCompile" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets".
+       Overriding target "BeforeResGen" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "BeforeResGen" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets".
+       Overriding target "ResGen" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "ResGen" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets".
+       Overriding target "GenerateSatelliteAssemblies" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "GenerateSatelliteAssemblies" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets".
+       Overriding target "Manifest" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets" with target "Manifest" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets".
+       Overriding target "XdcMake" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets" with target "XdcMake" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets".
+       Overriding target "BscMake" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets" with target "BscMake" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets".
+       Overriding target "ComputeMetaGenInputs" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.MetaGen.targets" with target "ComputeMetaGenInputs" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets".
+       Overriding target "GetNativeManifest" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "GetNativeManifest" from project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets".
+       Overriding target "CustomBuildStep" in project "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppCommon.targets" with target "CustomBuildStep" from project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.Redirect.14.targets".
        Overriding target "GetTargetPathWithTargetPlatformMoniker" in project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" with target "GetTargetPathWithTargetPlatformMoniker" from project "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.DesignTime.targets".
-Build started 08.12.2019 6:18:42.
-     1>Project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" on node 2 (Build target(s)).
+Build started 09.12.2019 17:35:42.
+     1>Project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" on node 2 (Clean target(s)).
      1>Building with tools version "Current".
        Project file contains ToolsVersion="12.0". This toolset may be unknown or missing, in which case you may be able to resolve this by installing the appropriate version of MSBuild, or the build may have been forced to a particular ToolsVersion for policy reasons. Treating the project as if it had ToolsVersion="Current". For more information, please see http://go.microsoft.com/fwlink/?LinkId=293424.
        Target "EnableIntermediateOutputPathMismatchWarning" skipped, due to false condition; ('$(RestoreProjectStyle)' == 'PackageReference') was evaluated as ('' == 'PackageReference').
-     1>Target "_CheckForInvalidConfigurationAndPlatform" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "SetTelemetryEnvironmentVariables" depends on it):
+     1>Target "_CheckForInvalidConfigurationAndPlatform" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_PrepareForClean" depends on it):
        Task "Error" skipped, due to false condition; ( '$(_InvalidConfigurationError)' == 'true' ) was evaluated as ( '' == 'true' ).
        Task "Warning" skipped, due to false condition; ( '$(_InvalidConfigurationWarning)' == 'true' ) was evaluated as ( '' == 'true' ).
-       Using "Message" task from assembly "Microsoft.Build.Tasks.Core, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a".
        Task "Message"
          Configuration=Release
        Done executing task "Message".
@@ -891,479 +919,90 @@ Build started 08.12.2019 6:18:42.
        Task "Error" skipped, due to false condition; ( '$(_InitialMSBuildProjectExtensionsPath)' != '' And '$(MSBuildProjectExtensionsPath)' != '$(_InitialMSBuildProjectExtensionsPath)' ) was evaluated as ( 'C:\X-RAY\stcop\rgs\src\3rd party\DXERR\obj\' != '' And 'C:\X-RAY\stcop\rgs\src\3rd party\DXERR\obj\' != 'C:\X-RAY\stcop\rgs\src\3rd party\DXERR\obj\' ).
        Task "Warning" skipped, due to false condition; ( '$(EnableBaseIntermediateOutputPathMismatchWarning)' == 'true' And '$(_InitialBaseIntermediateOutputPath)' != '$(BaseIntermediateOutputPath)' And '$(BaseIntermediateOutputPath)' != '$(MSBuildProjectExtensionsPath)' ) was evaluated as ( '' == 'true' And 'obj\' != 'obj\' And 'obj\' != 'C:\X-RAY\stcop\rgs\src\3rd party\DXERR\obj\' ).
      1>Done building target "_CheckForInvalidConfigurationAndPlatform" in project "DXERR.vcxproj".
-       Target "_CheckForInvalidConfigurationAndPlatform" skipped. Previously built successfully.
-     1>Target "SetTelemetryEnvironmentVariables" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VC\v160\Microsoft.Cpp.DesignTime.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "Build" depends on it):
-       Using "SetEnv" task from assembly "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.Build.CppTasks.Common.dll".
-       Task "SetEnv"
-         VSTEL_SolutionSessionID={A7E3B457-230D-44E3-9889-3D1F7F2FDE2F}
-       Done executing task "SetEnv".
-       Task "SetEnv"
-         VSTEL_CurrentSolutionBuildID=41985703
-       Done executing task "SetEnv".
-       Task "SetEnv"
-         VSTEL_ProjectID={772FE450-F4F3-4687-A2A7-5624825089D7}
-       Done executing task "SetEnv".
-     1>Done building target "SetTelemetryEnvironmentVariables" in project "DXERR.vcxproj".
-     1>Target "_PrepareForBuild" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.BuildSteps.Targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "Build" depends on it):
-       Task "CreateItem" skipped, due to false condition; ('%(CustomBuild.IncludeFileToTool)'!='') was evaluated as (''!='').
-     1>Done building target "_PrepareForBuild" in project "DXERR.vcxproj".
-     1>Target "_PrepareForReferenceResolution" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "ResolveReferences" depends on it):
-       Task "Message" skipped, due to false condition; ('$(_REFERENCE_DEBUG)'=='true') was evaluated as (''=='true').
-     1>Done building target "_PrepareForReferenceResolution" in project "DXERR.vcxproj".
-       Target "ComputeCrtSDKReference" skipped, due to false condition; ('@(ClCompile)'!='' and '$(WindowsAppContainer)'=='true' and '$(UseCrtSDKReference)' != 'false') was evaluated as ('dxerr.cpp'!='' and 'false'=='true' and '' != 'false').
-     1>Target "BeforeResolveReferences" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "ResolveReferences" depends on it):
-     1>Done building target "BeforeResolveReferences" in project "DXERR.vcxproj".
-     1>Target "AssignProjectConfiguration" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "ResolveReferences" depends on it):
-       Using "AssignProjectConfiguration" task from assembly "Microsoft.Build.Tasks.Core, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a".
+     1>Target "_PrepareForClean" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.BuildSteps.Targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "Clean" depends on it):
+       Task "Delete"
+         Deleting file "x64\Release\DXERR.tlog\DXERR.lastbuildstate".
+       Done executing task "Delete".
+     1>Done building target "_PrepareForClean" in project "DXERR.vcxproj".
+     1>Target "BeforeClean" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "Clean" depends on it):
+     1>Done building target "BeforeClean" in project "DXERR.vcxproj".
+       Target "UnmanagedUnregistration" skipped, due to false condition; ((('$(_AssemblyTimestampBeforeCompile)' != '$(_AssemblyTimestampAfterCompile)' or '$(RegisterForComInterop)' != 'true' or '$(OutputType)' != 'library') or
+                           ('$(_AssemblyTimestampBeforeCompile)' == '')) and
+                          Exists('@(_UnmanagedRegistrationCache)')) was evaluated as ((('' != '' or '' != 'true' or 'staticlibrary' != 'library') or
+                           ('' == '')) and
+                          Exists('obj\DXERR.vcxproj.UnmanagedRegistration.cache')).
+     1>Target "CoreClean" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "Clean" depends on it):
+       Task "Delete"
+         File "x64\Release\\TempCA\DxErr.pdb" doesn't exist. Skipping.
+         File "x64\Release\\TempCA\DxErr.lib" doesn't exist. Skipping.
+       Done executing task "Delete".
+       Task "ReadLinesFromFile"
+       Done executing task "ReadLinesFromFile".
+       Task "FindUnderPath"
+         Comparison path is "C:\X-RAY\stcop\rgs\src\x64\Release\".
+       Done executing task "FindUnderPath".
+       Task "FindUnderPath"
+         Comparison path is "x64\Release\".
+       Done executing task "FindUnderPath".
+       Task "Delete"
+       Done executing task "Delete".
+       Task "RemoveDuplicates"
+       Done executing task "RemoveDuplicates".
+       Task "MakeDir"
+       Done executing task "MakeDir".
+       Task "WriteLinesToFile"
+       Done executing task "WriteLinesToFile".
+     1>Done building target "CoreClean" in project "DXERR.vcxproj".
+     1>Target "AssignProjectConfiguration" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "PrepareProjectReferences" depends on it):
        Task "AssignProjectConfiguration"
        Done executing task "AssignProjectConfiguration".
      1>Done building target "AssignProjectConfiguration" in project "DXERR.vcxproj".
-       Target "AssignProjectConfiguration" skipped. Previously built successfully.
      1>Target "_SplitProjectReferencesByFileExistence" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "PrepareProjectReferences" depends on it):
        Task "ResolveNonMSBuildProjectOutput" skipped, due to false condition; ('$(BuildingInsideVisualStudio)'=='true' and '@(ProjectReferenceWithConfiguration)'!='') was evaluated as ('true'=='true' and ''!='').
      1>Done building target "_SplitProjectReferencesByFileExistence" in project "DXERR.vcxproj".
      1>Target "_GetProjectReferenceTargetFrameworkProperties" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "PrepareProjectReferences" depends on it):
-       Using "MSBuild" task from assembly "Microsoft.Build.Tasks.Core, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a".
        Task "MSBuild"
        Done executing task "MSBuild".
        Task "GetReferenceNearestTargetFrameworkTask" skipped, due to false condition; ('@(_ProjectReferenceTargetFrameworkPossibilities->Count())' != '0' and '$(ReferringTargetFrameworkForProjectReferences)' != '') was evaluated as ('0' != '0' and '.NETFramework,Version=v4.0' != '').
      1>Done building target "_GetProjectReferenceTargetFrameworkProperties" in project "DXERR.vcxproj".
-     1>Target "PrepareProjectReferences" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "ResolveProjectReferences" depends on it):
+     1>Target "PrepareProjectReferences" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "CleanReferencedProjects" depends on it):
      1>Done building target "PrepareProjectReferences" in project "DXERR.vcxproj".
-       Target "_RemoveNameMetadataFromProjectReferenceItems" skipped, due to false condition; ('@(ProjectReference)'!='') was evaluated as (''!='').
-     1>Target "ResolveProjectReferences" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "ResolveReferences" depends on it):
-       Task "MSBuild" skipped, due to false condition; ('%(_MSBuildProjectReferenceExistent.BuildReference)' == 'true' and '@(ProjectReferenceWithConfiguration)' != '' and ('$(BuildingInsideVisualStudio)' == 'true' or '$(BuildProjectReferences)' != 'true') and '$(VisualStudioVersion)' != '10.0' and '@(_MSBuildProjectReferenceExistent)' != '') was evaluated as ('' == 'true' and '' != '' and ('true' == 'true' or 'true' != 'true') and '16.0' != '10.0' and '' != '').
-       Task "MSBuild" skipped, due to false condition; ('%(_MSBuildProjectReferenceExistent.BuildReference)' == 'true' and '@(ProjectReferenceWithConfiguration)' != '' and ('$(BuildingInsideVisualStudio)' == 'true' or '$(BuildProjectReferences)' != 'true') and '$(VisualStudioVersion)' == '10.0' and '@(_MSBuildProjectReferenceExistent)' != '') was evaluated as ('' == 'true' and '' != '' and ('true' == 'true' or 'true' != 'true') and '16.0' == '10.0' and '' != '').
-       Task "MSBuild" skipped, due to false condition; ('%(_MSBuildProjectReferenceExistent.BuildReference)' == 'true' and '@(ProjectReferenceWithConfiguration)' != '' and '$(BuildingInsideVisualStudio)' != 'true' and '$(BuildProjectReferences)' == 'true' and '@(_MSBuildProjectReferenceExistent)' != '') was evaluated as ('' == 'true' and '' != '' and 'true' != 'true' and 'true' == 'true' and '' != '').
-       Task "MSBuild" skipped, due to false condition; ('%(_MSBuildProjectReferenceExistent.BuildReference)' == 'true' and '@(ProjectReferenceWithConfiguration)' != '' and '$(BuildingProject)' == 'true' and '@(_MSBuildProjectReferenceExistent)' != '') was evaluated as ('' == 'true' and '' != '' and 'true' == 'true' and '' != '').
-       Task "Warning" skipped, due to false condition; ('@(ProjectReferenceWithConfiguration)' != '' and '@(_MSBuildProjectReferenceNonexistent)' != '') was evaluated as ('' != '' and '' != '').
-     1>Done building target "ResolveProjectReferences" in project "DXERR.vcxproj".
-       Target "FindInvalidProjectReferences" skipped, due to false condition; ('$(FindInvalidProjectReferences)' == 'true') was evaluated as ('' == 'true').
-       Target "ResolveNativeReferences" skipped, due to false condition; ('@(NativeReference)'!='') was evaluated as (''!='').
-       Target "_PrepareForReferenceResolution" skipped. Previously built successfully.
-       Target "ResolveProjectReferences" skipped. Previously built successfully.
-       Target "FindInvalidProjectReferences" skipped, due to false condition; ('$(FindInvalidProjectReferences)' == 'true') was evaluated as ('' == 'true').
-     1>Target "GetFrameworkPaths" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.NETFramework.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "ResolveAssemblyReferences" depends on it):
-     1>Done building target "GetFrameworkPaths" in project "DXERR.vcxproj".
-       Target "GetWinFXPath" skipped, due to false condition; (('@(Page)' != '' or '@(ApplicationDefinition)' != '' or '@(Resource)' != '') and ('$(GetWinFXNativePath)' != '' or '$(GetWinFXWoWPath)' != '' )) was evaluated as (('' != '' or '' != '' or '' != '') and ('' != '' or '' != '' )).
-       Target "GetFrameworkPaths" skipped. Previously built successfully.
-     1>Target "GetReferenceAssemblyPaths" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "ResolveAssemblyReferences" depends on it):
-       Task "GetReferenceAssemblyPaths" skipped, due to false condition; ('$(TargetFrameworkMoniker)' != '' and ('$(_TargetFrameworkDirectories)' == '' or '$(_FullFrameworkReferenceAssemblyPaths)' == '')) was evaluated as ('' != '' and ('C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0' == '' or 'C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0' == '')).
-     1>Done building target "GetReferenceAssemblyPaths" in project "DXERR.vcxproj".
-     1>Target "SetBuildDefaultEnvironmentVariables" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.cpp.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "PrepareForBuild" depends on it):
-       Task "SetEnv"
-         PATH=C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin;C:\Program Files (x86)\Windows Kits\8.1\bin\x86;;C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools;C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\Tools\bin;C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\tools;C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\ide;C:\Program Files (x86)\HTML Help Workshop;;C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin;C:\Windows\Microsoft.NET\Framework\v4.0.30319\;;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Embarcadero\Studio\20.0\bin;C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl;C:\Program Files (x86)\Embarcadero\Studio\20.0\bin64;C:\Users\Public\Documents\Embarcadero\Studio\20.0\Bpl\Win64;C:\Python37-32\Scripts\;C:\Python37-32\;C:\Perl\bin\;c:\windows\system32;c:\windows;c:\windows\system32\wbem;c:\windows\system32\windowspowershell\v1.0\;c:\program files\microsoft sql server\110\tools\binn\;c:\program files\putty\;c:\program files\git\cmd;c:\program files\dotnet\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Common Files\Autodesk Shared\;C:\Program Files (x86)\WinMerge;C:\Program Files (x86)\Intel\Phone Flash Tool;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\SourceGear\Common\DiffMerge\;C:\Program Files\010 Editor;C:\Program Files\CMake\bin;C:\Program Files\Git\cmd;C:\Program Files (x86)\IncrediBuild;C:\Users\Mortan\AppData\Local\Programs\Python\Python37\Scripts\;C:\Users\Mortan\AppData\Local\Programs\Python\Python37\;C:\Users\Mortan\AppData\Local\GitHubDesktop\bin;C:\Microsoft VS Code\bin;C:\Users\Mortan\AppData\Local\Programs\Fiddler;C:\Program Files (x86)\Mikero\DePboTools\bin;
-       Done executing task "SetEnv".
-       Task "SetEnv"
-         LIB=C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\lib\amd64;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\lib\amd64;C:\Program Files (x86)\Windows Kits\8.1\lib\winv6.3\um\x64;;
-       Done executing task "SetEnv".
-       Task "SetEnv"
-         LIBPATH=C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\lib\amd64;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\lib\amd64;
-       Done executing task "SetEnv".
-       Task "SetEnv"
-         INCLUDE=C:\X-RAY\stcop\rgs\src\..\src\3rd party;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\include;C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\atlmfc\include;C:\Program Files (x86)\Windows Kits\8.1\Include\um;C:\Program Files (x86)\Windows Kits\8.1\Include\shared;C:\Program Files (x86)\Windows Kits\8.1\Include\winrt;;;C:\X-RAY\stcop\rgs\src\..\sdk\include;C:\X-RAY\stcop\rgs\src\..\sdk\include\OpenAutomate;C:\X-RAY\stcop\rgs\src\..\sdk\include\nvapi;C:\X-RAY\stcop\rgs\src\..\sdk\include\dxsdk
-       Done executing task "SetEnv".
-     1>Done building target "SetBuildDefaultEnvironmentVariables" in project "DXERR.vcxproj".
-     1>Target "SetUserMacroEnvironmentVariables" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.cpp.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "PrepareForBuild" depends on it):
-       Task "SetEnv" skipped, due to false condition; ('%(BuildMacro.EnvironmentVariable)' == 'true') was evaluated as ('' == 'true').
-       Task "SetEnv" skipped, due to false condition; ('%(BuildMacro.EnvironmentVariable)' == 'true') was evaluated as ('' == 'true').
-       Task "SetEnv" skipped, due to false condition; ('%(BuildMacro.EnvironmentVariable)' == 'true') was evaluated as ('' == 'true').
-       Task "SetEnv" skipped, due to false condition; ('%(BuildMacro.EnvironmentVariable)' == 'true') was evaluated as ('' == 'true').
-       Task "SetEnv" skipped, due to false condition; ('%(BuildMacro.EnvironmentVariable)' == 'true') was evaluated as ('' == 'true').
-       Task "SetEnv" skipped, due to false condition; ('%(BuildMacro.EnvironmentVariable)' == 'true') was evaluated as ('' == 'true').
-       Task "SetEnv" skipped, due to false condition; ('%(BuildMacro.EnvironmentVariable)' == 'true') was evaluated as ('' == 'true').
-       Task "SetEnv"
-         xrSdkDir=C:\X-RAY\stcop\rgs\src\..\sdk\
-       Done executing task "SetEnv".
-       Task "SetEnv"
-         dxSdkDir=C:\X-RAY\stcop\rgs\src\..\sdk\include\dxsdk\
-       Done executing task "SetEnv".
-       Task "SetEnv"
-         xr3rdPartyDir=C:\X-RAY\stcop\rgs\src\3rd party\
-       Done executing task "SetEnv".
-     1>Done building target "SetUserMacroEnvironmentVariables" in project "DXERR.vcxproj".
-     1>Target "GetResolvedWinMD" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "PrepareForBuild" depends on it):
-     1>Done building target "GetResolvedWinMD" in project "DXERR.vcxproj".
-     1>Target "PlatformPrepareForBuild" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.Cpp.Platform.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "PrepareForBuild" depends on it):
-       Task "VCMessage" skipped, due to false condition; ('$(_Error64bitToolsNotInstalled)' == 'true') was evaluated as ('' == 'true').
-       Task "VCMessage" skipped, due to false condition; ('$(ConfigurationPlatformExists)' != 'true') was evaluated as ('true' != 'true').
-       Task "VCMessage" skipped, due to false condition; ('$(ToolsetTargetsFound)' != 'true') was evaluated as ('true' != 'true').
-     1>Done building target "PlatformPrepareForBuild" in project "DXERR.vcxproj".
-       Target "GetFrameworkPaths" skipped. Previously built successfully.
-       Target "GetReferenceAssemblyPaths" skipped. Previously built successfully.
-       Target "AssignLinkMetadata" skipped, due to false condition; ( '$(SynthesizeLinkMetadata)' == 'true' ) was evaluated as ( '' == 'true' ).
-     1>Target "SetCABuildNativeEnvironmentVariables" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\VisualStudio\v16.0\CodeAnalysis\Microsoft.CodeAnalysis.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "PrepareForBuild" depends on it):
-       Task "SetEnv"
-         CAExcludePath=C:\Program Files (x86)\Windows Kits\8.1\Include\um;C:\Program Files (x86)\Windows Kits\8.1\Include\shared;C:\Program Files (x86)\Windows Kits\8.1\Include\winrt;;
-       Done executing task "SetEnv".
-       Task "SetEnv" skipped, due to false condition; ('$(RunCppAnalysis)'=='true' and '$(VCCodeAnalysisUX)'=='true') was evaluated as ('false'=='true' and 'true'=='true').
-     1>Done building target "SetCABuildNativeEnvironmentVariables" in project "DXERR.vcxproj".
-     1>Target "PrepareForBuild" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "ResolveAssemblyReferences" depends on it):
-       Task "VCMessage" skipped, due to false condition; ('$(DesignTimeBuild)' != 'true' and '$(ConfigurationPlatformExists)' != 'true') was evaluated as ('' != 'true' and 'true' != 'true').
-       Using "MakeDir" task from assembly "Microsoft.Build.Tasks.Core, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a".
+     1>Target "CleanReferencedProjects" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "Clean" depends on it):
+       Task "MSBuild" skipped, due to false condition; ('$(BuildingInsideVisualStudio)' != 'true' and '$(BuildProjectReferences)' == 'true' and '@(_MSBuildProjectReferenceExistent)' != '') was evaluated as ('true' != 'true' and 'true' == 'true' and '' != '').
+     1>Done building target "CleanReferencedProjects" in project "DXERR.vcxproj".
+     1>Target "CleanPublishFolder" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "Clean" depends on it):
+       Task "RemoveDir" skipped, due to false condition; ('$(PublishDir)'=='$(OutputPath)app.publish\' and Exists('$(PublishDir)')) was evaluated as ('C:\X-RAY\stcop\rgs\src\x64\Release\app.publish\'=='C:\X-RAY\stcop\rgs\src\x64\Release\app.publish\' and Exists('C:\X-RAY\stcop\rgs\src\x64\Release\app.publish\')).
+     1>Done building target "CleanPublishFolder" in project "DXERR.vcxproj".
+     1>Target "AfterClean" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "Clean" depends on it):
+     1>Done building target "AfterClean" in project "DXERR.vcxproj".
+       Target "EntityClean" skipped, due to false condition; ('@(EntityDeploy)' != '') was evaluated as ('' != '').
+     1>Target "BeforeCppClean" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppClean.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "CppClean" depends on it):
+     1>Done building target "BeforeCppClean" in project "DXERR.vcxproj".
+     1>Target "CoreCppClean" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppClean.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "CppClean" depends on it):
        Task "MakeDir"
        Done executing task "MakeDir".
-       Task "VCMessage" skipped, due to false condition; ('$(DesignTimeBuild)'!='true' and '$(WindowsAppContainer)'=='true' and '$(ConfigurationType)'!='Application' and '$(ConfigurationType)'!='DynamicLibrary' and '$(ConfigurationType)'!='StaticLibrary') was evaluated as (''!='true' and 'false'=='true' and 'StaticLibrary'!='Application' and 'StaticLibrary'!='DynamicLibrary' and 'StaticLibrary'!='StaticLibrary').
-       Task "VCMessage" skipped, due to false condition; ('$(DesignTimeBuild)'!='true' and '$(VCInstallDir)'=='' and '$(UseEnv)' != 'true' and ('$(TargetFrameworkVersion)'=='v3.5' or '$(TargetFrameworkVersion)'=='v3.0' or '$(TargetFrameworkVersion)'=='v2.0' )) was evaluated as (''!='true' and 'C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\'=='' and '' != 'true' and ('v4.0'=='v3.5' or 'v4.0'=='v3.0' or 'v4.0'=='v2.0' )).
-       Task "VCMessage" skipped, due to false condition; ('$(DesignTimeBuild)'!='true' and '$(VCInstallDir)'=='' and '$(UseEnv)' != 'true' and '$(PlatformToolset)'=='v90') was evaluated as (''!='true' and 'C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\'=='' and '' != 'true' and 'v120'=='v90').
-       Task "VCMessage" skipped, due to false condition; ('$(VCInstallDir)'=='' and '$(UseEnv)' != 'true') was evaluated as ('C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\'=='' and '' != 'true').
-       Task "VCMessage" skipped, due to false condition; ('$(WindowsSDKDir)'=='' and '$(UseEnv)' != 'true') was evaluated as ('C:\Program Files (x86)\Windows Kits\8.1\'=='' and '' != 'true').
-       Task "VCMessage" skipped, due to false condition; ('$(IntDirTrailingSlashWarning)'=='true') was evaluated as (''=='true').
-       Task "VCMessage" skipped, due to false condition; ('$(OutDirTrailingSlashWarning)'=='true') was evaluated as (''=='true').
-       Task "VCMessage" skipped, due to false condition; ('%(CompatibilityIssues.Identity)' != '' and '$(DesignTimeBuild)'!='true') was evaluated as ('' != '' and ''!='true').
-       Task "VCMessage" skipped, due to false condition; ('$(_MBCS_Using)' == 'true' and '$(_MBCS_Installed)' != 'true' and '$(DesignTimeBuild)' != 'true') was evaluated as ('' == 'true' and '' != 'true' and '' != 'true').
-       Task "VCMessage" skipped, due to false condition; ('$(IgnoreWarnIntDirSharingDetected)' != 'true' and '$(IntDirSharingDetected)' == 'true') was evaluated as ('' != 'true' and '' == 'true').
-       Task "VCMessage" skipped, due to false condition; ('$(IgnoreWarnIntDirInTempDetected)' != 'true' and ('$(_IntDirFullpath.StartsWith($(Tmp), true, null))' == 'true' or '$(_IntDirFullpath.StartsWith($(Temp), true, null))' == 'true' or '$(_OutDirFullpath.StartsWith($(Tmp), true, null))' == 'true' or '$(_OutDirFullpath.StartsWith($(Temp), true, null))' == 'true')) was evaluated as ('' != 'true' and ('False' == 'true' or 'False' == 'true' or 'False' == 'true' or 'False' == 'true')).
-       Task "MakeDir"
-       Done executing task "MakeDir".
-     1>Done building target "PrepareForBuild" in project "DXERR.vcxproj".
-       Target "_PrepareForReferenceResolution" skipped. Previously built successfully.
-       Target "ComputeCrtSDKReference" skipped, due to false condition; ('@(ClCompile)'!='' and '$(WindowsAppContainer)'=='true' and '$(UseCrtSDKReference)' != 'false') was evaluated as ('dxerr.cpp'!='' and 'false'=='true' and '' != 'false').
-       Target "GetInstalledSDKLocations" skipped, due to false condition; ('@(SDKReference)' != '') was evaluated as ('' != '').
-     1>Target "ResolveSDKReferences" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "ResolveAssemblyReferences" depends on it):
-       Task "ResolveSDKReference" skipped, due to false condition; ('@(SDKReference)'!='') was evaluated as (''!='').
-     1>Done building target "ResolveSDKReferences" in project "DXERR.vcxproj".
-       Target "ResolveSDKReferences" skipped. Previously built successfully.
-     1>Target "ExpandSDKReferences" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "ResolveAssemblyReferences" depends on it):
-       Task "GetSDKReferenceFiles" skipped, due to false condition; ('@(ResolvedSDKReference)'!='') was evaluated as (''!='').
-     1>Done building target "ExpandSDKReferences" in project "DXERR.vcxproj".
-       Target "ResolveNuGetPackageAssets" skipped, due to false condition; ('$(ResolveNuGetPackages)' == 'true' and exists('$(ProjectLockFile)')) was evaluated as ('true' == 'true' and exists('obj\project.assets.json')).
-       Target "ImplicitlyExpandNETStandardFacades" skipped, due to false condition; ('$(ImplicitlyExpandNETStandardFacades)' == 'true') was evaluated as ('' == 'true').
-       Target "GetReferenceAssemblyPaths" skipped. Previously built successfully.
-       Target "ImplicitlyExpandNETStandardFacades" skipped, due to false condition; ('$(ImplicitlyExpandNETStandardFacades)' == 'true') was evaluated as ('' == 'true').
-     1>Target "_HandlePackageFileConflicts" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\Microsoft.NET.Build.Extensions.ConflictResolution.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "ResolveAssemblyReferences" depends on it):
-       Using "ResolvePackageFileConflicts" task from assembly "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Microsoft\Microsoft.NET.Build.Extensions\\tools\net472\Microsoft.NET.Build.Extensions.Tasks.dll".
-       Task "ResolvePackageFileConflicts"
-       Done executing task "ResolvePackageFileConflicts".
-     1>Done building target "_HandlePackageFileConflicts" in project "DXERR.vcxproj".
-     1>Target "ResolveAssemblyReferences" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "ResolveReferences" depends on it):
-       Task "ResolveAssemblyReference" skipped, due to false condition; ('@(Reference)'!='' or '@(_ResolvedProjectReferencePaths)'!='' or '@(_ExplicitReference)' != '') was evaluated as (''!='' or ''!='' or '' != '').
-     1>Done building target "ResolveAssemblyReferences" in project "DXERR.vcxproj".
-       Target "GenerateBindingRedirects" skipped, due to false condition; ('$(AutoGenerateBindingRedirects)' == 'true' and '$(GenerateBindingRedirectsOutputType)' == 'true') was evaluated as ('' == 'true' and '' == 'true').
-       Target "_RemoveZipFileSuggestedRedirect" skipped, due to false condition; ('$(_TargetFrameworkVersionWithoutV)' >= '4.7.1' And '$(AllowZipFileRedirect)' != 'true') was evaluated as ('4.0' >= '4.7.1' And '' != 'true').
-       Target "GenerateBindingRedirectsUpdateAppConfig" skipped, due to false condition; ('$(AutoGenerateBindingRedirects)' == 'true' and '$(GenerateBindingRedirectsOutputType)' == 'true' and Exists('$(_GenerateBindingRedirectsIntermediateAppConfig)')) was evaluated as ('' == 'true' and '' == 'true' and Exists('x64\Release\DxErr.lib.config')).
-       Target "ResolveComReferences" skipped, due to false condition; ('@(COMReference)'!='' or '@(COMFileReference)'!='') was evaluated as (''!='' or ''!='').
-     1>Target "AfterResolveReferences" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "ResolveReferences" depends on it):
-     1>Done building target "AfterResolveReferences" in project "DXERR.vcxproj".
-       Target "ImplicitlyExpandDesignTimeFacades" skipped, due to false condition; ('$(ImplicitlyExpandDesignTimeFacades)' == 'true') was evaluated as ('' == 'true').
-       Target "ResolveTestReferences" skipped, due to false condition; ('@(Shadow)'!='') was evaluated as (''!='').
-     1>Target "ResolveReferences" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "Build" depends on it):
-     1>Done building target "ResolveReferences" in project "DXERR.vcxproj".
-       Target "PrepareForBuild" skipped. Previously built successfully.
-       Target "PrepareForBuild" skipped. Previously built successfully.
-     1>Target "InitializeBuildStatus" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "Build" depends on it):
-       Using "ReadLinesFromFile" task from assembly "Microsoft.Build.Tasks.Core, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a".
-       Task "ReadLinesFromFile"
-       Done executing task "ReadLinesFromFile".
-       Using "WriteLinesToFile" task from assembly "Microsoft.Build.Tasks.Core, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a".
+       Using "CppClean" task from assembly "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.Build.CppTasks.Common.dll".
+       Task "CppClean"
+       Done executing task "CppClean".
        Task "WriteLinesToFile"
        Done executing task "WriteLinesToFile".
-       Using "Touch" task from assembly "Microsoft.Build.Tasks.Core, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a".
-       Task "Touch"
-         Creating "x64\Release\DXERR.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
-       Done executing task "Touch".
-     1>Done building target "InitializeBuildStatus" in project "DXERR.vcxproj".
-       Target "PrepareProjectReferences" skipped. Previously built successfully.
-     1>Target "BuildGenerateSourcesTraverse" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "BuildGenerateSources" depends on it):
-       Task "MSBuild" skipped, due to false condition; ('$(BuildPassReferences)' == 'true' and '@(ProjectReferenceWithConfiguration)' != '' and '@(_MSBuildProjectReferenceExistent)' != '' and '%(_MSBuildProjectReferenceExistent.BuildReference)' == 'true') was evaluated as ('' == 'true' and '' != '' and '' != '' and '' == 'true').
-     1>Done building target "BuildGenerateSourcesTraverse" in project "DXERR.vcxproj".
-       Target "PrepareForBuild" skipped. Previously built successfully.
-       Target "ResolveReferences" skipped. Previously built successfully.
-     1>Target "BeforeBuildGenerateSources" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.BuildSteps.Targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildGenerateSourcesAction" depends on it):
-     1>Done building target "BeforeBuildGenerateSources" in project "DXERR.vcxproj".
-     1>Target "PreBuildEvent" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildGenerateSourcesAction" depends on it):
-       Task "Message" skipped, due to false condition; ('%(PreBuildEvent.Message)' != '' and '%(PreBuildEvent.Command)' != '') was evaluated as ('' != '' and '' != '').
-       Task "Exec" skipped, due to false condition; ('%(PreBuildEvent.Command)' != '') was evaluated as ('' != '').
-     1>Done building target "PreBuildEvent" in project "DXERR.vcxproj".
-       Target "CustomBuild" skipped, due to false condition; ('@(CustomBuild)' != '') was evaluated as ('' != '').
-       Target "FxCompile" skipped, due to false condition; ('@(FxCompile)' != '') was evaluated as ('' != '').
-       Target "Xsd" skipped, due to false condition; ('@(Xsd)' != '') was evaluated as ('' != '').
-     1>Target "_Xsd" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildGenerateSourcesAction" depends on it):
-     1>Done building target "_Xsd" in project "DXERR.vcxproj".
-     1>Target "MakeDirsForMidl" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_Midl" depends on it):
-       Task "Makedir"
-       Done executing task "Makedir".
-     1>Done building target "MakeDirsForMidl" in project "DXERR.vcxproj".
-       Target "Midl" skipped, due to false condition; ('@(Midl)' != '') was evaluated as ('' != '').
-       Target "CustomBuild" skipped, due to false condition; ('@(CustomBuild)' != '') was evaluated as ('' != '').
-       Target "FxCompile" skipped, due to false condition; ('@(FxCompile)' != '') was evaluated as ('' != '').
-     1>Target "ComputeMIDLGeneratedCompileInputs" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_Midl" depends on it):
-     1>Done building target "ComputeMIDLGeneratedCompileInputs" in project "DXERR.vcxproj".
-     1>Target "AfterMidl" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_Midl" depends on it):
-     1>Done building target "AfterMidl" in project "DXERR.vcxproj".
-     1>Target "_Midl" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildGenerateSourcesAction" depends on it):
-     1>Done building target "_Midl" in project "DXERR.vcxproj".
-     1>Target "AfterBuildGenerateSources" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.BuildSteps.Targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildGenerateSourcesAction" depends on it):
-     1>Done building target "AfterBuildGenerateSources" in project "DXERR.vcxproj".
-     1>Target "AfterBuildGenerateSourcesEvent" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildGenerateSourcesAction" depends on it):
-     1>Done building target "AfterBuildGenerateSourcesEvent" in project "DXERR.vcxproj".
-     1>Target "_BuildGenerateSourcesAction" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "BuildGenerateSources" depends on it):
-     1>Done building target "_BuildGenerateSourcesAction" in project "DXERR.vcxproj".
-     1>Target "BuildGenerateSources" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "Build" depends on it):
-     1>Done building target "BuildGenerateSources" in project "DXERR.vcxproj".
-       Target "PrepareProjectReferences" skipped. Previously built successfully.
-     1>Target "BuildCompileTraverse" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "BuildCompile" depends on it):
-       Task "MSBuild" skipped, due to false condition; ('$(BuildPassReferences)' == 'true' and '@(ProjectReferenceWithConfiguration)' != '' and '@(_MSBuildProjectReferenceExistent)' != ''  and '%(_MSBuildProjectReferenceExistent.BuildReference)' == 'true') was evaluated as ('' == 'true' and '' != '' and '' != ''  and '' == 'true').
-     1>Done building target "BuildCompileTraverse" in project "DXERR.vcxproj".
-       Target "PrepareForBuild" skipped. Previously built successfully.
-       Target "ResolveReferences" skipped. Previously built successfully.
-     1>Target "BeforeClCompile" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_ClCompile" depends on it):
-     1>Done building target "BeforeClCompile" in project "DXERR.vcxproj".
-       Target "ComputeMIDLGeneratedCompileInputs" skipped. Previously built successfully.
-     1>Target "ComputeCLInputPDBName" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_ClCompile" depends on it):
-     1>Done building target "ComputeCLInputPDBName" in project "DXERR.vcxproj".
-       Target "ResolveReferences" skipped. Previously built successfully.
-     1>Target "ComputeReferenceCLInput" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_ClCompile" depends on it):
-       Task "WriteLinesToFile" skipped, due to false condition; (('@(_ReferenceCopyLocalPaths)'!='') and '$(DesignTimeBuild)' != 'true') was evaluated as ((''!='') and '' != 'true').
-       Task "Message" skipped, due to false condition; ('$(_REFERENCE_DEBUG)'=='true') was evaluated as (''=='true').
-     1>Done building target "ComputeReferenceCLInput" in project "DXERR.vcxproj".
-     1>Target "WarnCompileDuplicatedFilename" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_ClCompile" depends on it):
-       Task "VCMessage" skipped, due to false condition; ('%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())') was evaluated as ('dxerr.cpp' != 'dxerr.cpp' and 'x64\Release\' == 'x64\Release\').
-     1>Done building target "WarnCompileDuplicatedFilename" in project "DXERR.vcxproj".
-     1>Target "MakeDirsForCl" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_ClCompile" depends on it):
-       Task "MakeDir"
-       Done executing task "MakeDir".
-     1>Done building target "MakeDirsForCl" in project "DXERR.vcxproj".
-       Target "PrepareForBuild" skipped. Previously built successfully.
-       Target "SetBuildDefaultEnvironmentVariables" skipped. Previously built successfully.
-       Target "SetUserMacroEnvironmentVariables" skipped. Previously built successfully.
-     1>Target "_SelectedFiles" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "SelectClCompile" depends on it):
-     1>Done building target "_SelectedFiles" in project "DXERR.vcxproj".
-       Target "ComputeMIDLGeneratedCompileInputs" skipped. Previously built successfully.
-       Target "ComputeCLInputPDBName" skipped. Previously built successfully.
-       Target "ComputeReferenceCLInput" skipped. Previously built successfully.
-       Target "WarnCompileDuplicatedFilename" skipped. Previously built successfully.
-       Target "_SelectedFiles" skipped. Previously built successfully.
-     1>Target "SelectCustomBuild" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "SelectClCompile" depends on it):
-     1>Done building target "SelectCustomBuild" in project "DXERR.vcxproj".
-     1>Target "SelectClCompile" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "ClCompile" depends on it):
-     1>Done building target "SelectClCompile" in project "DXERR.vcxproj".
-       Target "GenerateTargetFrameworkMonikerAttribute" skipped, due to false condition; ('$(GenerateTargetFrameworkAttribute)' == 'true') was evaluated as ('false' == 'true').
-       Target "ManagedIncrementalBuildPreProcessDependencyGraph" skipped, due to false condition; ('@(ClCompile)' != '' and '$(EnableManagedIncrementalBuild)' == 'True') was evaluated as ('dxerr.cpp' != '' and 'false' == 'True').
-     1>Target "ClCompile" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_ClCompile" depends on it):
-       Task "Delete" skipped, due to false condition; ('%(ClCompile.DebugInformationFormat)' != '' and '%(ClCompile.DebugInformationFormat)' != 'OldStyle' and '%(ClCompile.ProgramDataBaseFileName)' != '' and !Exists(%(ClCompile.ProgramDataBaseFileName))) was evaluated as ('ProgramDatabase' != '' and 'ProgramDatabase' != 'OldStyle' and 'x64\Release\vc120.pdb' != '' and !Exists(x64\Release\vc120.pdb)).
-       Task "CL" skipped, due to false condition; ('%(ClCompile.PrecompiledHeader)' == 'Create' and '%(ClCompile.ExcludedFromBuild)'!='true' and '%(ClCompile.CompilerIteration)' == '') was evaluated as ('NotUsing' == 'Create' and ''!='true' and '' == '').
-       Using "CL" task from assembly "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.Build.CppTasks.Common.dll".
-       Task "CL"
-         Read Tracking Logs:
-         	x64\Release\DXERR.tlog\cl.read.1.tlog
-         Outputs for C:\X-RAY\STCOP\RGS\SRC\3RD PARTY\DXERR\DXERR.CPP:
-         	C:\X-RAY\STCOP\RGS\SRC\3RD PARTY\DXERR\X64\RELEASE\DXERR.OBJ
-         All outputs are up-to-date.
-       Done executing task "CL".
-     1>Done building target "ClCompile" in project "DXERR.vcxproj".
-       Target "RunSelectedFileNativeCodeAnalysis" skipped, due to false condition; ('$(RunCppAnalysis)'=='true' and '$(SelectedFiles)'!='') was evaluated as ('false'=='true' and ''!='').
-       Target "ManagedIncrementalBuildPostProcessDependencyGraph" skipped, due to false condition; ('@(ClCompile)' != '' and '$(EnableManagedIncrementalBuild)' == 'True') was evaluated as ('dxerr.cpp' != '' and 'false' == 'True').
-     1>Target "AfterClCompile" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_ClCompile" depends on it):
-     1>Done building target "AfterClCompile" in project "DXERR.vcxproj".
-     1>Target "_ClCompile" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildCompileAction" depends on it):
-     1>Done building target "_ClCompile" in project "DXERR.vcxproj".
-       Target "_ResGen" skipped, due to false condition; ('@(EmbeddedResource)'!='') was evaluated as (''!='').
-     1>Target "BeforeResourceCompile" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_ResourceCompile" depends on it):
-     1>Done building target "BeforeResourceCompile" in project "DXERR.vcxproj".
-     1>Target "MakeDirsForResourceCompile" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_ResourceCompile" depends on it):
-       Task "MakeDir"
-       Done executing task "MakeDir".
-     1>Done building target "MakeDirsForResourceCompile" in project "DXERR.vcxproj".
-       Target "ResourceCompile" skipped, due to false condition; ('@(ResourceCompile)' != '') was evaluated as ('' != '').
-     1>Target "AfterResourceCompile" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_ResourceCompile" depends on it):
-     1>Done building target "AfterResourceCompile" in project "DXERR.vcxproj".
-     1>Target "_ResourceCompile" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildCompileAction" depends on it):
-     1>Done building target "_ResourceCompile" in project "DXERR.vcxproj".
-       Target "_ImpLib" skipped, due to false condition; ('$(ImpLibCompiled)' == 'true') was evaluated as ('' == 'true').
-     1>Target "BeforeLib" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_Lib" depends on it):
-     1>Done building target "BeforeLib" in project "DXERR.vcxproj".
-     1>Target "ComputeLibAdditionalOptions" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_Lib" depends on it):
-     1>Done building target "ComputeLibAdditionalOptions" in project "DXERR.vcxproj".
-     1>Target "ComputeRCOutputs" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "ComputeRCGeneratedLibInputs" depends on it):
-     1>Done building target "ComputeRCOutputs" in project "DXERR.vcxproj".
-     1>Target "ComputeRCGeneratedLibInputs" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_Lib" depends on it):
-     1>Done building target "ComputeRCGeneratedLibInputs" in project "DXERR.vcxproj".
-     1>Target "ComputeCustomBuildOutput" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_Lib" depends on it):
-       Task "CreateItem" skipped, due to false condition; ('%(CustomBuildDirsToMake.OutputFileToTool)'!='') was evaluated as (''!='').
-       Task "MakeDir"
-       Done executing task "MakeDir".
-     1>Done building target "ComputeCustomBuildOutput" in project "DXERR.vcxproj".
-       Target "ComputeMIDLGeneratedCompileInputs" skipped. Previously built successfully.
-       Target "ComputeCLInputPDBName" skipped. Previously built successfully.
-       Target "ComputeReferenceCLInput" skipped. Previously built successfully.
-       Target "WarnCompileDuplicatedFilename" skipped. Previously built successfully.
-     1>Target "ComputeCLOutputs" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "ComputeCLGeneratedLibInputs" depends on it):
-     1>Done building target "ComputeCLOutputs" in project "DXERR.vcxproj".
-     1>Target "ComputeCLGeneratedLibInputs" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_Lib" depends on it):
-     1>Done building target "ComputeCLGeneratedLibInputs" in project "DXERR.vcxproj".
-     1>Target "ComputeLibInputsFromProject" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_Lib" depends on it):
-     1>Done building target "ComputeLibInputsFromProject" in project "DXERR.vcxproj".
-       Target "ComputeReferenceLibInputs" skipped, due to false condition; (@(ProjectReference) != '') was evaluated as ( != '').
-     1>Target "MakeDirsForLib" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_Lib" depends on it):
-       Task "MakeDir"
-       Done executing task "MakeDir".
-     1>Done building target "MakeDirsForLib" in project "DXERR.vcxproj".
-     1>Target "DoLibOutputFilesMatch" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_Lib" depends on it):
-       Task "VCMessage" skipped, due to false condition; ('@(_OutputFileFromLib)' == '') was evaluated as ('C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.lib' == '').
-       Task "VCMessage" skipped, due to false condition; ('@(_OutputFileFromLib)' != '' and '%(_OutputFileFromLib.FullPath)' != '$([System.IO.Path]::GetFullPath($(TargetPath)))') was evaluated as ('C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.lib' != '' and 'C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.lib' != 'C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.lib').
-       Task "VCMessage" skipped, due to false condition; ('@(_OutputFileFromLib)' != '' and '%(_OutputFileFromLib.Extension)' != '' and '%(_OutputFileFromLib.Extension)' != '$(TargetExt)') was evaluated as ('C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.lib' != '' and '.lib' != '' and '.lib' != '.lib').
-       Task "VCMessage" skipped, due to false condition; ('@(_OutputFileFromLib)' != '' and '%(_OutputFileFromLib.Filename)' !=  '' and '%(_OutputFileFromLib.Filename)' != '$(TargetName)') was evaluated as ('C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.lib' != '' and 'DxErr' !=  '' and 'DxErr' != 'DxErr').
-     1>Done building target "DoLibOutputFilesMatch" in project "DXERR.vcxproj".
-     1>Target "PreLinkEvent" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_Lib" depends on it):
-       Task "Message" skipped, due to false condition; ('%(PreLinkEvent.Message)' != '' and '%(PreLinkEvent.Command)' != '') was evaluated as ('' != '' and '' != '').
-       Task "Exec" skipped, due to false condition; ('%(PreLinkEvent.Command)' != '') was evaluated as ('' != '').
-     1>Done building target "PreLinkEvent" in project "DXERR.vcxproj".
-     1>Target "Lib" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_Lib" depends on it):
-       Using "LIB" task from assembly "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.Build.CppTasks.Common.dll".
-       Task "LIB"
-         Write Tracking Logs:
-         	x64\Release\DXERR.tlog\Lib-link.write.1.tlog
-         Read Tracking Logs:
-         	x64\Release\DXERR.tlog\Lib-link.read.1.tlog
-         Outputs for C:\X-RAY\STCOP\RGS\SRC\3RD PARTY\DXERR\X64\RELEASE\DXERR.OBJ:
-         	C:\X-RAY\STCOP\RGS\SRC\X64\RELEASE\DXERR.LIB
-         All outputs are up-to-date.
-       Done executing task "LIB".
-       Task "Message"
-         DXERR.vcxproj -> C:\X-RAY\stcop\rgs\src\x64\Release\DxErr.lib
-       Done executing task "Message".
-     1>Done building target "Lib" in project "DXERR.vcxproj".
-     1>Target "AfterLib" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_Lib" depends on it):
-     1>Done building target "AfterLib" in project "DXERR.vcxproj".
-     1>Target "_Lib" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildCompileAction" depends on it):
-     1>Done building target "_Lib" in project "DXERR.vcxproj".
-     1>Target "AfterBuildCompileEvent" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildCompileAction" depends on it):
-     1>Done building target "AfterBuildCompileEvent" in project "DXERR.vcxproj".
-     1>Target "_BuildCompileAction" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "BuildCompile" depends on it):
-     1>Done building target "_BuildCompileAction" in project "DXERR.vcxproj".
-     1>Target "BuildCompile" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "Build" depends on it):
-     1>Done building target "BuildCompile" in project "DXERR.vcxproj".
-       Target "PrepareProjectReferences" skipped. Previously built successfully.
-     1>Target "BuildLinkTraverse" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "BuildLink" depends on it):
-       Task "MSBuild" skipped, due to false condition; ('$(BuildPassReferences)' == 'true' and '@(ProjectReferenceWithConfiguration)' != '' and '@(_MSBuildProjectReferenceExistent)' != ''  and '%(_MSBuildProjectReferenceExistent.BuildReference)' == 'true') was evaluated as ('' == 'true' and '' != '' and '' != ''  and '' == 'true').
-     1>Done building target "BuildLinkTraverse" in project "DXERR.vcxproj".
-       Target "PrepareForBuild" skipped. Previously built successfully.
-       Target "ResolveReferences" skipped. Previously built successfully.
-     1>Target "ComputeLegacyManifestEmbedding" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildLinkAction" depends on it):
-       Task "VCMessage" skipped, due to false condition; ('$(RevertManifestEmbedding)' == 'true' and '$(_LegacyManifestEmbeddingDebug)' == 'true') was evaluated as ('' == 'true' and '' == 'true').
-     1>Done building target "ComputeLegacyManifestEmbedding" in project "DXERR.vcxproj".
-       Target "_Link" skipped, due to false condition; ('$(LinkCompiled)' == 'true') was evaluated as ('' == 'true').
-     1>Target "_ALink" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildLinkAction" depends on it):
-     1>Done building target "_ALink" in project "DXERR.vcxproj".
-       Target "ComputeLegacyManifestEmbedding" skipped. Previously built successfully.
-     1>Target "_Manifest" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildLinkAction" depends on it):
-       Task "CallTarget" skipped, due to false condition; ('$(LegacyManifestEmbedding)' == 'true') was evaluated as ('' == 'true').
-     1>Done building target "_Manifest" in project "DXERR.vcxproj".
-       Target "RegisterOutput" skipped, due to false condition; ('$(EmbedManifest)'=='true' and '$(LinkSkippedExecution)' != 'true' and ('$(_IsNativeEnvironment)' == 'true' or '$(Platform)' == 'Win32')) was evaluated as ('true'=='true' and '' != 'true' and ('' == 'true' or 'x64' == 'Win32')).
-       Target "PrepareForBuild" skipped. Previously built successfully.
-       Target "ResolveReferences" skipped. Previously built successfully.
-     1>Target "ResolvedXDCMake" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_XdcMake" depends on it):
-       Task "MSBuild" skipped, due to false condition; ('%(_MSBuildProjectReferenceExistent.Extension)' == '.vcxproj' and '@(ProjectReferenceWithConfiguration)' != '' and '@(_MSBuildProjectReferenceExistent)' != '' and '$(_ClCompileGenerateXMLDocumentationFiles)' == 'true') was evaluated as ('' == '.vcxproj' and '' != '' and '' != '' and '' == 'true').
-     1>Done building target "ResolvedXDCMake" in project "DXERR.vcxproj".
-     1>Target "ComputeCLCompileGeneratedXDCFiles" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_XdcMake" depends on it):
-     1>Done building target "ComputeCLCompileGeneratedXDCFiles" in project "DXERR.vcxproj".
-     1>Target "MakeDirsForXdcMake" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_XdcMake" depends on it):
-       Task "MakeDir"
-       Done executing task "MakeDir".
-     1>Done building target "MakeDirsForXdcMake" in project "DXERR.vcxproj".
-       Target "XdcMake" skipped, due to false condition; ('@(XdcMake)' != '') was evaluated as ('' != '').
-     1>Target "_XdcMake" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildLinkAction" depends on it):
-     1>Done building target "_XdcMake" in project "DXERR.vcxproj".
-     1>Target "ComputeCLCompileGeneratedSbrFiles" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BscMake" depends on it):
-     1>Done building target "ComputeCLCompileGeneratedSbrFiles" in project "DXERR.vcxproj".
-     1>Target "MakeDirsForBscMake" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BscMake" depends on it):
-       Task "MakeDir"
-       Done executing task "MakeDir".
-     1>Done building target "MakeDirsForBscMake" in project "DXERR.vcxproj".
-       Target "BscMake" skipped, due to false condition; ('@(BscMake)' != '') was evaluated as ('' != '').
-       Target "CustomBuildStep" skipped, due to false condition; ('@(CustomBuildStep)' != '' and '$(SelectedFiles)'=='') was evaluated as ('' != '' and ''=='').
-     1>Target "_BscMake" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildLinkAction" depends on it):
-     1>Done building target "_BscMake" in project "DXERR.vcxproj".
-     1>Target "_GenerateSatelliteAssemblyInputs" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "CreateSatelliteAssemblies" depends on it):
-       Task "Warning" skipped, due to false condition; ('@(ManifestResourceWithCulture)'!='' and '%(ManifestResourceWithCulture.EmittedForCompatibilityOnly)'=='') was evaluated as (''!='' and ''=='').
-       Task "Warning" skipped, due to false condition; ('@(ManifestNonResxWithCultureOnDisk)'!='' and '%(ManifestNonResxWithCultureOnDisk.EmittedForCompatibilityOnly)'=='') was evaluated as (''!='' and ''=='').
-     1>Done building target "_GenerateSatelliteAssemblyInputs" in project "DXERR.vcxproj".
-       Target "ComputeIntermediateSatelliteAssemblies" skipped, due to false condition; (@(ReferenceSatellitePaths->'%(DestinationSubDirectory)') != '') was evaluated as ( != '').
-       Target "GenerateSatelliteAssemblies" skipped, due to false condition; ('@(_SatelliteAssemblyResourceInputs)' != '') was evaluated as ('' != '').
-     1>Target "CreateSatelliteAssemblies" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildLinkAction" depends on it):
-     1>Done building target "CreateSatelliteAssemblies" in project "DXERR.vcxproj".
-     1>Target "_Appverifier" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildLinkAction" depends on it):
-     1>Done building target "_Appverifier" in project "DXERR.vcxproj".
-     1>Target "_Deploy" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildLinkAction" depends on it):
-     1>Done building target "_Deploy" in project "DXERR.vcxproj".
-       Target "ComputeIntermediateSatelliteAssemblies" skipped, due to false condition; (@(ReferenceSatellitePaths->'%(DestinationSubDirectory)') != '') was evaluated as ( != '').
-       Target "_CopyFilesMarkedCopyLocal" skipped, due to false condition; ('@(ReferenceCopyLocalPaths)' != '') was evaluated as ('' != '').
-     1>Target "AssignTargetPaths" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "GetCopyToOutputDirectoryItems" depends on it):
-       Using "AssignTargetPath" task from assembly "Microsoft.Build.Tasks.Core, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a".
-       Task "AssignTargetPath"
-       Done executing task "AssignTargetPath".
-       Task "AssignTargetPath"
-       Done executing task "AssignTargetPath".
-       Task "AssignTargetPath"
-       Done executing task "AssignTargetPath".
-       Task "AssignTargetPath"
-       Done executing task "AssignTargetPath".
-       Task "AssignTargetPath" skipped, due to false condition; ('@(_DeploymentBaseManifestWithTargetPath)'=='' and '%(None.Extension)'=='.manifest') was evaluated as (''=='' and ''=='.manifest').
-     1>Done building target "AssignTargetPaths" in project "DXERR.vcxproj".
-       Target "_SplitProjectReferencesByFileExistence" skipped. Previously built successfully.
-       Target "_GetProjectReferenceTargetFrameworkProperties" skipped. Previously built successfully.
-     1>Target "GetCopyToOutputDirectoryXamlAppDefs" in file "C:\Windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.Xaml.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "GetCopyToOutputDirectoryItems" depends on it):
-       Task "AssignTargetPath"
-       Done executing task "AssignTargetPath".
-     1>Done building target "GetCopyToOutputDirectoryXamlAppDefs" in project "DXERR.vcxproj".
-     1>Target "GetCopyToOutputDirectoryItems" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_CopySourceItemsToOutputDirectory" depends on it):
-       Task "MSBuild" skipped, due to false condition; ('@(_MSBuildProjectReferenceExistent)' != '' and '$(_GetChildProjectCopyToOutputDirectoryItems)' == 'true' and '%(_MSBuildProjectReferenceExistent.Private)' != 'false' and '$(UseCommonOutputDirectory)' != 'true') was evaluated as ('' != '' and 'true' == 'true' and '' != 'false' and 'false' != 'true').
-       Task "AssignTargetPath"
-       Done executing task "AssignTargetPath".
-     1>Done building target "GetCopyToOutputDirectoryItems" in project "DXERR.vcxproj".
-       Target "_CopyOutOfDateSourceItemsToOutputDirectory" skipped, due to false condition; ( '@(_SourceItemsToCopyToOutputDirectory)' != '' ) was evaluated as ( '' != '' ).
-       Target "_CopyOutOfDateSourceItemsToOutputDirectoryAlways" skipped, due to false condition; ( '@(_SourceItemsToCopyToOutputDirectoryAlways)' != '' ) was evaluated as ( '' != '' ).
-     1>Target "_CopySourceItemsToOutputDirectory" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "CopyFilesToOutputDirectory" depends on it):
-     1>Done building target "_CopySourceItemsToOutputDirectory" in project "DXERR.vcxproj".
-       Target "_CopyAppConfigFile" skipped, due to false condition; ( '@(AppConfigWithTargetPath)' != '' ) was evaluated as ( '' != '' ).
-       Target "_CopyManifestFiles" skipped, due to false condition; ( '$(_DeploymentCopyApplicationManifest)'=='true' or '$(GenerateClickOnceManifests)'=='true' ) was evaluated as ( ''=='true' or ''=='true' ).
-     1>Target "_CheckForCompileOutputs" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "CopyFilesToOutputDirectory" depends on it):
-     1>Done building target "_CheckForCompileOutputs" in project "DXERR.vcxproj".
-       Target "_SGenCheckForOutputs" skipped, due to false condition; ('$(_SGenGenerateSerializationAssembliesConfig)' == 'On' or ('@(WebReferenceUrl)'!='' and '$(_SGenGenerateSerializationAssembliesConfig)' == 'Auto')) was evaluated as ('Auto' == 'On' or (''!='' and 'Auto' == 'Auto')).
-     1>Target "CopyFilesToOutputDirectory" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "PrepareForRun" depends on it):
-       Task "Copy" skipped, due to false condition; ('$(CopyBuildOutputToOutputDirectory)' == 'true' and '$(SkipCopyBuildProduct)' != 'true') was evaluated as ('true' == 'true' and 'true' != 'true').
-       Task "CopyRefAssembly" skipped, due to false condition; ('$(ProduceReferenceAssembly)' == 'true' and '$(CopyBuildOutputToOutputDirectory)' == 'true' and '$(SkipCopyBuildProduct)' != 'true') was evaluated as ('false' == 'true' and 'true' == 'true' and 'true' != 'true').
-       Task "Message" skipped, due to false condition; ('$(CopyBuildOutputToOutputDirectory)' == 'true' and '$(SkipCopyBuildProduct)'!='true') was evaluated as ('true' == 'true' and 'true'!='true').
-       Task "Copy" skipped, due to false condition; ('@(AddModules)' != '') was evaluated as ('' != '').
-       Task "Copy" skipped, due to false condition; ('$(_SGenDllCreated)'=='true') was evaluated as ('false'=='true').
-       Task "Copy" skipped, due to false condition; ('$(_DebugSymbolsProduced)'=='true' and '$(SkipCopyingSymbolsToOutputDirectory)' != 'true' and '$(CopyOutputSymbolsToOutputDirectory)'=='true') was evaluated as ('false'=='true' and '' != 'true' and 'true'=='true').
-       Task "Copy" skipped, due to false condition; ('$(_DocumentationFileProduced)'=='true' and '$(CopyDocumentationFileToOutputDirectory)'=='true') was evaluated as ('false'=='true' and 'true'=='true').
-       Task "Copy" skipped, due to false condition; ('@(IntermediateSatelliteAssembliesWithTargetPath)' != '') was evaluated as ('' != '').
-       Task "Copy" skipped, due to false condition; ('@(ReferenceComWrappersToCopyLocal)' != '' or '@(ResolvedIsolatedComModules)' != '' or '@(_DeploymentLooseManifestFile)' != '' or '@(NativeReferenceFile)' != '' ) was evaluated as ('' != '' or '' != '' or '' != '' or '' != '' ).
-       Task "Copy" skipped, due to false condition; ('$(SkipCopyWinMDArtifact)' != 'true' and '@(WinMDExpArtifacts)' != '') was evaluated as ('' != 'true' and '' != '').
-       Task "Message" skipped, due to false condition; ('$(SkipCopyWinMDArtifact)' != 'true' and '$(_WindowsMetadataOutputPath)' != '') was evaluated as ('' != 'true' and '' != '').
-     1>Done building target "CopyFilesToOutputDirectory" in project "DXERR.vcxproj".
-     1>Target "PrepareForRun" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildLinkAction" depends on it):
-     1>Done building target "PrepareForRun" in project "DXERR.vcxproj".
-       Target "CustomBuildStep" skipped, due to false condition; ('@(CustomBuildStep)' != '' and '$(SelectedFiles)'=='') was evaluated as ('' != '' and ''=='').
-     1>Target "PostBuildEvent" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "_BuildLinkAction" depends on it):
-       Task "Message" skipped, due to false condition; ('%(PostBuildEvent.Message)' != '' and '%(PostBuildEvent.Command)' != '') was evaluated as ('' != '' and '' != '').
-       Task "Exec" skipped, due to false condition; ('%(PostBuildEvent.Command)' != '') was evaluated as ('' != '').
-     1>Done building target "PostBuildEvent" in project "DXERR.vcxproj".
-     1>Target "_BuildLinkAction" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "BuildLink" depends on it):
-     1>Done building target "_BuildLinkAction" in project "DXERR.vcxproj".
-     1>Target "BuildLink" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "Build" depends on it):
-     1>Done building target "BuildLink" in project "DXERR.vcxproj".
-     1>Target "AfterBuild" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.BuildSteps.Targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "Build" depends on it):
-     1>Done building target "AfterBuild" in project "DXERR.vcxproj".
-     1>Target "FinalizeBuildStatus" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "Build" depends on it):
-       Using "Delete" task from assembly "Microsoft.Build.Tasks.Core, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a".
+     1>Done building target "CoreCppClean" in project "DXERR.vcxproj".
+     1>Target "AfterCppClean" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppClean.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "CppClean" depends on it):
+     1>Done building target "AfterCppClean" in project "DXERR.vcxproj".
+     1>Target "PGInstrumentedClean" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppClean.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "CppClean" depends on it):
        Task "Delete"
-         Deleting file "x64\Release\DXERR.tlog\unsuccessfulbuild".
        Done executing task "Delete".
-       Task "Touch"
-         Touching "x64\Release\DXERR.tlog\DXERR.lastbuildstate".
-       Done executing task "Touch".
-     1>Done building target "FinalizeBuildStatus" in project "DXERR.vcxproj".
+     1>Done building target "PGInstrumentedClean" in project "DXERR.vcxproj".
+     1>Target "CppClean" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppClean.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (target "Clean" depends on it):
+     1>Done building target "CppClean" in project "DXERR.vcxproj".
        Target "_CheckForInvalidConfigurationAndPlatform" skipped. Previously built successfully.
        Target "_CheckForInvalidConfigurationAndPlatform" skipped. Previously built successfully.
-     1>Target "Build" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.BuildSteps.Targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (entry point):
-     1>Done building target "Build" in project "DXERR.vcxproj".
-     1>Done Building Project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (Build target(s)).
+     1>Target "Clean" in file "C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets" from project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (entry point):
+     1>Done building target "Clean" in project "DXERR.vcxproj".
+     1>Done Building Project "C:\X-RAY\stcop\rgs\src\3rd party\DXERR\DXERR.vcxproj" (Clean target(s)).
 
 Build succeeded.
     0 Warning(s)
     0 Error(s)
 
-Time Elapsed 00:00:00.26
+Time Elapsed 00:00:00.02

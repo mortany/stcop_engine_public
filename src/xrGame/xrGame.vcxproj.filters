@@ -11005,7 +11005,6 @@
       <Filter>UI\Multiplayer\Voting</Filter>
     </ClCompile>
     <ClCompile Include="AmebaZone.cpp" />
-    <ClCompile Include="ui\UIRankingsCoC.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ai\monsters\chimera\chimera_attack_state.h">

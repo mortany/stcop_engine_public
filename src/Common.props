@@ -15,6 +15,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <IncludePath>$(SolutionDir)..\src\3rd party;$(IncludePath);$(xrSdkDir)include;$(xrSdkDir)include\OpenAutomate;$(xrSdkDir)include\nvapi;$(xrSdkDir)include\dxsdk</IncludePath>
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

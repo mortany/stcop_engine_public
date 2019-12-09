@@ -1,11 +1,13 @@
 # exclude binaries and temporary files
 ipch/
+x64/
 
 # User-specific files
 *.suo
 *.sdf
 *.opensdf
 *.user
+*.obj
 
 # Visual Studio profiler
 *.psess

@@ -117,7 +117,10 @@ void xrCore::_initialize(LPCSTR _ApplicationName, LogCallback cb, BOOL init_fs, 
         FS._initialize(flags, 0, fs_fname);
         //Msg("'%s' build %d, %s\n", "xrCore", build_id, build_date);
 		Msg("Build: %d\nBuild date: %s\n", build_id, build_date);
-		Msg("Non-open source build");
+		Msg("Be feel free to use engine in your mod!");
+		Msg("Contact engine autour:");
+		Msg("Forward Frontier Discord Server: https://discord.gg/YDWHe25");
+		Msg("SWP:HQ REPLACER ADDON Discord Server: https://discord.gg/wPA3YFP");
         EFS._initialize();
 #ifdef DEBUG
 #ifndef _EDITOR

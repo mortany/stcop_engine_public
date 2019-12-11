@@ -102,13 +102,15 @@ void player_hud_motion_container::load(IKinematicsAnimated* model, const shared_
 				motion_ID				= model->ID_Cycle_Safe(buff);
 				if (!motion_ID.valid() && i == 0)
 				{
+					Msg("ATTENTION: motion %s invalid!",buff);
 					motion_ID = model->ID_Cycle_Safe("hand_idle_doun");
 				}
-				if(motion_ID.valid())
+				else if(motion_ID.valid())
 				{
 					pm->m_animations.resize			(pm->m_animations.size()+1);
 					pm->m_animations.back().mid		= motion_ID;
 					pm->m_animations.back().name	= buff;
+					//Msg("motion %s sucessfull loaded", buff);
 #ifdef DEBUG
 //					Msg(" alias=[%s] base=[%s] name=[%s]",pm->m_alias_name.c_str(), pm->m_base_name.c_str(), buff);
 #endif // #ifdef DEBUG

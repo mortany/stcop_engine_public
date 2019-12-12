@@ -315,12 +315,15 @@ void CRender::LoadLights(IReader *fs)
 	Lights.LoadHemi();
 }
 
+#pragma pack(push,4)
 struct b_portal
 {
 	u16				sector_front;
 	u16				sector_back;
-	svector<Fvector,6>	vertices;
+	svector<Fvector, 6>	vertices;
 };
+#pragma pack(pop)
+
 
 void CRender::LoadSectors(IReader* fs)
 {

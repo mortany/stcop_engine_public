@@ -1,5 +1,4 @@
 #include "stdafx_.h"
-#if 0
 #include "BugSlayerUtil.h"
 #include <stdio.h>
 
@@ -78,7 +77,9 @@ void BuildStackTrace	()
 
 	if (!GetThreadContext(GetCurrentThread(),&context))
 		return;
-
+#ifdef _WIN64
+	context.Rip				= program_counter();
+#else
 	context.Eip				= program_counter();
 #ifndef _EDITOR
 	__asm					mov context.Ebp, ebp
@@ -88,6 +89,7 @@ void BuildStackTrace	()
 	__asm					mov ESP, esp
 #endif // _EDITOR
 
+#endif
 	EXCEPTION_POINTERS		ex_ptrs;
 	ex_ptrs.ContextRecord	= &context;
 	ex_ptrs.ExceptionRecord	= 0;
@@ -112,5 +114,3 @@ void OutputDebugStackTrace	(const char *header)
 		OutputDebugString	("\r\n");
 	}
 }
-
-#endif

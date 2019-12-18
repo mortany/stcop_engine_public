@@ -216,14 +216,15 @@ IC int dcTriListCollider::dSortTriPrimitiveCollide (
 			if(debug_output().ph_dbg_draw_mask().test(phDBgDrawNegativeTries))
 				debug_output().DBG_DrawTri(T,V_array,D3DCOLOR_XRGB(0,0,255));
 #endif
-#ifdef _WIN64
+			float last_pos_dist = dDOT(last_pos, tri.norm) - tri.pos;
+#ifndef _WIN64
 
-			bool test_nan = isnan(last_pos_dist);
+			//bool test_nan = isnan(last_pos_dist);
 #else
-			constexpr bool test_nan = false;
+			//constexpr bool test_nan = false;
 #endif
-			float last_pos_dist=dDOT(last_pos,tri.norm)- tri.pos ;
-			if ((!(last_pos_dist < 0.f)) || b_pushing || test_nan)
+
+			if ((!(last_pos_dist < 0.f)) || b_pushing /*|| test_nan*/)
 				if(__aabb_tri(Point(p),Point((float*)&AABB),vertices))
 				{
 #ifdef DEBUG

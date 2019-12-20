@@ -95,19 +95,39 @@ CDetailManager::CDetailManager	()
 	dm_fade = dm_current_fade;
 	ps_r__Detail_density = ps_current_detail_density;
 	ps_current_detail_height = ps_r__Detail_height;
-	cache_level1 = (CacheSlot1 * *)Memory.mem_alloc(dm_cache1_line * sizeof(CacheSlot1*));
+	cache_level1 = (CacheSlot1 * *)Memory.mem_alloc(dm_cache1_line * sizeof(CacheSlot1*)
+#ifdef USE_MEMORY_MONITOR
+		, "CDetailManager::cache_level1"
+#endif
+	);
 	for (u32 i = 0; i < dm_cache1_line; ++i)
 	{
-		cache_level1[i] = (CacheSlot1*)Memory.mem_alloc(dm_cache1_line * sizeof(CacheSlot1));
+		cache_level1[i] = (CacheSlot1*)Memory.mem_alloc(dm_cache1_line * sizeof(CacheSlot1)
+#ifdef USE_MEMORY_MONITOR
+			, "CDetailManager::cache_level1 " + i
+#endif
+		);
 		for (u32 j = 0; j < dm_cache1_line; ++j)
 			new(&cache_level1[i][j]) CacheSlot1();
 	}
-	cache = (Slot * **)Memory.mem_alloc(dm_cache_line * sizeof(Slot * *));
+	cache = (Slot * **)Memory.mem_alloc(dm_cache_line * sizeof(Slot * *)
+#ifdef USE_MEMORY_MONITOR
+		, "CDetailManager::cache"
+#endif
+	);
 	for (u32 i = 0; i < dm_cache_line; ++i)
 	{
-		cache[i] = (Slot * *)Memory.mem_alloc(dm_cache_line * sizeof(Slot*));
+		cache[i] = (Slot * *)Memory.mem_alloc(dm_cache_line * sizeof(Slot*)
+#ifdef USE_MEMORY_MONITOR
+			, "CDetailManager::cache " + i
+#endif	
+		);
 	}
-	cache_pool = (Slot*)Memory.mem_alloc(dm_cache_size * sizeof(Slot));
+	cache_pool = (Slot*)Memory.mem_alloc(dm_cache_size * sizeof(Slot)
+#ifdef USE_MEMORY_MONITOR
+		, "CDetailManager::cache_pool"
+#endif
+	);
 
 	for (u32 i = 0; i < dm_cache_size; ++i)
 		new(&cache_pool[i]) Slot();

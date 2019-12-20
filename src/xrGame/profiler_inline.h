@@ -8,6 +8,8 @@
 
 #pragma once
 
+#ifdef USE_PROFILER
+
 IC	CProfilePortion::CProfilePortion	(LPCSTR timer_id)
 {
 	if (!psAI_Flags.test(aiStats))
@@ -49,3 +51,5 @@ IC	CProfileStats::CProfileStats		()
 	m_count			= 0;
 	m_call_count	= 0;
 }
+
+#endif

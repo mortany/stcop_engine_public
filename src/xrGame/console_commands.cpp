@@ -982,14 +982,14 @@ public:
 
 
 
-class CCC_DebugFonts : public IConsole_Command {
+/*class CCC_DebugFonts : public IConsole_Command {
 public:
 	CCC_DebugFonts (LPCSTR N) : IConsole_Command(N) {bEmptyArgsHandled = true; }
 	virtual void Execute				(LPCSTR args) 
 	{
 		xr_new<CUIDebugFonts>()->ShowDialog(true);		
 	}
-};
+};*/
 
 class CCC_DebugNode : public IConsole_Command {
 public:
@@ -1952,7 +1952,7 @@ CMD4(CCC_Integer,			"hit_anims_tune",						&tune_hit_anims,		0, 1);
 #endif // #if defined(USE_DEBUGGER) && defined(USE_LUA_STUDIO)
 	
 	CMD1(CCC_ShowMonsterInfo,	"ai_monster_info");
-	CMD1(CCC_DebugFonts,		"debug_fonts");
+	//CMD1(CCC_DebugFonts,		"debug_fonts");
 
 
 	CMD1(CCC_ShowAnimationStats,"ai_show_animation_stats");

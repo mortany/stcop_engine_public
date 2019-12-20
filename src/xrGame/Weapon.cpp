@@ -729,7 +729,7 @@ void CWeapon::LoadCurrentScopeParams(LPCSTR section)
 		if (m_zoom_params.m_bUseDynamicZoom)
 		{
 			m_fZoomStepCount = READ_IF_EXISTS(pSettings, r_u8, section, "scope_zoom_steps", 3.0f);
-			m_fZoomMinKoeff  = READ_IF_EXISTS(pSettings, r_u8, section, "min_zoom_k",		0.3f);
+			m_fZoomMinKoeff  = READ_IF_EXISTS(pSettings, r_float, section, "min_zoom_k",	0.3f);
 		}
 
 		m_zoom_params.m_sUseBinocularVision = READ_IF_EXISTS(pSettings, r_string, section, "scope_alive_detector", 0);
@@ -1666,7 +1666,36 @@ float CWeapon::GetControlInertionFactor() const
 {
 	float fInertionFactor = inherited::GetControlInertionFactor();
 	if (IsScopeAttached() && IsZoomed())
-		return m_fScopeInertionFactor;
+	{
+		if (bIsSecondVPZoomPresent() && psActorFlags.test(AF_3DSCOPE_ENABLE))
+		{
+			if (GetSecondVPFov() < 15.f)
+			{
+				return 9.5f;
+			}
+			else if (GetSecondVPFov() < 20.f)
+			{
+				return 7.5f;
+			}
+			else if (GetSecondVPFov() < 35.f)
+			{
+				return 5.5f;
+			}
+			else if (GetSecondVPFov() < 55.f)
+			{
+				return 2.5f;
+			}
+			else
+			{
+				return m_fScopeInertionFactor;
+			}
+		}
+		else
+		{
+			return m_fScopeInertionFactor;//m_fScopeInertionFactor;
+		}
+	}
+		
 
 	return fInertionFactor;
 }

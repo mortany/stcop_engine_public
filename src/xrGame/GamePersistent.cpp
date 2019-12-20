@@ -684,7 +684,7 @@ void CGamePersistent::OnFrame	()
 
 #ifdef DEBUG
 	if ((m_last_stats_frame + 1) < m_frame_counter)
-		profiler().clear		();
+		//profiler().clear		();
 #endif
 	UpdateDof();
 }
@@ -740,7 +740,7 @@ void CGamePersistent::Statistics	(CGameFont* F)
 #ifdef DEBUG
 #	ifndef _EDITOR
 		m_last_stats_frame		= m_frame_counter;
-		profiler().show_stats	(F,!!psAI_Flags.test(aiStats));
+		//profiler().show_stats	(F,!!psAI_Flags.test(aiStats));
 #	endif
 #endif
 }

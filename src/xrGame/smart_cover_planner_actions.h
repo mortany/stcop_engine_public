@@ -11,7 +11,6 @@
 #include "smart_cover_detail.h"
 #include <boost/noncopyable.hpp>
 #include "stalker_combat_action_base.h"
-#include "debug_make_final.hpp"
 
 class CAI_Stalker;
 
@@ -23,12 +22,11 @@ class animation_planner;
 // action_base 
 ////////////////////////////////////////////////////////////////////////////
 
-class action_base :
-	public CStalkerActionCombatBase,
-	private boost::noncopyable
+class action_base : public CStalkerActionCombatBase
 {
 private:
 	typedef CStalkerActionCombatBase inherited;
+
 
 public:
 						action_base					(CAI_Stalker *object, LPCSTR action_name = "");
@@ -44,9 +42,7 @@ public:
 // change_loophole
 ////////////////////////////////////////////////////////////////////////////
 
-class change_loophole :	
-	public action_base,
-	private debug::make_final<change_loophole>
+class change_loophole final: public action_base
 {
 private:
 	typedef action_base								inherited;
@@ -64,9 +60,7 @@ public:
 // non_animated_change_loophole
 ////////////////////////////////////////////////////////////////////////////
 
-class non_animated_change_loophole:
-	public action_base,
-	private debug::make_final<non_animated_change_loophole>
+class non_animated_change_loophole final: public action_base
 {
 private:
 	typedef action_base								inherited;
@@ -85,9 +79,7 @@ public:
 // exit
 ////////////////////////////////////////////////////////////////////////////
 
-class exit :
-	public action_base,
-	private debug::make_final<exit>
+class exit final: public action_base
 {
 private:
 	typedef action_base								inherited;

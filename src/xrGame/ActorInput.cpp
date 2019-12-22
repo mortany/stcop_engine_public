@@ -255,14 +255,22 @@ void CActor::IR_OnKeyboardHold(int cmd)
 {
 	if (hud_adj_mode && pInput->iGetAsyncKeyState(DIK_LSHIFT))
 	{
-		if (pInput->iGetAsyncKeyState(DIK_UP))
+		bool bIsRot = (hud_adj_mode == 2 || hud_adj_mode == 4);
+
+		if (pInput->iGetAsyncKeyState(bIsRot ? DIK_LEFT : DIK_UP))
 			g_player_hud->tune(Ivector().set(0, -1, 0));
-		if (pInput->iGetAsyncKeyState(DIK_DOWN))
+		if (pInput->iGetAsyncKeyState(bIsRot ? DIK_RIGHT : DIK_DOWN))
 			g_player_hud->tune(Ivector().set(0, 1, 0));
-		if (pInput->iGetAsyncKeyState(DIK_LEFT))
+		if (pInput->iGetAsyncKeyState(bIsRot ? DIK_UP : DIK_LEFT))
 			g_player_hud->tune(Ivector().set(-1, 0, 0));
-		if (pInput->iGetAsyncKeyState(DIK_RIGHT))
+		if (pInput->iGetAsyncKeyState(bIsRot ? DIK_DOWN : DIK_RIGHT))
 			g_player_hud->tune(Ivector().set(1, 0, 0));
+		if (pInput->iGetAsyncKeyState(DIK_PRIOR))
+			g_player_hud->tune(Ivector().set(0, 0, 1));
+		if (pInput->iGetAsyncKeyState(DIK_NEXT))
+			g_player_hud->tune(Ivector().set(0, 0, -1));
+		if(pInput->iGetAsyncKeyState(DIK_RETURN))
+			g_player_hud->tune(Ivector().set(0, 0, 0));
 		return;
 	}
 

@@ -110,6 +110,7 @@ void CWeaponAutomaticShotgun::OnStateSwitch	(u32 S)
 	{
 	case eSubstateReloadBegin:
 		if( HaveCartridgeInInventory(1) )
+
 			switch2_StartReload	();
 		break;
 	case eSubstateReloadInProcess:

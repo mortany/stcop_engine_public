@@ -157,8 +157,8 @@ void CPHMovementControl::in_shedule_Update(u32 DT)
 
 void CPHMovementControl::Calculate(Fvector& vAccel,const Fvector& camDir,float /**ang_speed/**/,float jump,float /**dt/**/,bool /**bLight/**/)
 {
-	Fvector previous_position;previous_position.set(vPosition);
-	m_character->IPosition(vPosition);
+	Fvector previous_position{ vPosition };
+	m_character->GetPosition(vPosition);
 	if(bExernalImpulse)
 	{
 		
@@ -180,31 +180,7 @@ void CPHMovementControl::Calculate(Fvector& vAccel,const Fvector& camDir,float /
 	fActualVelocity=vVelocity.magnitude();
 	//Msg("saved avel %f", fActualVelocity);
 	gcontact_Was=m_character->ContactWas();
-
-//////
-
 	UpdateCollisionDamage( );
-
-/*
-	u16 mat_injurios = m_character->InjuriousMaterialIDX();
-
-	if(m_character->LastMaterialIDX()!=GAMEMTL_NONE_IDX)
-	{
-		const SGameMtl *last_material=GMLib.GetMaterialByIdx(m_character->LastMaterialIDX());
-		if( last_material->Flags.test(SGameMtl::flInjurious) )
-			mat_injurios = m_character->LastMaterialIDX();
-	}
-
-	if( mat_injurios!=GAMEMTL_NONE_IDX)
-	{
-		if( fis_zero(gcontact_HealthLost) )
-				m_character->SetHitType( DefineCollisionHitType( mat_injurios ) );
-		gcontact_HealthLost+=Device.fTimeDelta*GMLib.GetMaterialByIdx( mat_injurios )->fInjuriousSpeed;
-	}
-
-*/
-	//IPhysicsShellHolder * O=di->DamageObject();
-	//SCollisionHitCallback* cc= O ? O->get_collision_hit_callback() : NULL;
 	ICollisionDamageInfo	*cdi=CollisionDamageInfo();
 	if(cdi->HitCallback())
 			cdi->HitCallback()->call((m_character->PhysicsRefObject()),fMinCrashSpeed,fMaxCrashSpeed,fContactSpeed,gcontact_HealthLost,CollisionDamageInfo());
@@ -1323,7 +1299,7 @@ BOOL CPHMovementControl::BorderTraceCallback(collide::rq_result& result, LPVOID 
 	if(result.O){
 		return true;
 	}else{
-		//ïîëó÷èòü òðåóãîëüíèê è óçíàòü åãî ìàòåðèàë
+		//Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ Ñ‚Ñ€ÐµÑƒÐ³Ð¾Ð»ÑŒÐ½Ð¸Ðº Ð¸ ÑƒÐ·Ð½Ð°Ñ‚ÑŒ ÐµÐ³Ð¾ Ð¼Ð°Ñ‚ÐµÑ€Ð¸Ð°Ð»
 		T				= Level().ObjectSpace.GetStaticTris()+result.element;
 		mtl_idx			= T->material;
 	}

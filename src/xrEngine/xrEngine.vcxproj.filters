@@ -962,6 +962,7 @@
     <ClCompile Include="xrSASH.cpp">
       <Filter>OpenAutomate</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\sdk\include\OpenAutomate\src\OpenAutomate.c" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">

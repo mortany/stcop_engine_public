@@ -4,6 +4,6 @@
     <ClInclude Include="..\vorbis\vorbisfile.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\lib\vorbisfile.c" />
+    <ClCompile Include="..\source\vorbisfile.c" />
   </ItemGroup>
 </Project>

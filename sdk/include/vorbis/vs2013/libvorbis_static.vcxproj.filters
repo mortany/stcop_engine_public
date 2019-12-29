@@ -11,76 +11,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\lib\analysis.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\bitrate.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\block.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\codebook.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\envelope.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\floor0.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\floor1.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\info.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\lookup.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\lpc.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\lsp.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\mapping0.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\mdct.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\psy.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\registry.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\res0.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\sharedbook.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\smallft.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\synthesis.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\vorbisenc.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\window.c">
-      <Filter>src</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\vorbis.def">
-      <Filter>src</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\codec.h">
       <Filter>include</Filter>
     </ClInclude>
@@ -207,5 +137,70 @@
     <ClInclude Include="..\lib\window.h">
       <Filter>include</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\psy.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\registry.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\res0.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\sharedbook.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\smallft.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\synthesis.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\vorbisenc.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\window.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\analysis.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\bitrate.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\block.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\codebook.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\envelope.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\floor0.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\floor1.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\info.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\lookup.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\lpc.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\lsp.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\mapping0.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\mdct.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

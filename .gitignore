@@ -7,7 +7,7 @@ bin/
 bin_plugs/
 intermediate/
 intermediate_plugs/
-lib/
+/lib/
 _build/
 libraries/
 /src/*.tss

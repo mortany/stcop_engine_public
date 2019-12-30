@@ -691,7 +691,7 @@ void CWeaponMagazined::OnAnimationEnd(u32 state)
 			{
 				FirstBulletInGun = m_magazine.back();
 				m_magazine.pop_back();
-				iAmmoElapsed--;
+				--iAmmoElapsed;
 			}
 
 			ReloadMagazine();
@@ -699,7 +699,7 @@ void CWeaponMagazined::OnAnimationEnd(u32 state)
 			if (m_bNeedBulletInGun && bNeedputBullet)
 			{
 				m_magazine.push_back(FirstBulletInGun);
-				iAmmoElapsed++;
+				++iAmmoElapsed;
 			}
 
 			SwitchState(eIdle);
@@ -711,7 +711,12 @@ void CWeaponMagazined::OnAnimationEnd(u32 state)
 		case eUnMisfire:
 		{
 			bMisfire = false;
-			iAmmoElapsed--;
+			if (iAmmoElapsed > 0 && psWpnAnimsFlag.test(ANM_MISFIRE))
+			{
+				--iAmmoElapsed;
+				m_magazine.pop_back();
+			}
+
 			SwitchState(eIdle);
 		}break; // End of UnMisfire animation
 	}

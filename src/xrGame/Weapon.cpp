@@ -1712,6 +1712,7 @@ void CWeapon::GetZoomData(const float scope_factor, float& delta, float& min_zoo
 void CWeapon::OnZoomIn()
 {
 	m_zoom_params.m_bIsZoomModeNow = true;
+	psActorFlags.set(AF_ZOOM_NEW_FD, true);
 
 	if (m_fSecondRTZoomFactor == -1)
 		ZoomDynamicMod(true, true);
@@ -1760,6 +1761,7 @@ void CWeapon::OnZoomOut()
 		m_fRTZoomFactor = GetZoomFactor(); // Сохраняем текущий динамический зум
 	m_zoom_params.m_bIsZoomModeNow		= false;
 	SetZoomFactor(g_fov);
+	psActorFlags.set(AF_ZOOM_NEW_FD, false);
 	// Включаем инерцию (также заменено  GetInertionFactor())
 	// EnableHudInertion	(TRUE);
 

@@ -919,6 +919,8 @@ void CActor::g_Physics			(Fvector& _accel, float jump, float dt)
 }
 float g_fov = 75.0f;
 
+extern u32 hud_adj_mode;
+
 float CActor::currentFOV()
 {
 	if (!psHUD_Flags.is(HUD_WEAPON|HUD_WEAPON_RT|HUD_WEAPON_RT2))
@@ -1020,7 +1022,23 @@ void CActor::UpdateCL	()
 #ifdef DEBUG
 			HUD().SetFirstBulletCrosshairDisp(pWeapon->GetFirstBulletDisp());
 #endif
-			
+			// Новая система маркера, спасибо Роману из команды демосфена
+
+			Fvector pos, dir;
+
+			bool bInZoom = !!(pWeapon->bInZoomRightNow() && pWeapon->bIsSecondVPZoomPresent() && psActorFlags.test(AF_3DSCOPE_ENABLE));
+
+			pos = Cameras().Position();
+			dir = Cameras().Direction();
+
+			if (psHUD_Flags.test(HUD_CROSSCHAIR_NEW) && !(pWeapon->IsZoomed() && pWeapon->ZoomTexture()))
+			{
+				pos = pWeapon->get_LastFP();
+				dir = bInZoom ? Cameras().Direction() : pWeapon->get_LastFD();
+			}
+
+			HUD().DefineCrosshairCastingPoint(pos, dir);
+
 			BOOL B = ! ((mstate_real & mcLookout) && !IsGameTypeSingle());
 
 			psHUD_Flags.set( HUD_WEAPON_RT, B );
@@ -1036,8 +1054,6 @@ void CActor::UpdateCL	()
 			pWeapon->UpdateSecondVP(); //--#SM+#-- +SecondVP+
 
 			bool bUseMark = !!pWeapon->bMarkCanShow();
-
-			bool bInZoom  = !!(pWeapon->bInZoomRightNow() && pWeapon->bIsSecondVPZoomPresent() && psActorFlags.test(AF_3DSCOPE_ENABLE));
 
 			//float fVPRotFactor = pWeapon->bNVsecondVPstatus ? pWeapon->GetZRotatingFactor() : 0.0f;
 
@@ -1055,6 +1071,7 @@ void CActor::UpdateCL	()
 	{
 		if(Level().CurrentEntity() && this->ID()==Level().CurrentEntity()->ID() )
 		{
+			HUD().DefineCrosshairCastingPoint(Cameras().Position(), Cameras().Direction());
 			HUD().SetCrosshairDisp(0.f);
 			HUD().ShowCrosshair(false);
 

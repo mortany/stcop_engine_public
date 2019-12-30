@@ -230,7 +230,7 @@ void   CHUDManager::RenderActiveItemUI()
 }
 
 extern ENGINE_API BOOL bShowPauseString;
-//îòðèñîâêà ýëåìåíòîâ èíòåðôåéñà
+//Ð¾Ñ‚Ñ€Ð¸ÑÐ¾Ð²ÐºÐ° ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð² Ð¸Ð½Ñ‚ÐµÑ€Ñ„ÐµÐ¹ÑÐ°
 void  CHUDManager::RenderUI()
 {
 	if (!psHUD_Flags.is(HUD_DRAW_RT2))	
@@ -289,6 +289,11 @@ void CHUDManager::SetFirstBulletCrosshairDisp(float fbdispf)
 void  CHUDManager::ShowCrosshair(bool show)
 {
 	m_pHUDTarget->ShowCrosshair	(show);
+}
+
+void CHUDManager::DefineCrosshairCastingPoint(const Fvector& point, const Fvector& direction)
+{
+	m_pHUDTarget->DefineCrosshairCastingPoint(point, direction);
 }
 
 void CHUDManager::HitMarked( int idx, float power, const Fvector& dir )

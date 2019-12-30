@@ -314,6 +314,33 @@ public:
 	}
 };
 
+class CCC_Spawn_to_inventory : public IConsole_Command {
+public:
+	CCC_Spawn_to_inventory(LPCSTR N) : IConsole_Command(N) { };
+	virtual void Execute(LPCSTR args) {
+		if (!g_pGameLevel)
+		{
+			Log("Error: No game level!");
+			return;
+		}
+
+		if (!pSettings->section_exist(args))
+		{
+			Msg("! Section [%s] isn`t exist...", args);
+			return;
+		}
+
+		char	Name[128];	Name[0] = 0;
+		sscanf(args, "%s", Name);
+
+		Level().spawn_item(Name, Actor()->Position(), false, Actor()->ID());
+	}
+	virtual void	Info(TInfo& I)
+	{
+		strcpy(I, "name,team,squad,group");
+	}
+};
+
 class CCC_ALifeSwitchDistance : public IConsole_Command {
 public:
 	CCC_ALifeSwitchDistance(LPCSTR N) : IConsole_Command(N)  { };
@@ -1842,6 +1869,8 @@ void CCC_RegisterCommands()
 	CMD4(CCC_Float,				"g_hud_fov",			&psHUD_FOV_def,	0.1f,	1.0f); // [FFT++]: изменено в коллизии шокера
 	CMD4(CCC_Float,				"fov",					&g_fov,			5.0f,	180.0f);
 
+	CMD1(CCC_Spawn_to_inventory, "g_spawn_to_inventory");
+
 	// Demo
 #if 1//ndef MASTER_GOLD
 	CMD1(CCC_DemoPlay,			"demo_play"				);
@@ -1982,6 +2011,8 @@ CMD4(CCC_Integer,			"hit_anims_tune",						&tune_hit_anims,		0, 1);
 
 	CMD3(CCC_Mask, "g_3d_scopes", &psActorFlags, AF_3DSCOPE_ENABLE);
 	CMD3(CCC_Mask, "g_pnv_in_scope", &psActorFlags, AF_PNV_W_SCOPE_DIS);
+	CMD3(CCC_Mask, "g_real_bulletpos", &psHUD_Flags, HUD_CROSSCHAIR_NEW);
+
 
 #ifndef MASTER_GOLD
 	CMD1(CCC_JumpToLevel,	"jump_to_level"		);

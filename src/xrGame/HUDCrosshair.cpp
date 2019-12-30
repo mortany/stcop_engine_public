@@ -1,4 +1,4 @@
-// HUDCrosshair.cpp:  êðåñòèê ïðèöåëà, îòîáðàæàþùèé òåêóùóþ äèñïåðñèþ
+// HUDCrosshair.cpp:  ÐºÑ€ÐµÑÑ‚Ð¸Ðº Ð¿Ñ€Ð¸Ñ†ÐµÐ»Ð°, Ð¾Ñ‚Ð¾Ð±Ñ€Ð°Ð¶Ð°ÑŽÑ‰Ð¸Ð¹ Ñ‚ÐµÐºÑƒÑ‰ÑƒÑŽ Ð´Ð¸ÑÐ¿ÐµÑ€ÑÐ¸ÑŽ
 // 
 //////////////////////////////////////////////////////////////////////
 
@@ -21,15 +21,15 @@ CHUDCrosshair::~CHUDCrosshair	()
 
 void CHUDCrosshair::Load		()
 {
-	//âñå ðàçìåðû â ïðîöåíòàõ îò äëèíû ýêðàíà
-	//äëèíà êðåñòèêà 
+	//Ð²ÑÐµ Ñ€Ð°Ð·Ð¼ÐµÑ€Ñ‹ Ð² Ð¿Ñ€Ð¾Ñ†ÐµÐ½Ñ‚Ð°Ñ… Ð¾Ñ‚ Ð´Ð»Ð¸Ð½Ñ‹ ÑÐºÑ€Ð°Ð½Ð°
+	//Ð´Ð»Ð¸Ð½Ð° ÐºÑ€ÐµÑÑ‚Ð¸ÐºÐ° 
 	cross_length_perc = pSettings->r_float (HUD_CURSOR_SECTION, "cross_length");
 	min_radius_perc = pSettings->r_float (HUD_CURSOR_SECTION, "min_radius");
 	max_radius_perc = pSettings->r_float (HUD_CURSOR_SECTION, "max_radius");
 	cross_color = pSettings->r_fcolor (HUD_CURSOR_SECTION, "cross_color").get();
 }
 
-//âûñòàâëÿåò radius îò min_radius äî max_radius
+//Ð²Ñ‹ÑÑ‚Ð°Ð²Ð»ÑÐµÑ‚ radius Ð¾Ñ‚ min_radius Ð´Ð¾ max_radius
 void CHUDCrosshair::SetDispersion	(float disp)
 { 
 	Fvector4 r;
@@ -106,13 +106,14 @@ void CHUDCrosshair::OnRenderFirstBulletDispertion()
 #endif
 
 extern ENGINE_API BOOL g_bRendering; 
-void CHUDCrosshair::OnRender ()
+void CHUDCrosshair::OnRender (const float& x, const float& y)
 {
 	VERIFY			(g_bRendering);
 	Fvector2		center;
 	Fvector2		scr_size;
 	scr_size.set	(float(::Render->getTarget()->get_width()), float(::Render->getTarget()->get_height()));
-	center.set		(scr_size.x/2.0f, scr_size.y/2.0f);
+	center.set((scr_size.x / 2.0f) * (1.f + x), (scr_size.y / 2.0f) * (1.f + y));
+	//center.set		(scr_size.x/2.0f, scr_size.y/2.0f);
 
 	UIRender->StartPrimitive		(10, IUIRender::ptLineList, UI().m_currentPointType);
 	

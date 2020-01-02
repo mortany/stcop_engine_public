@@ -1,4 +1,4 @@
-// Actor_Weapon.cpp:	 для работы с оружием
+// Actor_Weapon.cpp:	 РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РѕСЂСѓР¶РёРµРј
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
@@ -22,7 +22,7 @@ static const float VEL_A_MAX	= 10.f;
 
 #define GetWeaponParam(pWeapon, func_name, def_value)	((pWeapon) ? (pWeapon->func_name) : def_value)
 
-//возвращает текуший разброс стрельбы (в радианах)с учетом движения
+//РІРѕР·РІСЂР°С‰Р°РµС‚ С‚РµРєСѓС€РёР№ СЂР°Р·Р±СЂРѕСЃ СЃС‚СЂРµР»СЊР±С‹ (РІ СЂР°РґРёР°РЅР°С…)СЃ СѓС‡РµС‚РѕРј РґРІРёР¶РµРЅРёСЏ
 float CActor::GetWeaponAccuracy() const
 {
 	CWeapon* W	= smart_cast<CWeapon*>(inventory().ActiveItem());
@@ -59,19 +59,51 @@ float CActor::GetWeaponAccuracy() const
 	return dispersion;
 }
 
+#include "WeaponMagazinedWGrenade.h"
+#include "WeaponRG6.h"
+#include "WeaponRPG7.h"
+#include "WeaponKnife.h"
+#include "xrEngine/CustomHUD.h"
 
 void CActor::g_fireParams	(const CHudItem* pHudItem, Fvector &fire_pos, Fvector &fire_dir)
 {
-	fire_pos		= Cameras().Position();
-	fire_dir		= Cameras().Direction();
+	fire_dir = Cameras().Direction();
+	fire_pos = Cameras().Position();
 
-	const CMissile	*pMissile = smart_cast <const CMissile*> (pHudItem);
-	if (pMissile)
+	CWeapon* weapon = smart_cast<CWeapon*>(inventory().ActiveItem());
+	
+	const CMissile* pMissile = smart_cast <const CMissile*> (pHudItem);
+	const CMissile* pMissileA = smart_cast <const CMissile*> (weapon);
+	const CWeaponMagazinedWGrenade* WGren = smart_cast <const CWeaponMagazinedWGrenade*> (weapon);
+	const CWeaponRG6* RG6 = smart_cast <const CWeaponRG6*> (weapon);
+	const CWeaponRPG7* RPG7 = smart_cast <const CWeaponRPG7*> (weapon);
+	const CWeaponKnife* pKnife = smart_cast <const CWeaponKnife*> (weapon);
+
+	if (weapon && psHUD_Flags.test(HUD_CROSSCHAIR_NEW) && !pKnife)
 	{
-		Fvector offset;
-		XFORM().transform_dir(offset, pMissile->throw_point_offset());
-		fire_pos.add(offset);
+		if (eacFirstEye == cam_active && !(weapon->IsZoomed() && weapon->ZoomTexture()))
+		{
+			fire_pos = weapon->get_LastFP();
+
+			bool bInZoom = !!(weapon->bInZoomRightNow() && weapon->bIsSecondVPZoomPresent() && psActorFlags.test(AF_3DSCOPE_ENABLE));
+
+			fire_dir =  bInZoom ? Cameras().Direction() : weapon->get_LastFD();
+		}
 	}
+	else
+	{
+		if (HUDview() && pMissile)
+		{
+			Fvector offset;
+			XFORM().transform_dir(offset, pMissile->throw_point_offset());
+			fire_pos.add(offset);
+		}
+		if (!HUDview() && pMissileA && !RPG7 && !RG6 && !WGren && !pMissile)
+		{
+			fire_pos = pMissileA->XFORM().c;
+		}
+	}
+
 }
 
 void CActor::g_WeaponBones	(int &L, int &R1, int &R2)
@@ -308,9 +340,9 @@ void	CActor::RemoveAmmoForWeapon	(CInventoryItem *pIItem)
 
 	CWeaponAmmo* pAmmo = smart_cast<CWeaponAmmo*>(inventory().GetAny( pWM->m_ammoTypes[0].c_str() ));
 	if (!pAmmo) return;
-	//--- мы нашли патроны к текущему оружию	
+	//--- РјС‹ РЅР°С€Р»Рё РїР°С‚СЂРѕРЅС‹ Рє С‚РµРєСѓС‰РµРјСѓ РѕСЂСѓР¶РёСЋ	
 	/*
-	//--- проверяем не подходят ли они к чему-то еще
+	//--- РїСЂРѕРІРµСЂСЏРµРј РЅРµ РїРѕРґС…РѕРґСЏС‚ Р»Рё РѕРЅРё Рє С‡РµРјСѓ-С‚Рѕ РµС‰Рµ
 	bool CanRemove = true;
 	TIItemContainer::const_iterator I = inventory().m_all.begin();//, B = I;
 	TIItemContainer::const_iterator E = inventory().m_all.end();

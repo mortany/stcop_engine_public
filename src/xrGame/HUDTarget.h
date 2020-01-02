@@ -21,6 +21,9 @@ private:
 	float					fuzzyShowInfo;
 	SPickParam				PP;
 
+	Fvector					m_crosshairCastedFromPos;
+	Fvector					m_crosshairCastedToDir;
+
 	bool					m_bShowCrosshair;
 	CHUDCrosshair			HUDCrosshair;
 
@@ -36,6 +39,7 @@ public:
 	collide::rq_result&		GetRQ		() {return PP.RQ;};
 	float					GetRQVis	() {return PP.power;};
 	CHUDCrosshair&			GetHUDCrosshair	() {return HUDCrosshair;}
+	void					DefineCrosshairCastingPoint(const Fvector& point, const Fvector& direction);
 	void					ShowCrosshair	(bool b);
 	void					net_Relcase		(CObject* O);
 };

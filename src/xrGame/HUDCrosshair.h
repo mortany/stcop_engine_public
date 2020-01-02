@@ -1,4 +1,4 @@
-// HUDCrosshair.h:  крестик прицела, отображающий текущую дисперсию
+// HUDCrosshair.h:  РєСЂРµСЃС‚РёРє РїСЂРёС†РµР»Р°, РѕС‚РѕР±СЂР°Р¶Р°СЋС‰РёР№ С‚РµРєСѓС‰СѓСЋ РґРёСЃРїРµСЂСЃРёСЋ
 // 
 //////////////////////////////////////////////////////////////////////
 
@@ -16,7 +16,7 @@ private:
 	float			min_radius_perc;
 	float			max_radius_perc;
 
-	//текущий радиус прицела
+	//С‚РµРєСѓС‰РёР№ СЂР°РґРёСѓСЃ РїСЂРёС†РµР»Р°
 	float			radius;
 	float			target_radius;
 #ifdef DEBUG
@@ -30,7 +30,7 @@ public:
 					CHUDCrosshair	();
 					~CHUDCrosshair	();
 
-			void	OnRender		();
+			void	OnRender		(const float& x, const float& y);
 			void	SetDispersion	(float disp);
 #ifdef DEBUG
 			void	SetFirstBulletDispertion(float fbdisp);

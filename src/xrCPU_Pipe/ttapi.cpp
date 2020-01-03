@@ -179,7 +179,8 @@ DWORD ttapi_Init( _processor_info* ID )
 	while ( ! ( dwAffinitiMask & dwCurrentMask ) )
 		dwCurrentMask <<= 1;
 
-	//SetThreadAffinityMask( GetCurrentThread() , dwCurrentMask );
+	if (!strstr(Core.Params, "-cpu_test_fix"))
+		SetThreadAffinityMask( GetCurrentThread() , dwCurrentMask );
 	//Msg("Master Thread Affinity Mask : 0x%8.8X" , dwCurrentMask );
 
 	// Creating threads
@@ -196,7 +197,8 @@ DWORD ttapi_Init( _processor_info* ID )
 			dwCurrentMask <<= 1;
 		while ( ! ( dwAffinitiMask & dwCurrentMask ) );
 			
-		//SetThreadAffinityMask( ttapi_threads_handles[ i ] , dwCurrentMask );
+		if (!strstr(Core.Params, "-cpu_test_fix"))
+			SetThreadAffinityMask( ttapi_threads_handles[ i ] , dwCurrentMask );
 		//Msg("Helper Thread #%u Affinity Mask : 0x%8.8X" , i + 1 , dwCurrentMask );
 
 		// Setting thread name

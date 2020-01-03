@@ -101,7 +101,9 @@ void CWeaponMagazined::Load	(LPCSTR section)
 		m_sounds.LoadSound(section, "snd_reload_empty", "sndReloadEmpty", true, m_eSoundReload);
 	if (WeaponSoundExist(section, "snd_reload_misfire"))
 		m_sounds.LoadSound(section, "snd_reload_misfire", "sndReloadMisfire", true, m_eSoundReload);
-	
+	if (WeaponSoundExist(section, "snd_pump_gun"))
+		m_sounds.LoadSound(section, "snd_pump_gun", "sndPumpGun", true, m_eSoundReload);
+
 	m_bCustomShotSounds = WeaponSoundExist(section, "snd_shoot_auto");
 
 	if (m_bCustomShotSounds)
@@ -111,7 +113,6 @@ void CWeaponMagazined::Load	(LPCSTR section)
 
 		if (WeaponSoundExist(section, "snd_shoot_echo"))
 			m_sounds.LoadSound(section, "snd_shoot_echo", "sndShotEcho", false, m_eSoundShot);
-
 	}
 
 	m_sSndShotCurrent = "sndShot";
@@ -434,8 +435,17 @@ void CWeaponMagazined::OnStateSwitch	(u32 S)
 	if (GetState() == eFire)
 	{
 		if (S == eIdle || S == eMisfire || S == eMagEmpty || S == eReload)
-			if((xr_strcmp(m_sSndShotCurrent.c_str(), "sndSilencerShot") != 0) && !IsMisfire())
-				if(m_sounds.FindSoundItem("sndShotEcho", false) ) PlaySound("sndShotEcho", get_LastFP());
+		{
+			if ((xr_strcmp(m_sSndShotCurrent.c_str(), "sndSilencerShot") != 0) && !IsMisfire())
+			{
+				// Модернизация блока контроля звуков
+				if (m_sounds.FindSoundItem("sndShotEcho", false)) PlaySound("sndShotEcho", get_LastFP());
+				// Проиграем звук помпы отдельно, если не будет работать то будем думать что делать и как быть
+				if (m_sounds.FindSoundItem("sndPumpGun", false)) PlaySound("sndPumpGun", get_LastFP());
+
+
+			}
+		}
 	}
 
 	inherited::OnStateSwitch(S);

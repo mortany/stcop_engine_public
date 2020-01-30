@@ -23,3 +23,4 @@ lua51.lib
 luajit.exe
 *.log
 *.log
+*.log

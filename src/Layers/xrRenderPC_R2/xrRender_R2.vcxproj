@@ -414,7 +414,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>nvapi.lib;oalib.lib;luabind.beta7-devel.rc4.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)3rd party\luajit-2\src\;$(xrSdkDir)libraries\x64;$(xrLibDir);$(DXSDK_DIR)Lib\x86;$(XRAY_16X_LIBS)OpenAutomate\libraries;$(SolutionDir)x64\Release;C:\X-RAY\stcop\rgs\src\3rd party\luajit-2\src;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(xrSdkDir)libraries\x64;$(xrLibDir);$(DXSDK_DIR)Lib\x86;$(XRAY_16X_LIBS)OpenAutomate\libraries;$(SolutionDir)x64\Release;C:\X-RAY\stcop\rgs\src\3rd party\luajit-2\src;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
       <OptimizeReferences>

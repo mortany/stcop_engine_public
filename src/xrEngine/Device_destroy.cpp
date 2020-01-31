@@ -27,7 +27,7 @@ void CRenderDevice::Destroy(void)
     Log("Destroying Direct3D...");
 
     ShowCursor(TRUE);
-	ClipCursor(NULL);
+	//ClipCursor(NULL);
     m_pRender->ValidateHW();
 
     _Destroy(FALSE);
@@ -88,9 +88,9 @@ void CRenderDevice::Reset(bool precache)
 
 #ifndef DEDICATED_SERVER
     ShowCursor(FALSE);
-	RECT winRect;
-	GetWindowRect(m_hWnd, &winRect);
-	ClipCursor(&winRect);
+	//RECT winRect;
+	//GetWindowRect(m_hWnd, &winRect);
+	//ClipCursor(&winRect);
 #endif
 
     seqDeviceReset.Process(rp_DeviceReset);

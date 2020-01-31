@@ -786,9 +786,9 @@ void CHW::updateWindowProps(HWND m_hWnd)
 
 	ShowCursor	(FALSE);
 	SetForegroundWindow( m_hWnd );
-	RECT winRect;
-	GetWindowRect(m_hWnd, &winRect);
-	ClipCursor(&winRect);
+	//RECT winRect;
+	//GetWindowRect(m_hWnd, &winRect);
+	//ClipCursor(&winRect);
 }
 
 

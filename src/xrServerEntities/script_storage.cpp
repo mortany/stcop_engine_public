@@ -285,6 +285,10 @@ void CScriptStorage::reinit	()
 		return;
 	}
 
+	luaL_openlibs(lua());
+
+	//luabind::open(lua());
+
 	// initialize lua standard library functions 
 	struct luajit {
 		static void open_lib	(lua_State *L, pcstr module_name, lua_CFunction function)

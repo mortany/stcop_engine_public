@@ -431,7 +431,6 @@ void CWeaponMagazined::ReloadMagazine()
 
 void CWeaponMagazined::OnStateSwitch	(u32 S)
 {
-
 	if (GetState() == eFire)
 	{
 		if (S == eIdle || S == eMisfire || S == eMagEmpty || S == eReload)
@@ -440,10 +439,6 @@ void CWeaponMagazined::OnStateSwitch	(u32 S)
 			{
 				// Модернизация блока контроля звуков
 				if (m_sounds.FindSoundItem("sndShotEcho", false)) PlaySound("sndShotEcho", get_LastFP());
-				// Проиграем звук помпы отдельно, если не будет работать то будем думать что делать и как быть
-				if (m_sounds.FindSoundItem("sndPumpGun", false)) PlaySound("sndPumpGun", get_LastFP());
-
-
 			}
 		}
 	}
@@ -656,6 +651,8 @@ void CWeaponMagazined::OnShot()
 	{
 		shared_str custom_snd = xr_strcmp(m_sSndShotCurrent.c_str(), "sndSilencerShot") == 0 ? "sndSilencerShot_a" : "sndShot_a";
 		PlaySound(m_iShotNum > 1 ? custom_snd.c_str() : m_sSndShotCurrent.c_str(), get_LastFP());
+		// Проиграем звук помпы отдельно, если не будет работать то будем думать что делать и как быть
+		if (m_sounds.FindSoundItem("sndPumpGun", false)) PlaySound("sndPumpGun", get_LastFP());
 	}
 	else PlaySound(m_sSndShotCurrent.c_str(), get_LastFP());
 

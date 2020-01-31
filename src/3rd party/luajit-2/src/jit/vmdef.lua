@@ -190,6 +190,7 @@ ffnames = {
 "coroutine.isyieldable",
 "coroutine.create",
 "coroutine.yield",
+"coroutine.cstacksize",
 "coroutine.resume",
 "coroutine.wrap_aux",
 "coroutine.wrap",

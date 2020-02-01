@@ -15,6 +15,7 @@
 #include "../xrRenderDX10/msaa/dx10MSAABlender.h"
 #include "../xrRenderDX10/DX10 Rain/dx10RainBlender.h"
 
+#include "blender_cut.h"
 
 #include "../xrRender/dxRenderDeviceRender.h"
 
@@ -301,6 +302,7 @@ CRenderTarget::CRenderTarget		()
 	dxRenderDeviceRender::Instance().Resources->Evict			();
 
 	// Blenders
+	b_cut					= xr_new<CBlender_cut>					(); //New
 	b_occq					= xr_new<CBlender_light_occq>			();
 	b_accum_mask			= xr_new<CBlender_accum_direct_mask>	();
 	b_accum_direct			= xr_new<CBlender_accum_direct>			();
@@ -574,7 +576,11 @@ CRenderTarget::CRenderTarget		()
 				s_accum_reflected_msaa[i].create( b_accum_reflected_msaa[i], "null");
 			}
 		}
-	}	
+	}
+
+	{
+		s_cut.create(b_cut, "r4\\cut");
+	}
 
 	// BLOOM
 	{
@@ -595,6 +601,10 @@ CRenderTarget::CRenderTarget		()
 			s_postprocess_msaa.create(b_postprocess_msaa,			"r2\\post");
 		}
 		f_bloom_factor				= 0.5f;
+	}
+
+	{
+		rt_temp_without_samples.create(r2_RT_temp_without_samples, Device.dwWidth, Device.dwHeight, D3DFORMAT::D3DFMT_A16B16G16R16);
 	}
 
 	// TONEMAP
@@ -1079,6 +1089,7 @@ CRenderTarget::~CRenderTarget	()
 	  }
    }
 	xr_delete					(b_accum_mask			);
+	xr_delete					(b_cut					);
 	xr_delete					(b_occq					);
 	xr_delete					(b_hdao_cs				);
 	if( RImplementation.o.dx10_msaa )

@@ -50,6 +50,8 @@ public:
 	IBlender*					b_ssao;
 	IBlender*					b_ssao_msaa[8];
 
+	IBlender*					b_cut;
+
     // compute shader for hdao
     IBlender*                   b_hdao_cs;
     IBlender*                   b_hdao_msaa_cs;
@@ -73,6 +75,9 @@ public:
 	ref_rt						rt_Position;		// 64bit,	fat	(x,y,z,?)				(eye-space)
 	ref_rt						rt_Normal;			// 64bit,	fat	(x,y,z,hemi)			(eye-space)
 	ref_rt						rt_Color;			// 64/32bit,fat	(r,g,b,specular-gloss)	(or decompressed MET-8-8-8-8)
+
+	ref_rt                      rt_temp;
+	ref_rt                      rt_temp_without_samples;
 
 	// 
 	ref_rt						rt_Accumulator;		// 64bit		(r,g,b,specular)
@@ -138,6 +143,8 @@ private:
 	ref_shader					s_accum_spot	;
 	ref_shader					s_accum_reflected;
 	ref_shader					s_accum_volume;
+
+	ref_shader					s_cut;
 
 	//	generate min/max
 	ref_shader					s_create_minmax_sm;
@@ -269,7 +276,7 @@ public:
 	void						phase_accumulator		();
 	void						phase_vol_accumulator	();
 	void						shadow_direct			(light* L, u32 dls_phase);
-
+	void						phase_cut();
 	//	Generates min/max sm
 	void						create_minmax_SM();
 

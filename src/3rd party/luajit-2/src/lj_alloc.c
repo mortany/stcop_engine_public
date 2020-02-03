@@ -169,7 +169,7 @@ static LJ_AINLINE int CALL_MUNMAP(void *ptr, size_t size)
 #else
 
 /* Win32 MMAP via VirtualAlloc */
-static void *CALL_MMAP(size_t size)
+static LJ_AINLINE void *CALL_MMAP(size_t size)
 {
   DWORD olderr = GetLastError();
   void *ptr = LJ_WIN_VALLOC(0, size, MEM_RESERVE|MEM_COMMIT, PAGE_READWRITE);
@@ -178,7 +178,7 @@ static void *CALL_MMAP(size_t size)
 }
 
 /* For direct MMAP, use MEM_TOP_DOWN to minimize interference */
-static void *DIRECT_MMAP(size_t size)
+static LJ_AINLINE void *DIRECT_MMAP(size_t size)
 {
   DWORD olderr = GetLastError();
   void *ptr = LJ_WIN_VALLOC(0, size, MEM_RESERVE|MEM_COMMIT|MEM_TOP_DOWN,
@@ -186,7 +186,7 @@ static void *DIRECT_MMAP(size_t size)
   SetLastError(olderr);
   return ptr ? ptr : MFAIL;
 }
-static int CALL_MUNMAP(void *ptr, size_t size)
+static LJ_AINLINE int CALL_MUNMAP(void *ptr, size_t size)
 {
   DWORD olderr = GetLastError();
   MEMORY_BASIC_INFORMATION minfo;

@@ -277,6 +277,8 @@ public:
 	void						phase_vol_accumulator	();
 	void						shadow_direct			(light* L, u32 dls_phase);
 	void						phase_cut();
+
+	void						SwitchViewPort(ViewPort vp);
 	//	Generates min/max sm
 	void						create_minmax_SM();
 

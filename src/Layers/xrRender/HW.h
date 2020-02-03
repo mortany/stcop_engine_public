@@ -12,6 +12,29 @@
 #include "stats_manager.h"
 #endif
 
+#if defined(USE_DX10) || defined(USE_DX11)
+
+enum ViewPort;
+
+struct HWViewPortRTZB
+{
+	HWViewPortRTZB()
+	{
+		baseRT = nullptr;
+		baseZB = nullptr;
+	};
+#if defined(USE_DX11)
+	ID3D11RenderTargetView* baseRT;	//	combine with DX9 pBaseRT via typedef
+	ID3D11DepthStencilView* baseZB;
+#elif defined(USE_DX10)
+	ID3D10RenderTargetView* baseRT;	//	combine with DX9 pBaseRT via typedef
+	ID3D10DepthStencilView* baseZB;
+#endif	//	USE_DX10
+};
+
+#endif	//
+
+
 class  CHW
 #if defined(USE_DX10) || defined(USE_DX11)
 	:	public pureAppActivate, 
@@ -30,6 +53,9 @@ public:
 	void					DestroyDevice			();
 
 	void					Reset					(HWND hw);
+#if defined(USE_DX10) || defined(USE_DX11)
+	void					SwitchVP(ViewPort vp);
+#endif	//	USE_DX10
 
 	void					selectResolution		(u32 &dwWidth, u32 &dwHeight, BOOL bWindowed);
 	D3DFORMAT				selectDepthStencil		(D3DFORMAT);
@@ -50,6 +76,12 @@ public:
 #endif
 
 //	Variables section
+#if defined(USE_DX10) || defined(USE_DX11)
+public:
+	ViewPort				storedVP;
+	xr_map<ViewPort, HWViewPortRTZB> viewPortsRTZB;
+#endif
+
 #if defined(USE_DX11)	//	USE_DX10
 public:
 	IDXGIAdapter*			m_pAdapter;	//	pD3D equivalent
@@ -61,7 +93,7 @@ public:
 
 	CHWCaps					Caps;
 
-	D3D_DRIVER_TYPE		m_DriverType;	//	DevT equivalent
+	D3D_DRIVER_TYPE			m_DriverType;	//	DevT equivalent
 	DXGI_SWAP_CHAIN_DESC	m_ChainDesc;	//	DevPP equivalent
 	bool					m_bUsePerfhud;
 	D3D_FEATURE_LEVEL		FeatureLevel;

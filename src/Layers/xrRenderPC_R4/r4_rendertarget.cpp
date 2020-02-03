@@ -21,13 +21,16 @@
 
 #include <D3DX10Tex.h>
 
+extern ENGINE_API float psSVPImageSizeK;
+
 void	CRenderTarget::u_setrt			(const ref_rt& _1, const ref_rt& _2, const ref_rt& _3, ID3DDepthStencilView* zb)
 {
 	VERIFY									(_1||zb);
 	if (_1)
 	{
-		dwWidth									= _1->dwWidth;
-		dwHeight								= _1->dwHeight;
+		dwWidth = _1->RTWidth();
+		dwHeight = _1->RTHeight();
+
 	}
 	else
 	{
@@ -64,8 +67,9 @@ void	CRenderTarget::u_setrt			(const ref_rt& _1, const ref_rt& _2, ID3DDepthSten
 	VERIFY									(_1||zb);
 	if (_1)
 	{
-		dwWidth									= _1->dwWidth;
-		dwHeight								= _1->dwHeight;
+		dwWidth = _1->RTWidth();
+		dwHeight = _1->RTHeight();
+
 	}
 	else
 	{
@@ -361,20 +365,25 @@ CRenderTarget::CRenderTarget		()
 	//	NORMAL
 	{
 		u32		w=Device.dwWidth, h=Device.dwHeight;
-		rt_Position.create			(r2_RT_P,		w,h,D3DFMT_A16B16G16R16F, SampleCount );
+		xr_vector<RtCreationParams> vp_params_main_secondary;
+		vp_params_main_secondary.push_back(RtCreationParams(w, h, MAIN_VIEWPORT));
+		vp_params_main_secondary.push_back(RtCreationParams(Device.m_SecondViewport.screenWidth, Device.m_SecondViewport.screenHeight, SECONDARY_WEAPON_SCOPE));
+
+		rt_Position.create(r2_RT_P, vp_params_main_secondary, D3DFMT_A16B16G16R16F, SampleCount);
+
 
 		if( RImplementation.o.dx10_msaa )
-			rt_MSAADepth.create( r2_RT_MSAAdepth, w, h, D3DFMT_D24S8, SampleCount );
+			rt_MSAADepth.create(r2_RT_MSAAdepth, vp_params_main_secondary, D3DFMT_D24S8, SampleCount);
 
 		if( !RImplementation.o.dx10_gbuffer_opt )
-			rt_Normal.create			(r2_RT_N,		w,h,D3DFMT_A16B16G16R16F, SampleCount );
+			rt_Normal.create			(r2_RT_N, vp_params_main_secondary,D3DFMT_A16B16G16R16F, SampleCount );
 
 		// select albedo & accum
 		if (RImplementation.o.mrtmixdepth)	
 		{
 			// NV50
-			rt_Color.create			(r2_RT_albedo,	w,h,D3DFMT_A8R8G8B8		, SampleCount );
-			rt_Accumulator.create	(r2_RT_accum,	w,h,D3DFMT_A16B16G16R16F, SampleCount );
+			rt_Color.create			(r2_RT_albedo, vp_params_main_secondary,D3DFMT_A8R8G8B8		, SampleCount );
+			rt_Accumulator.create	(r2_RT_accum,  vp_params_main_secondary,D3DFMT_A16B16G16R16F, SampleCount );
 		}
 		else		
 		{
@@ -383,38 +392,38 @@ CRenderTarget::CRenderTarget		()
 				// NV40
 				if( !RImplementation.o.dx10_gbuffer_opt )
 				{
-					rt_Color.create				(r2_RT_albedo,		w,h,D3DFMT_A16B16G16R16F, SampleCount );	// expand to full
-					rt_Accumulator.create		(r2_RT_accum,		w,h,D3DFMT_A16B16G16R16F, SampleCount );
+					rt_Color.create				(r2_RT_albedo, vp_params_main_secondary,D3DFMT_A16B16G16R16F, SampleCount );	// expand to full
+					rt_Accumulator.create		(r2_RT_accum,  vp_params_main_secondary,D3DFMT_A16B16G16R16F, SampleCount );
 				}
 				else
 				{
-					rt_Color.create				(r2_RT_albedo,		w,h,D3DFMT_A8R8G8B8,       SampleCount );	// expand to full
-					rt_Accumulator.create		(r2_RT_accum,		w,h,D3DFMT_A16B16G16R16F,  SampleCount );
+					rt_Color.create				(r2_RT_albedo, vp_params_main_secondary,D3DFMT_A8R8G8B8,       SampleCount );	// expand to full
+					rt_Accumulator.create		(r2_RT_accum,  vp_params_main_secondary,D3DFMT_A16B16G16R16F,  SampleCount );
 				}
 			} else {
 				// R4xx, no-fp-blend,-> albedo_wo
 				VERIFY						(RImplementation.o.albedo_wo);
-				rt_Color.create				(r2_RT_albedo,		   w,h,D3DFMT_A8R8G8B8		, SampleCount );	// normal
-				rt_Accumulator.create		(r2_RT_accum,		   w,h,D3DFMT_A16B16G16R16F, SampleCount );
-				rt_Accumulator_temp.create	(r2_RT_accum_temp,	w,h,D3DFMT_A16B16G16R16F, SampleCount );
+				rt_Color.create				(r2_RT_albedo, vp_params_main_secondary,D3DFMT_A8R8G8B8		, SampleCount );	// normal
+				rt_Accumulator.create		(r2_RT_accum, vp_params_main_secondary,D3DFMT_A16B16G16R16F, SampleCount );
+				rt_Accumulator_temp.create	(r2_RT_accum_temp, vp_params_main_secondary,D3DFMT_A16B16G16R16F, SampleCount );
 			}
 		}
 
 		// generic(LDR) RTs
-		rt_Generic_0.create		(r2_RT_generic0,w,h,D3DFMT_A8R8G8B8, 1		);
-		rt_Generic_1.create		(r2_RT_generic1,w,h,D3DFMT_A8R8G8B8, 1		);
-		rt_secondVP.create		(r2_RT_secondVP,w,h,D3DFMT_A8R8G8B8, 1		); //--#SM+#-- +SecondVP+
+		rt_Generic_0.create		(r2_RT_generic0, vp_params_main_secondary,D3DFMT_A8R8G8B8, 1		);
+		rt_Generic_1.create		(r2_RT_generic1, vp_params_main_secondary,D3DFMT_A8R8G8B8, 1		);
+		rt_secondVP.create(r2_RT_secondVP, RtCreationParams(Device.m_SecondViewport.screenWidth, Device.m_SecondViewport.screenHeight, MAIN_VIEWPORT), D3DFMT_A8R8G8B8, 1); //--#SM+#-- +SecondVP+
 		if( RImplementation.o.dx10_msaa )
 		{
-			rt_Generic_0_r.create			(r2_RT_generic0_r,w,h,D3DFMT_A8R8G8B8, SampleCount	);
-			rt_Generic_1_r.create			(r2_RT_generic1_r,w,h,D3DFMT_A8R8G8B8, SampleCount		);
-			rt_Generic.create		      (r2_RT_generic,w,h,   D3DFMT_A8R8G8B8, 1		);
+			rt_Generic_0_r.create			(r2_RT_generic0_r, vp_params_main_secondary,D3DFMT_A8R8G8B8, SampleCount	);
+			rt_Generic_1_r.create			(r2_RT_generic1_r, vp_params_main_secondary,D3DFMT_A8R8G8B8, SampleCount		);
+			rt_Generic.create		      (r2_RT_generic,		vp_params_main_secondary,   D3DFMT_A8R8G8B8, 1		);
 		}
 		//	Igor: for volumetric lights
 		//rt_Generic_2.create			(r2_RT_generic2,w,h,D3DFMT_A8R8G8B8		);
 		//	temp: for higher quality blends
 		if (RImplementation.o.advancedpp)
-			rt_Generic_2.create			(r2_RT_generic2,w,h,D3DFMT_A16B16G16R16F, SampleCount );
+			rt_Generic_2.create			(r2_RT_generic2, vp_params_main_secondary,D3DFMT_A16B16G16R16F, SampleCount );
 	}
 
 	// OCCLUSION
@@ -429,11 +438,11 @@ CRenderTarget::CRenderTarget		()
 		if (RImplementation.o.nullrt)	nullrt	= (D3DFORMAT)MAKEFOURCC('N','U','L','L');
 
 		u32	size					=RImplementation.o.smapsize	;
-		rt_smap_depth.create		(r2_RT_smap_depth,			size,size,depth_format	);
+		rt_smap_depth.create		(r2_RT_smap_depth, RtCreationParams(size, size, MAIN_VIEWPORT),depth_format	);
 
 		if (RImplementation.o.dx10_minmax_sm)
 		{
-			rt_smap_depth_minmax.create( r2_RT_smap_depth_minmax,	size/4,size/4, D3DFMT_R32F	);
+			rt_smap_depth_minmax.create( r2_RT_smap_depth_minmax, RtCreationParams(size/4, size/4, MAIN_VIEWPORT), D3DFMT_R32F	);
 			CBlender_createminmax TempBlender;
 			s_create_minmax_sm.create( &TempBlender, "null" );
 		}
@@ -588,8 +597,8 @@ CRenderTarget::CRenderTarget		()
 		u32	w=BLOOM_size_X, h=BLOOM_size_Y;
 		u32 fvf_build				= D3DFVF_XYZRHW|D3DFVF_TEX4|D3DFVF_TEXCOORDSIZE2(0)|D3DFVF_TEXCOORDSIZE2(1)|D3DFVF_TEXCOORDSIZE2(2)|D3DFVF_TEXCOORDSIZE2(3);
 		u32 fvf_filter				= (u32)D3DFVF_XYZRHW|D3DFVF_TEX8|D3DFVF_TEXCOORDSIZE4(0)|D3DFVF_TEXCOORDSIZE4(1)|D3DFVF_TEXCOORDSIZE4(2)|D3DFVF_TEXCOORDSIZE4(3)|D3DFVF_TEXCOORDSIZE4(4)|D3DFVF_TEXCOORDSIZE4(5)|D3DFVF_TEXCOORDSIZE4(6)|D3DFVF_TEXCOORDSIZE4(7);
-		rt_Bloom_1.create			(r2_RT_bloom1,	w,h,		fmt);
-		rt_Bloom_2.create			(r2_RT_bloom2,	w,h,		fmt);
+		rt_Bloom_1.create			(r2_RT_bloom1, RtCreationParams(w, h, MAIN_VIEWPORT),		fmt);
+		rt_Bloom_2.create			(r2_RT_bloom2, RtCreationParams(w, h, MAIN_VIEWPORT),		fmt);
 		g_bloom_build.create		(fvf_build,		RCache.Vertex.Buffer(), RCache.QuadIB);
 		g_bloom_filter.create		(fvf_filter,	RCache.Vertex.Buffer(), RCache.QuadIB);
 		s_bloom_dbg_1.create		("effects\\screen_set",		r2_RT_bloom1);
@@ -604,13 +613,14 @@ CRenderTarget::CRenderTarget		()
 	}
 
 	{
-		rt_temp_without_samples.create(r2_RT_temp_without_samples, Device.dwWidth, Device.dwHeight, D3DFORMAT::D3DFMT_A16B16G16R16);
+		rt_temp.create(r2_RT_temp, RtCreationParams(Device.dwWidth, Device.dwHeight, MAIN_VIEWPORT), RtCreationParams(Device.m_SecondViewport.screenWidth, Device.m_SecondViewport.screenHeight, SECONDARY_WEAPON_SCOPE), D3DFORMAT::D3DFMT_A16B16G16R16, SampleCount);
+		rt_temp_without_samples.create(r2_RT_temp_without_samples, RtCreationParams(Device.dwWidth, Device.dwHeight, MAIN_VIEWPORT), RtCreationParams(Device.m_SecondViewport.screenWidth, Device.m_SecondViewport.screenHeight, SECONDARY_WEAPON_SCOPE), D3DFORMAT::D3DFMT_A16B16G16R16);
 	}
 
 	// TONEMAP
 	{
-		rt_LUM_64.create			(r2_RT_luminance_t64,	64, 64,	D3DFMT_A16B16G16R16F	);
-		rt_LUM_8.create				(r2_RT_luminance_t8,	8,	8,	D3DFMT_A16B16G16R16F	);
+		rt_LUM_64.create			(r2_RT_luminance_t64, RtCreationParams(64, 64, MAIN_VIEWPORT),	D3DFMT_A16B16G16R16F	);
+		rt_LUM_8.create				(r2_RT_luminance_t8,  RtCreationParams(8, 8, MAIN_VIEWPORT),	D3DFMT_A16B16G16R16F	);
 		s_luminance.create			(b_luminance,				"r2\\luminance");
 		f_luminance_adapt			= 0.5f;
 
@@ -621,7 +631,7 @@ CRenderTarget::CRenderTarget		()
 		for (u32 it=0; it<HW.Caps.iGPUNum*2; it++)	{
 			string256					name;
 			xr_sprintf						(name,"%s_%d",	r2_RT_luminance_pool,it	);
-			rt_LUM_pool[it].create		(name,	1,	1,	D3DFMT_R32F				);
+			rt_LUM_pool[it].create		(name, RtCreationParams(1, 1, MAIN_VIEWPORT),	D3DFMT_R32F				);
 			//u_setrt						(rt_LUM_pool[it],	0,	0,	0			);
 			//CHK_DX						(HW.pDevice->Clear( 0L, NULL, D3DCLEAR_TARGET,	0x7f7f7f7f,	1.0f, 0L));
 			FLOAT ColorRGBA[4] = { 127.0f/255.0f, 127.0f/255.0f, 127.0f/255.0f, 127.0f/255.0f};
@@ -647,7 +657,7 @@ CRenderTarget::CRenderTarget		()
 		}
 
 		D3DFORMAT	fmt = HW.Caps.id_vendor==0x10DE?D3DFMT_R32F:D3DFMT_R16F;
-		rt_half_depth.create		(r2_RT_half_depth, w, h, fmt);
+		rt_half_depth.create(r2_RT_half_depth, RtCreationParams(w, h, MAIN_VIEWPORT), RtCreationParams(u32(w * psSVPImageSizeK), u32(h * psSVPImageSizeK), SECONDARY_WEAPON_SCOPE), fmt);
 
 		s_ssao.create				(b_ssao, "r2\\ssao");
 	}
@@ -678,14 +688,14 @@ CRenderTarget::CRenderTarget		()
 
 		if (ssao_hdao_ultra)
 		{
-			rt_ssao_temp.create(r2_RT_ssao_temp, w, h, D3DFMT_R16F, 1, true);
+			rt_ssao_temp.create(r2_RT_ssao_temp, RtCreationParams(w, h, MAIN_VIEWPORT), RtCreationParams(Device.m_SecondViewport.screenWidth, Device.m_SecondViewport.screenHeight, SECONDARY_WEAPON_SCOPE), D3DFMT_R16F, 1, true);
 			s_hdao_cs.create(b_hdao_cs, "r2\\ssao");
 			if (RImplementation.o.dx10_msaa)
 				s_hdao_cs_msaa.create(b_hdao_msaa_cs, "r2\\ssao");
 		}
 		else if (ssao_blur_on)
 		{
-			rt_ssao_temp.create(r2_RT_ssao_temp, w, h, D3DFMT_G16R16F, SampleCount);
+			rt_ssao_temp.create(r2_RT_ssao_temp, RtCreationParams(w, h, MAIN_VIEWPORT), RtCreationParams(Device.m_SecondViewport.screenWidth, Device.m_SecondViewport.screenHeight, SECONDARY_WEAPON_SCOPE), D3DFMT_R16F, 1, true);
 			s_ssao.create(b_ssao, "r2\\ssao");
 
 
@@ -1172,4 +1182,12 @@ bool CRenderTarget::use_minmax_sm_this_frame()
 		return false;
 	}
 
+}
+
+void CRenderTarget::SwitchViewPort(ViewPort vp)
+{
+	const CResourceManager::map_RT& rtlist = DEV->GetRTList();
+
+	for (CResourceManager::map_RT::const_iterator rt_it = rtlist.begin(); rt_it != rtlist.end(); rt_it++)
+		rt_it->second->SwitchViewPortResources(vp);
 }

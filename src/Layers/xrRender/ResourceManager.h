@@ -136,11 +136,16 @@ public:
 #endif	//	USE_DX10
 
 #ifdef USE_DX11
-	CRT*							_CreateRT			(LPCSTR Name, u32 w, u32 h,	D3DFORMAT f, u32 SampleCount = 1, bool useUAV=false );
+	CRT*							_CreateRT           (LPCSTR Name, xr_vector<RtCreationParams>& vp_params, D3DFORMAT f, u32 SampleCount = 1, bool useUAV = false);
+#elif USE_DX10
+	CRT*							_CreateRT			(LPCSTR Name, xr_vector<RtCreationParams>& vp_params, D3DFORMAT f, u32 SampleCount = 1);
 #else
-	CRT*							_CreateRT			(LPCSTR Name, u32 w, u32 h,	D3DFORMAT f, u32 SampleCount = 1 );
+	CRT* _CreateRT(LPCSTR Name, u32 w, u32 h, D3DFORMAT f, u32 SampleCount = 1);
 #endif
 	void							_DeleteRT			(const CRT*	RT	);
+#if defined (USE_DX11) || defined (DX_10)
+	const	map_RT&					GetRTList() const { return m_rtargets; };
+#endif
 
 	//	DX10 cut CRTC*							_CreateRTC			(LPCSTR Name, u32 size,	D3DFORMAT f);
 	//	DX10 cut void							_DeleteRTC			(const CRTC*	RT	);

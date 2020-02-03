@@ -37,6 +37,12 @@ public:
 //	void								Apply			(u32 dwStage);
 
 	void								surface_set		(ID3DBaseTexture* surf );
+#if defined(USE_DX10) || defined(USE_DX11)
+	void								SurfaceSetRT    (ID3DBaseTexture* surf, ID3DShaderResourceView* sh_res_view); // special for render target
+	void								surface_null();
+	ID3DShaderResourceView*				CreateShaderRes (ID3DBaseTexture* surf);
+#endif	//	USE_DX10
+
 	ID3DBaseTexture*					surface_get 	();
 
 	IC BOOL								isUser			()		{ return flags.bUser;					}

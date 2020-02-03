@@ -271,6 +271,11 @@ void CRender::Render		()
 		Target->phase_scene_prepare					();
 	}
 
+	if (currentViewPort == SECONDARY_WEAPON_SCOPE)
+	{
+		Target->phase_cut();
+	}
+
 	//*******
 	// Sync point
 	Device.Statistic->RenderDUMP_Wait_S.Begin	();

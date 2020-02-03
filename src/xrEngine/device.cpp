@@ -288,19 +288,11 @@ void CRenderDevice::on_idle()
 	// Render Viewports
 	if (Device.m_SecondViewport.IsSVPActive() && Device.m_SecondViewport.IsSVPFrame())
 	{
-		if (debugSecondVP)
-		{
-			Render->viewPortsThisFrame.push_back(SECONDARY_WEAPON_SCOPE);
-			Render->firstViewPort = SECONDARY_WEAPON_SCOPE;
-			Render->lastViewPort = SECONDARY_WEAPON_SCOPE;
-		}
-		else
-		{
-			Render->viewPortsThisFrame.push_back(MAIN_VIEWPORT);
-			Render->viewPortsThisFrame.push_back(SECONDARY_WEAPON_SCOPE);
-			Render->firstViewPort = MAIN_VIEWPORT;
-			Render->lastViewPort = SECONDARY_WEAPON_SCOPE;
-		}
+        Render->firstViewPort = MAIN_VIEWPORT;
+        Render->lastViewPort = SECONDARY_WEAPON_SCOPE;
+        Render->viewPortsThisFrame.push_back(MAIN_VIEWPORT);
+        Render->viewPortsThisFrame.push_back(SECONDARY_WEAPON_SCOPE);
+
 	}
 	else
 	{
@@ -315,14 +307,20 @@ void CRenderDevice::on_idle()
 #ifdef MOVE_CURRENT_FRAME_COUNTR
 	u32 stored_cur_frame = dwFrame;
 #endif
-
+    u32 t_width = Device.dwWidth, t_height = Device.dwHeight;
 	for (size_t i = 0; i < Render->viewPortsThisFrame.size(); i++)
 	{
 #ifdef MOVE_CURRENT_FRAME_COUNTR
 		dwFrame += 1;
 #endif
 		Render->currentViewPort = Render->viewPortsThisFrame[i];
-		Render->needPresenting = (Render->currentViewPort == MAIN_VIEWPORT || debugSecondVP) ? true : false;
+		Render->needPresenting = (Render->currentViewPort == MAIN_VIEWPORT) ? true : false;
+
+        if (Render->currentViewPort == SECONDARY_WEAPON_SCOPE)
+        {
+            Device.dwWidth = m_SecondViewport.screenWidth;
+            Device.dwHeight = m_SecondViewport.screenHeight;
+        }
 
 		if (g_pGameLevel)
 		g_pGameLevel->ApplyCamera(); // Apply camera params of vp, so that we create a correct full transform matrix
@@ -372,6 +370,9 @@ void CRenderDevice::on_idle()
 				End();
 			}
 		}
+
+        Device.dwWidth = t_width;
+        Device.dwHeight = t_height;
 	}
 
 	// Restore main vp saved stuff for the needs of new frame
@@ -409,58 +410,12 @@ void CRenderDevice::on_idle()
         seqFrameMT.Process(rp_Frame);
     }
 
-#ifdef DEDICATED_SERVER
-    u32 FrameEndTime = TimerGlobal.GetElapsed_ms();
-    u32 FrameTime = (FrameEndTime - FrameStartTime);
-    /*
-    string1024 FPS_str = "";
-    string64 tmp;
-    xr_strcat(FPS_str, "FPS Real - ");
-    if (dwTimeDelta != 0)
-    xr_strcat(FPS_str, ltoa(1000/dwTimeDelta, tmp, 10));
-    else
-    xr_strcat(FPS_str, "~~~");
-
-    xr_strcat(FPS_str, ", FPS Proj - ");
-    if (FrameTime != 0)
-    xr_strcat(FPS_str, ltoa(1000/FrameTime, tmp, 10));
-    else
-    xr_strcat(FPS_str, "~~~");
-
-    */
-    u32 DSUpdateDelta = 1000 / g_svDedicateServerUpdateReate;
-    if (FrameTime < DSUpdateDelta)
-    {
-        Sleep(DSUpdateDelta - FrameTime);
-        // Msg("sleep for %d", DSUpdateDelta - FrameTime);
-        // xr_strcat(FPS_str, ", sleeped for ");
-        // xr_strcat(FPS_str, ltoa(DSUpdateDelta - FrameTime, tmp, 10));
-    }
-    // Msg(FPS_str);
-#endif // #ifdef DEDICATED_SERVER
-
     if (!b_is_Active)
         Sleep(1);
 }
 
-#ifdef INGAME_EDITOR
-void CRenderDevice::message_loop_editor()
-{
-    m_editor->run();
-    m_editor_finalize(m_editor);
-    xr_delete(m_engine);
-}
-#endif // #ifdef INGAME_EDITOR
-
 void CRenderDevice::message_loop()
 {
-#ifdef INGAME_EDITOR
-    if (editor())
-    {
-        message_loop_editor();
-        return;
-    }
-#endif // #ifdef INGAME_EDITOR
 
     MSG msg;
     PeekMessage(&msg, NULL, 0U, 0U, PM_NOREMOVE);
@@ -605,9 +560,6 @@ void CRenderDevice::Pause(BOOL bOn, BOOL bTimer, BOOL bSound, LPCSTR reason)
     {
         if (!Paused())
             bShowPauseString =
-#ifdef INGAME_EDITOR
-                editor() ? FALSE :
-#endif // #ifdef INGAME_EDITOR
 #ifdef DEBUG
                 !xr_strcmp(reason, "li_pause_key_no_clip") ? FALSE :
 #endif // DEBUG

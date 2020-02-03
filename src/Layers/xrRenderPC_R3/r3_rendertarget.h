@@ -48,6 +48,8 @@ public:
 	IBlender*					b_accum_reflected_msaa[8];
 	IBlender*					b_ssao;
 	IBlender*					b_ssao_msaa[8];
+
+	IBlender*					b_cut;
 #ifdef DEBUG
 	struct		dbg_line_t		{
 		Fvector	P0,P1;
@@ -76,6 +78,8 @@ public:
 
 	//  Second viewport
 	ref_rt						rt_secondVP;		// 32bit		(r,g,b,a) --//#SM+#-- +SecondVP+
+	ref_rt                      rt_temp;
+	ref_rt                      rt_temp_without_samples;
 
 	//	Igor: for volumetric lights
 	ref_rt						rt_Generic_2;		// 32bit		(r,g,b,a)				// post-process, intermidiate results, etc.
@@ -130,6 +134,9 @@ private:
 	ref_shader					s_accum_spot	;
 	ref_shader					s_accum_reflected;
 	ref_shader					s_accum_volume;
+
+	//PiP scopes stuff
+	ref_shader					s_cut;
 
 	//	generate min/max
 	ref_shader					s_create_minmax_sm;
@@ -260,6 +267,10 @@ public:
 	void						phase_accumulator		();
 	void						phase_vol_accumulator	();
 	void						shadow_direct			(light* L, u32 dls_phase);
+
+	//PiP scopes rendering stuff
+	void						SwitchViewPort(ViewPort vp);
+	void						phase_cut();
 
 	//	Generates min/max sm
 	void						create_minmax_SM();

@@ -18,6 +18,8 @@
 
 extern ENGINE_API float VIEWPORT_NEAR;
 
+enum ViewPort;
+
 //#define VIEWPORT_NEAR 0.05f //--#SM+#-- (Old: 0.2f)
 
 #define DEVICE_RESET_PRECACHE_FRAME_COUNT 10
@@ -116,6 +118,9 @@ class ENGINE_API CSecondVPParams //--#SM+#-- +SecondVP+
 
 public:
 	bool isCamReady; // Флаг готовности камеры (FOV, позиция, и т.п) к рендеру второго вьюпорта
+
+    u32 screenWidth;
+    u32 screenHeight;
 
 	bool isR1;
 
@@ -245,6 +250,8 @@ public:
     void Clear();
     void End();
     void FrameMove();
+
+
 
     void overdrawBegin();
     void overdrawEnd();

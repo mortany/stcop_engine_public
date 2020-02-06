@@ -143,7 +143,7 @@ public:
 	CRT* _CreateRT(LPCSTR Name, u32 w, u32 h, D3DFORMAT f, u32 SampleCount = 1);
 #endif
 	void							_DeleteRT			(const CRT*	RT	);
-#if defined (USE_DX11) || defined (DX_10)
+#if defined (USE_DX11) || defined (USE_DX10)
 	const	map_RT&					GetRTList() const { return m_rtargets; };
 #endif
 

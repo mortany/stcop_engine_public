@@ -549,11 +549,6 @@ void CRender::AfterWorldRender()
 {
 	if (currentViewPort == SECONDARY_WEAPON_SCOPE)
 	{
-		// Делает копию бэкбуфера (текущего экрана) в рендер-таргет второго вьюпорта
-		//ID3DTexture2D* pBuffer = NULL;
-		//HW.m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)& pBuffer);
-		//HW.pContext->CopyResource(Target->rt_secondVP->pSurface, pBuffer);
-		//pBuffer->Release(); // Корректно очищаем ссылку на бэкбуфер (иначе игра зависнет в опциях)
 		ID3DResource* res;
 		HW.pBaseRT->GetResource(&res);
 		HW.pContext->CopyResource(Target->rt_secondVP->pSurface, res); // rt sizes must match, to be able to copy

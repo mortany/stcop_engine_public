@@ -41,6 +41,8 @@ void CRT::create	(LPCSTR Name, u32 w, u32 h,	D3DFORMAT f, u32 SampleCount )
 {
 	if (valid()) return;
 
+	rtName = Name;
+
 	R_ASSERT(HW.pDevice && Name && Name[0]);
 	_order		= CPU::GetCLK()	;	//Device.GetTimerGlobal()->GetElapsed_clk();
 
@@ -196,9 +198,33 @@ void CRT::create	(LPCSTR Name, u32 w, u32 h,	D3DFORMAT f, u32 SampleCount )
 			R_CHK(HW.pDevice->CreateUnorderedAccessView(it.first->second.textureSurface, &UAVDesc, &it.first->second.unorderedAccessViewInstance));
 		}
 #endif //  DX_11
+		Msg("Create resource for %s", rtName.c_str());
+
 		it.first->second.shaderResView = pTexture->CreateShaderRes(it.first->second.textureSurface);
+
+		//pTexture
+
+		//R_ASSERT2(it.first->second.shaderResView, make_string("%s", rtName.c_str()));
+
 		it.first->second.textureSurface->AddRef();
+
+		if (pTexture->Description().SampleDesc.Count <= 1 || pTexture->Description().Format != DXGI_FORMAT_R24G8_TYPELESS)
+			R_ASSERT2(it.first->second.shaderResView, make_string("%s", rtName.c_str()));
+
 	}
+
+	auto it = viewPortStuff.begin();
+
+	pRT = it->second.renderTargetInstance;
+	pZRT = it->second.zBufferInstance;
+#ifdef USE_DX11
+	pUAView = it->second.unorderedAccessViewInstance;
+#endif //  DX_11
+	pSurface = it->second.textureSurface;
+	rtWidth = it->second.rtWidth;
+	rtHeight = it->second.rtHeight;
+	pTexture->SurfaceSetRT(it->second.textureSurface, it->second.shaderResView);
+
 
 	//pTexture	= DEV->_CreateTexture	(Name);
 	//pTexture->surface_set(pSurface);
@@ -263,9 +289,13 @@ void CRT::SwitchViewPortResources(ViewPort vp)
 
 	Msg("SwitchViewPortResources %u %u", rtWidth, rtHeight);
 
-	R_ASSERT(pRT || pZRT);
-	R_ASSERT(pSurface);
-	R_ASSERT(value.shaderResView);
+	R_ASSERT2(pRT || pZRT, make_string("%s", rtName.c_str()));
+	R_ASSERT2(pSurface, make_string("%s", rtName.c_str()));
+	//R_ASSERT2(value.shaderResView, make_string("%s", rtName.c_str()));
+
+	if (pTexture->Description().SampleDesc.Count <= 1 || pTexture->Description().Format != DXGI_FORMAT_R24G8_TYPELESS)
+		R_ASSERT2(value.shaderResView, make_string("%s", rtName.c_str()));
+
 
 	pTexture->SurfaceSetRT(value.textureSurface, value.shaderResView);
 }

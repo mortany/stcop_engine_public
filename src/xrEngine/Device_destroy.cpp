@@ -73,8 +73,16 @@ void CRenderDevice::Reset(bool precache)
 
     m_pRender->Reset(m_hWnd, dwWidth, dwHeight, fWidth_2, fHeight_2);
 
-    m_SecondViewport.screenWidth = u32((dwWidth / 32) * psSVPImageSizeK) * 32;
-    m_SecondViewport.screenHeight = u32((dwHeight / 32) * psSVPImageSizeK) * 32;
+    if (psDeviceFlags.test(rsR3) || psDeviceFlags.test(rsR4))
+    {
+        m_SecondViewport.screenWidth = u32((dwWidth / 32) * psSVPImageSizeK) * 32;
+        m_SecondViewport.screenHeight = u32((dwHeight / 32) * psSVPImageSizeK) * 32;
+    }
+    else
+    {
+        m_SecondViewport.screenWidth = dwWidth;
+        m_SecondViewport.screenHeight = dwHeight;
+    }
 
     if (g_pGamePersistent)
     {

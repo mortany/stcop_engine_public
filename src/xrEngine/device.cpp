@@ -316,7 +316,7 @@ void CRenderDevice::on_idle()
 		Render->currentViewPort = Render->viewPortsThisFrame[i];
 		Render->needPresenting = (Render->currentViewPort == MAIN_VIEWPORT) ? true : false;
 
-        if (Render->currentViewPort == SECONDARY_WEAPON_SCOPE)
+        if (Render->currentViewPort == SECONDARY_WEAPON_SCOPE && (psDeviceFlags.test(rsR3) || psDeviceFlags.test(rsR4)))
         {
             Device.dwWidth = m_SecondViewport.screenWidth;
             Device.dwHeight = m_SecondViewport.screenHeight;
@@ -371,10 +371,12 @@ void CRenderDevice::on_idle()
 			}
 		}
 
-        Device.dwWidth = t_width;
-        Device.dwHeight = t_height;
+        if (psDeviceFlags.test(rsR3) || psDeviceFlags.test(rsR4))
+        {
+            Device.dwWidth = t_width;
+            Device.dwHeight = t_height;
+        }
 	}
-
 	// Restore main vp saved stuff for the needs of new frame
 	vCameraPosition_saved = mainVPCamPosSaved;
 	mFullTransform_saved = mainVPFullTrans;

@@ -60,6 +60,7 @@ public:
 private:
 	u32						rtWidth;
 	u32						rtHeight;
+	shared_str				rtName;
 public:
 	ViewPort					vpStored;
 	bool						isTwoViewPorts;

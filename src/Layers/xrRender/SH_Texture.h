@@ -49,6 +49,8 @@ public:
 	IC u32								get_Width		()		{ desc_enshure(); return desc.Width;	}
 	IC u32								get_Height		()		{ desc_enshure(); return desc.Height;	}
 
+	const D3D_TEXTURE2D_DESC&			Description		()		{ return desc; };
+
 	void								video_Sync		(u32 _time){m_play_time=_time;}
 	void								video_Play		(BOOL looped, u32 _time=0xFFFFFFFF);
 	void								video_Pause		(BOOL state);

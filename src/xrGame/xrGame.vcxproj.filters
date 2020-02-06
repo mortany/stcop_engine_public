@@ -7363,9 +7363,6 @@
       <Filter>UI\Multiplayer\Voting</Filter>
     </ClInclude>
     <ClInclude Include="AmebaZone.h" />
-    <ClInclude Include="WeaponCustomAuto.h" />
-    <ClInclude Include="WeaponRevolver.h" />
-    <ClInclude Include="HolderEntityObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="damage_manager.cpp">
@@ -11016,9 +11013,5 @@
     <CustomBuild Include="Explosive.h">
       <Filter>Core\Client\Objects\items &amp; weapons\Explosives</Filter>
     </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Players.cd" />
-    <None Include="Weapons.cd" />
   </ItemGroup>
 </Project>

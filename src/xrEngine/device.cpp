@@ -332,7 +332,7 @@ void CRenderDevice::on_idle()
 		//RCache.set_xform_project ( mProject );
 		D3DXMatrixInverse((D3DXMATRIX*)&mInvFullTransform, 0, (D3DXMATRIX*)&mFullTransform);
 
-		if (Render->currentViewPort == MAIN_VIEWPORT) // need to save main vp stuff for next frame
+		if (Render->currentViewPort == MAIN_VIEWPORT && Device.m_SecondViewport.IsSVPActive()) // need to save main vp stuff for next frame
 		{
 			mainVPCamPosSaved = vCameraPosition;
 			mainVPFullTrans = mFullTransform;
@@ -371,17 +371,20 @@ void CRenderDevice::on_idle()
 			}
 		}
 
-        if (psDeviceFlags.test(rsR3) || psDeviceFlags.test(rsR4))
+        if ((psDeviceFlags.test(rsR3) || psDeviceFlags.test(rsR4)))
         {
             Device.dwWidth = t_width;
             Device.dwHeight = t_height;
         }
 	}
 	// Restore main vp saved stuff for the needs of new frame
-	vCameraPosition_saved = mainVPCamPosSaved;
-	mFullTransform_saved = mainVPFullTrans;
-	mView_saved = mainVPViewSaved;
-	mProject_saved = mainVPProjectSaved;
+    if (Device.m_SecondViewport.IsSVPActive())
+    {
+        vCameraPosition_saved = mainVPCamPosSaved;
+        mFullTransform_saved = mainVPFullTrans;
+        mView_saved = mainVPViewSaved;
+        mProject_saved = mainVPProjectSaved;
+    }
 
 	Statistic->RenderTOTAL_Real.End();
 	Statistic->RenderTOTAL_Real.FrameEnd();

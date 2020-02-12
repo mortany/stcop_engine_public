@@ -201,6 +201,7 @@ void attachable_hud_item::setup_firedeps(firedeps& fd)
 		Fmatrix& fire_mat								= m_model->LL_GetTransform(m_measures.m_fire_bone);
 		fire_mat.transform_tiny							(fd.vLastFP, m_measures.m_fire_point_offset);
 		m_item_transform.transform_tiny					(fd.vLastFP);
+		fd.vLastFP.add(Device.vCameraPosition);
 
 		fd.vLastFD.set									(0.f,0.f,1.f);
 		m_item_transform.transform_dir					(fd.vLastFD);
@@ -220,6 +221,7 @@ void attachable_hud_item::setup_firedeps(firedeps& fd)
 		Fmatrix& fire_mat			= m_model->LL_GetTransform(m_measures.m_fire_bone2);
 		fire_mat.transform_tiny		(fd.vLastFP2,m_measures.m_fire_point2_offset);
 		m_item_transform.transform_tiny	(fd.vLastFP2);
+		fd.vLastFP2.add(Device.vCameraPosition);
 		VERIFY(_valid(fd.vLastFP2));
 		VERIFY(_valid(fd.vLastFP2));
 	}
@@ -229,6 +231,7 @@ void attachable_hud_item::setup_firedeps(firedeps& fd)
 		Fmatrix& fire_mat			= m_model->LL_GetTransform(m_measures.m_shell_bone);
 		fire_mat.transform_tiny		(fd.vLastSP,m_measures.m_shell_point_offset);
 		m_item_transform.transform_tiny	(fd.vLastSP);
+		fd.vLastSP.add(Device.vCameraPosition);
 		VERIFY(_valid(fd.vLastSP));
 		VERIFY(_valid(fd.vLastSP));
 	}
@@ -421,25 +424,24 @@ u32 attachable_hud_item::anim_play(const shared_str& anm_name_b, BOOL bMixIn, co
 
 	if (IsGameTypeSingle() && parent_object.H_Parent() == Level().CurrentControlEntity())
 	{
-		CActor* current_actor	= static_cast_checked<CActor*>(Level().CurrentControlEntity());
-		VERIFY					(current_actor);
-		CEffectorCam* ec		= current_actor->Cameras().GetCamEffector(eCEWeaponAction);
+		CActor* current_actor = static_cast_checked<CActor*>(Level().CurrentControlEntity());
+		VERIFY(current_actor);
 
-	
-		if(NULL==ec)
+		string_path ce_path;
+		string_path anm_name;
+		strconcat(sizeof(anm_name), anm_name, "camera_effects" "\\" "weapon" "\\", M.name.c_str(), ".anm");
+		if (FS.exist(ce_path, "$game_anims$", anm_name))
 		{
-			string_path			ce_path;
-			string_path			anm_name;
-			strconcat			(sizeof(anm_name),anm_name,"camera_effects\\weapon\\", M.name.c_str(),".anm");
-			if (FS.exist( ce_path, "$game_anims$", anm_name))
-			{
-				CAnimatorCamEffector* e		= xr_new<CAnimatorCamEffector>();
-				e->SetType					(eCEWeaponAction);
-				e->SetHudAffect				(false);
-				e->SetCyclic				(false);
-				e->Start					(anm_name);
-				current_actor->Cameras().AddCamEffector(e);
-			}
+			CEffectorCam* ec = current_actor->Cameras().GetCamEffector(eCEWeaponAction);
+			if (ec)
+				current_actor->Cameras().RemoveCamEffector(eCEWeaponAction);
+
+			CAnimatorCamEffector* e = new CAnimatorCamEffector();
+			e->SetType(eCEWeaponAction);
+			e->SetHudAffect(false);
+			e->SetCyclic(false);
+			e->Start(anm_name);
+			current_actor->Cameras().AddCamEffector(e);
 		}
 	}
 	return ret;
@@ -606,6 +608,7 @@ const Fvector& player_hud::attach_pos() const
 void player_hud::update(const Fmatrix& cam_trans)
 {
 	Fmatrix	trans					= cam_trans;
+
 	update_inertion					(trans);
 	update_additional				(trans);
 

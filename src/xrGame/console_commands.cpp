@@ -1215,7 +1215,6 @@ public:
 */
 #endif
 
-#ifndef MASTER_GOLD
 #	include "game_graph.h"
 struct CCC_JumpToLevel : public IConsole_Command {
 	CCC_JumpToLevel(LPCSTR N) : IConsole_Command(N)  {};
@@ -1370,7 +1369,6 @@ public:
 	}
 };
 
-#endif // MASTER_GOLD
 
 #include "GamePersistent.h"
 
@@ -2013,13 +2011,10 @@ CMD4(CCC_Integer,			"hit_anims_tune",						&tune_hit_anims,		0, 1);
 	CMD3(CCC_Mask, "g_pnv_in_scope", &psActorFlags, AF_PNV_W_SCOPE_DIS);
 	CMD3(CCC_Mask, "g_real_bulletpos", &psHUD_Flags, HUD_CROSSCHAIR_NEW);
 
-
-#ifndef MASTER_GOLD
 	CMD1(CCC_JumpToLevel,	"jump_to_level"		);
 	CMD1(CCC_Script,		"run_script");
 	CMD1(CCC_ScriptCommand,	"run_string");
 	CMD1(CCC_TimeFactor,	"time_factor");		
-#endif // MASTER_GOLD
 
 	CMD3(CCC_Mask,		"g_autopickup",			&psActorFlags,	AF_AUTOPICKUP);
 	CMD3(CCC_Mask,		"g_dynamic_music",		&psActorFlags,	AF_DYNAMIC_MUSIC);
@@ -2184,11 +2179,8 @@ CMD4(CCC_FloatBlock,		"dbg_text_height_scale",	&dbg_text_height_scale	,			0.2f	,
 	CMD3(CCC_Mask,			"cl_dynamiccrosshair",	&psHUD_Flags,	HUD_CROSSHAIR_DYNAMIC);
 	CMD1(CCC_MainMenu,		"main_menu"				);
 
-#ifndef MASTER_GOLD
 	CMD1(CCC_StartTimeSingle,	"start_time_single");
 	CMD4(CCC_TimeFactorSingle,	"time_factor_single", &g_fTimeFactor, 0.f, 1000.0f);
-#endif // MASTER_GOLD
-
 
 	g_uCommonFlags.zero();
 	g_uCommonFlags.set(flAiUseTorchDynamicLights, TRUE);

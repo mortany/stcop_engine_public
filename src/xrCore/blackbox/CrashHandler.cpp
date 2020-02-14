@@ -74,7 +74,7 @@ LPCTSTR __stdcall
 
 // The internal SymGetLineFromAddr function
 BOOL InternalSymGetLineFromAddr ( IN  HANDLE          hProcess        ,
-                                  IN  DWORD           dwAddr          ,
+                                  IN  DWORD_PTR       dwAddr          ,
                                   OUT PDWORD          pdwDisplacement ,
                                   OUT PIMAGEHLP_LINE  Line            );
 
@@ -379,7 +379,7 @@ LPCTSTR __stdcall GetFaultReason ( EXCEPTION_POINTERS * pExPtrs )
         int iCurr = 0 ;
         // A temporary value holder. This holder keeps the stack usage to a
         // minimum.
-        DWORD dwTemp ;
+        DWORD_PTR dwTemp ;
 
         iCurr += BSUGetModuleBaseName ( GetCurrentProcess ( ) ,
                                         NULL                  ,
@@ -388,7 +388,7 @@ LPCTSTR __stdcall GetFaultReason ( EXCEPTION_POINTERS * pExPtrs )
 
         iCurr += wsprintf ( g_szBuff + iCurr , _T ( " caused an " ) ) ;
 
-        dwTemp = (DWORD)
+        dwTemp = (DWORD_PTR)
             ConvertSimpleException(pExPtrs->ExceptionRecord->
                                                          ExceptionCode);
 
@@ -396,7 +396,7 @@ LPCTSTR __stdcall GetFaultReason ( EXCEPTION_POINTERS * pExPtrs )
         {
             iCurr += wsprintf ( g_szBuff + iCurr ,
                                 _T ( "%s" )      ,
-                                dwTemp            ) ;
+                                (LPCTSTR)dwTemp            ) ;
         }
         else
         {
@@ -417,8 +417,8 @@ LPCTSTR __stdcall GetFaultReason ( EXCEPTION_POINTERS * pExPtrs )
         iCurr += wsprintf ( g_szBuff + iCurr , _T ( " in module " ) ) ;
 
         dwTemp =
-            SymGetModuleBase ( (HANDLE)GetCurrentProcessId ( ) ,
-                               (DWORD)pExPtrs->ExceptionRecord->
+            SymGetModuleBase ( GetCurrentProcess ( ) ,
+                               (DWORD_PTR)pExPtrs->ExceptionRecord->
                                                     ExceptionAddress ) ;
         ASSERT ( NULL != dwTemp ) ;
 
@@ -440,7 +440,7 @@ LPCTSTR __stdcall GetFaultReason ( EXCEPTION_POINTERS * pExPtrs )
                             pExPtrs->ExceptionRecord->ExceptionAddress);
     #else
         iCurr += wsprintf ( g_szBuff + iCurr                ,
-                            _T ( " at %04X:%08X" )          ,
+                            _T ( " at %04X:%08p" )          ,
                             pExPtrs->ContextRecord->SegCs   ,
                             pExPtrs->ExceptionRecord->ExceptionAddress);
     #endif
@@ -449,16 +449,16 @@ LPCTSTR __stdcall GetFaultReason ( EXCEPTION_POINTERS * pExPtrs )
 
         // Start looking up the exception address.
         PIMAGEHLP_SYMBOL pSym = (PIMAGEHLP_SYMBOL)&g_stSymbol ;
-        FillMemory ( pSym , NULL , SYM_BUFF_SIZE ) ;
+        FillMemory ( pSym , SYM_BUFF_SIZE, NULL ) ;
         pSym->SizeOfStruct = sizeof ( IMAGEHLP_SYMBOL ) ;
         pSym->MaxNameLength = SYM_BUFF_SIZE - sizeof ( IMAGEHLP_SYMBOL);
 
-		DWORD_PTR dwDisp64;
+        DWORD_PTR dwpDisp ;
         if ( TRUE ==
-              SymGetSymFromAddr ( (HANDLE)GetCurrentProcessId ( )     ,
-                                  (DWORD)pExPtrs->ExceptionRecord->
+              SymGetSymFromAddr ( GetCurrentProcess ( )     ,
+                                  (DWORD_PTR)pExPtrs->ExceptionRecord->
                                                      ExceptionAddress ,
-                                  &dwDisp64                             ,
+                                  &dwpDisp,
                                   pSym                                ))
         {
             iCurr += wsprintf ( g_szBuff + iCurr , _T ( ", " ) ) ;
@@ -480,12 +480,12 @@ LPCTSTR __stdcall GetFaultReason ( EXCEPTION_POINTERS * pExPtrs )
             }
             else
             {
-                if ( dwDisp64 > 0 )
+                if (dwpDisp > 0 )
                 {
                     iCurr += wsprintf ( g_szBuff + iCurr          ,
                                         _T ( "%s()+%04d byte(s)" ),
                                         pSym->Name                ,
-                                        dwDisp64                     ) ;
+										dwpDisp) ;
                 }
                 else
                 {
@@ -508,11 +508,12 @@ LPCTSTR __stdcall GetFaultReason ( EXCEPTION_POINTERS * pExPtrs )
         // Look up the source file and line number.
         ZeroMemory ( &g_stLine , sizeof ( IMAGEHLP_LINE ) ) ;
         g_stLine.SizeOfStruct = sizeof ( IMAGEHLP_LINE ) ;
-		DWORD dwDisp;
+
+        DWORD dwDisp;
         if ( TRUE ==
-              InternalSymGetLineFromAddr ((HANDLE)
-                                            GetCurrentProcessId ( )    ,
-                                          (DWORD)pExPtrs->
+              InternalSymGetLineFromAddr (
+                                            GetCurrentProcess ( )    ,
+                                          (DWORD_PTR)pExPtrs->
                                                     ExceptionRecord->
                                                       ExceptionAddress ,
                                           &dwDisp                      ,
@@ -604,16 +605,16 @@ LPCTSTR  __stdcall
     // function.
 
     // Initialize the STACKFRAME structure.
-    ZeroMemory ( &g_stFrame , sizeof ( STACKFRAME ) ) ;
+    ZeroMemory ( &g_stFrame , sizeof (g_stFrame) ) ;
 
-#if defined(_X86)_
+#if defined(_X86_)
     g_stFrame.AddrPC.Offset       = pExPtrs->ContextRecord->Eip ;
     g_stFrame.AddrPC.Mode         = AddrModeFlat                ;
     g_stFrame.AddrStack.Offset    = pExPtrs->ContextRecord->Esp ;
     g_stFrame.AddrStack.Mode      = AddrModeFlat                ;
     g_stFrame.AddrFrame.Offset    = pExPtrs->ContextRecord->Ebp ;
     g_stFrame.AddrFrame.Mode      = AddrModeFlat                ;
-#elif defined(_WIN64)
+#elif defined(_M_X64)
 	g_stFrame.AddrPC.Offset = pExPtrs->ContextRecord->Rip;
 	g_stFrame.AddrPC.Mode = AddrModeFlat;
 	g_stFrame.AddrStack.Offset = pExPtrs->ContextRecord->Rsp;
@@ -654,11 +655,7 @@ BOOL __stdcall CH_ReadProcessMemory ( HANDLE                      ,
                                       LPDWORD lpNumberOfBytesRead  )
 {
 	DWORD_PTR read;
-	BOOL b = ReadProcessMemory(GetCurrentProcess(),
-		lpBaseAddress,
-		lpBuffer,
-		nSize,
-		&read);
+	BOOL b = ReadProcessMemory(GetCurrentProcess(), lpBaseAddress, lpBuffer, nSize, &read);
 	*lpNumberOfBytesRead = read;
 	return b;
 }
@@ -685,22 +682,24 @@ LPCTSTR __stdcall
     DWORD dwTemp ;
     // The module base address. I look this up right after the stack
     // walk to ensure that the module is valid.
-    DWORD dwModBase ;
+    DWORD_PTR dwModBase ;
 
     __try
     {
         // Initialize the symbol engine in case it isn't initialized.
         InitSymEng ( ) ;
 
-#ifdef _WIN64
-#define CH_MACHINE IMAGE_FILE_MACHINE_IA64
-#else
+#if defined _M_X64
+#define CH_MACHINE IMAGE_FILE_MACHINE_AMD64
+#elif defined _M_IX86
 #define CH_MACHINE IMAGE_FILE_MACHINE_I386
+#else
+#error ( "Unknown machine!" )
 #endif
         // Note:  If the source file and line number functions are used,
         //        StackWalk can cause an access violation.
         BOOL bSWRet = StackWalk ( CH_MACHINE                        ,
-                                  (HANDLE)GetCurrentProcessId ( )   ,
+                                  GetCurrentProcess ( )             ,
                                   GetCurrentThread ( )              ,
                                   &g_stFrame                        ,
                                   pExPtrs->ContextRecord            ,
@@ -720,13 +719,8 @@ LPCTSTR __stdcall
         // by StackWalk really exists. I've seen cases in which
         // StackWalk returns TRUE but the address doesn't belong to
         // a module in the process.
-        dwModBase = SymGetModuleBase ( (HANDLE)GetCurrentProcessId ( ),
+        dwModBase = SymGetModuleBase ( GetCurrentProcess ( ),
                                         g_stFrame.AddrPC.Offset       );
-        if ( 0 == dwModBase )
-        {
-            szRet = NULL ;
-            return ( szRet ) ;
-        }
 
         int iCurr = 0 ;
 
@@ -738,7 +732,7 @@ LPCTSTR __stdcall
 #else
         iCurr += wsprintf ( g_szBuff + iCurr              ,
                             _T ( "%04X:%08X" )            ,
-                            pExPtrs->ContextRecord->SegCs ,
+                            g_stFrame.AddrPC.Segment      ,
                             g_stFrame.AddrPC.Offset        ) ;
 #endif
 
@@ -766,7 +760,7 @@ LPCTSTR __stdcall
         }
 
         ASSERT ( iCurr < ( BUFF_SIZE - MAX_PATH ) ) ;
-		DWORD_PTR dwDisp64;
+		DWORD_PTR dwpDisp;
 
         // Output the symbol name?
         if ( GSTSO_SYMBOL == ( dwOpts & GSTSO_SYMBOL ) )
@@ -780,9 +774,9 @@ LPCTSTR __stdcall
                                   sizeof ( IMAGEHLP_SYMBOL ) ;
 
             if ( TRUE ==
-                  SymGetSymFromAddr ( (HANDLE)GetCurrentProcessId ( ) ,
+                  SymGetSymFromAddr ( GetCurrentProcess ( ) ,
                                       g_stFrame.AddrPC.Offset         ,
-                                      &dwDisp64                         ,
+                                      &dwpDisp,
                                       pSym                            ))
             {
                 iCurr += wsprintf ( g_szBuff + iCurr , _T ( ", " ) ) ;
@@ -801,12 +795,12 @@ LPCTSTR __stdcall
                 }
                 else
                 {
-                    if ( dwDisp64 > 0 )
+                    if (dwpDisp > 0 )
                     {
                         iCurr += wsprintf ( g_szBuff + iCurr         ,
-                                            _T( "%s()") ,
-                                            pSym->Name               ,
-                                            dwDisp64                   );
+                                            _T( "%s + %d byte(s)") ,
+                                            pSym->Name,
+											dwpDisp);
                     }
                     else
                     {
@@ -833,10 +827,10 @@ LPCTSTR __stdcall
         {
             ZeroMemory ( &g_stLine , sizeof ( IMAGEHLP_LINE ) ) ;
             g_stLine.SizeOfStruct = sizeof ( IMAGEHLP_LINE ) ;
+
 			DWORD dwDisp;
             if ( TRUE ==
-                   InternalSymGetLineFromAddr ( (HANDLE)
-                                                  GetCurrentProcessId(),
+                   InternalSymGetLineFromAddr ( GetCurrentProcess(),
                                                 g_stFrame.AddrPC.Offset,
                                                 &dwDisp                ,
                                                 &g_stLine             ))
@@ -861,7 +855,7 @@ LPCTSTR __stdcall
                     if ( dwDisp > 0 )
                     {
                         iCurr += wsprintf(g_szBuff + iCurr             ,
-                                       _T("%s, %d"),
+                                          _T("%s, %d + %d byte(s)")    ,
                                           g_stLine.FileName            ,
                                           g_stLine.LineNumber          ,
                                           dwDisp                     );
@@ -1126,7 +1120,7 @@ LPCTSTR ConvertSimpleException ( DWORD dwExcept )
 }
 
 BOOL InternalSymGetLineFromAddr ( IN  HANDLE          hProcess        ,
-                                  IN  DWORD           dwAddr          ,
+                                  IN  DWORD_PTR       dwAddr          ,
                                   OUT PDWORD          pdwDisplacement ,
                                   OUT PIMAGEHLP_LINE  Line            )
 {
@@ -1184,9 +1178,8 @@ void InitSymEng ( void )
 
         // Force the invade process flag no matter what operating system
         // I'm on.
-        HANDLE hPID = (HANDLE)GetCurrentProcessId ( ) ;
-        VERIFY ( BSUSymInitialize ( (DWORD)hPID ,
-                                    hPID        ,
+        VERIFY ( BSUSymInitialize (GetCurrentProcessId(),
+            GetCurrentProcess(),
                                     g_application_path,
                                     TRUE         ) ) ;
         g_bSymEngInit = TRUE ;
@@ -1198,7 +1191,8 @@ void CleanupSymEng ( void )
 {
     if ( TRUE == g_bSymEngInit )
     {
-        VERIFY ( SymCleanup ( (HANDLE)GetCurrentProcessId ( ) ) ) ;
+        VERIFY ( SymCleanup ( GetCurrentProcess ( ) ) ) ;
         g_bSymEngInit = FALSE ;
     }
 }
+

@@ -18,6 +18,8 @@ XRCORE_API void* g_globalCheckAddr = NULL;
 extern void save_stack_trace();
 #endif // DEBUG_MEMORY_MANAGER
 
+#define USE_OLD_ALLOCATOR
+
 MEMPOOL mem_pools[mem_pools_count];
 
 // MSVC
@@ -30,10 +32,30 @@ ICF u32 get_pool(size_t size)
     else return pid;
 }
 
-#ifdef PURE_ALLOC
-bool g_use_pure_alloc = false;
-#endif // PURE_ALLOC
 
+bool g_use_pure_alloc = false;
+
+
+#ifndef USE_OLD_ALLOCATOR
+
+void* xrMemory::mem_alloc(size_t size
+#	ifdef DEBUG_MEMORY_NAME
+    , const char* _name
+#	endif // DEBUG_MEMORY_NAME
+)
+{
+    stat_calls++;
+
+
+
+    void* result = malloc(size);
+#ifdef USE_MEMORY_MONITOR
+    memory_monitor::monitor_alloc(result, size, _name);
+#endif // USE_MEMORY_MONITOR
+    return							(result);
+}
+
+#else
 void* xrMemory::mem_alloc(size_t size
 # ifdef DEBUG_MEMORY_NAME
                           , const char* _name
@@ -42,7 +64,6 @@ void* xrMemory::mem_alloc(size_t size
 {
     stat_calls++;
 
-#ifdef PURE_ALLOC
     static bool g_use_pure_alloc_initialized = false;
     if (!g_use_pure_alloc_initialized)
     {
@@ -64,7 +85,6 @@ void* xrMemory::mem_alloc(size_t size
 #endif // USE_MEMORY_MONITOR
         return (result);
     }
-#endif // PURE_ALLOC
 
 #ifdef DEBUG_MEMORY_MANAGER
     if (mem_initialized) debug_cs.Enter();
@@ -126,9 +146,23 @@ void* xrMemory::mem_alloc(size_t size
 #ifdef USE_MEMORY_MONITOR
     memory_monitor::monitor_alloc(_ptr, size, _name);
 #endif // USE_MEMORY_MONITOR
-	memset(_ptr, 0, size);
+	//memset(_ptr, 0, size);
     return _ptr;
 }
+
+#endif
+
+#ifndef USE_OLD_ALLOCATOR
+
+void	xrMemory::mem_free(void* P)
+{
+    stat_calls++;
+    free(P);
+    return;
+
+}
+
+#else
 
 void xrMemory::mem_free(void* P)
 {
@@ -137,13 +171,11 @@ void xrMemory::mem_free(void* P)
     memory_monitor::monitor_free(P);
 #endif // USE_MEMORY_MONITOR
 
-#ifdef PURE_ALLOC
     if (g_use_pure_alloc)
     {
         free(P);
         return;
     }
-#endif // PURE_ALLOC
 
 #ifdef DEBUG_MEMORY_MANAGER
     if (g_globalCheckAddr == P)
@@ -172,7 +204,24 @@ void xrMemory::mem_free(void* P)
 #endif // DEBUG_MEMORY_MANAGER
 }
 
+#endif
+
 extern BOOL g_bDbgFillMemory;
+
+#ifndef USE_OLD_ALLOCATOR
+
+void* xrMemory::mem_realloc(void* P, size_t size
+#ifdef DEBUG_MEMORY_NAME
+    , const char* _name
+#endif // DEBUG_MEMORY_NAME
+)
+{
+    stat_calls++;
+
+    void* result = realloc(P, size);
+    return							(result);
+}
+#else
 
 void* xrMemory::mem_realloc(void* P, size_t size
 #ifdef DEBUG_MEMORY_NAME
@@ -181,7 +230,6 @@ void* xrMemory::mem_realloc(void* P, size_t size
                            )
 {
     stat_calls++;
-#ifdef PURE_ALLOC
     if (g_use_pure_alloc)
     {
         void* result = realloc(P, size);
@@ -191,7 +239,6 @@ void* xrMemory::mem_realloc(void* P, size_t size
 # endif // USE_MEMORY_MONITOR
         return (result);
     }
-#endif // PURE_ALLOC
     if (0 == P)
     {
         return mem_alloc(size
@@ -291,5 +338,7 @@ void* xrMemory::mem_realloc(void* P, size_t size
 
     return _ptr;
 }
+
+#endif
 
 #endif // __BORLANDC__

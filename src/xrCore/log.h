@@ -21,6 +21,8 @@ void InitLog();
 void CloseLog();
 void XRCORE_API FlushLog();
 
+XRCORE_API LPCSTR logFullName();
+
 extern XRCORE_API xr_vector<shared_str>* LogFile;
 extern XRCORE_API BOOL LogExecCB;
 

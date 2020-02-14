@@ -136,26 +136,18 @@ static LPVOID __cdecl luabind_allocator	(
 		size_t const size
 	)
 {
-	if (!size) {
-		LPVOID	non_const_pointer = const_cast<LPVOID>(pointer);
-		xr_free	(non_const_pointer);
-		return	( 0 );
+	if (!size)
+	{
+		void* non_const_pointer = const_cast<LPVOID>(pointer);
+		xr_free(non_const_pointer);
+		return nullptr;
 	}
-
-	if (!pointer) {
-#ifdef DEBUG
-		return	( Memory.mem_alloc(size, "luabind") );
-#else // #ifdef DEBUG
-		return	( Memory.mem_alloc(size) );
-#endif // #ifdef DEBUG
+	if (!pointer)
+	{
+		return xr_malloc(size);
 	}
-
-	LPVOID		non_const_pointer = const_cast<LPVOID>(pointer);
-#ifdef DEBUG
-	return		( Memory.mem_realloc(non_const_pointer, size, "luabind") );
-#else // #ifdef DEBUG
-	return		( Memory.mem_realloc(non_const_pointer, size) );
-#endif // #ifdef DEBUG
+	void* non_const_pointer = const_cast<LPVOID>(pointer);
+	return xr_realloc(non_const_pointer, size);
 }
 
 void setup_luabind_allocator		()
@@ -277,7 +269,6 @@ void CScriptStorage::reinit	()
 	if (m_virtual_machine)
 		lua_close			(m_virtual_machine);
 
-	//m_virtual_machine		= lua_newstate(lua_alloc, NULL);
 	m_virtual_machine		= luaL_newstate();
 
 	if (!m_virtual_machine) {

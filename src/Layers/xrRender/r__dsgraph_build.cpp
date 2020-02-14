@@ -54,10 +54,10 @@ void R_dsgraph_structure::r_dsgraph_insert_dynamic	(dxRender_Visual *pVisual, Fv
 	float distSQ			;
 	float SSA;
 
-	if (!RI.val_bHUD)
+	//if (!RI.val_bHUD)
 		SSA = CalcSSA(distSQ, Center, pVisual);
-	else
-		SSA = CalcHudSSA(distSQ, Center, pVisual);
+	//else
+		//SSA = CalcHudSSA(distSQ, Center, pVisual);
 
 	if (SSA<=r_ssaDISCARD)		return;
 

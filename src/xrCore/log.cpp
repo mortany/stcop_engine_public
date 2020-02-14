@@ -64,6 +64,11 @@ void AddOne(const char* split)
     logCS.Leave();
 }
 
+LPCSTR logFullName()
+{
+    return logFName;
+}
+
 void Log(const char* s)
 {
     int i, j;

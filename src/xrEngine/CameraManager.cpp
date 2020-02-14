@@ -447,6 +447,7 @@ void CCameraManager::ApplyDevice(float _viewport_near)
 {
 	g_pGameLevel->lastApplyCamera = fastdelegate::FastDelegate1<float>(this, &CCameraManager::ApplyDeviceInternal);
 	g_pGameLevel->lastApplyCameraVPNear = _viewport_near;
+    //ApplyDeviceInternal(_viewport_near);
 }
 
 extern ENGINE_API float psSVP1FrustumFovK;

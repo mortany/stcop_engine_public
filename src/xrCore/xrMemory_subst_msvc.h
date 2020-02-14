@@ -149,7 +149,7 @@ struct xr_special_free
     {
         void* _real_ptr = dynamic_cast<void*>(ptr);
         ptr->~T();
-        Memory.mem_free(_real_ptr);
+        xr_free(_real_ptr);
     }
 };
 
@@ -159,7 +159,7 @@ struct xr_special_free < false, T >
     IC void operator()(T*& ptr)
     {
         ptr->~T();
-        Memory.mem_free(ptr);
+        xr_free(ptr);
     }
 };
 

@@ -463,7 +463,7 @@ class hud_transform_helper
 {
 	Fmatrix Pold;
 	Fmatrix FTold;
-	Fmatrix Vold;
+	//Fmatrix Vold;
 
 public:
 	hud_transform_helper()
@@ -474,13 +474,13 @@ public:
 		Pold = Device.mProject;
 		FTold = Device.mFullTransform;
 
-		Vold = Device.mView;
-		Device.mView.build_camera_dir(Fvector().set(0.f, 0.f, 0.f), Device.vCameraDirection, Device.vCameraTop);
+		//Vold = Device.mView;
+		//Device.mView.build_camera_dir(Fvector().set(0.f, 0.f, 0.f), Device.vCameraDirection, Device.vCameraTop);
 
 		Device.mProject.build_projection(deg2rad(psHUD_FOV * Device.fFOV /* *Device.fASPECT*/), Device.fASPECT,	0.05f, g_pGamePersistent->Environment().CurrentEnv->far_plane);
 
 		Device.mFullTransform.mul(Device.mProject, Device.mView);
-		RCache.set_xform_view(Device.mView);
+		//RCache.set_xform_view(Device.mView);
 		RCache.set_xform_project(Device.mProject);
 
 		RImplementation.rmNear();
@@ -493,8 +493,8 @@ public:
 		// Restore projection
 		Device.mProject = Pold;
 		Device.mFullTransform = FTold;
-		Device.mView = Vold;
-		RCache.set_xform_view(Device.mView);
+		//Device.mView = Vold;
+		//RCache.set_xform_view(Device.mView);
 		RCache.set_xform_project(Device.mProject);
 	}
 };

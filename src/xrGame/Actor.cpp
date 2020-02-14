@@ -1122,7 +1122,7 @@ void CActor::UpdateCL	()
 
 		//trans.c = buff;
 
-		trans.c.set(0.f, 0.f, 0.f);
+		//trans.c.set(0.f, 0.f, 0.f);
 		g_player_hud->update(trans);
 	}
 

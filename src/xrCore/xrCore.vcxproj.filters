@@ -85,6 +85,9 @@
     <Filter Include="OS">
       <UniqueIdentifier>{6d6f8325-ad31-4677-b0b9-de5d952c320b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{8185e74a-e698-4c04-a4fd-35424eab6066}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FTimer.cpp">
@@ -599,6 +602,36 @@
     </ClInclude>
     <ClInclude Include="xrSyncronize.h" />
     <ClInclude Include="..\build_config_defines.h" />
+    <ClInclude Include="xr_vector.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="xalloc.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="xr_map.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="xr_set.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="xr_stack.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="xr_list.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="xr_deque.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="xr_string.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="predicates.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="xr_vector_defs.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="xrCore.rc">

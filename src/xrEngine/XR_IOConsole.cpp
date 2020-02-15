@@ -148,13 +148,13 @@ void CConsole::Initialize()
     m_last_cmd = NULL;
 
     m_cmd_history.reserve(m_cmd_history_max + 2);
-    m_cmd_history.clear_not_free();
+    m_cmd_history.clear();
     reset_cmd_history_idx();
 
     m_tips.reserve(MAX_TIPS_COUNT + 1);
-    m_tips.clear_not_free();
+    m_tips.clear();
     m_temp_tips.reserve(MAX_TIPS_COUNT + 1);
-    m_temp_tips.clear_not_free();
+    m_temp_tips.clear();
 
     m_tips_mode = 0;
     m_prev_length_str = 0;
@@ -216,7 +216,7 @@ void CConsole::OutFont(LPCSTR text, float& pos_y)
         int ln = 0;
         PSTR one_line = (PSTR)_alloca((CONSOLE_BUF_SIZE + 1) * sizeof(char));
 
-        while (text[sz] && (ln + sz < CONSOLE_BUF_SIZE - 5))// перенос строк
+        while (text[sz] && (ln + sz < CONSOLE_BUF_SIZE - 5))// РїРµСЂРµРЅРѕСЃ СЃС‚СЂРѕРє
         {
             one_line[ln + sz] = text[sz];
             one_line[ln + sz + 1] = 0;
@@ -448,7 +448,7 @@ void CConsole::DrawBackgrounds(bool bGame)
     float list_w = pFont->SizeOf_(max_str) + 2.0f * w1;
 
     float font_h = pFont->CurrentHeight_();
-    float tips_h = _min(m_tips.size(), (u32)VIEW_TIPS_COUNT) * font_h;
+    float tips_h = std::min(m_tips.size(), (size_t)VIEW_TIPS_COUNT) * font_h;
     tips_h += (m_tips.size() > 0) ? 5.0f : 0.0f;
 
     Frect pr, sr;
@@ -872,8 +872,8 @@ bool CConsole::add_internal_cmds(LPCSTR in_str, vecTipsEx& out_v)
 
 void CConsole::update_tips()
 {
-    m_temp_tips.clear_not_free();
-    m_tips.clear_not_free();
+    m_temp_tips.clear();
+    m_tips.clear();
 
     m_cur_cmd = NULL;
     if (!bVisible)
@@ -962,7 +962,7 @@ void CConsole::update_tips()
 
 void CConsole::select_for_filter(LPCSTR filter_str, vecTips& in_v, vecTipsEx& out_v)
 {
-    out_v.clear_not_free();
+    out_v.clear();
     u32 in_count = in_v.size();
     if (in_count == 0 || !filter_str)
     {

@@ -1357,6 +1357,7 @@
     <ClInclude Include="PPMd.h" />
     <ClInclude Include="PPMdType.h" />
     <ClInclude Include="ppmd_compressor.h" />
+    <ClInclude Include="predicates.h" />
     <ClInclude Include="ptmalloc3\malloc-2.8.3.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="rt_compressor.h" />
@@ -1376,6 +1377,7 @@
     <ClInclude Include="string_concatenations_inline.h" />
     <ClInclude Include="SubAlloc.hpp" />
     <ClInclude Include="vector.h" />
+    <ClInclude Include="xalloc.h" />
     <ClInclude Include="xrCore.h" />
     <ClInclude Include="xrCore_platform.h" />
     <ClInclude Include="xrDebug.h" />
@@ -1391,10 +1393,18 @@
     <ClInclude Include="xrsharedmem.h" />
     <ClInclude Include="xrstring.h" />
     <ClInclude Include="xrSyncronize.h" />
+    <ClInclude Include="xr_deque.h" />
     <ClInclude Include="xr_ini.h" />
+    <ClInclude Include="xr_list.h" />
+    <ClInclude Include="xr_map.h" />
     <ClInclude Include="xr_resource.h" />
+    <ClInclude Include="xr_set.h" />
     <ClInclude Include="xr_shared.h" />
+    <ClInclude Include="xr_stack.h" />
+    <ClInclude Include="xr_string.h" />
     <ClInclude Include="xr_trims.h" />
+    <ClInclude Include="xr_vector.h" />
+    <ClInclude Include="xr_vector_defs.h" />
     <ClInclude Include="_bitwise.h" />
     <ClInclude Include="_color.h" />
     <ClInclude Include="_compressed_normal.h" />

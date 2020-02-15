@@ -316,7 +316,7 @@ void CObjectList::net_Register(CObject* O)
 
 
 
-    //. map_NETID.insert(mk_pair(O->ID(),O));
+    //. map_NETID.insert(std::make_pair(O->ID(),O));
     //Msg ("-------------------------------- Register: %s",O->cName());
 }
 

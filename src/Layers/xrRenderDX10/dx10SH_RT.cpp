@@ -170,7 +170,7 @@ void CRT::create	(LPCSTR Name, u32 w, u32 h,	D3DFORMAT f, u32 SampleCount )
 		desc.Width = vp_params[i].w;
 		desc.Height = vp_params[i].h;
 
-		auto it = viewPortStuff.insert(mk_pair(vp_params[i].viewport, ViewPortRT()));
+		auto it = viewPortStuff.insert(std::make_pair(vp_params[i].viewport, ViewPortRT()));
 
 		it.first->second.rtWidth = vp_params[i].w;
 		it.first->second.rtHeight = vp_params[i].h;

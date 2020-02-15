@@ -88,7 +88,7 @@ for (int c=0; c<count; c++){
 CObject* pObject= (CObject*) NEW_INSTANCE(CLS);
 pObject->Load (item.first.c_str());
 VERIFY2 (pObject->cNameSect().c_str(),item.first.c_str());
-map_POOL.insert (mk_pair(pObject->cNameSect(),pObject));
+map_POOL.insert (std::make_pair(pObject->cNameSect(),pObject));
 }
 }
 
@@ -135,6 +135,6 @@ return O;
 
 void IGame_ObjectPool::destroy ( CObject* O )
 {
-map_POOL.insert (mk_pair(O->cNameSect(),O));
+map_POOL.insert (std::make_pair(O->cNameSect(),O));
 }
 */

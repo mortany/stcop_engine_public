@@ -643,9 +643,12 @@ public:
 };
 
 
-ENGINE_API float psHUD_FOV_def = 0.35f; //--#SM+#--	Дефолтный HUD FOV (В % от Camera FOV) [default hud_fov (perc. of g_fov)]
+ENGINE_API float psHUD_FOV_def = 0.45f; //--#SM+#--	Дефолтный HUD FOV (В % от Camera FOV) [default hud_fov (perc. of g_fov)]
 ENGINE_API float psHUD_FOV = psHUD_FOV_def; //--#SM+#-- Текущий HUD FOV (В % от Camera FOV) [current hud_fov (perc. of g_fov)]
 ENGINE_API float VIEWPORT_NEAR = 0.2f; //--#SM+#-- (Old: 0.2f)
+
+ENGINE_API float hud_adj_delta_pos = 0.0005f;
+ENGINE_API float hud_adj_delta_rot = 0.05f;
 
 ENGINE_API float psSVPImageSizeK = 0.7f;
 
@@ -810,6 +813,9 @@ void CCC_Register()
 	CMD4(CCC_Float, "developer_float_2", &devfloat2, -100000.f, 100000.f);
 	CMD4(CCC_Float, "developer_float_3", &devfloat3, -100000.f, 100000.f);
 	CMD4(CCC_Float, "developer_float_4", &devfloat4, -100000.f, 100000.f);
+
+    CMD4(CCC_Float, "hud_adjust_delta_pos", &hud_adj_delta_pos, -10.f, 10.f);
+    CMD4(CCC_Float, "hud_adjust_delta_rot", &hud_adj_delta_rot, -10.f, 10.f);
 
     CMD1(CCC_ExclusiveMode, "input_exclusive_mode");
 

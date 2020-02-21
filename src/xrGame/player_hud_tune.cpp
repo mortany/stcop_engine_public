@@ -15,8 +15,10 @@ u32 hud_adj_mode		= 0;
 u32 hud_adj_item_idx	= 0;
 // "press SHIFT+NUM 0-return 1-hud_pos 2-hud_rot 3-itm_pos 4-itm_rot 5-fire_point 6-fire_2_point 7-shell_point";
 
-float _delta_pos			= READ_IF_EXISTS(pFFSettings, r_float, "hud_adj", "_delta_pos", 0.0005f);
-float _delta_rot			= READ_IF_EXISTS(pFFSettings, r_float, "hud_adj", "_delta_rot", 0.05f);
+extern ENGINE_API float hud_adj_delta_pos, hud_adj_delta_rot;
+
+//float _delta_pos			= READ_IF_EXISTS(pFFSettings, r_float, "hud_adj", "_delta_pos", 0.0005f);
+//float _delta_rot			= READ_IF_EXISTS(pFFSettings, r_float, "hud_adj", "_delta_rot", 0.05f);
 
 bool is_attachable_item_tuning_mode()
 {
@@ -117,9 +119,9 @@ void attachable_hud_item::tune(Ivector values)
 	{
 		if(hud_adj_mode==3)
 		{
-			if(values.x)	diff.x = (values.x>0)?_delta_pos:-_delta_pos;
-			if(values.y)	diff.y = (values.y>0)?_delta_pos:-_delta_pos;
-			if(values.z)	diff.z = (values.z>0)?_delta_pos:-_delta_pos;
+			if(values.x)	diff.x = (values.x>0)? hud_adj_delta_pos :-hud_adj_delta_pos;
+			if(values.y)	diff.y = (values.y>0)? hud_adj_delta_pos :-hud_adj_delta_pos;
+			if(values.z)	diff.z = (values.z>0)? hud_adj_delta_pos :-hud_adj_delta_pos;
 			
 			Fvector							d;
 			Fmatrix							ancor_m;
@@ -129,9 +131,9 @@ void attachable_hud_item::tune(Ivector values)
 		}else
 		if(hud_adj_mode==4)
 		{
-			if(values.x)	diff.x = (values.x>0)?_delta_rot:-_delta_rot;
-			if(values.y)	diff.y = (values.y>0)?_delta_rot:-_delta_rot;
-			if(values.z)	diff.z = (values.z>0)?_delta_rot:-_delta_rot;
+			if(values.x)	diff.x = (values.x>0)? hud_adj_delta_rot :-hud_adj_delta_rot;
+			if(values.y)	diff.y = (values.y>0)? hud_adj_delta_rot :-hud_adj_delta_rot;
+			if(values.z)	diff.z = (values.z>0)? hud_adj_delta_rot :-hud_adj_delta_rot;
 
 			Fvector							d;
 			Fmatrix							ancor_m;
@@ -152,9 +154,9 @@ void attachable_hud_item::tune(Ivector values)
 
 	if(hud_adj_mode==5||hud_adj_mode==6||hud_adj_mode==7)
 	{
-		if(values.x)	diff.x = (values.x>0)?_delta_pos:-_delta_pos;
-		if(values.y)	diff.y = (values.y>0)?_delta_pos:-_delta_pos;
-		if(values.z)	diff.z = (values.z>0)?_delta_pos:-_delta_pos;
+		if(values.x)	diff.x = (values.x>0)? hud_adj_delta_pos :-hud_adj_delta_pos;
+		if(values.y)	diff.y = (values.y>0)? hud_adj_delta_pos :-hud_adj_delta_pos;
+		if(values.z)	diff.z = (values.z>0)? hud_adj_delta_pos :-hud_adj_delta_pos;
 
 		if(hud_adj_mode==5)
 		{
@@ -214,7 +216,7 @@ void player_hud::tune(Ivector _values)
 		Fvector			diff;
 		diff.set		(0,0,0);
 		
-		float _curr_dr	= _delta_rot;
+		float _curr_dr	= hud_adj_delta_rot;
 
 		u8 idx			= m_attached_items[hud_adj_item_idx]->m_parent_hud_item->GetCurrentHudOffsetIdx();
 		if(idx)
@@ -225,9 +227,9 @@ void player_hud::tune(Ivector _values)
 
 		if(hud_adj_mode==1)
 		{
-			if(values.x)	diff.x = (values.x<0)?_delta_pos:-_delta_pos;
-			if(values.y)	diff.y = (values.y>0)?_delta_pos:-_delta_pos;
-			if(values.z)	diff.z = (values.z>0)?_delta_pos:-_delta_pos;
+			if(values.x)	diff.x = (values.x<0)? hud_adj_delta_pos :-hud_adj_delta_pos;
+			if(values.y)	diff.y = (values.y>0)? hud_adj_delta_pos :-hud_adj_delta_pos;
+			if(values.z)	diff.z = (values.z>0)? hud_adj_delta_pos :-hud_adj_delta_pos;
 
 			pos_.add		(diff);
 		}
@@ -268,10 +270,10 @@ void player_hud::tune(Ivector _values)
 	else if(hud_adj_mode==8 || hud_adj_mode==9)
 	{
 		if(hud_adj_mode==8 && (values.z) )
-			_delta_pos	+= (values.z>0)?0.001f:-0.001f;
+			hud_adj_delta_pos += (values.z>0)?0.001f:-0.001f;
 		
 		if(hud_adj_mode==9 && (values.z) )
-			 _delta_rot += (values.z>0)?0.1f:-0.1f;
+			hud_adj_delta_rot += (values.z>0)?0.1f:-0.1f;
 	}
 	else
 	{
@@ -419,7 +421,7 @@ void hud_draw_adjust_mode()
 			F->SetColor			(0xffffffff);
 			F->OutNext			(_text);
 			F->OutNext			("for item [%d]", hud_adj_item_idx);
-			F->OutNext			("delta values dP=%f dR=%f", _delta_pos, _delta_rot);
+			F->OutNext			("delta values dP=%f dR=%f", hud_adj_delta_pos, hud_adj_delta_rot);
 			F->OutNext			("[Z]-x axis [X]-y axis [C]-z axis");
 		}
 }

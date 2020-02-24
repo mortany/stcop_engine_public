@@ -601,7 +601,6 @@
       <Filter>OS</Filter>
     </ClInclude>
     <ClInclude Include="xrSyncronize.h" />
-    <ClInclude Include="..\build_config_defines.h" />
     <ClInclude Include="xr_vector.h">
       <Filter>Common</Filter>
     </ClInclude>
@@ -630,6 +629,9 @@
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="xr_vector_defs.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.hpp">
       <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>

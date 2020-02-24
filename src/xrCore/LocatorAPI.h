@@ -11,6 +11,7 @@
 #include <io.h>
 #pragma warning(pop)
 
+#include "Utils.hpp"
 #include "LocatorAPI_defs.h"
 
 class XRCORE_API CStreamReader;

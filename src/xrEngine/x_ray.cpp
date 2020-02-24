@@ -779,7 +779,7 @@ int APIENTRY WinMain_impl(HINSTANCE hInstance,
 #endif // DEDICATED_SERVER
 
     //if (strstr(Core.Params, "-cpu_test_fix"))
-        SetThreadAffinityMask(GetCurrentThread(), 1);
+        //SetThreadAffinityMask(GetCurrentThread(), 1);
     //SetThreadAffinityMask(GetCurrentThread(), 1);
 
     // Title window

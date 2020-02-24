@@ -4,6 +4,9 @@
 #include "particle_actions_collection.h"
 #include "particle_effect.h"
 
+#include "tbb/parallel_for.h" 
+#include "tbb/blocked_range.h"
+
 using namespace PAPI;
 
 void PAPI::PAAvoid::Execute(ParticleEffect *effect, const float dt, float& tm_max)
@@ -1664,8 +1667,7 @@ __forceinline void _mm_store_fvector( Fvector& v , const __m128 R1 )
 
 
 struct TES_PARAMS {
-	u32 p_from;
-	u32 p_to;
+	u32 p_count;
 	ParticleEffect* effect;
 	pVector offset;
 	float age;
@@ -1676,7 +1678,7 @@ struct TES_PARAMS {
 };
 
 
-void PATurbulenceExecuteStream( LPVOID lpvParams )
+void PATurbulenceExecuteStream(TES_PARAMS* pParams)
 {
 	#ifdef _GPA_ENABLED	
 		TAL_SCOPED_TASK_NAMED( "PATurbulenceExecuteStream()" );
@@ -1691,10 +1693,7 @@ void PATurbulenceExecuteStream( LPVOID lpvParams )
     pVector vY;
     pVector vZ;
 
-	TES_PARAMS* pParams = (TES_PARAMS *) lpvParams;
-
-	u32 p_from = pParams->p_from;
-	u32 p_to = pParams->p_to;
+	u32 count = pParams->p_count;
 	ParticleEffect* effect = pParams->effect;
 	pVector offset = pParams->offset;
 	float age = pParams->age;
@@ -1703,7 +1702,7 @@ void PATurbulenceExecuteStream( LPVOID lpvParams )
 	int octaves = pParams->octaves;
 	float magnitude = pParams->magnitude;
 
-    for(u32 i = p_from; i < p_to; i++)
+	FOR_START(u32, 0, count, i)
     {
         Particle &m = effect->particles[i];
 
@@ -1752,7 +1751,7 @@ void PATurbulenceExecuteStream( LPVOID lpvParams )
 
 		_mm_store_fvector( m.vel , _mvel );
 	}
-
+	FOR_END
 }
 
 
@@ -1774,38 +1773,16 @@ void PATurbulence::Execute(ParticleEffect *effect, const float dt, float& tm_max
 	if ( ! p_cnt )
 		return;
 
-	u32 nWorkers = ttapi_GetWorkersCount();
-
-	if ( p_cnt < nWorkers * 20 )
-		nWorkers = 1;
-
-	TES_PARAMS* tesParams = (TES_PARAMS*) _alloca( sizeof(TES_PARAMS) * nWorkers );
-
-	// Give ~1% more for the last worker
-	// to minimize wait in final spin
-	u32 nSlice = p_cnt / 128; 
-
-	u32 nStep = ( ( p_cnt - nSlice ) / nWorkers );
-	//u32 nStep = ( p_cnt / nWorkers );
-
-	//Msg( "Trb: %u" , nStep );
-
-	for ( u32 i = 0 ; i < nWorkers ; ++i ) {
-		tesParams[i].p_from = i * nStep;
-		tesParams[i].p_to = ( i == ( nWorkers - 1 ) ) ? p_cnt : ( tesParams[i].p_from + nStep );
-
-		tesParams[i].effect = effect;
-		tesParams[i].offset = offset;
-		tesParams[i].age = age;
-		tesParams[i].epsilon = epsilon;
-		tesParams[i].frequency = frequency;
-		tesParams[i].octaves = octaves;
-		tesParams[i].magnitude = magnitude;
-
-		ttapi_AddWorker( PATurbulenceExecuteStream , (LPVOID) &tesParams[i] );
-	}
-
-	ttapi_RunAllWorkers();
+	TES_PARAMS tesParams;
+	tesParams.p_count = p_cnt;
+	tesParams.effect = effect;
+	tesParams.offset = offset;
+	tesParams.age = age;
+	tesParams.epsilon = epsilon;
+	tesParams.frequency = frequency;
+	tesParams.octaves = octaves;
+	tesParams.magnitude = magnitude;
+	PATurbulenceExecuteStream(&tesParams);
 
 }
 

@@ -3,6 +3,10 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
+
+#include <tbb/blocked_range.h>
+#include <tbb/parallel_for.h>
+
 #include "HOM.h"
 #include "occRasterizer.h"
 #include "../../xrEngine/GameFont.h"
@@ -94,7 +98,8 @@ void CHOM::Load			()
 
 	// Create RASTER-triangles
 	m_pTris				= xr_alloc<occTri>	(u32(CL.getTS()));
-	for (u32 it=0; it<CL.getTS(); it++)
+
+	FOR_START(u32, 0, CL.getTS(), it)
 	{
 		CDB::TRI&	clT = CL.getT()[it];
 		occTri&		rT	= m_pTris[it];
@@ -113,6 +118,7 @@ void CHOM::Load			()
 		rT.skip			= 0;
 		rT.center.add(v0,v1).add(v2).div(3.f);
 	}
+	FOR_END
 
 	// Create AABB-tree
 	m_pModel			= xr_new<CDB::MODEL> ();

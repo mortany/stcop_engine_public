@@ -1301,7 +1301,6 @@
     <ClCompile Include="_std_extensions.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\build_config_defines.h" />
     <ClInclude Include="blackbox\BugslayerUtil.h" />
     <ClInclude Include="blackbox\CrashHandler.h" />
     <ClInclude Include="blackbox\DiagAssert.h" />
@@ -1376,6 +1375,7 @@
     <ClInclude Include="string_concatenations.h" />
     <ClInclude Include="string_concatenations_inline.h" />
     <ClInclude Include="SubAlloc.hpp" />
+    <ClInclude Include="Utils.hpp" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="xalloc.h" />
     <ClInclude Include="xrCore.h" />

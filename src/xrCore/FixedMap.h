@@ -135,6 +135,12 @@ public:
             allocator::dealloc(nodes);
         }
     }
+
+    bool empty() const 
+    { 
+        return pool == 0; 
+    }
+
     IC TNode* insert(const K& k)
     {
         if (pool)

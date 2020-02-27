@@ -387,9 +387,6 @@
     <ClInclude Include="FixedMap.h">
       <Filter>Math\STLext</Filter>
     </ClInclude>
-    <ClInclude Include="FixedSet.h">
-      <Filter>Math\STLext</Filter>
-    </ClInclude>
     <ClInclude Include="FixedVector.h">
       <Filter>Math\STLext</Filter>
     </ClInclude>
@@ -632,6 +629,9 @@
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="Utils.hpp">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="xr_allocator.h">
       <Filter>Common</Filter>
     </ClInclude>
   </ItemGroup>

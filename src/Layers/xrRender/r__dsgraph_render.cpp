@@ -509,11 +509,15 @@ void R_dsgraph_structure::r_dsgraph_render_hud	()
 	
 	//PIX_EVENT(r_dsgraph_render_hud);
 
-	hud_transform_helper helper;
+	if(!mapHUD.empty())
+	{
+		hud_transform_helper helper;
 
-	// Rendering
-	mapHUD.traverseLR			(sorted_L1);
-	mapHUD.clear				();
+		// Rendering
+		mapHUD.traverseLR(sorted_L1);
+		mapHUD.clear();
+	}
+
 
 #if	RENDER==R_R1
 	if (g_hud && g_hud->RenderActiveItemUIQuery())
@@ -560,20 +564,28 @@ void	R_dsgraph_structure::r_dsgraph_render_sorted	()
 	mapSorted.traverseRL	(sorted_L1);
 	mapSorted.clear			();
 
-	hud_transform_helper helper;
 
-	// Rendering
-	mapHUDSorted.traverseRL(sorted_L1);
-	mapHUDSorted.clear();
+	if (!mapHUDSorted.empty())
+	{
+		hud_transform_helper helper;
+
+		// Rendering
+		mapHUDSorted.traverseRL(sorted_L1);
+		mapHUDSorted.clear();
+	}
+
 }
 
 void	R_dsgraph_structure::r_dsgraph_render_hud_sorted()
 {
-	hud_transform_helper helper;
+	if (!mapHUDSorted.empty())
+	{
+		hud_transform_helper helper;
 
-	// Rendering
-	mapHUDSorted.traverseRL(sorted_L1);
-	mapHUDSorted.clear();
+		// Rendering
+		mapHUDSorted.traverseRL(sorted_L1);
+		mapHUDSorted.clear();
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -587,11 +599,14 @@ void	R_dsgraph_structure::r_dsgraph_render_emissive	()
 
 	//	HACK: Calculate this only once
 
-	hud_transform_helper helper;
+	if (!mapHUDEmissive.empty())
+	{
+		hud_transform_helper helper;
 
-	// Sorted (back to front)
-	mapHUDEmissive.traverseLR	(sorted_L1);
-	mapHUDEmissive.clear		();
+		// Sorted (back to front)
+		mapHUDEmissive.traverseLR(sorted_L1);
+		mapHUDEmissive.clear();
+	}
 #endif
 }
 

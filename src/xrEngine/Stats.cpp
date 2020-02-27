@@ -338,6 +338,13 @@ void CStats::Show()
         pFont->OnRender();
     };
 
+    if (psDeviceFlags.test(rsFPS))
+    {
+        const auto fps = u32(fFPS);
+        fpsFont->Out(Device.dwWidth - 40, 5, "%3d", fps);
+        fpsFont->OnRender();
+    }
+
     if ( /*psDeviceFlags.test(rsStatistic) ||*/ psDeviceFlags.test(rsCameraPos))
     {
         _draw_cam_pos(pFont);
@@ -461,10 +468,11 @@ void CStats::OnDeviceCreate()
 {
     g_bDisableRedText = strstr(Core.Params, "-xclsx") ? TRUE : FALSE;
 
-    // if (!strstr(Core.Params, "-dedicated"))
-#ifndef DEDICATED_SERVER
     pFont = xr_new<CGameFont>("stat_font", CGameFont::fsDeviceIndependent);
-#endif
+    fpsFont = xr_new<CGameFont>("hud_font_di", CGameFont::fsDeviceIndependent);
+    fpsFont->SetHeightI(0.025f);
+    fpsFont->SetColor(color_rgba(250, 250, 15, 180));
+
 
     if (!pSettings->section_exist("evaluation")
             || !pSettings->line_exist("evaluation", "line1")
@@ -486,6 +494,7 @@ void CStats::OnDeviceDestroy()
 {
     SetLogCB(0);
     xr_delete(pFont);
+    xr_delete(fpsFont);
 }
 
 void CStats::OnRender()

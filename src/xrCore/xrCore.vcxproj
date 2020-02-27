@@ -1322,7 +1322,6 @@
     <CustomBuild Include="FileSystem.h" />
     <ClInclude Include="file_stream_reader.h" />
     <ClInclude Include="FixedMap.h" />
-    <ClInclude Include="FixedSet.h" />
     <ClInclude Include="FixedVector.h" />
     <ClInclude Include="FS.h" />
     <ClInclude Include="FS_impl.h" />
@@ -1393,6 +1392,7 @@
     <ClInclude Include="xrsharedmem.h" />
     <ClInclude Include="xrstring.h" />
     <ClInclude Include="xrSyncronize.h" />
+    <ClInclude Include="xr_allocator.h" />
     <ClInclude Include="xr_deque.h" />
     <ClInclude Include="xr_ini.h" />
     <ClInclude Include="xr_list.h" />

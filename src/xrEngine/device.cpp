@@ -362,7 +362,7 @@ void CRenderDevice::on_idle()
 			{
 
 				seqRender.Process(rp_Render);
-				if ((psDeviceFlags.test(rsCameraPos) || psDeviceFlags.test(rsStatistic) || Statistic->errors.size()) && (Render->currentViewPort == MAIN_VIEWPORT || debugSecondVP))
+				if ((psDeviceFlags.test(rsCameraPos) || psDeviceFlags.test(rsStatistic) || psDeviceFlags.test(rsFPS) || Statistic->errors.size()) && (Render->currentViewPort == MAIN_VIEWPORT || debugSecondVP))
 					Statistic->Show();
 				// TEST!!!
 				//Statistic->RenderTOTAL_Real.End ();

@@ -98,6 +98,16 @@ public:
     CRegistrator <pureFrame > seqFrame;
     CRegistrator <pureScreenResolutionChanged> seqResolutionChanged;
 
+    // returns the aproximate, adjusted by camera fov, distance 
+    IC float GetDistFromCamera(const Fvector& from_position) const
+    {
+        float distance = vCameraPosition.distance_to(from_position);
+        float fov_K = 67.f / fFOV;
+        float adjusted_distane = distance / fov_K;
+
+        return adjusted_distane;
+    }
+
     HWND m_hWnd;
     // CStats* Statistic;
 

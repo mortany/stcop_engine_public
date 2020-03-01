@@ -8,7 +8,6 @@
 
 #ifndef _EDITOR
 #include <xmmintrin.h>
-#pragma comment(lib,"xrCPU_Pipe.lib")
 #endif
 
 using namespace PAPI;

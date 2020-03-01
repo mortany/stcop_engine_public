@@ -8,10 +8,7 @@
 #include "../../xrEngine/xr_object.h"
 #include "../xrRender/fbasicvisual.h"
 #include "../../xrEngine/CustomHUD.h"
-
-#ifndef _EDITOR
-#include "../../xrCPU_Pipe/ttapi.h"
-#endif
+#include "../../xrEngine/CPU/PLC.h"
 
 const	float		S_distance		= 48;
 const	float		S_distance2		= S_distance*S_distance;
@@ -518,7 +515,9 @@ void CLightShadows::render	()
 			*/
 			int	c0,c1,c2;
 
-			PSGP.PLC_calc3(c0,c1,c2,Device,v,TT.N,S.L,Le,S.C);
+			XRay::Math::PLCCalc_SSE(c0, c1, c2, Device.vCameraPosition, v, TT.N, S.L, Le, S.C);
+
+			//Math::
 
 			if (c0>S_clip && c1>S_clip && c2>S_clip)		continue;	
 			clamp		(c0,S_ambient,255);

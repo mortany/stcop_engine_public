@@ -682,7 +682,7 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>.;$(SolutionDir)3rd party\luajit-2\src\;$(SolutionDir)3rd party\luabind\;$(DXSDK_DIR)Include;$(XRAY_16X_LIBS)OpenAutomate\inc;$(XRAY_16X_LIBS)libogg-1.1.4\include;$(XRAY_16X_LIBS)libtheora-1.1.1\include;$(xrSdkDir)include;$(xrSdkDir)include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(SolutionDir)3rd party\tbb\include\;$(SolutionDir)3rd party\luajit-2\src\;$(SolutionDir)3rd party\luabind\;$(DXSDK_DIR)Include;$(XRAY_16X_LIBS)OpenAutomate\inc;$(XRAY_16X_LIBS)libogg-1.1.4\include;$(XRAY_16X_LIBS)libtheora-1.1.1\include;$(xrSdkDir)include;$(xrSdkDir)include\OpenAutomate;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;ENGINE_BUILD;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>
       </StringPooling>
@@ -713,7 +713,7 @@
     <Link>
       <AdditionalDependencies>vfw32.lib;libogg_static.lib;libtheora_static.lib;oalib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)Lib\x64;$(SolutionDir)3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;$(SolutionDir)..\lib\$(Platform)\Release;$(SolutionDir)$(Platform)\Release;$(xrSdkDir)libraries\x64;$(xrLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(DXSDK_DIR)Lib\x64;$(xr3rdPartyDir)tbb\lib\intel64\vc14;$(SolutionDir)3rd party\luajit-2\src\;$(XRAY_16X_LIBS)OpenAutomate\libraries;$(SolutionDir)..\lib\$(Platform)\Release;$(SolutionDir)$(Platform)\Release;$(xrSdkDir)libraries\x64;$(xrLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <SubSystem>Windows</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
@@ -1307,6 +1307,7 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CPU\PLC.h" />
     <ClInclude Include="ai_script_lua_extension.h" />
     <ClInclude Include="ai_script_lua_space.h" />
     <ClInclude Include="ai_script_space.h" />

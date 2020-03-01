@@ -250,6 +250,9 @@
     <Filter Include="My Amplifier Results">
       <UniqueIdentifier>{6aec60dd-7590-4a0f-accf-2550c71f6aa4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CPU">
+      <UniqueIdentifier>{d5c34dea-5824-4ae9-b3e4-0779ba0fc541}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="_d3d_extensions.h">
@@ -617,6 +620,9 @@
     </ClInclude>
     <ClInclude Include="xrSASH.h">
       <Filter>OpenAutomate</Filter>
+    </ClInclude>
+    <ClInclude Include="CPU\PLC.h">
+      <Filter>CPU</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

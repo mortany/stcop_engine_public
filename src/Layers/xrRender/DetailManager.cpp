@@ -259,7 +259,7 @@ void CDetailManager::UpdateVisibleM()
 {
 	for (int i = 0; i != 3; ++i)
 		for (auto& vis : m_visibles[i])
-			vis.clear(); // Mortan: Maybe in this old engine .clear()?
+			vis.clear();
 
 	Fvector		EYE				= RDEVICE.vCameraPosition_saved;
 
@@ -382,16 +382,13 @@ void CDetailManager::Render	()
 	if (!psDeviceFlags.is(rsDetails))	return;
 
 	// MT
-	MT_SYNC					();
+	//MT_SYNC					();
+	WaitForCalc();
 
 	RDEVICE.Statistic->RenderDUMP_DT_Render.Begin	();
 	g_pGamePersistent->m_pGShaderConstants->m_blender_mode.w = 1.0f; //--#SM+#-- Флаг начала рендера травы [begin of grass render]
 
-#ifndef _EDITOR
 	float factor			= g_pGamePersistent->Environment().wind_strength_factor;
-#else
-	float factor			= 0.3f;
-#endif
 	swing_current.lerp		(swing_desc[0],swing_desc[1],factor);
 
 	RCache.set_CullMode		(CULL_NONE);
@@ -404,29 +401,37 @@ void CDetailManager::Render	()
 	m_frame_rendered		= RDEVICE.dwFrame;
 }
 
+void CDetailManager::StartCalcAsync()
+{
+	m_CalcAsync.run([this]()
+		{
+			MT_CALC();
+		});
+}
+
+void CDetailManager::WaitForCalc()
+{
+	m_CalcAsync.wait();
+}
+
 void __stdcall	CDetailManager::MT_CALC		()
 {
-#ifndef _EDITOR
-	if (0==RImplementation.Details)		return;	// possibly deleted
-	if (0==dtFS)						return;
+	if (0 == RImplementation.Details)	return;	// possibly deleted
+	if (0 == dtFS)						return;
 	if (!psDeviceFlags.is(rsDetails))	return;
-#endif    
 
-	MT.Enter					();
-	if (m_frame_calc!=RDEVICE.dwFrame)	
-		if ((m_frame_rendered+1)==RDEVICE.dwFrame) //already rendered
-		{
-			Fvector		EYE				= RDEVICE.vCameraPosition_saved;
+	if (m_frame_calc != RDEVICE.dwFrame && (m_frame_rendered + 1) == RDEVICE.dwFrame)
+	{
+		Fvector		EYE = RDEVICE.vCameraPosition_saved;
 
-			int s_x	= iFloor			(EYE.x/dm_slot_size+.5f);
-			int s_z	= iFloor			(EYE.z/dm_slot_size+.5f);
+		int s_x = iFloor(EYE.x / dm_slot_size + .5f);
+		int s_z = iFloor(EYE.z / dm_slot_size + .5f);
 
-			RDEVICE.Statistic->RenderDUMP_DT_Cache.Begin	();
-			cache_Update				(s_x,s_z,EYE,dm_max_decompress);
-			RDEVICE.Statistic->RenderDUMP_DT_Cache.End	();
+		RDEVICE.Statistic->RenderDUMP_DT_Cache.Begin();
+		cache_Update(s_x, s_z, EYE, dm_max_decompress);
+		RDEVICE.Statistic->RenderDUMP_DT_Cache.End();
 
-			UpdateVisibleM				();
-			m_frame_calc				= RDEVICE.dwFrame;
-		}
-	MT.Leave					        ();
+		UpdateVisibleM();
+		m_frame_calc = RDEVICE.dwFrame;
+	}
 }

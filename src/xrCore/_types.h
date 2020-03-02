@@ -1,5 +1,7 @@
-#ifndef TYPES_H
-#define TYPES_H
+#pragma once
+
+#include <atomic>
+
 
 // Type defs
 typedef signed char s8;
@@ -66,4 +68,13 @@ typedef char string4096[4096];
 
 typedef char string_path[2 * _MAX_PATH];
 
-#endif
+
+using xr_atomic_u8 = std::atomic<u8>;
+using xr_atomic_u16 = std::atomic<u16>;
+using xr_atomic_u32 = std::atomic<u32>;
+using xr_atomic_u64 = std::atomic<u64>;
+
+using xr_atomic_s8 = std::atomic<s8>;
+using xr_atomic_s16 = std::atomic<s16>;
+using xr_atomic_s32 = std::atomic<s32>;
+using xr_atomic_s64 = std::atomic<s64>;

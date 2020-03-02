@@ -1,7 +1,5 @@
 //---------------------------------------------------------------------------
-#ifndef particle_actionsH
-#define particle_actionsH
-
+#pragma once
 
 namespace PAPI{
 // refs
@@ -47,4 +45,3 @@ namespace PAPI{
 	};
 };
 //---------------------------------------------------------------------------
-#endif

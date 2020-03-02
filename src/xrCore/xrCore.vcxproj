@@ -1403,6 +1403,7 @@
     <ClInclude Include="xr_stack.h" />
     <ClInclude Include="xr_string.h" />
     <ClInclude Include="xr_trims.h" />
+    <ClInclude Include="xr_unordered_map.h" />
     <ClInclude Include="xr_vector.h" />
     <ClInclude Include="xr_vector_defs.h" />
     <ClInclude Include="_bitwise.h" />

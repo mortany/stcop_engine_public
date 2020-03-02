@@ -25,6 +25,7 @@ using std::swap;
 #include "xr_list.h"
 #include "xr_deque.h"
 #include "xr_string.h"
+#include "xr_unordered_map.h"
 
 #ifdef STLPORT
 

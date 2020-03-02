@@ -634,6 +634,9 @@
     <ClInclude Include="xr_allocator.h">
       <Filter>Common</Filter>
     </ClInclude>
+    <ClInclude Include="xr_unordered_map.h">
+      <Filter>Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="xrCore.rc">

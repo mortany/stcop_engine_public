@@ -735,7 +735,7 @@ void		xrRender_initconsole	()
 
 //.	CMD4(CCC_Float,		"r__detail_density",	&ps_r__Detail_density,		.05f,	0.99f	);
 	//CMD4(CCC_Float,		"r__detail_density",	&ps_r__Detail_density,		.2f,	0.6f	);
-	CMD4(CCC_Float,		"r__detail_density",	&ps_current_detail_density, 0.04f,	0.6f		); //AVO: extended from 0.2f to 0.04f and replaced variable
+	CMD4(CCC_Float,		"r__detail_density",	&ps_current_detail_density, 0.2f,	0.6f		); //AVO: extended from 0.2f to 0.04f and replaced variable
 	CMD4(CCC_detail_radius, "r__detail_radius", &ps_r__detail_radius,		49,		200			);
 	CMD4(CCC_Float,		"r__detail_height",		&ps_r__Detail_height,		1,		3			);
 #ifdef DEBUG

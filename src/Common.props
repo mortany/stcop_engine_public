@@ -5,10 +5,10 @@
     <xrBinRootDir>$(SolutionDir)..\bin\</xrBinRootDir>
     <xrBinPlugRootDir>$(SolutionDir)..\bin_plugs\</xrBinPlugRootDir>
     <xrLibRootDir>$(SolutionDir)..\lib\</xrLibRootDir>
-    <xrBinDir>$(SolutionDir)..\bin\$(Configuration)\</xrBinDir>
-    <xrBinPlugDir>$(SolutionDir)..\bin_plugs\$(Configuration)\</xrBinPlugDir>
-    <xrLibDir>$(SolutionDir)..\lib\$(Configuration)\</xrLibDir>
-    <xrIntDir>$(SolutionDir)..\intermediate\$(Configuration)\</xrIntDir>
+    <xrBinDir>$(SolutionDir)..\bin\</xrBinDir>
+    <xrBinPlugDir>$(SolutionDir)..\bin_plugs\</xrBinPlugDir>
+    <xrLibDir>$(SolutionDir)..\lib\</xrLibDir>
+    <xrIntDir>$(SolutionDir)..\intermediate\</xrIntDir>
     <xrSdkDir>$(SolutionDir)..\sdk\</xrSdkDir>
     <dxSdkDir>$(xrSdkDir)include\dxsdk\</dxSdkDir>
     <xr3rdPartyDir>$(SolutionDir)3rd party\</xr3rdPartyDir>
@@ -35,24 +35,31 @@
   <ItemGroup>
     <BuildMacro Include="xrBinRootDir">
       <Value>$(xrBinRootDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrBinPlugRootDir">
       <Value>$(xrBinPlugRootDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrLibRootDir">
       <Value>$(xrLibRootDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrBinDir">
       <Value>$(xrBinDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrBinPlugDir">
       <Value>$(xrBinPlugDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrLibDir">
       <Value>$(xrLibDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrIntDir">
       <Value>$(xrIntDir)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrSdkDir">
       <Value>$(xrSdkDir)</Value>

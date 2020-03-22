@@ -643,12 +643,29 @@ void CWeapon::LoadModParams(LPCSTR section)
 	m_strafe_offset[3][1].set(fStrafeCamLFactor_aim, fStrafeMinAngle_aim, NULL); // aim-GL
 }
 
+bool CWeapon::bReloadSectionScope(LPCSTR section)
+{
+	if (!pSettings->line_exist(section, "scopes"))
+		return false;
+
+	if (pSettings->r_string(section, "scopes") == NULL)
+		return false;
+
+	if (xr_strcmp(pSettings->r_string(section, "scopes"), "none") == 0)
+		return false;
+
+	return true;
+}
+
 bool CWeapon::bLoadAltScopesParams(LPCSTR section)
 {
 	if (!pSettings->line_exist(section, "scopes"))
 		return false;
 
-	if(!xr_strcmp(pSettings->r_string(section, "scopes"), "none"))
+	if(pSettings->r_string(section, "scopes") == NULL)
+		return false;
+
+	if(xr_strcmp(pSettings->r_string(section, "scopes"), "none")==0)
 		return false;
 
 	if (m_eScopeStatus == ALife::eAddonAttachable)
@@ -1845,6 +1862,8 @@ void CWeapon::reload			(LPCSTR section)
 		m_strap_bone1			= pSettings->r_string(section,"strap_bone1");
 	else
 		m_can_be_strapped		= false;
+
+	bUseAltScope = !!bReloadSectionScope(section);
 
 	if (m_eScopeStatus == ALife::eAddonAttachable) {
 		m_addon_holder_range_modifier	= READ_IF_EXISTS(pSettings,r_float,GetScopeName(),"holder_range_modifier",m_holder_range_modifier);

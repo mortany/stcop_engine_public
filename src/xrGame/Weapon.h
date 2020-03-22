@@ -43,6 +43,7 @@ public:
 	virtual	bool			bInZoomRightNow() const { return m_zoom_params.m_fZoomRotationFactor > 0.05; }
 	IC		bool			bIsSecondVPZoomPresent() const { return GetSecondVPZoomFactor() > 0.000f; }
 			bool			bLoadAltScopesParams(LPCSTR section);
+			bool            bReloadSectionScope(LPCSTR section);
 	virtual	bool            bMarkCanShow() { return IsZoomed(); }
 			bool            bChangeNVSecondVPStatus();
 

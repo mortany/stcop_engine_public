@@ -369,22 +369,7 @@ void	CIKLimbsController:: Update						( )
 	update_blend( m_legs_blend );
 
 	_pose_extrapolation.update( m_object->XFORM() );
-	xr_vector<CIKLimb>::iterator i = _bone_chains.begin(), e = _bone_chains.end();
-	for( ; e != i; ++i )
-			LimbUpdate( *i );
-
-	/*
-	Fmatrix predict;
-	_pose_extrapolation.extrapolate( predict, Device.fTimeGlobal  ); 
-
-
-
-
-	DBG_DrawMatrix( m_object->XFORM(), 1 );
-	DBG_DrawMatrix( predict, 1 );
-	
-	_pose_extrapolation.extrapolate( predict, Device.fTimeGlobal + 1  ); 
-	DBG_DrawMatrix( predict, 1 );
-	*/
+	for (CIKLimb& it : _bone_chains)
+		LimbUpdate(it);
 }
 

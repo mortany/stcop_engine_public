@@ -978,14 +978,6 @@ void	CIKLimb::Update( CGameObject *O, const CBlend *b, const extrapolation::poin
 	Fmatrix anim_foot; 
 	AnimGoal( anim_foot );
 	
-	//Fmatrix current_foot;
-	//current_foot = m_foot.Kinematics( )->LL_GetTransform( m_bones[m_foot.ref_bone()] );
-	
-
-	//ik_goal_matrix m;	
-	//Fmatrix foot = Fmatrix().mul_43( Fmatrix().invert( O->XFORM() ) ,sv_state.goal( m ).get() );
-	//m_foot.ref_bone_to_foot( foot )
-
 	m_foot.Collide( collide_data, collider, anim_foot, O->XFORM(), O, anim_state.step() );
 
 	step_predict( O, b, state_predict, object_pose_extrapolation );
@@ -1034,7 +1026,15 @@ struct ssaved_callback :
 static void	_BCL get_matrix( CBoneInstance* P )
 {
 	VERIFY( _valid(  P->mTransform ) );
-	*((Fmatrix*)P->callback_param()) = P->mTransform;
+
+	// Waiting mainthred
+	void* pCurrParams = P->callback_param();
+	if (!pCurrParams)
+		return;
+
+	*(reinterpret_cast<Fmatrix*>(pCurrParams)) = P->mTransform;
+
+	//*((Fmatrix*)P->callback_param()) = P->mTransform;
 
 }
 u16	CIKLimb::foot_matrix_predict ( Fmatrix& foot, Fmatrix& toe, float time, IKinematicsAnimated *K ) const 

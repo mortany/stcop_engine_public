@@ -716,6 +716,11 @@ void CSkeletonX_ext::_CollectBoneFaces(Fvisual* V, u32 iBase, u32 iCount)
 
 #if defined(USE_DX10) || defined(USE_DX11)
 	indices = *m_Indices;
+#endif
+	indices += iBase;
+
+#if defined(USE_DX10) || defined(USE_DX11)
+
 
 	if (*Vertices1W)
 	{
@@ -790,7 +795,6 @@ void CSkeletonX_ext::_CollectBoneFaces(Fvisual* V, u32 iBase, u32 iCount)
 	R_CHK(V->p_rm_Indices->Lock(0, V->dwPrimitives * 3, (void**)&indices, D3DLOCK_READONLY));
 #endif	//	USE_DX10
 
-	indices += iBase;
 
 
 #if !defined(USE_DX10) && !defined(USE_DX11)	//	Don't use hardware buffers in DX10 since we can't read them

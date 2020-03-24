@@ -463,10 +463,12 @@ _DDS_2D:
 			LoadInfo.Width	= IMG.Width;
 			LoadInfo.Height	= IMG.Height;
 
-			if (img_loaded_lod)
+			LoadInfo.FirstMipLevel = img_loaded_lod;
+
+			/*if (img_loaded_lod) // Mortan: если буду чинить x32 не забыть вернуть
 			{
 				Reduce(LoadInfo.Width, LoadInfo.Height, IMG.MipLevels, img_loaded_lod);
-			}
+			}*/
 
 			//LoadInfo.Usage = D3D_USAGE_IMMUTABLE;
 			if (bStaging)
@@ -483,7 +485,7 @@ _DDS_2D:
 			LoadInfo.pSrcInfo = &IMG;
 
 #ifdef USE_DX11
-			R_CHK2(D3DX11CreateTextureFromMemory
+			R_CHK(D3DX11CreateTextureFromMemory
 				(
 				HW.pDevice,S->pointer(),S->length(),
 				&LoadInfo,
@@ -492,7 +494,7 @@ _DDS_2D:
 				0
 				), fn);
 #else
-			R_CHK2(D3DX10CreateTextureFromMemory
+			R_CHK(D3DX10CreateTextureFromMemory
 				(
 				HW.pDevice,S->pointer(),S->length(),
 				&LoadInfo,

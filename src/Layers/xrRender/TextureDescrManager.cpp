@@ -2,6 +2,7 @@
 #pragma hdrstop
 #include "TextureDescrManager.h"
 #include "ETextureParams.h"
+#include <tbb/parallel_for_each.h>
 
 // eye-params
 float					r__dtex_range	= 50;
@@ -32,74 +33,77 @@ void CTextureDescrMngr::LoadTHM(LPCSTR initial)
 {
 	FS_FileSet				flist;
 	FS.file_list			(flist, initial, FS_ListFiles, "*.thm");
-#ifdef DEBUG
-	Msg						("count of .thm files=%d", flist.size());
-#endif // #ifdef DEBUG
-	FS_FileSetIt It			= flist.begin();
-	FS_FileSetIt It_e		= flist.end();
-	STextureParams			tp;
-	string_path				fn;
-	for(;It!=It_e;++It)
+
+	if (flist.empty())
+		return;
+
+	DECLARE_MT_LOCK(lock);
+	
+	const auto processFile = [&](const FS_File& it)
 	{
-		
-		FS.update_path		(fn, initial, (*It).name.c_str());
-		IReader* F			= FS.r_open(fn);
-		xr_strcpy			(fn,(*It).name.c_str());
+		string_path				fn;
+		FS.update_path(fn, initial, it.name.c_str());
+		IReader* F = FS.r_open(fn);
+		xr_strcpy(fn, it.name.c_str());
 		fix_texture_thm_name(fn);
 
-		R_ASSERT			(F->find_chunk(THM_CHUNK_TYPE));
-		F->r_u32			();
-		tp.Clear			();
-		tp.Load				(*F);
-		FS.r_close			(F);
-		if (STextureParams::ttImage		== tp.type ||
-			STextureParams::ttTerrain	== tp.type ||
-			STextureParams::ttNormalMap	== tp.type	)
+		R_ASSERT(F->find_chunk(THM_CHUNK_TYPE));
+		F->r_u32();
+		STextureParams tp;
+		tp.Load(*F);
+		FS.r_close(F);
+		if (STextureParams::ttImage == tp.type ||
+			STextureParams::ttTerrain == tp.type ||
+			STextureParams::ttNormalMap == tp.type)
 		{
-			texture_desc&	desc	= m_texture_details[fn];
-			cl_dt_scaler*&	dts		= m_detail_scalers[fn];
+			DO_MT_LOCK(lock);
+			texture_desc& desc = m_texture_details[fn];
+			cl_dt_scaler*& dts = m_detail_scalers[fn];
+			DO_MT_UNLOCK(lock);
 
-			if( tp.detail_name.size() &&
-				tp.flags.is_any(STextureParams::flDiffuseDetail|STextureParams::flBumpDetail) )
+			if (tp.detail_name.size() &&
+				tp.flags.is_any(STextureParams::flDiffuseDetail | STextureParams::flBumpDetail))
 			{
-				if(desc.m_assoc)
-					xr_delete				(desc.m_assoc);
+				if (desc.m_assoc)
+					xr_delete(desc.m_assoc);
 
-				desc.m_assoc				= xr_new<texture_assoc>();
-				desc.m_assoc->detail_name	= tp.detail_name;
+				desc.m_assoc = xr_new<texture_assoc>();
+				desc.m_assoc->detail_name = tp.detail_name;
 				if (dts)
 					dts->scale = tp.detail_scale;
 				else
-					/*desc.m_assoc->cs*/dts	= xr_new<cl_dt_scaler>(tp.detail_scale);
+					/*desc.m_assoc->cs*/dts = xr_new<cl_dt_scaler>(tp.detail_scale);
 
-				desc.m_assoc->usage			= 0;
-				
-				if( tp.flags.is(STextureParams::flDiffuseDetail) )
-					desc.m_assoc->usage		|= (1<<0);
-				
-				if( tp.flags.is(STextureParams::flBumpDetail) )
-					desc.m_assoc->usage		|= (1<<1);
+				desc.m_assoc->usage = 0;
+
+				if (tp.flags.is(STextureParams::flDiffuseDetail))
+					desc.m_assoc->usage |= (1 << 0);
+
+				if (tp.flags.is(STextureParams::flBumpDetail))
+					desc.m_assoc->usage |= (1 << 1);
 
 			}
-			if(desc.m_spec)
-				xr_delete				(desc.m_spec);
+			if (desc.m_spec)
+				xr_delete(desc.m_spec);
 
-			desc.m_spec					= xr_new<texture_spec>();
-			desc.m_spec->m_material		= tp.material+tp.material_weight;
+			desc.m_spec = xr_new<texture_spec>();
+			desc.m_spec->m_material = tp.material + tp.material_weight;
 			desc.m_spec->m_use_steep_parallax = false;
-			
-			if(tp.bump_mode==STextureParams::tbmUse)
+
+			if (tp.bump_mode == STextureParams::tbmUse)
 			{
-				desc.m_spec->m_bump_name	= tp.bump_name;
+				desc.m_spec->m_bump_name = tp.bump_name;
 			}
-			else if (tp.bump_mode==STextureParams::tbmUseParallax)
+			else if (tp.bump_mode == STextureParams::tbmUseParallax)
 			{
-				desc.m_spec->m_bump_name	= tp.bump_name;
+				desc.m_spec->m_bump_name = tp.bump_name;
 				desc.m_spec->m_use_steep_parallax = true;
 			}
 
 		}
-	}
+	};
+
+	DO_MT_PROCESS_RANGE(flist, processFile);
 }
 
 void CTextureDescrMngr::Load()

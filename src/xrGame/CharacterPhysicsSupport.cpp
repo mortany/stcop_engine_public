@@ -650,9 +650,10 @@ void CCharacterPhysicsSupport::in_UpdateCL( )
 
 		float dist = Device.vCameraPosition.distance_to(p);
 
-		if (dist < IK_CALC_DIST) // if the distance is too big - no need to calc ik.
+		if (1/*dist < IK_CALC_DIST*/) // if the distance is too big - no need to calc ik.
 		{
-			if (view_frust.testSphere_dirty(p, vis.sphere.R) || dist < IK_ALWAYS_CALC_DIST) // calc if object is in view frustum or if distance is less than "always calc"
+			// calc if object is in view frustum or if distance is less than "always calc"
+			if (1/*view_frust.testSphere_dirty(p, vis.sphere.R) || dist < IK_ALWAYS_CALC_DIST*/) 
 			{
 				update_interactive_anims();
 				ik_controller()->Update();

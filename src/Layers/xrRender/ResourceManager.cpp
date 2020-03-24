@@ -14,6 +14,8 @@
 #include "blenders\blender.h"
 #include "blenders\blender_recorder.h"
 
+#include <tbb/parallel_for_each.h>
+
 //	Already defined in Texture.cpp
 void fix_texture_name(LPSTR fn);
 /*
@@ -337,17 +339,17 @@ void CResourceManager::Delete(const Shader* S)
 void CResourceManager::DeferredUpload()
 {
 	if (!RDEVICE.b_is_Ready) return;
+
+	tbb::parallel_for_each(m_textures, [&](auto m_tex) { m_tex.second->Load(); });
+}
+/*
+void CResourceManager::DeferredUpload()
+{
+	if (!RDEVICE.b_is_Ready) return;
 	for (map_TextureIt t=m_textures.begin(); t!=m_textures.end(); t++)
 	{
 		t->second->Load();
 	}
-}
-/*
-void	CResourceManager::DeferredUnload	()
-{
-	if (!RDEVICE.b_is_Ready)				return;
-	for (map_TextureIt t=m_textures.begin(); t!=m_textures.end(); t++)
-		t->second->Unload();
 }
 */
 #ifdef _EDITOR

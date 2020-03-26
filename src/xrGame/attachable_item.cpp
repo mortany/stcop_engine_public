@@ -126,15 +126,32 @@ void CAttachableItem::afterDetach		()
 	object().processing_deactivate	();
 }
 
-float ATT_ITEM_MOVE_CURR = 0.01f;
-float ATT_ITEM_ROT_CURR = 0.1f;
+extern ENGINE_API float adj_delta_pos, adj_delta_rot;
 
-float ATT_ITEM_MOVE_STEP = 0.001f;
-float ATT_ITEM_ROT_STEP = 0.01f;
+#define ATT_ITEM_MOVE_CURR adj_delta_pos
+#define ATT_ITEM_ROT_CURR adj_delta_rot
+
+//float ATT_ITEM_MOVE_STEP = 0.001f;
+//float ATT_ITEM_ROT_STEP = 0.01f;
+
+void CAttachableItem::ParseCurrentItem(CGameFont* F)
+{
+}
+
+void CAttachableItem::SaveAttachableParams()
+{
+	if (!m_dbgItem)	return;
+	Log("It's not implemented now");
+}
 
 void attach_adjust_mode_keyb(int dik)
 {
 	if(!CAttachableItem::m_dbgItem)	return;
+
+	if (pInput->iGetAsyncKeyState(DIK_LSHIFT) && pInput->iGetAsyncKeyState(DIK_RETURN))
+	{
+		CAttachableItem::m_dbgItem->SaveAttachableParams();
+	}
 
 	bool b_move		= !!(pInput->iGetAsyncKeyState(DIK_LSHIFT));
 	bool b_rot		= !!(pInput->iGetAsyncKeyState(DIK_LMENU));
@@ -155,30 +172,30 @@ void attach_adjust_mode_keyb(int dik)
 	case DIK_LEFT:
 		{
 			if(b_move)
-				CAttachableItem::mov(axis, ATT_ITEM_MOVE_CURR);
+				CAttachableItem::m_dbgItem->mov(axis, ATT_ITEM_MOVE_CURR);
 			else
-				CAttachableItem::rot(axis, ATT_ITEM_ROT_CURR);
+				CAttachableItem::m_dbgItem->rot(axis, ATT_ITEM_ROT_CURR);
 		}break;
 	case DIK_RIGHT:
 		{
 			if(b_move)
-				CAttachableItem::mov(axis, -ATT_ITEM_MOVE_CURR);
+				CAttachableItem::m_dbgItem->mov(axis, -ATT_ITEM_MOVE_CURR);
 			else
-				CAttachableItem::rot(axis, -ATT_ITEM_ROT_CURR);
+				CAttachableItem::m_dbgItem->rot(axis, -ATT_ITEM_ROT_CURR);
 		}break;
 	case DIK_PRIOR:
 		{
-			if(b_move)
-				ATT_ITEM_MOVE_CURR +=ATT_ITEM_MOVE_STEP;
-			else
-				ATT_ITEM_ROT_CURR +=ATT_ITEM_ROT_STEP;
+			//if(b_move)
+				//ATT_ITEM_MOVE_CURR +=ATT_ITEM_MOVE_STEP;
+			//else
+				//ATT_ITEM_ROT_CURR +=ATT_ITEM_ROT_STEP;
 		}break;
 	case DIK_NEXT:
 		{
-			if(b_move)
-				ATT_ITEM_MOVE_CURR -=ATT_ITEM_MOVE_STEP;
-			else
-				ATT_ITEM_ROT_CURR -=ATT_ITEM_ROT_STEP;
+			//if(b_move)
+				//ATT_ITEM_MOVE_CURR -=ATT_ITEM_MOVE_STEP;
+			//else
+				//ATT_ITEM_ROT_CURR -=ATT_ITEM_ROT_STEP;
 		}break;
 	};
 }
@@ -195,20 +212,26 @@ void attach_draw_adjust_mode()
 	F->SetColor			(0xffffffff);
 	xr_sprintf(_text, "Adjusting attachable item [%s]", CAttachableItem::m_dbgItem->object().cNameSect().c_str());
 	F->OutNext			(_text);
+
+	CAttachableItem::m_dbgItem->ParseCurrentItem(F);
+
 	xr_sprintf(_text, "move step  [%3.3f] rotate step  [%3.3f]", ATT_ITEM_MOVE_CURR, ATT_ITEM_ROT_CURR);
 	F->OutNext			(_text);
 
 	F->OutNext			("HOLD LShift to move. ALT to rotate");
 	F->OutNext			("HOLD [Z]-x axis [X]-y axis [C]-z axis");
 
-	F->OutNext			("RIGHT-LEFT - move. PgUP-PgDOWN - step");
-	F->OutSkip			();
+	F->OutNext			("RIGHT-LEFT - move.");
+	F->OutSkip();
 
-	Fvector _pos = CAttachableItem::get_pos_offset();
+	F->OutNext			("Console commands: adjust_delta_pos,adjust_delta_rot");
+	F->OutSkip();
+
+	Fvector _pos = CAttachableItem::m_dbgItem->get_pos_offset();
 	xr_sprintf(_text, "attach_position_offset IS [%3.3f][%3.3f][%3.3f]", _pos.x, _pos.y, _pos.z);
 	F->OutNext			(_text);
 
-	Fvector _ang = CAttachableItem::get_angle_offset();
+	Fvector _ang = CAttachableItem::m_dbgItem->get_angle_offset();
 	xr_sprintf(_text, "attach_angle_offset IS [%3.3f][%3.3f][%3.3f]", _ang.x, _ang.y, _ang.z);
 	F->OutNext			(_text);
 }

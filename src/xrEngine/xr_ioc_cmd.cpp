@@ -650,6 +650,9 @@ ENGINE_API float VIEWPORT_NEAR = 0.2f; //--#SM+#-- (Old: 0.2f)
 ENGINE_API float hud_adj_delta_pos = 0.0005f;
 ENGINE_API float hud_adj_delta_rot = 0.05f;
 
+ENGINE_API float adj_delta_pos = 0.0005f;
+ENGINE_API float adj_delta_rot = 0.05f;
+
 ENGINE_API float psSVPImageSizeK = 0.7f;
 
 ENGINE_API float devfloat1 = 0.f;
@@ -817,6 +820,10 @@ void CCC_Register()
 
     CMD4(CCC_Float, "hud_adjust_delta_pos", &hud_adj_delta_pos, -10.f, 10.f);
     CMD4(CCC_Float, "hud_adjust_delta_rot", &hud_adj_delta_rot, -10.f, 10.f);
+
+
+    CMD4(CCC_Float, "adjust_delta_pos", &adj_delta_pos, -10.f, 10.f);
+    CMD4(CCC_Float, "adjust_delta_rot", &adj_delta_rot, -10.f, 10.f);
 
     CMD1(CCC_ExclusiveMode, "input_exclusive_mode");
 

@@ -716,6 +716,8 @@ void CSkeletonX_ext::_CollectBoneFaces(Fvisual* V, u32 iBase, u32 iCount)
 
 #if defined(USE_DX10) || defined(USE_DX11)
 	indices = *m_Indices;
+#else
+	R_CHK(V->p_rm_Indices->Lock(0, V->dwPrimitives * 3, (void**)&indices, D3DLOCK_READONLY));
 #endif
 	indices += iBase;
 
@@ -791,8 +793,6 @@ void CSkeletonX_ext::_CollectBoneFaces(Fvisual* V, u32 iBase, u32 iCount)
 				else
 					R_ASSERT2(0, "not implemented yet");
 
-#else	//	USE_DX10
-	R_CHK(V->p_rm_Indices->Lock(0, V->dwPrimitives * 3, (void**)&indices, D3DLOCK_READONLY));
 #endif	//	USE_DX10
 
 

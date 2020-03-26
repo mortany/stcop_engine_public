@@ -2739,3 +2739,37 @@ void CWeapon::UpdateAddonsTransform(bool for_hud)
 {
 
 }
+
+void CWeapon::SaveAttachableParams()
+{
+	if (!m_dbgItem)	return;
+
+	LPCSTR sect_name = m_dbgItem->item().m_section_id.c_str();
+	string_path fname;
+	FS.update_path(fname, "$game_data$", make_string("_world\\%s.ltx", sect_name).c_str());
+
+	CInifile* pHudCfg = new CInifile(fname, FALSE, FALSE, TRUE);
+
+	pHudCfg->w_string(sect_name, "position", make_string("%f,%f,%f", m_Offset.c.x, m_Offset.c.y, m_Offset.c.z).c_str());
+	Fvector ypr;
+	m_Offset.getHPB(ypr.x, ypr.y, ypr.z);
+	ypr.mul(180.f / PI);
+	pHudCfg->w_string(sect_name, "orientation", make_string("%f,%f,%f", ypr.x, ypr.y, ypr.z).c_str());
+
+	if (pSettings->line_exist(sect_name, "strap_position") && pSettings->line_exist(sect_name, "strap_orientation"))
+	{
+		pHudCfg->w_string(sect_name, "strap_position", make_string("%f,%f,%f", m_StrapOffset.c.x, m_StrapOffset.c.y, m_StrapOffset.c.z).c_str());
+		m_StrapOffset.getHPB(ypr.x, ypr.y, ypr.z);
+		ypr.mul(180.f / PI);
+		pHudCfg->w_string(sect_name, "strap_orientation", make_string("%f,%f,%f", ypr.x, ypr.y, ypr.z).c_str());
+	}
+
+	xr_delete(pHudCfg);
+	Msg("data saved to %s", fname);
+	Sleep(250);
+
+}
+void CWeapon::ParseCurrentItem(CGameFont* F)
+{
+	F->OutNext("WEAPON IN STRAPPED MOD [%d]", m_strapped_mode);
+}

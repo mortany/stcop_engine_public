@@ -423,6 +423,7 @@ void hud_draw_adjust_mode()
 			F->OutNext			("for item [%d]", hud_adj_item_idx);
 			F->OutNext			("delta values dP=%f dR=%f", hud_adj_delta_pos, hud_adj_delta_rot);
 			F->OutNext			("[Z]-x axis [X]-y axis [C]-z axis");
+			F->OutNext			("[SHIFT] + [ENTER] for save params into file");
 		}
 }
 

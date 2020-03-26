@@ -289,7 +289,7 @@ void CEnvDescriptor::load(CEnvironment& environment, CInifile& config)
     // deg2rad(config.r_fvector2(m_identifier.c_str(),"sun_dir").y),
     // deg2rad(config.r_fvector2(m_identifier.c_str(),"sun_dir").x)
     // );
-    VERIFY2(sun_dir.y < 0, "Invalid sun direction settings while loading");
+    //VERIFY2(sun_dir.y < 0, "Invalid sun direction settings while loading");
 
     lens_flare_id = environment.eff_LensFlare->AppendDef(environment, environment.m_suns_config, config.r_string(m_identifier.c_str(), "sun"));
     tb_id = environment.eff_Thunderbolt->AppendDef(environment, environment.m_thunderbolt_collections_config, environment.m_thunderbolts_config, config.r_string(m_identifier.c_str(), "thunderbolt_collection"));

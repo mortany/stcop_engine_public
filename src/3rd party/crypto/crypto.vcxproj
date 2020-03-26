@@ -239,6 +239,7 @@
     </ClCompile>
     <Link>
       <ImportLibrary>$(xrIntDir)$(Platform)\$(Configuration)\$(TargetName).lib</ImportLibrary>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Mixed|x64'">

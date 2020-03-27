@@ -28,3 +28,6 @@ X-Ray Engine 1.6 x64 for Forward Frontier Team
 * [Oxygen](https://github.com/xrOxygen/xray-oxygen) Часть правок была взята оттуда
 * [Shoker](https://github.com/ShokerStlk/xray-16-SWM) SWM 3.0 который подарил нам много вкусностей
 * EMS Team - Наши друзья и товарищи, так же авторы некоторых ключевых фишек типа оптимизации PiP прицелов
+## Donate
+[![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://paypal.me/mortany?locale.x=ru_RU)
+

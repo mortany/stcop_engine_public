@@ -201,6 +201,12 @@ public:
 		CTexture*		T	= RCache.get_ActiveTexture	(u32(C->samp.index));
 		VERIFY				(T);
 		float	mtl			= T->m_material;
+		
+		if (override_material && (xr_strcmp(T->cName, d_texture_name) == 0)) 
+		{ 
+			mtl = d_material + d_material_weight; 
+		}
+
 #ifdef	DEBUG
 		if (ps_r2_ls_flags.test(R2FLAG_GLOBALMATERIAL))	mtl=ps_r2_gmaterial;
 #endif
@@ -254,6 +260,8 @@ public:
 	virtual	void					add_Occluder				(Fbox2&	bb_screenspace	);			// mask screen region as oclluded
 	virtual void					add_Visual					(IRenderVisual*	V	);			// add visual leaf	(no culling performed at all)
 	virtual void					add_Geometry				(IRenderVisual*	V	);			// add visual(s)	(all culling performed)
+
+	virtual bool					texture_is_exist(LPCSTR texture_name);
 
 	// wallmarks
 	virtual void					add_StaticWallmark			(ref_shader& S, const Fvector& P, float s, CDB::TRI* T, Fvector* V);

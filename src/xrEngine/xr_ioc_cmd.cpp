@@ -156,7 +156,40 @@ public:
     }
 };
 
+class CCC_TuneTextureMaterial : public IConsole_Command
+{
+public:
+    CCC_TuneTextureMaterial(LPCSTR N) :IConsole_Command(N) {};
+    virtual void	Execute(LPCSTR args)
+    {
+        if (!psDeviceFlags.test(rsR2) && !psDeviceFlags.test(rsR3) && !psDeviceFlags.test(rsR4))
+        {
+            Msg("This command not supported for static render.");
+            return;
+        }
 
+        if (0 == xr_strcmp(args, "null")) 
+        { 
+            Msg("Material override off"); 
+            override_material = false; 
+            d_texture_name = NULL; 
+        }
+
+        bool exist = Render->texture_is_exist(args);
+
+        if (!exist) { 
+            Msg("Warning: wrong path or texture is not exist!"); 
+            override_material = false; 
+            d_texture_name = NULL; 
+        }
+        else
+        {
+            Msg("Material override on");
+            d_texture_name._set(args);
+            override_material = true;
+        }
+    }
+};
 
 //-----------------------------------------------------------------------
 class CCC_Help : public IConsole_Command
@@ -660,6 +693,12 @@ ENGINE_API float devfloat2 = 0.f;
 ENGINE_API float devfloat3 = 0.f;
 ENGINE_API float devfloat4 = 0.f;
 
+ENGINE_API float d_material = 1.0f;
+ENGINE_API float d_material_weight = 0.0f;
+ENGINE_API shared_str d_texture_name = NULL;
+ENGINE_API bool override_material = false;
+
+
 //extern int psSkeletonUpdate;
 extern int rsDVB_Size;
 extern int rsDIB_Size;
@@ -817,6 +856,11 @@ void CCC_Register()
 	CMD4(CCC_Float, "developer_float_2", &devfloat2, -100000.f, 100000.f);
 	CMD4(CCC_Float, "developer_float_3", &devfloat3, -100000.f, 100000.f);
 	CMD4(CCC_Float, "developer_float_4", &devfloat4, -100000.f, 100000.f);
+
+    CMD1(CCC_TuneTextureMaterial, "debug_texture");
+
+    CMD4(CCC_Float, "d_material", &d_material, -10.f, 10.f);
+    CMD4(CCC_Float, "d_material_weight", &d_material_weight, -10.f, 10.f);
 
     CMD4(CCC_Float, "hud_adjust_delta_pos", &hud_adj_delta_pos, -10.f, 10.f);
     CMD4(CCC_Float, "hud_adjust_delta_rot", &hud_adj_delta_rot, -10.f, 10.f);

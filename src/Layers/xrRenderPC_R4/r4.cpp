@@ -113,6 +113,12 @@ static class cl_alpha_ref	: public R_constant_setup
 	}
 } binder_alpha_ref;
 
+
+bool CRender::texture_is_exist(LPCSTR texture_name)
+{
+	return DEV->_FindTexture(texture_name);
+}
+
 extern ENGINE_API BOOL r2_sun_static;
 extern ENGINE_API BOOL r2_advanced_pp;	//	advanced post process and effects
 //////////////////////////////////////////////////////////////////////////

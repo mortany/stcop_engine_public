@@ -380,4 +380,9 @@ extern ENGINE_API float devfloat2;
 extern ENGINE_API float devfloat3;
 extern ENGINE_API float devfloat4;
 
+extern ENGINE_API float d_material;
+extern ENGINE_API float d_material_weight;
+extern ENGINE_API shared_str d_texture_name;
+extern ENGINE_API bool override_material;
+
 #endif

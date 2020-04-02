@@ -284,6 +284,8 @@ public:
     virtual void models_Prefetch() = 0;
     virtual void models_Clear(BOOL b_complete) = 0;
 
+    virtual bool texture_is_exist(LPCSTR texture_name) = 0;
+
     // Occlusion culling
     virtual BOOL occ_visible(vis_data& V) = 0;
     virtual BOOL occ_visible(Fbox& B) = 0;
@@ -294,8 +296,8 @@ public:
     virtual void Render() = 0;
 
 	// [FFT++]
-	virtual void BeforeWorldRender() = 0; //--#SM+#-- Перед рендерингом мира
-	virtual void AfterWorldRender() = 0; //--#SM+#-- После рендеринга мира (до UI)
+	virtual void BeforeWorldRender() = 0; //--#SM+#-- РџРµСЂРµРґ СЂРµРЅРґРµСЂРёРЅРіРѕРј РјРёСЂР°
+	virtual void AfterWorldRender() = 0; //--#SM+#-- РџРѕСЃР»Рµ СЂРµРЅРґРµСЂРёРЅРіР° РјРёСЂР° (РґРѕ UI)
 
     virtual void Screenshot(ScreenshotMode mode = SM_NORMAL, LPCSTR name = 0) = 0;
     virtual void Screenshot(ScreenshotMode mode, CMemoryWriter& memory_writer) = 0;

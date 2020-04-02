@@ -498,6 +498,12 @@ void CRender::OnFrame()
 			fastdelegate::FastDelegate0<>(&HOM,&CHOM::MT_RENDER));
 	}
 }*/
+
+bool CRender::texture_is_exist(LPCSTR texture_name)
+{
+	return DEV->_FindTexture(texture_name);
+}
+
 void CRender::OnFrame()
 {
 	Models->DeleteQueue			();

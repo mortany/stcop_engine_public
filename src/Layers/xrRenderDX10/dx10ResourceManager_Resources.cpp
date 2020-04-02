@@ -554,6 +554,19 @@ CTexture* CResourceManager::_CreateTexture	(LPCSTR _Name)
 		return		T;
 	}
 }
+
+bool CResourceManager::_FindTexture(LPCSTR _Name)
+{
+	if (0 == xr_strcmp(_Name, "null"))	return 0;
+
+	R_ASSERT(_Name && _Name[0]);
+
+	LPSTR N = LPSTR(_Name);
+	map_TextureIt I = m_textures.find(N);
+	if (I != m_textures.end())	return	true;
+	else return false;
+}
+
 void	CResourceManager::_DeleteTexture		(const CTexture* T)
 {
 	// DBG_VerifyTextures	();

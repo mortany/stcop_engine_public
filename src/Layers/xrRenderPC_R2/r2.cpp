@@ -287,6 +287,8 @@ void					CRender::create					()
 	::PortalTraverser.initialize();
 }
 
+
+
 void					CRender::destroy				()
 {
 	m_bMakeAsyncSS				= false;
@@ -386,7 +388,10 @@ void CRender::OnFrame()
 	}
 }
 
-
+bool CRender::texture_is_exist(LPCSTR texture_name)
+{
+	return DEV->_FindTexture(texture_name);	
+}
 // Implementation
 IRender_ObjectSpecific*	CRender::ros_create				(IRenderable* parent)				{ return xr_new<CROS_impl>();			}
 void					CRender::ros_destroy			(IRender_ObjectSpecific* &p)		{ xr_delete(p);							}

@@ -118,6 +118,8 @@ public:
 	CTexture*						_CreateTexture		(LPCSTR Name);
 	void							_DeleteTexture		(const CTexture* T);
 
+	bool							_FindTexture(LPCSTR Name);
+
 	CMatrix*						_CreateMatrix		(LPCSTR Name);
 	void							_DeleteMatrix		(const CMatrix*  M);
 

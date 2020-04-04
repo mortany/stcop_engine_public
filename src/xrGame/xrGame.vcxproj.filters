@@ -2488,6 +2488,9 @@
     <Filter Include="Physics\scripts">
       <UniqueIdentifier>{66d4d9cb-fbc2-4e9a-8483-4eb5c1738ed9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Weapon Generic\Refactored">
+      <UniqueIdentifier>{c1e5e685-0596-498f-be3a-ffe061f0dbce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mt_config.h">
@@ -5733,9 +5736,6 @@
     <ClInclude Include="ShootingObject.h">
       <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Weapon Generic</Filter>
     </ClInclude>
-    <ClInclude Include="Weapon.h">
-      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Weapon Generic</Filter>
-    </ClInclude>
     <ClInclude Include="WeaponAmmo.h">
       <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Ammo</Filter>
     </ClInclude>
@@ -7363,6 +7363,12 @@
       <Filter>UI\Multiplayer\Voting</Filter>
     </ClInclude>
     <ClInclude Include="AmebaZone.h" />
+    <ClInclude Include="Weapon.h">
+      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Weapon Generic\Refactored</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponAddons.h">
+      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Weapon Generic\Refactored</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="damage_manager.cpp">
@@ -9255,9 +9261,6 @@
     <ClCompile Include="ShootingObject.cpp">
       <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Weapon Generic</Filter>
     </ClCompile>
-    <ClCompile Include="Weapon.cpp">
-      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Weapon Generic</Filter>
-    </ClCompile>
     <ClCompile Include="WeaponDispersion.cpp">
       <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Weapon Generic</Filter>
     </ClCompile>
@@ -10996,6 +10999,27 @@
       <Filter>UI\Multiplayer\Voting</Filter>
     </ClCompile>
     <ClCompile Include="AmebaZone.cpp" />
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Weapon Generic\Refactored</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponZOOM.cpp">
+      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Weapon Generic\Refactored</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponScopeControler.cpp">
+      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Weapon Generic\Refactored</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponInertion.cpp">
+      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Weapon Generic\Refactored</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponRendering.cpp">
+      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Weapon Generic\Refactored</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponVanilaAddons.cpp">
+      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Weapon Generic\Refactored</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponAddonsLogic.cpp">
+      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Weapon Generic\Refactored</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="ai\monsters\chimera\chimera_attack_state.h">

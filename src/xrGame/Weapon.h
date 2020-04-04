@@ -13,6 +13,7 @@
 #include "first_bullet_controller.h"
 
 #include "CameraRecoil.h"
+#include "WeaponAddons.h"
 
 class CEntity;
 class ENGINE_API CMotionDef;

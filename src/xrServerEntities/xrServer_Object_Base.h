@@ -99,7 +99,7 @@ public:
 	Flags32							m_spawn_flags;
 
 	//client object custom data serialization
-	xr_vector<u8>					client_data;
+	xr_vector<u8>					client_data; // Mortan: мейби тут стоит увеличить параметр для пух и прочего?
 	virtual void					load					(NET_Packet	&tNetPacket);
 
 	//////////////////////////////////////////////////////////////////////////

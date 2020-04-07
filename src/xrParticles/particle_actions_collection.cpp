@@ -1651,7 +1651,7 @@ __forceinline __m128 _mm_load_fvector( const Fvector& v )
 	return R1;
 }
 
-__forceinline void _mm_store_fvector( Fvector& v , const __m128 R1 )
+__forceinline void _mm_store_fvector( Fvector& v , const __m128 &R1 )
 {
 	__m128 R2;
 

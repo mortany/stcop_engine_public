@@ -131,7 +131,7 @@ IC bool	get_plane_static(  ik_pick_result &r, Fvector &next_pos, float &next_ran
 	return true;
 }
 
-IC bool	get_plane_dynamic(  ik_pick_result &r, Fvector &next_pos, float &next_range, const collide::rq_result	R, float pick_dist,const Fvector &pos, const Fvector &pick_v )
+IC bool	get_plane_dynamic(  ik_pick_result &r, Fvector &next_pos, float &next_range, const collide::rq_result	&R, float pick_dist,const Fvector &pos, const Fvector &pick_v )
 {
 
 	next_pos.add( pos, Fvector( ).mul( pick_v, R.range + EPS_L ) );
@@ -169,7 +169,7 @@ IC bool	get_plane_dynamic(  ik_pick_result &r, Fvector &next_pos, float &next_ra
 }
 
 static const float		reach_dist		=1.5f	;
-IC bool get_plane( ik_pick_result &r,  Fvector &next_pos, float &next_range, const collide::rq_result	R, float pick_dist,const Fvector &pos, const Fvector &pick_v )
+IC bool get_plane( ik_pick_result &r,  Fvector &next_pos, float &next_range, const collide::rq_result	&R, float pick_dist,const Fvector &pos, const Fvector &pick_v )
 {
 	if( !R.O )
 		return get_plane_static(  r, next_pos, next_range, R, pick_dist, pos,  pick_v  );

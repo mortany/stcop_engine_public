@@ -16,7 +16,7 @@ using	namespace animation;
 // BoneInstance methods
 void		CBlendInstance::construct()
 {	
-	ZeroMemory			(this,sizeof(*this));
+	Blend.clear();
 }
 void		CBlendInstance::blend_add	(CBlend* H)
 {	

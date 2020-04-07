@@ -29,7 +29,7 @@ namespace PAPI{
 		IC void			clear			()
         {
 			R_ASSERT(!m_bLocked);
-			for (PAVecIt it=actions.begin(); it!=actions.end(); it++) 
+			for (PAVecIt it=actions.begin(); it!=actions.end(); ++it) 
 				xr_delete(*it);
 			actions.clear();
 		}

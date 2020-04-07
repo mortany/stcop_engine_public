@@ -38,7 +38,7 @@ void CDetailManager::soft_Render	()
 		xr_vector<SlotItemVec*>& _vis	= m_visibles[0][O];
 		xr_vector <SlotItemVec* >::iterator _vI = _vis.begin();
 		xr_vector <SlotItemVec* >::iterator _vE = _vis.end();
-		for (; _vI!=_vE; _vI++){
+		for (; _vI!=_vE; ++_vI){
 			SlotItemVec*	items	= *_vI;
 			u32	vCount_Total		= items->size()*vCount_Object;
 			// calculate lock count needed

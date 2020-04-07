@@ -4,6 +4,7 @@
 #include "inventory.h"
 #include <GamePersistent.h>
 #include "Torch.h"
+#include "WeaponBinocularsVision.h"
 #include <HUDManager.h>
 
 void CWeapon::ZoomDynamicMod(bool bIncrement, bool bForceLimit)

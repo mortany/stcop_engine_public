@@ -302,7 +302,7 @@ LONG __stdcall CrashHandlerExceptionFilter (EXCEPTION_POINTERS* pExPtrs)
             {
                 HINSTANCE hBaseAddr = (HINSTANCE)
                       SymGetModuleBase((HANDLE)GetCurrentProcessId ( ) ,
-                                       (DWORD)pExPtrs->
+                                       (DWORD64)pExPtrs->
                                             ExceptionRecord->
                                                       ExceptionAddress);
                 if ( NULL != hBaseAddr )

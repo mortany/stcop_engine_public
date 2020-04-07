@@ -4,6 +4,7 @@
 
 #pragma pack(push,4)
 //////////////////////////////////////////////////////////////////////////
+#pragma warning(push)
 #pragma warning(disable : 4200)
 struct XRCORE_API smem_value
 {
@@ -38,7 +39,7 @@ IC bool smem_equal(const smem_value* A, u32 dwCRC, u32 dwLength, u8* ptr)
     if (A->dwLength != dwLength) return false;
     return 0 == memcmp(A->value, ptr, dwLength);
 };
-#pragma warning(default : 4200)
+#pragma warning(pop)
 
 //////////////////////////////////////////////////////////////////////////
 class XRCORE_API smem_container
@@ -80,7 +81,8 @@ public:
     void create(u32 dwCRC, u32 dwLength, T* ptr)
     {
         smem_value* v = g_pSharedMemoryContainer->dock(dwCRC, dwLength*sizeof(T), ptr);
-        if (0 != v) v->dwReference++;
+        if (0 != v) 
+            ++v->dwReference;
         _dec();
         p_ = v;
     }
@@ -92,7 +94,13 @@ public:
     T& operator[] (size_t id) { return ((T*)(p_->value))[id]; }
     const T& operator[] (size_t id) const { return ((T*)(p_->value))[id]; }
     // misc func
-    u32 size() { if (0 == p_) return 0; else return p_->dwLength / sizeof(T); }
+    u32 size() 
+    { 
+        if (0 == p_) 
+            return 0; 
+        else 
+            return p_->dwLength / sizeof(T); 
+    }
     void swap(ref_smem<T>& rhs) { smem_value* tmp = p_; p_ = rhs.p_; rhs.p_ = tmp; }
     bool equal(ref_smem<T>& rhs) { return p_ == rhs.p_; }
     u32 ref_count() { if (0 == p_) return 0; else return p_->dwReference; }

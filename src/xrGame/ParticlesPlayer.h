@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////
 // ParticlesPlayer.h
-// èíòåğôåéñ äëÿ ïğîèãğûâàíèÿ ïàğòèêëîâ íà îáúåêòå
+// Ğ¸Ğ½Ñ‚ĞµÑ€Ñ„ĞµĞ¹Ñ Ğ´Ğ»Ñ Ğ¿Ñ€Ğ¾Ğ¸Ğ³Ñ€Ñ‹Ğ²Ğ°Ğ½Ğ¸Ñ Ğ¿Ğ°Ñ€Ñ‚Ğ¸ĞºĞ»Ğ¾Ğ² Ğ½Ğ° Ğ¾Ğ±ÑŠĞµĞºÑ‚Ğµ
 ///////////////////////////////////////////////////////////////
 
 #pragma once
@@ -18,17 +18,17 @@ class CParticlesPlayer
 {
 
 public:
-	//ñòğóêòóğà ñ âíóòğåííåé èíôîğìàöèåé î ïàğòèêëå
+	//ÑÑ‚Ñ€ÑƒĞºÑ‚ÑƒÑ€Ğ° Ñ Ğ²Ğ½ÑƒÑ‚Ñ€ĞµĞ½Ğ½ĞµĞ¹ Ğ¸Ğ½Ñ„Ğ¾Ñ€Ğ¼Ğ°Ñ†Ğ¸ĞµĞ¹ Ğ¾ Ğ¿Ğ°Ñ€Ñ‚Ğ¸ĞºĞ»Ğµ
 	struct SParticlesInfo
 	{
 		CParticlesObject*	ps;
 		Fvector				angles;
-		u16					sender_id;	//id - îáúåêòà, êîòîğûé çàïóñòèë ïàğòèêëû
-		u32					life_time;	//âğåìÿ æèçíè ïàğòèêëà (-1) - áåñêîíå÷íî
+		u16					sender_id;	//id - Ğ¾Ğ±ÑŠĞµĞºÑ‚Ğ°, ĞºĞ¾Ñ‚Ğ¾Ñ€Ñ‹Ğ¹ Ğ·Ğ°Ğ¿ÑƒÑÑ‚Ğ¸Ğ» Ğ¿Ğ°Ñ€Ñ‚Ğ¸ĞºĞ»Ñ‹
+		u32					life_time;	//Ğ²Ñ€ĞµĞ¼Ñ Ğ¶Ğ¸Ğ·Ğ½Ğ¸ Ğ¿Ğ°Ñ€Ñ‚Ğ¸ĞºĞ»Ğ° (-1) - Ğ±ĞµÑĞºĞ¾Ğ½ĞµÑ‡Ğ½Ğ¾
 	};
 	DEFINE_VECTOR			(SParticlesInfo,ParticlesInfoList,ParticlesInfoListIt);
 
-	//ñòğóêòóğà äëÿ êîñòî÷êè ñ ñïèñêîì çàïóùåííûõ ïàğòèêëîâ
+	//ÑÑ‚Ñ€ÑƒĞºÑ‚ÑƒÑ€Ğ° Ğ´Ğ»Ñ ĞºĞ¾ÑÑ‚Ğ¾Ñ‡ĞºĞ¸ Ñ ÑĞ¿Ğ¸ÑĞºĞ¾Ğ¼ Ğ·Ğ°Ğ¿ÑƒÑ‰ĞµĞ½Ğ½Ñ‹Ñ… Ğ¿Ğ°Ñ€Ñ‚Ğ¸ĞºĞ»Ğ¾Ğ²
 	struct SBoneInfo
 	{
 		u16					index;
@@ -44,19 +44,19 @@ public:
 	DEFINE_VECTOR			(SBoneInfo,BoneInfoVec,BoneInfoVecIt);
 
 private:
-	// ñïèñîê êîñòåé
-	u64						bone_mask; // èñïîëüçóåìûå êîñòè
+	// ÑĞ¿Ğ¸ÑĞ¾Ğº ĞºĞ¾ÑÑ‚ĞµĞ¹
+	u64						bone_mask; // Ğ¸ÑĞ¿Ğ¾Ğ»ÑŒĞ·ÑƒĞµĞ¼Ñ‹Ğµ ĞºĞ¾ÑÑ‚Ğ¸
 	BoneInfoVec				m_Bones;	
 	CObject					*m_self_object;
 
 protected :
-	bool					m_bActiveBones;	//åñòü ëè êîñòî÷êè íà êîòîğûõ èãğàşòñÿ ïàğòèêëû
+	bool					m_bActiveBones;	//ĞµÑÑ‚ÑŒ Ğ»Ğ¸ ĞºĞ¾ÑÑ‚Ğ¾Ñ‡ĞºĞ¸ Ğ½Ğ° ĞºĞ¾Ñ‚Ğ¾Ñ€Ñ‹Ñ… Ğ¸Ğ³Ñ€Ğ°ÑÑ‚ÑÑ Ğ¿Ğ°Ñ€Ñ‚Ğ¸ĞºĞ»Ñ‹
 
 public:
 	IC SBoneInfo*			get_bone_info			(u16 bone_index)
 	{
 		if (BI_NONE==bone_index) return 0;
-		for (BoneInfoVecIt it=m_Bones.begin(); it!=m_Bones.end(); it++)
+		for (BoneInfoVecIt it=m_Bones.begin(); it!=m_Bones.end(); ++it)
 			if (it->index==bone_index) return &(*it);
 		return 0;
 	}

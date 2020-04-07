@@ -50,12 +50,12 @@ void	CRenderTarget::phase_combine	()
 	if (RImplementation.currentViewPort == SECONDARY_WEAPON_SCOPE) //--#SM+#-- +SecondVP+
 	{
 		// clang-format off
-		gpu_id = (Device.dwFrame - 1) % HW.Caps.iGPUNum;	// Ôèêñ "ìåðöàíèÿ" tonemapping (HDR) ïîñëå âûêëþ÷åíèÿ äâîéíîãî ðåíäåðà. 
-															// Ïîáî÷íûé ýôôåêò - ïðè ðàáîòå äâîéíîãî ðåíäåðà ñêîðîñòü èçìåíåíèÿ tonemapping (HDR) ïàäàåò â äâà ðàçà
-															// Ìåðöàíèå ñâÿçàíî ñ òåì, ÷òî HDR äëÿ ñâîåé ðàáîòû õðàíèò óìåíüøåííèå êîïèè "ïðîøëûõ êàäðîâ"
-															// Ýòè êàäðû îòíîñèòåëüíî ïîõîæè äðóã íà äðóãà, îäíàêî ïðè âêëþ÷åííîì äâîéíîì ðåíäåðå
-															// â ïîëîâèíå êàäðîâ îêàçûâàåòñÿ êàðòèíêà èç âòîðîãî ðåíäåðà, è ïîñêîëüêó îíà ÷àñòî ìîæåò îòëè÷àòñÿ ïî öâåòó\ÿðêîñòè
-															// òî ïðè ïîïûòêå ñîçäàíèÿ "ïëàâíîãî" ïåðåõîäà ìåæäó íèìè ïîëó÷àåòñÿ ýôôåêò ìåðöàíèÿ
+		gpu_id = (Device.dwFrame - 1) % HW.Caps.iGPUNum;	// Ð¤Ð¸ÐºÑ "Ð¼ÐµÑ€Ñ†Ð°Ð½Ð¸Ñ" tonemapping (HDR) Ð¿Ð¾ÑÐ»Ðµ Ð²Ñ‹ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ñ Ð´Ð²Ð¾Ð¹Ð½Ð¾Ð³Ð¾ Ñ€ÐµÐ½Ð´ÐµÑ€Ð°. 
+															// ÐŸÐ¾Ð±Ð¾Ñ‡Ð½Ñ‹Ð¹ ÑÑ„Ñ„ÐµÐºÑ‚ - Ð¿Ñ€Ð¸ Ñ€Ð°Ð±Ð¾Ñ‚Ðµ Ð´Ð²Ð¾Ð¹Ð½Ð¾Ð³Ð¾ Ñ€ÐµÐ½Ð´ÐµÑ€Ð° ÑÐºÐ¾Ñ€Ð¾ÑÑ‚ÑŒ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ñ tonemapping (HDR) Ð¿Ð°Ð´Ð°ÐµÑ‚ Ð² Ð´Ð²Ð° Ñ€Ð°Ð·Ð°
+															// ÐœÐµÑ€Ñ†Ð°Ð½Ð¸Ðµ ÑÐ²ÑÐ·Ð°Ð½Ð¾ Ñ Ñ‚ÐµÐ¼, Ñ‡Ñ‚Ð¾ HDR Ð´Ð»Ñ ÑÐ²Ð¾ÐµÐ¹ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ ÑƒÐ¼ÐµÐ½ÑŒÑˆÐµÐ½Ð½Ð¸Ðµ ÐºÐ¾Ð¿Ð¸Ð¸ "Ð¿Ñ€Ð¾ÑˆÐ»Ñ‹Ñ… ÐºÐ°Ð´Ñ€Ð¾Ð²"
+															// Ð­Ñ‚Ð¸ ÐºÐ°Ð´Ñ€Ñ‹ Ð¾Ñ‚Ð½Ð¾ÑÐ¸Ñ‚ÐµÐ»ÑŒÐ½Ð¾ Ð¿Ð¾Ñ…Ð¾Ð¶Ð¸ Ð´Ñ€ÑƒÐ³ Ð½Ð° Ð´Ñ€ÑƒÐ³Ð°, Ð¾Ð´Ð½Ð°ÐºÐ¾ Ð¿Ñ€Ð¸ Ð²ÐºÐ»ÑŽÑ‡ÐµÐ½Ð½Ð¾Ð¼ Ð´Ð²Ð¾Ð¹Ð½Ð¾Ð¼ Ñ€ÐµÐ½Ð´ÐµÑ€Ðµ
+															// Ð² Ð¿Ð¾Ð»Ð¾Ð²Ð¸Ð½Ðµ ÐºÐ°Ð´Ñ€Ð¾Ð² Ð¾ÐºÐ°Ð·Ñ‹Ð²Ð°ÐµÑ‚ÑÑ ÐºÐ°Ñ€Ñ‚Ð¸Ð½ÐºÐ° Ð¸Ð· Ð²Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ Ñ€ÐµÐ½Ð´ÐµÑ€Ð°, Ð¸ Ð¿Ð¾ÑÐºÐ¾Ð»ÑŒÐºÑƒ Ð¾Ð½Ð° Ñ‡Ð°ÑÑ‚Ð¾ Ð¼Ð¾Ð¶ÐµÑ‚ Ð¾Ñ‚Ð»Ð¸Ñ‡Ð°Ñ‚ÑÑ Ð¿Ð¾ Ñ†Ð²ÐµÑ‚Ñƒ\ÑÑ€ÐºÐ¾ÑÑ‚Ð¸
+															// Ñ‚Ð¾ Ð¿Ñ€Ð¸ Ð¿Ð¾Ð¿Ñ‹Ñ‚ÐºÐµ ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ñ "Ð¿Ð»Ð°Ð²Ð½Ð¾Ð³Ð¾" Ð¿ÐµÑ€ÐµÑ…Ð¾Ð´Ð° Ð¼ÐµÐ¶Ð´Ñƒ Ð½Ð¸Ð¼Ð¸ Ð¿Ð¾Ð»ÑƒÑ‡Ð°ÐµÑ‚ÑÑ ÑÑ„Ñ„ÐµÐºÑ‚ Ð¼ÐµÑ€Ñ†Ð°Ð½Ð¸Ñ
 	}
 	{
 		t_LUM_src->surface_set		(rt_LUM_pool[gpu_id*2+0]->pSurface);
@@ -149,7 +149,7 @@ void	CRenderTarget::phase_combine	()
 		Fmatrix		m_v2w;			m_v2w.invert				(Device.mView		);
 		CEnvDescriptorMixer& envdesc= *g_pGamePersistent->Environment().CurrentEnv		;
 		const float minamb			= 0.001f;
-		Fvector4	ambclr			= { _max(envdesc.ambient.x*2,minamb),	_max(envdesc.ambient.y*2,minamb),			_max(envdesc.ambient.z*2,minamb),	0	};
+		Fvector4	ambclr			= { _max(envdesc.ambient.x*2,minamb),	_max(envdesc.ambient.y*2,minamb),			_max(envdesc.ambient.z*2,minamb),	0.0f	};
 					ambclr.mul		(ps_r2_sun_lumscale_amb);
 
 //.		Fvector4	envclr			= { envdesc.sky_color.x*2+EPS,	envdesc.sky_color.y*2+EPS,	envdesc.sky_color.z*2+EPS,	envdesc.weight					};

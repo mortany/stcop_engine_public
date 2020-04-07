@@ -15,22 +15,22 @@ public:
 
 	void set_hud_offset(Fmatrix& matrix)
 	{
-		bone_offset[1] = matrix;
+		bone_offset[0] = matrix;
 	}
 
 	Fmatrix get_hud_offset()
 	{
-		return bone_offset[1];
+		return bone_offset[0];
 	}
 
 	void set_world_offset(Fmatrix& matrix)
 	{
-		bone_offset[2] = matrix;
+		bone_offset[1] = matrix;
 	}
 
 	Fmatrix get_world_offset()
 	{
-		return bone_offset[2];
+		return bone_offset[1];
 	}
 };
 

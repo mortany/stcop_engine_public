@@ -200,7 +200,7 @@ public:
 	Shader*							_lua_Create			(LPCSTR		s_shader,	LPCSTR s_textures);
 	BOOL							_lua_HasShader		(LPCSTR		s_shader);
 
-	CResourceManager						()	: bDeferredLoad(TRUE){	}
+	CResourceManager						()	: bDeferredLoad(TRUE), LSVM(NULL){	}
 	~CResourceManager						()	;
 
 	void			OnDeviceCreate			(IReader* F);

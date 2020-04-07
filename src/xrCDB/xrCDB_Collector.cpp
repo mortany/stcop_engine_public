@@ -10,7 +10,7 @@ namespace CDB
 	{
 		xr_vector<Fvector>::iterator I,E;
 		I=verts.begin();	E=verts.end();
-		for (;I!=E;I++)		if (I->similar(V,eps)) return u32(I-verts.begin());
+		for (;I!=E;++I)		if (I->similar(V,eps)) return u32(I-verts.begin());
 		verts.push_back		(V);
 		return verts.size	()-1;
 	}
@@ -345,7 +345,7 @@ namespace CDB
 		{
 			DWORDList* vl;
 			vl = &(VM[ix][iy][iz]);
-			for(DWORDIt it=vl->begin();it!=vl->end(); it++)
+			for(DWORDIt it=vl->begin();it!=vl->end(); ++it)
 				if( verts[*it].similar(V) )	{
 					P = *it;
 					break;

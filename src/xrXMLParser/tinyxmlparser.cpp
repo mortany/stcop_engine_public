@@ -439,7 +439,7 @@ const char* TiXmlBase::ReadName( const char* p, TIXML_STRING * name, TiXmlEncodi
 const char* TiXmlBase::GetEntity( const char* p, char* value, int* length, TiXmlEncoding encoding )
 {
 	// Presume an entity, and pull it out.
-    TIXML_STRING ent;
+    //TIXML_STRING ent;
 	int i;
 	*length = 0;
 
@@ -1149,7 +1149,7 @@ const char* TiXmlElement::Parse(TiXmlDocument* document, const char* p, TiXmlPar
 			if ( !p || !*p )
 			{
 				if ( document ) document->SetError( TIXML_ERROR_PARSING_ELEMENT, pErr, data, encoding );
-				delete attrib;
+				xr_delete(attrib);
 				return 0;
 			}
 
@@ -1162,7 +1162,7 @@ const char* TiXmlElement::Parse(TiXmlDocument* document, const char* p, TiXmlPar
 			if ( node )
 			{
 				node->SetValue( attrib->Value() );
-				delete attrib;
+				xr_delete(attrib);
 				return 0;
 			}
 
@@ -1208,7 +1208,7 @@ const char* TiXmlElement::ReadValue( const char* p, TiXmlParsingData* data, TiXm
 			if ( !textNode->Blank() )
 				LinkEndChild( textNode );
 			else
-				delete textNode;
+				xr_delete(textNode);
 		} 
 		else 
 		{

@@ -38,9 +38,9 @@ CObjectList::~CObjectList()
 
 CObject* CObjectList::FindObjectByName(shared_str name)
 {
-    for (Objects::iterator I = objects_active.begin(); I != objects_active.end(); I++)
+    for (Objects::iterator I = objects_active.begin(); I != objects_active.end(); ++I)
         if ((*I)->cName().equal(name)) return (*I);
-    for (Objects::iterator I = objects_sleeping.begin(); I != objects_sleeping.end(); I++)
+    for (Objects::iterator I = objects_sleeping.begin(); I != objects_sleeping.end(); ++I)
         if ((*I)->cName().equal(name)) return (*I);
     return NULL;
 }
@@ -267,12 +267,12 @@ void CObjectList::Update(bool bForce)
     if (!destroy_queue.empty())
     {
         // Info
-        for (Objects::iterator oit = objects_active.begin(); oit != objects_active.end(); oit++)
+        for (Objects::iterator oit = objects_active.begin(); oit != objects_active.end(); ++oit)
             for (int it = destroy_queue.size() - 1; it >= 0; it--)
             {
                 (*oit)->net_Relcase(destroy_queue[it]);
             }
-        for (Objects::iterator oit = objects_sleeping.begin(); oit != objects_sleeping.end(); oit++)
+        for (Objects::iterator oit = objects_sleeping.begin(); oit != objects_sleeping.end(); ++oit)
             for (int it = destroy_queue.size() - 1; it >= 0; it--) (*oit)->net_Relcase(destroy_queue[it]);
 
         for (int it = destroy_queue.size() - 1; it >= 0; it--) Sound->object_relcase(destroy_queue[it]);

@@ -93,7 +93,7 @@ BOOL pick_bone(T_buffer vertices, CKinematics* Parent, IKinematics::pick_result 
 {
 
 	
-	for (CBoneData::FacesVecIt it=faces.begin(); it!=faces.end(); it++){
+	for (CBoneData::FacesVecIt it=faces.begin(); it!=faces.end(); ++it){
 	
 		u32 idx			= (*it)*3;
 		for (u32 k=0; k<3; k++){

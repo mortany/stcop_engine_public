@@ -43,9 +43,8 @@ IC void MouseRayFromPoint	( Fvector& direction, int x, int y, Fmatrix& m_CamMat 
 void CRender::ScreenshotImpl	(ScreenshotMode mode, LPCSTR name, CMemoryWriter* memory_writer)
 {
 	ID3DResource		*pSrcTexture;
+	// Фикс для скриншотилки
 	//HW.pBaseRT->GetResource(&pSrcTexture);
-
-#pragma todo("Mortan: нужно прочекать как это сработает")
 	auto VP = HW.viewPortsRTZB.find(MAIN_VIEWPORT);
 	VP->second.baseRT->GetResource(&pSrcTexture);
 

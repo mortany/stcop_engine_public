@@ -11,6 +11,7 @@ CWeaponShotgun::CWeaponShotgun()
 {
 	m_eSoundClose_2			= ESoundTypes(SOUND_TYPE_WEAPON_SHOOTING);
 	m_eSoundAddCartridge	= ESoundTypes(SOUND_TYPE_WEAPON_SHOOTING);
+	m_eSoundOpen            = ESoundTypes(SOUND_TYPE_WEAPON_RECHARGING);
 }
 
 CWeaponShotgun::~CWeaponShotgun()

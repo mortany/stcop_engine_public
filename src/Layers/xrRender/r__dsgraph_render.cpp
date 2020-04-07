@@ -740,7 +740,7 @@ void	R_dsgraph_structure::r_dsgraph_render_R1_box	(IRender_Sector* _S, Fbox& BB,
 				FHierrarhyVisual* pV = (FHierrarhyVisual*)V;
 				I = pV->children.begin	();
 				E = pV->children.end		();
-				for (; I!=E; I++)		{
+				for (; I!=E; ++I)		{
 					dxRender_Visual* T			= *I;
 					if (BB.intersect(T->vis.box))	lstVisuals.push_back(T);
 				}
@@ -754,7 +754,7 @@ void	R_dsgraph_structure::r_dsgraph_render_R1_box	(IRender_Sector* _S, Fbox& BB,
 				pV->CalculateBones		(TRUE);
 				I = pV->children.begin	();
 				E = pV->children.end		();
-				for (; I!=E; I++)		{
+				for (; I!=E; ++I)		{
 					dxRender_Visual* T				= *I;
 					if (BB.intersect(T->vis.box))	lstVisuals.push_back(T);
 				}
@@ -765,7 +765,7 @@ void	R_dsgraph_structure::r_dsgraph_render_R1_box	(IRender_Sector* _S, Fbox& BB,
 				FLOD		* pV		=	(FLOD*) V;
 				I = pV->children.begin		();
 				E = pV->children.end		();
-				for (; I!=E; I++)		{
+				for (; I!=E; ++I)		{
 					dxRender_Visual* T				= *I;
 					if (BB.intersect(T->vis.box))	lstVisuals.push_back(T);
 				}

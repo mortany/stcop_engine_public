@@ -321,7 +321,7 @@ void		CHW::CreateDevice(HWND m_hWnd, bool move_window)
 		fDepth = selectDepthStencil(fTarget);
 	}
 
-	if ((D3DFMT_UNKNOWN == fTarget) || (D3DFMT_UNKNOWN == fTarget)) {
+	if ((D3DFMT_UNKNOWN == fTarget)) {
 		Msg("Failed to initialize graphics hardware.\n"
 			"Please try to restart the game.\n"
 			"Can not find matching format for back buffer."
@@ -560,7 +560,7 @@ void	CHW::updateWindowProps(HWND m_hWnd)
 			dwWindowStyle = WS_BORDER | WS_VISIBLE;
 			if (!strstr(Core.Params, "-no_dialog_header"))
 				dwWindowStyle |= WS_DLGFRAME | WS_SYSMENU | WS_MINIMIZEBOX;
-			SetWindowLong(m_hWnd, GWL_STYLE, dwWindowStyle);
+			SetWindowLongPtr(m_hWnd, GWL_STYLE, dwWindowStyle);
 			// When moving from fullscreen to windowed mode, it is important to
 			// adjust the window size after recreating the device rather than
 			// beforehand to ensure that you get the window size you want.  For
@@ -594,8 +594,8 @@ void	CHW::updateWindowProps(HWND m_hWnd)
 	}
 	else
 	{
-		SetWindowLong(m_hWnd, GWL_STYLE, dwWindowStyle = (WS_POPUP | WS_VISIBLE));
-		SetWindowLong(m_hWnd, GWL_EXSTYLE, WS_EX_TOPMOST);
+		SetWindowLongPtr(m_hWnd, GWL_STYLE, dwWindowStyle = (WS_POPUP | WS_VISIBLE));
+		SetWindowLongPtr(m_hWnd, GWL_EXSTYLE, WS_EX_TOPMOST);
 	}
 
 #ifndef _EDITOR

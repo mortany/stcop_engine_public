@@ -114,7 +114,7 @@ void CParticleManager::StopEffect(int effect_id, int alist_id, BOOL deffered)
 	pa->lock();
 
     // Step through all the actions in the action list.
-    for(PAVecIt it=pa->begin(); it!=pa->end(); it++){
+    for(PAVecIt it=pa->begin(); it!=pa->end(); ++it){
         switch((*it)->type){
         case PASourceID: static_cast<PASource*>(*it)->m_Flags.set(PASource::flSilent,TRUE);		break;
         }
@@ -140,7 +140,7 @@ void CParticleManager::Update(int effect_id, int alist_id, float dt)
 
 	// Step through all the actions in the action list.
     float kill_old_time = 1.0f;
-	for(PAVecIt it=pa->begin(); it!=pa->end(); it++)
+	for(PAVecIt it=pa->begin(); it!=pa->end(); ++it)
 	{
 		VERIFY((*it));
     	(*it)->Execute	(pe, dt, kill_old_time);
@@ -163,7 +163,7 @@ void CParticleManager::Transform(int alist_id, const Fmatrix& full, const Fvecto
 	Fmatrix mT;			mT.translate(full.c);
 
 	// Step through all the actions in the action list.
-	for(PAVecIt it=pa->begin(); it!=pa->end(); it++){
+	for(PAVecIt it=pa->begin(); it!=pa->end(); ++it){
 		BOOL r 			= (*it)->m_Flags.is(ParticleAction::ALLOW_ROTATE);
 		const Fmatrix& m = r?full:mT;
         (*it)->Transform(m);
@@ -273,7 +273,7 @@ void CParticleManager::SaveActions(int alist_id, IWriter& W)
 	VERIFY(pa);
 	pa->lock();
     W.w_u32					(pa->size());
-    for (PAVecIt it=pa->begin(); it!=pa->end(); it++)
+    for (PAVecIt it=pa->begin(); it!=pa->end(); ++it)
         (*it)->Save			(W);
 	pa->unlock();
 }

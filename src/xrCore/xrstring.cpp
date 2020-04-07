@@ -6,7 +6,7 @@
 #include "FS_impl.h"
 
 XRCORE_API extern str_container* g_pStringContainer = NULL;
-#define HEADER (12 + sizeof(void*)) // ref + len + crc + next
+const int HEADER = sizeof(str_value);// ref + len + crc + next
 
 #if 1
 
@@ -177,11 +177,7 @@ str_value* str_container::dock(str_c value)
        )
     {
 
-        result = (str_value*)Memory.mem_alloc(HEADER + s_len_with_zero
-#ifdef DEBUG_MEMORY_NAME
-                                              , "storage: sstring"
-#endif // DEBUG_MEMORY_NAME
-                                             );
+        result = (str_value*)xr_malloc(HEADER + s_len_with_zero);
 
 #ifdef DEBUG
         static int num_leaked_string = 0;

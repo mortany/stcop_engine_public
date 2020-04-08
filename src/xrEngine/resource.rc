@@ -35,7 +35,7 @@ IDI_ICON1               ICON                    "stalker_cs.ico"
 // Bitmap
 //
 
-IDB_BITMAP1             BITMAP                  "splash_xrcs_en.bmp"
+IDB_BITMAP1             BITMAP                  "forward_frontier_splash.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -59,11 +59,11 @@ BEGIN
     BEGIN
         BLOCK "000004b0"
         BEGIN
-            VALUE "CompanyName", "GSC Game World"
-            VALUE "FileDescription", "X-Ray 1.6 Engine"
+            VALUE "CompanyName", "Forward Frontier Team"
+            VALUE "FileDescription", "Forward Frontier x64 Engine"
             VALUE "FileVersion", "1.6.02"
             VALUE "InternalName", "xrEngine"
-            VALUE "LegalCopyright", "Copyright © 2009 GSC Game World"
+            VALUE "LegalCopyright", "Copyright Â© 2020"
             VALUE "OriginalFilename", "xrEngine.exe"
             VALUE "ProductName", "S.T.A.L.K.E.R.: Call Of Pripyat"
             VALUE "ProductVersion", "1.6.02"

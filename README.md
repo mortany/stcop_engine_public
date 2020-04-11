@@ -25,6 +25,8 @@ X-Ray Engine 1.6 x64 for Forward Frontier Team
 * Поддержка системы прицелов "STCoP WP"
 
 Свежие релизы всегда можете найти в разделе "Релизы" <br>
+## Особая благодарность
+* [isobolevskiy](https://github.com/BearIvan/) За неоценимый вклад и множество полезных советов
 ## Использованные материалы
 * [OpenXRay](https://github.com/openxray) Всеотец прародитель
 * [Oxygen](https://github.com/xrOxygen/xray-oxygen) Часть правок была взята отсюда

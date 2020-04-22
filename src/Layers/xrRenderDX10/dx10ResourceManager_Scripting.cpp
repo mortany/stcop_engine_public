@@ -160,9 +160,11 @@ static void lua_cast_failed(lua_State* L, LUABIND_TYPE_INFO info)
 //#	endif // USE_MEMORY_MONITOR
 #endif // PURE_ALLOC
 
+doug_lea_allocator	g_render_lua_allocator(0, 0, "render:lua");
+
 static void *lua_alloc		(void *ud, void *ptr, size_t osize, size_t nsize) 
 {
-
+	
 }
 
 // export

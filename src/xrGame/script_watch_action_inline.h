@@ -28,7 +28,7 @@ IC	CScriptWatchAction::CScriptWatchAction		(SightManager::ESightType tWatchType,
 }
 
 // Searchlight look ///////////////////////////////////////////////
-IC	CScriptWatchAction::CScriptWatchAction		(const Fvector &tTarget, float vel1, float vel2)
+IC	CScriptWatchAction::CScriptWatchAction		(const Fvector &tTarget, float vel1, float vel2) : m_tWatchType(), m_tGoalType()
 {
 	m_tpObjectToWatch	= 0;
 	m_tTargetPoint		= tTarget;

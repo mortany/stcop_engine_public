@@ -24,7 +24,9 @@ m_type( epotBox ),
 m_mass( 10.f ),
 m_collision_hit_callback( 0 ),
 bones_snd_player( 0 ),
-m_net_updateData ( 0 )
+m_net_updateData ( 0 ),
+m_just_after_spawn(false),
+m_activated(false)
 {
 }
 
@@ -341,8 +343,8 @@ void CPhysicObject::UpdateCL()
 {
 	inherited::UpdateCL();
 
-	//Åñëè íàø ôèçè÷åñêèé îáúåêò àíèìèðîâàííûé, òî 
-	//äâèãàåì îáúåêò çà àíèìàöèåé
+	//Ð•ÑÐ»Ð¸ Ð½Ð°Ñˆ Ñ„Ð¸Ð·Ð¸Ñ‡ÐµÑÐºÐ¸Ð¹ Ð¾Ð±ÑŠÐµÐºÑ‚ Ð°Ð½Ð¸Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð½Ñ‹Ð¹, Ñ‚Ð¾ 
+	//Ð´Ð²Ð¸Ð³Ð°ÐµÐ¼ Ð¾Ð±ÑŠÐµÐºÑ‚ Ð·Ð° Ð°Ð½Ð¸Ð¼Ð°Ñ†Ð¸ÐµÐ¹
 	if (m_pPhysicsShell->PPhysicsShellAnimator())
 	{
 		m_pPhysicsShell->AnimatorOnFrame();

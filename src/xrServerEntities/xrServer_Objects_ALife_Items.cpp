@@ -28,6 +28,9 @@
 ////////////////////////////////////////////////////////////////////////////
 CSE_ALifeInventoryItem::CSE_ALifeInventoryItem(LPCSTR caSection)
 {
+	m_self						= NULL;
+	prev_freezed				= false;
+	m_u8NumItems				= 0;
 	//текущее состояние вещи
 	m_fCondition				= 1.0f;
 

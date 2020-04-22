@@ -8,8 +8,9 @@
 
 #pragma once
 
-IC	CScriptSoundAction::CScriptSoundAction	()
+IC	CScriptSoundAction::CScriptSoundAction	() : m_monster_sound_delay(0)
 {
+	m_monster_sound_delay = 0;
 	m_caSoundToPlay		= "";
 	m_caBoneName		= "";
 	m_tGoalType			= eGoalTypeDummy;

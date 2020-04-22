@@ -209,7 +209,7 @@ BOOL CAnimatorCamEffector::ProcessCam(SCamEffectorInfo& info)
 
 BOOL CAnimatorCamLerpEffector::ProcessCam(SCamEffectorInfo& info)
 {
-	if(!inherited::inherited::ProcessCam(info))	return FALSE;
+	if (!CEffectorCam::ProcessCam(info)) return FALSE;
 
 	const Fmatrix& m			= m_objectAnimator->XFORM();
 	m_objectAnimator->Update	(Device.fTimeDelta);
@@ -276,7 +276,7 @@ BOOL CCameraEffectorControlled::Valid()
 
 #define SND_MIN_VOLUME_FACTOR (0.1f)
 
-SndShockEffector::SndShockEffector	()
+SndShockEffector::SndShockEffector	() : m_end_time(0), m_life_time(0)
 {
 	m_life_time				= 0.0f;
 	m_end_time			    = 0.0f;

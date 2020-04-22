@@ -11,7 +11,9 @@ SCalculateData::SCalculateData( CIKLimb& l, const Fmatrix &o ):
 	cl_shift( Fvector( ).set( 0, 0, 0 ) )	, 
 	m_angles( 0 )							, 
 	apply( false )							,
-	do_collide( false ) 
+	do_collide( false )						,
+	l(0.0f)									,
+	a(0.0f)
 {
 
 }

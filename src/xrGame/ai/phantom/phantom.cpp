@@ -8,6 +8,8 @@
 
 CPhantom::CPhantom()
 {
+	m_fly_particles		= NULL;
+	m_enemy				= NULL;
 	fSpeed				= 4.f;
 	fASpeed				= 1.7f;
 	vHP.set				(0,0);

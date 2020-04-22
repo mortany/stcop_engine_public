@@ -84,10 +84,7 @@ void CActor::g_fireParams	(const CHudItem* pHudItem, Fvector &fire_pos, Fvector 
 		if (eacFirstEye == cam_active && !(weapon->IsZoomed() && weapon->ZoomTexture()))
 		{
 			fire_pos = weapon->get_LastFP();
-
-			bool bInZoom = !!(weapon->bInZoomRightNow() && weapon->bIsSecondVPZoomPresent() && psActorFlags.test(AF_3DSCOPE_ENABLE));
-
-			fire_dir =  bInZoom ? Cameras().Direction() : weapon->get_LastFD();
+			fire_dir = weapon->get_LastFD();
 		}
 	}
 	else

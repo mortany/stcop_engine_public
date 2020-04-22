@@ -1034,7 +1034,7 @@ void CActor::UpdateCL	()
 			if (psHUD_Flags.test(HUD_CROSSCHAIR_NEW) && !(pWeapon->IsZoomed() && pWeapon->ZoomTexture()))
 			{
 				pos = pWeapon->get_LastFP();
-				dir = bInZoom ? Cameras().Direction() : pWeapon->get_LastFD();
+				dir = pWeapon->get_LastFD();
 			}
 
 			HUD().DefineCrosshairCastingPoint(pos, dir);

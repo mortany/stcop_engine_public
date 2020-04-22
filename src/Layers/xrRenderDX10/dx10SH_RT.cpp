@@ -44,7 +44,7 @@ void CRT::create	(LPCSTR Name, u32 w, u32 h,	D3DFORMAT f, u32 SampleCount )
 	rtName = Name;
 
 	R_ASSERT(HW.pDevice && Name && Name[0]);
-	_order		= CPU::GetCLK()	;	//Device.GetTimerGlobal()->GetElapsed_clk();
+	_order		= CPU::QPC()	;	//Device.GetTimerGlobal()->GetElapsed_clk();
 
 	//HRESULT		_hr;
 
@@ -198,7 +198,6 @@ void CRT::create	(LPCSTR Name, u32 w, u32 h,	D3DFORMAT f, u32 SampleCount )
 			R_CHK(HW.pDevice->CreateUnorderedAccessView(it.first->second.textureSurface, &UAVDesc, &it.first->second.unorderedAccessViewInstance));
 		}
 #endif //  DX_11
-		Msg("Create resource for %s", rtName.c_str());
 
 		it.first->second.shaderResView = pTexture->CreateShaderRes(it.first->second.textureSurface);
 
@@ -286,8 +285,6 @@ void CRT::SwitchViewPortResources(ViewPort vp)
 	pSurface = value.textureSurface;
 	rtWidth = value.rtWidth;
 	rtHeight = value.rtHeight;
-
-	Msg("SwitchViewPortResources %u %u", rtWidth, rtHeight);
 
 	R_ASSERT2(pRT || pZRT, make_string("%s", rtName.c_str()));
 	R_ASSERT2(pSurface, make_string("%s", rtName.c_str()));

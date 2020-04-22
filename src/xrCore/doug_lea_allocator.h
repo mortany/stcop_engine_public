@@ -4,8 +4,7 @@
 // Copyright (C) GSC Game World - 2009
 ////////////////////////////////////////////////////////////////////////////
 
-#ifndef DOUG_LEA_ALLOCATOR_H_INCLUDED
-#define DOUG_LEA_ALLOCATOR_H_INCLUDED
+#pragma once
 
 class XRCORE_API doug_lea_allocator
 {
@@ -34,5 +33,3 @@ private:
     LPCSTR m_arena_id;
     void* m_dl_arena;
 }; // class doug_lea_allocator
-
-#endif // #ifndef DOUG_LEA_ALLOCATOR_H_INCLUDED

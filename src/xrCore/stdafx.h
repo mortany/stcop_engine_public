@@ -11,6 +11,7 @@
 #include "xrCore.h"
 #include "xrCore_platform.h"
 #include "Utils.hpp"
+#include <chrono>
 //#include <vld.h>
 //.#include "../../Include/xrAPI/xrAPI.h"
 #endif

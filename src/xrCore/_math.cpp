@@ -158,6 +158,14 @@ XRCORE_API u64 QPC()
     return _dest;
 }
 
+XRCORE_API u64 QPC_Freq()
+{
+    u64 qpc_freq;
+    QueryPerformanceFrequency((PLARGE_INTEGER)&qpc_freq);
+    return qpc_freq;
+}
+
+
 #ifdef M_BORLAND
 u64 __fastcall GetCLK(void)
 {

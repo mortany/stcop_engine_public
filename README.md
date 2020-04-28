@@ -28,6 +28,7 @@ X-Ray Engine 1.6 x64 for Forward Frontier Team
 ## Особая благодарность
 * [isobolevskiy](https://github.com/BearIvan/) За неоценимый вклад и множество полезных советов
 ## Использованные материалы
+* [Mpnolith](https://bitbucket.org/SeargeDP/coc-1.4-xray-64/src/coc-1.4-xray-64/) За отличный пример перехода к x64
 * [OpenXRay](https://github.com/openxray) Всеотец прародитель
 * [Oxygen](https://github.com/xrOxygen/xray-oxygen) Часть правок была взята отсюда
 * [Shoker](https://github.com/ShokerStlk/xray-16-SWM) SWM 3.0 который подарил нам много вкусностей

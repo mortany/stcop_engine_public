@@ -33,6 +33,7 @@ struct ik_pick_result
 		point( _point ),
 		position( Fvector().set( -FLT_MAX, -FLT_MAX, -FLT_MAX ) )
 	{
+		range = 0.0f;
 		triangle[0] = Fvector().set( -FLT_MAX, -FLT_MAX, -FLT_MAX );
 		triangle[1] = Fvector().set( -FLT_MAX, -FLT_MAX, -FLT_MAX );
 		triangle[2] = Fvector().set( -FLT_MAX, -FLT_MAX, -FLT_MAX );

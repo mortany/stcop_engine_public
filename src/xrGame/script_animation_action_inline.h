@@ -10,6 +10,7 @@
 
 IC	CScriptAnimationAction::CScriptAnimationAction	()
 {
+	anim_index			= 0;
 	m_tMentalState		= MonsterSpace::eMentalStateDanger;
 	m_tGoalType			= eGoalTypeMental;
 	m_tAnimAction		= MonsterSpace::eAA_NoAction;
@@ -17,7 +18,7 @@ IC	CScriptAnimationAction::CScriptAnimationAction	()
 	m_use_animation_movement_controller	= false;
 }
 
-IC	CScriptAnimationAction::CScriptAnimationAction	(LPCSTR caAnimationToPlay, bool use_animation_movement_controller)
+IC	CScriptAnimationAction::CScriptAnimationAction	(LPCSTR caAnimationToPlay, bool use_animation_movement_controller) : m_tMentalState(), m_tGoalType()
 {
 	SetAnimation		(caAnimationToPlay);
 	m_use_animation_movement_controller	= use_animation_movement_controller;

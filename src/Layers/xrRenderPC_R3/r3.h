@@ -104,6 +104,8 @@ public:
 	  u32		dx10_minmax_sm		: 2;
 	  u32		dx10_minmax_sm_screenarea_threshold;
 
+	  u32		managed_tex_disabled : 1; // don't keep textures in RAM
+
 		u32		forcegloss			: 1;
 		u32		forceskinw			: 1;
 		float	forcegloss_v		;

@@ -258,6 +258,11 @@ void dxRenderDeviceRender::ResourcesDeferredUpload()
 	Resources->DeferredUpload();
 }
 
+void dxRenderDeviceRender::ResourcesDeferredUnload()
+{
+	Resources->DeferredUnload();
+}
+
 void dxRenderDeviceRender::ResourcesGetMemoryUsage(u32& m_base, u32& c_base, u32& m_lmaps, u32& c_lmaps)
 {
 	if (Resources)

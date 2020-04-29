@@ -78,12 +78,24 @@ void CHW::Reset(HWND hwnd)
 		DevPP.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
 	}
 #endif
-
+	bool bNoManagedTex = !!RImplementation.o.managed_tex_disabled;
 	while (TRUE) {
-		HRESULT _hr = HW.pDevice->Reset(&DevPP);
-		if (SUCCEEDED(_hr))					break;
-		Msg("! ERROR: [%dx%d]: %s", DevPP.BackBufferWidth, DevPP.BackBufferHeight, Debug.error2string(_hr));
-		Sleep(100);
+		HRESULT result;
+
+		if (bNoManagedTex)
+		{
+			Device.m_pRender->ResourcesDeferredUnload();
+			result = HW.pDevice->Reset(&DevPP);
+			Device.m_pRender->ResourcesDeferredUpload();
+		}
+		else
+		{
+			result = HW.pDevice->Reset(&DevPP);
+		}
+
+		if (SUCCEEDED(result))					break;
+		Msg("! ERROR: [%dx%d]: %s", DevPP.BackBufferWidth, DevPP.BackBufferHeight, Debug.error2string(result));
+		Sleep((bNoManagedTex ? 3000 : 100)); // xxx: it's better to crash the game
 	}
 	R_CHK(pDevice->GetRenderTarget(0, &pBaseRT));
 	R_CHK(pDevice->GetDepthStencilSurface(&pBaseZB));

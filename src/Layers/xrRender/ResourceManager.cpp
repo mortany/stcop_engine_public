@@ -342,16 +342,12 @@ void CResourceManager::DeferredUpload()
 
 	tbb::parallel_for_each(m_textures, [&](auto m_tex) { m_tex.second->Load(); });
 }
-/*
-void CResourceManager::DeferredUpload()
+void CResourceManager::DeferredUnload()
 {
 	if (!RDEVICE.b_is_Ready) return;
-	for (map_TextureIt t=m_textures.begin(); t!=m_textures.end(); t++)
-	{
-		t->second->Load();
-	}
+
+	tbb::parallel_for_each(m_textures, [&](auto m_tex) { m_tex.second->Unload(); });
 }
-*/
 #ifdef _EDITOR
 void	CResourceManager::ED_UpdateTextures(AStringVec* names)
 {

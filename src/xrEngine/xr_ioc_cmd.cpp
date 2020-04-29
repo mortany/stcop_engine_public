@@ -775,7 +775,7 @@ void CCC_Register()
     CMD3(CCC_Mask, "rs_stats", &psDeviceFlags, rsStatistic);
     CMD3(CCC_Mask, "rs_fps", &psDeviceFlags, rsFPS);
     CMD4(CCC_Float, "rs_vis_distance", &psVisDistance, 0.4f, 1.5f);
-	//CMD4(CCC_Float, "r_viewport_near", &VIEWPORT_NEAR, 0.05f, 1.f);
+    CMD3(CCC_Mask, "texture_disable_managed", &psDeviceFlags, rsDisableManagedTex);
 
     CMD3(CCC_Mask, "rs_cam_pos", &psDeviceFlags, rsCameraPos);
 #ifdef DEBUG

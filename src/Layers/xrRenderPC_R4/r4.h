@@ -106,6 +106,8 @@ public:
 		
 	  u32		dx11_enable_tessellation : 1;
 
+	  u32		managed_tex_disabled	 : 1; // don't keep textures in RAM
+
 		u32		forcegloss			: 1;
 		u32		forceskinw			: 1;
 		float	forcegloss_v		;

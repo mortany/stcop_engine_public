@@ -111,6 +111,7 @@
 #define __inline inline
 #define IC inline
 #define ICF __forceinline // !!! this should be used only in critical places found by PROFILER
+#define UNUSED(...) (void)(__VA_ARGS__)
 #ifdef _EDITOR
 # define ICN
 #else
@@ -216,6 +217,7 @@
 
 #include "clsid.h"
 #include "xrSyncronize.h"
+#include "ScopeLock.h"
 #include "xrMemory.h"
 #include "xrDebug.h"
 

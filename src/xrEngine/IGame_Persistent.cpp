@@ -150,6 +150,8 @@ void IGame_Persistent::Prefetch()
     float p_time = 1000.f*Device.GetTimerGlobal()->GetElapsed_sec();
 	size_t mem_0 = Memory.mem_usage();
 
+    Log("Loading sounds...");
+    ::Sound->prefetch();
     Log("Loading objects...");
     ObjectPool.prefetch();
     Log("Loading models...");

@@ -42,7 +42,7 @@ protected:
 	CDB::MODEL*							geom_ENV;
 
 	// Containers
-	xr_vector<CSoundRender_Source*>		s_sources;
+	xr_unordered_map<xr_string, CSoundRender_Source*> s_sources;
 	xr_vector<CSoundRender_Emitter*>	s_emitters;
 	u32									s_emitters_u;			// emitter update marker
 	xr_vector<CSoundRender_Target*>		s_targets;
@@ -75,6 +75,8 @@ public:
 
 	virtual void						clone					( ref_sound& S, const ref_sound& from,	esound_type sound_type, int	game_type);
 	virtual void						destroy					( ref_sound& S);
+	virtual void						prefetch				() { i_create_all_sources(); }
+
 	virtual void						stop_emitters			( );
 	virtual int							pause_emitters			( bool val );
 
@@ -110,6 +112,7 @@ public:
 public:
 	CSoundRender_Source*				i_create_source			( LPCSTR name				);
 	void								i_destroy_source		( CSoundRender_Source*  S	);
+	void								i_create_all_sources	();
 	CSoundRender_Emitter*				i_play					( ref_sound* S, BOOL _loop, float delay	);
 	void								i_start					( CSoundRender_Emitter* E	);
 	void								i_stop					( CSoundRender_Emitter* E	);

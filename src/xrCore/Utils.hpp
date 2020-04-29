@@ -2,7 +2,7 @@
 
 
 #define DECLARE_MT_LOCK(lock) xrCriticalSection lock
-
+#define DECLARE_MT_SCOPE_LOCK(lock) ScopeLock scope(&lock); UNUSED(scope)
 
 #define DO_MT_LOCK(lock) lock.Enter()
 #define DO_MT_UNLOCK(lock) lock.Leave()

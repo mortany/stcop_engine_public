@@ -1,12 +1,29 @@
 #include "stdafx.h"
+#include <mutex>
 
-#ifdef PROFILE_CRITICAL_SECTIONS
-static add_profile_portion_callback add_profile_portion = 0;
-void set_add_profile_portion(add_profile_portion_callback callback)
+struct LockImpl
 {
-    add_profile_portion = callback;
-}
+#ifdef XR_PLATFORM_WINDOWS
+    CRITICAL_SECTION cs;
 
+    LockImpl() { InitializeCriticalSection(&cs); }
+    ~LockImpl() { DeleteCriticalSection(&cs); }
+
+    ICF void Lock() { EnterCriticalSection(&cs); }
+    ICF void Unlock() { LeaveCriticalSection(&cs); }
+    ICF bool TryLock() { return !!TryEnterCriticalSection(&cs); }
+#else
+    std::recursive_mutex mutex;
+
+    ICF void Lock() { mutex.lock(); }
+    ICF void Unlock() { mutex.unlock(); }
+    ICF bool TryLock() { return mutex.try_lock(); }
+#endif
+};
+
+#ifdef CONFIG_PROFILE_LOCKS
+static add_profile_portion_callback add_profile_portion = 0;
+void set_add_profile_portion(add_profile_portion_callback callback) { add_profile_portion = callback; }
 struct profiler
 {
     u64 m_time;
@@ -30,59 +47,46 @@ struct profiler
         (*add_profile_portion)(m_timer_id, time - m_time);
     }
 };
-#endif // PROFILE_CRITICAL_SECTIONS
 
-#ifdef PROFILE_CRITICAL_SECTIONS
-xrCriticalSection::xrCriticalSection(LPCSTR id) : m_id(id)
-#else // PROFILE_CRITICAL_SECTIONS
-xrCriticalSection::xrCriticalSection()
-#endif // PROFILE_CRITICAL_SECTIONS
+Lock::Lock(const char* id) : impl(new LockImpl), lockCounter(0), id(id) {}
+
+void Lock::Enter()
 {
-    pmutex = xr_alloc<CRITICAL_SECTION>(1);
-    InitializeCriticalSection((CRITICAL_SECTION*)pmutex);
-}
-
-xrCriticalSection::~xrCriticalSection()
-{
-    DeleteCriticalSection((CRITICAL_SECTION*)pmutex);
-    xr_free(pmutex);
-}
-
-#ifdef DEBUG
-extern void OutputDebugStackTrace(const char* header);
-#endif // DEBUG
-
-void xrCriticalSection::Enter()
-{
-#ifdef PROFILE_CRITICAL_SECTIONS
-# if 0//def DEBUG
+#if 0 // def DEBUG
     static bool show_call_stack = false;
     if (show_call_stack)
         OutputDebugStackTrace("----------------------------------------------------");
-# endif // DEBUG
-    profiler temp(m_id);
-#endif // PROFILE_CRITICAL_SECTIONS
-    EnterCriticalSection((CRITICAL_SECTION*)pmutex);
+#endif // DEBUG
+    profiler temp(id);
+    mutex.lock();
+    isLocked = true;
+}
+#else
+xrCriticalSection::xrCriticalSection() : impl(new LockImpl), lockCounter(0) {}
+
+xrCriticalSection::~xrCriticalSection() { delete impl; }
+
+void xrCriticalSection::Enter()
+{
+    impl->Lock();
+    ++lockCounter;
+}
+#endif // CONFIG_PROFILE_LOCKS
+
+bool xrCriticalSection::TryEnter()
+{
+    const bool locked = impl->TryLock();
+    if (locked)
+        ++lockCounter;
+    return locked;
 }
 
 void xrCriticalSection::Leave()
 {
-    LeaveCriticalSection((CRITICAL_SECTION*)pmutex);
+    impl->Unlock();
+    --lockCounter;
 }
 
-BOOL xrCriticalSection::TryEnter()
-{
-    return TryEnterCriticalSection((CRITICAL_SECTION*)pmutex);
-}
-
-xrCriticalSection::raii::raii(xrCriticalSection* critical_section)
-    : critical_section(critical_section)
-{
-    VERIFY(critical_section);
-    critical_section->Enter();
-}
-
-xrCriticalSection::raii::~raii()
-{
-    critical_section->Leave();
-}
+#ifdef DEBUG
+extern void OutputDebugStackTrace(const char* header);
+#endif

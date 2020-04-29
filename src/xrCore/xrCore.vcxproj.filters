@@ -88,6 +88,9 @@
     <Filter Include="Common">
       <UniqueIdentifier>{8185e74a-e698-4c04-a4fd-35424eab6066}</UniqueIdentifier>
     </Filter>
+    <Filter Include="thread">
+      <UniqueIdentifier>{d1cecf39-4a71-485c-b365-9c8bd4afa2c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FTimer.cpp">
@@ -291,7 +294,12 @@
     <ClCompile Include="os_clipboard.cpp">
       <Filter>OS</Filter>
     </ClCompile>
-    <ClCompile Include="xrSyncronize.cpp" />
+    <ClCompile Include="xrSyncronize.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="ScopeLock.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FTimer.h">
@@ -597,7 +605,6 @@
     <ClInclude Include="os_clipboard.h">
       <Filter>OS</Filter>
     </ClInclude>
-    <ClInclude Include="xrSyncronize.h" />
     <ClInclude Include="xr_vector.h">
       <Filter>Common</Filter>
     </ClInclude>
@@ -636,6 +643,12 @@
     </ClInclude>
     <ClInclude Include="xr_unordered_map.h">
       <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="xrSyncronize.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="ScopeLock.h">
+      <Filter>thread</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

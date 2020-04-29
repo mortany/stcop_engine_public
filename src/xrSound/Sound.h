@@ -259,6 +259,7 @@ public:
 	virtual void					attach_tail				( ref_sound& S, LPCSTR fName)															= 0;
 	virtual void					clone					( ref_sound& S, const ref_sound& from,		esound_type sound_type, int		game_type)	= 0;
 	virtual void					destroy					( ref_sound& S)																			= 0;
+	virtual void					prefetch				()																						= 0;
 	virtual void					stop_emitters			( )																						= 0;	
 	virtual int						pause_emitters			( bool val )																			= 0;
 
@@ -299,7 +300,6 @@ IC ref_sound_data::~ref_sound_data				()																{	::Sound->_destroy_data
 
 IC void	ref_sound::create						( LPCSTR name, esound_type sound_type, int	game_type)	{	VERIFY(!::Sound->i_locked()); 	::Sound->create		(*this,name,sound_type,game_type);							}
 IC void	ref_sound::attach_tail					( LPCSTR name)											{	VERIFY(!::Sound->i_locked()); 	::Sound->attach_tail(*this,name);							}
-
 IC void	ref_sound::clone						( const ref_sound& from,esound_type sound_type, int	game_type)	{	VERIFY(!::Sound->i_locked()); 	::Sound->clone		(*this,from,sound_type,game_type);					}
 IC void	ref_sound::destroy						( )														{	VERIFY(!::Sound->i_locked()); 	::Sound->destroy	(*this);													}
 IC void	ref_sound::play							( CObject* O,						u32 flags, float d)	{	VERIFY(!::Sound->i_locked()); 	::Sound->play		(*this,O,flags,d);											}

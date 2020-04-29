@@ -851,6 +851,7 @@
     <ClCompile Include="rt_lzo1x_d2.cpp" />
     <ClCompile Include="rt_lzo1x_d3.cpp" />
     <ClCompile Include="rt_lzo_init.cpp" />
+    <ClCompile Include="ScopeLock.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -980,6 +981,7 @@
     <ClInclude Include="rt_lzo_dict.h" />
     <ClInclude Include="rt_lzo_ptr.h" />
     <ClInclude Include="rt_miniacc.h" />
+    <ClInclude Include="ScopeLock.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="stream_reader.h" />
     <ClInclude Include="stream_reader_inline.h" />

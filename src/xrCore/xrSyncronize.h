@@ -1,54 +1,41 @@
-#ifndef xrSyncronizeH
-#define xrSyncronizeH
+#pragma once
+#include <atomic>
 
-#if 0//def DEBUG
-# define PROFILE_CRITICAL_SECTIONS
-#endif // DEBUG
 
-#ifdef PROFILE_CRITICAL_SECTIONS
-typedef void(*add_profile_portion_callback) (LPCSTR id, const u64& time);
+#ifdef CONFIG_PROFILE_LOCKS
+typedef void (*add_profile_portion_callback)(LPCSTR id, const u64& time);
 void XRCORE_API set_add_profile_portion(add_profile_portion_callback callback);
 
-# define STRINGIZER_HELPER(a) #a
-# define STRINGIZER(a) STRINGIZER_HELPER(a)
-# define CONCATENIZE_HELPER(a,b) a##b
-# define CONCATENIZE(a,b) CONCATENIZE_HELPER(a,b)
-# define MUTEX_PROFILE_PREFIX_ID #mutexes/
-# define MUTEX_PROFILE_ID(a) STRINGIZER(CONCATENIZE(MUTEX_PROFILE_PREFIX_ID,a))
-#endif // PROFILE_CRITICAL_SECTIONS
+#define MUTEX_PROFILE_PREFIX_ID #mutexes /
+#define MUTEX_PROFILE_ID(a) MACRO_TO_STRING(CONCATENIZE(MUTEX_PROFILE_PREFIX_ID, a))
+#endif // CONFIG_PROFILE_LOCKS
 
-// Desc: Simple wrapper for critical section
 class XRCORE_API xrCriticalSection
 {
+    struct LockImpl* impl;
 public:
-    class XRCORE_API raii
-    {
-    public:
-        raii(xrCriticalSection*);
-        ~raii();
-
-    private:
-        xrCriticalSection* critical_section;
-    };
-
-private:
-    xrCriticalSection(xrCriticalSection const& copy) {};  //noncopyable
-    void* pmutex;
-#ifdef PROFILE_CRITICAL_SECTIONS
-    LPCSTR m_id;
-#endif // PROFILE_CRITICAL_SECTIONS
-
-public:
-#ifdef PROFILE_CRITICAL_SECTIONS
-    xrCriticalSection(LPCSTR id);
-#else // PROFILE_CRITICAL_SECTIONS
+#ifdef CONFIG_PROFILE_LOCKS
+    Lock(const char* id);
+#else
     xrCriticalSection();
-#endif // PROFILE_CRITICAL_SECTIONS
+#endif
     ~xrCriticalSection();
 
+#ifdef CONFIG_PROFILE_LOCKS
     void Enter();
-    void Leave();
-    BOOL TryEnter();
-};
+#else
+    void Enter();
+#endif
 
-#endif // xrSyncronizeH
+    bool TryEnter();
+
+    void Leave();
+
+    bool IsLocked() const { return !!lockCounter; }
+
+private:
+    std::atomic_int lockCounter;
+#ifdef CONFIG_PROFILE_LOCKS
+    const char* id;
+#endif
+};

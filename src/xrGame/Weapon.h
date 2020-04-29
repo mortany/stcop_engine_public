@@ -41,6 +41,16 @@ public:
 			bool            bNVsecondVPavaible;
 			bool            bNVsecondVPstatus;
 
+	// Для упрощёной настройки, в будущем будет изменено
+	WeaponAddon*			scope_addon;
+	WeaponAddon*			gl_addon;
+	WeaponAddon*			sil_addon;
+
+	xr_vector<WeaponAddon*> addons_attached;
+
+	xr_vector<shared_str>	all_addons_list;
+	xr_vector<shared_str>	slots_avaible;
+
 	virtual	bool			bInZoomRightNow() const { return m_zoom_params.m_fZoomRotationFactor > 0.05; }
 	IC		bool			bIsSecondVPZoomPresent() const { return GetSecondVPZoomFactor() > 0.000f; }
 			bool			bLoadAltScopesParams(LPCSTR section);

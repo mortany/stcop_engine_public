@@ -119,8 +119,6 @@ static void lua_cast_failed(lua_State* L, LUABIND_TYPE_INFO info)
 #define USE_DL_ALLOCATOR
 #endif // PURE_ALLOC
 
-doug_lea_allocator	g_render_lua_allocator(0, 0, "render:lua");
-
 static void *lua_alloc		(void *ud, void *ptr, size_t osize, size_t nsize) 
 {
 

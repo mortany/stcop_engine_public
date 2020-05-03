@@ -476,7 +476,7 @@
       </OmitFramePointers>
       <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>.;$(SolutionDir);$(SolutionDir)xrServerEntities;$(SolutionDir)3rd party\luajit-2\src\;$(SolutionDir)3rd party\luabind\;$(xrSdkDir)include;$(XRAY_16X_LIBS)OpenAutomate\inc;$(SolutionDir)3rd party\CxImage;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(SolutionDir);$(SolutionDir)xrServerEntities;$(SolutionDir)3rd party\luajit-2\src\;$(SolutionDir)3rd party\luabind\;$(xrSdkDir)include;$(XRAY_16X_LIBS)OpenAutomate\inc;$(SolutionDir)3rd party\CxImage;$(SolutionDir)3rd party\tbb\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;XRGAME_EXPORTS;dSINGLE;MSVC;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>
       </StringPooling>
@@ -510,7 +510,7 @@
     <Link>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>$(xrIntDir)$(Platform)\$(Configuration)\xrPhysics;$(xrSdkDir)libraries\x64;$(xrSdkDir)libraries;$(XRAY_16X_LIBS)OpenAutomate\libraries;$(XRAY_16X_LIBS)jpeg\libraries\Release;$(SolutionDir)$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories);$(xrLibDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(xrIntDir)$(Platform)\$(Configuration)\xrPhysics;$(xrSdkDir)libraries\x64;$(xrSdkDir)libraries;$(XRAY_16X_LIBS)OpenAutomate\libraries;$(XRAY_16X_LIBS)jpeg\libraries\Release;$(SolutionDir)$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories);$(xrLibDir)$(Platform)\$(Configuration)\;$(xr3rdPartyDir)tbb\lib\intel64\vc14</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
       <OptimizeReferences>
@@ -521,6 +521,7 @@
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
       <ImportLibrary>$(xrLibDir)$(Platform)\$(Configuration)\$(TargetName).lib</ImportLibrary>
       <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX|x64'">
@@ -1658,8 +1659,6 @@
     <ClInclude Include="operator_abstract_inline.h" />
     <ClInclude Include="operator_condition.h" />
     <ClInclude Include="operator_condition_inline.h" />
-    <ClInclude Include="ParticlesObject.h" />
-    <ClInclude Include="ParticlesPlayer.h" />
     <ClInclude Include="particle_params.h" />
     <ClInclude Include="particle_params_inline.h" />
     <ClInclude Include="path_manager.h" />
@@ -3452,8 +3451,6 @@
     <ClCompile Include="object_handler_planner_weapon.cpp" />
     <ClCompile Include="object_property_evaluators.cpp" />
     <ClCompile Include="obstacles_query.cpp" />
-    <ClCompile Include="ParticlesObject.cpp" />
-    <ClCompile Include="ParticlesPlayer.cpp" />
     <ClCompile Include="particle_params.cpp" />
     <ClCompile Include="particle_params_script.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>

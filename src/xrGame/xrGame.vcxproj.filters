@@ -5475,9 +5475,6 @@
     <ClInclude Include="holder_custom.h">
       <Filter>Core\Client\Objects\base\GameObject\Holder</Filter>
     </ClInclude>
-    <ClInclude Include="ParticlesPlayer.h">
-      <Filter>Core\Client\Objects\base\GameObject\Holder\ParticlesPlayer</Filter>
-    </ClInclude>
     <ClInclude Include="ai_obstacle.h">
       <Filter>Core\Client\Objects\base\GameObject\ai_obstacle</Filter>
     </ClInclude>
@@ -6071,9 +6068,6 @@
     </ClInclude>
     <ClInclude Include="InventoryBox.h">
       <Filter>Core\Client\Objects\inventory_box</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticlesObject.h">
-      <Filter>Core\Client\Particles</Filter>
     </ClInclude>
     <ClInclude Include="Spectator.h">
       <Filter>Core\Client\Spectator</Filter>
@@ -9084,9 +9078,6 @@
     <ClCompile Include="holder_custom_script.cpp">
       <Filter>Core\Client\Objects\base\GameObject\Holder</Filter>
     </ClCompile>
-    <ClCompile Include="ParticlesPlayer.cpp">
-      <Filter>Core\Client\Objects\base\GameObject\Holder\ParticlesPlayer</Filter>
-    </ClCompile>
     <ClCompile Include="ai_obstacle.cpp">
       <Filter>Core\Client\Objects\base\GameObject\ai_obstacle</Filter>
     </ClCompile>
@@ -9698,9 +9689,6 @@
     </ClCompile>
     <ClCompile Include="InventoryBox.cpp">
       <Filter>Core\Client\Objects\inventory_box</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticlesObject.cpp">
-      <Filter>Core\Client\Particles</Filter>
     </ClCompile>
     <ClCompile Include="Spectator.cpp">
       <Filter>Core\Client\Spectator</Filter>

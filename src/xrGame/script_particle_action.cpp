@@ -8,6 +8,7 @@
 
 #include "stdafx.h"
 #include "script_particle_action.h"
+#include "../xrParticles/psystem.h"
 #include "particlesobject.h"
 
 CScriptParticleAction::~CScriptParticleAction	()

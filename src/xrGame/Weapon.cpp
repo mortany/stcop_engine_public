@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Weapon.h"
-#include "ParticlesObject.h"
+#include "../xrParticles/psystem.h"
+#include "particlesobject.h"
 #include "entity_alive.h"
 #include "inventory_item_impl.h"
 #include "inventory.h"

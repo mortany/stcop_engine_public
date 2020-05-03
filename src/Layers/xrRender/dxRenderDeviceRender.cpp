@@ -2,6 +2,7 @@
 #include "dxRenderDeviceRender.h"
 
 #include "ResourceManager.h"
+#include "../../xrGame/ParticlesObject.h"
 
 dxRenderDeviceRender::dxRenderDeviceRender()
 	:	Resources(0)
@@ -318,6 +319,7 @@ void dxRenderDeviceRender::Begin()
 #if !defined(USE_DX10) && !defined(USE_DX11)
 	CHK_DX					(HW.pDevice->BeginScene());
 #endif	//	USE_DX10
+	CParticlesObject::WaitForParticles();
 	RCache.OnFrameBegin		();
 	RCache.set_CullMode		(CULL_CW);
 	RCache.set_CullMode		(CULL_CCW);

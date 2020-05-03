@@ -7,8 +7,7 @@
 
 #include "ShootingObject.h"
 
-#include "../xrParticles/psystem.h"
-#include "particlesobject.h"
+#include "ParticlesObject.h"
 #include "WeaponAmmo.h"
 
 #include "actor.h"

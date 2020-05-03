@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "car.h"
 //#if 0
-#include "../xrParticles/psystem.h"
+
 #include "ParticlesObject.h"
 //#include "Physics.h"
 
@@ -71,7 +71,7 @@ CCar::CCar()
 	m_exhaust_particles	="vehiclefx\\exhaust_1";
 	m_car_sound			=xr_new<SCarSound>	(this);
 
-	//Сѓ РјР°С€РёРЅС‹ СЃР»РѕС‚РѕРІ РІ РёРЅРІРµРЅС‚Р°СЂРµ РЅРµС‚
+	//у машины слотов в инвентаре нет
 	inventory			= xr_new<CInventory>();
 	inventory->SetSlotsUseful(false);
 	m_doors_torque_factor = 2.f;
@@ -1681,7 +1681,7 @@ void CCar::OnEvent(NET_Packet& P, u16 type)
 	inherited::OnEvent		(P,type);
 	CExplosive::OnEvent		(P,type);
 
-	//РѕР±СЂР°Р±РѕС‚РєР° СЃРѕРѕР±С‰РµРЅРёР№, РЅСѓР¶РЅС‹С… РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ Р±Р°РіР°Р¶РЅРёРєРѕРј РјР°С€РёРЅС‹
+	//обработка сообщений, нужных для работы с багажником машины
 	u16 id;
 	switch (type)
 	{

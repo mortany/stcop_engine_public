@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "ZoneCampfire.h"
-#include "../xrParticles/psystem.h"
-#include "particlesobject.h"
+#include "ParticlesObject.h"
 #include "GamePersistent.h"
 #include "../xrEngine/LightAnimLibrary.h"
 /*

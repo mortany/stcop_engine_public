@@ -33,12 +33,6 @@
     <ClInclude Include="particle_manager.h">
       <Filter>PAPI</Filter>
     </ClInclude>
-    <ClInclude Include="..\xrGame\ParticlesObject.h">
-      <Filter>PAPI</Filter>
-    </ClInclude>
-    <ClInclude Include="..\xrGame\ParticlesPlayer.h">
-      <Filter>PAPI</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -63,12 +57,6 @@
       <Filter>PAPI</Filter>
     </ClCompile>
     <ClCompile Include="particle_manager.cpp">
-      <Filter>PAPI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrGame\ParticlesObject.cpp">
-      <Filter>PAPI</Filter>
-    </ClCompile>
-    <ClCompile Include="..\xrGame\ParticlesPlayer.cpp">
       <Filter>PAPI</Filter>
     </ClCompile>
   </ItemGroup>

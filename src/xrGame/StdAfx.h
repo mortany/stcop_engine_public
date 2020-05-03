@@ -18,8 +18,6 @@
 #	define	THROW3					VERIFY3
 #endif
 
-#pragma comment( lib, "xrParticles.lib"	)
-
 #include "../xrEngine/gamefont.h"
 #include "../xrEngine/xr_object.h"
 #include "../xrEngine/igame_level.h"

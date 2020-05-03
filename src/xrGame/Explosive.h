@@ -1,4 +1,4 @@
-// Explosive.h: РёРЅС‚РµСЂС„РµР№СЃ РґР»СЏ РІР·РІСЂС‹РІР°СЋС‰РёС…СЃСЏ РѕР±СЉРµРєС‚РѕРІ
+// Explosive.h: интерфейс для взврывающихся объектов
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -11,7 +11,6 @@
 #include "script_export_space.h"
 #include "../xrphysics/DamageSource.h"
 #include "wallmark_manager.h"
-#include "../xrParticles/psystem.h"
 #include "ParticlesObject.h"
 class IRender_Light;
 DEFINE_VECTOR(CPhysicsShellHolder*,BLASTED_OBJECTS_V,BLASTED_OBJECTS_I);
@@ -80,7 +79,7 @@ static		float				TestPassEffect			(const	Fvector	&source_p,	const	Fvector	&dir,f
 protected:
 
 	CWalmarkManager				m_wallmark_manager;
-	//ID РїРµСЂСЃРѕРЅР°Р¶Р° РєРѕС‚РѕСЂС‹Р№ РёРЅРёС†РёСЂРѕРІР°Р» РґРµР№СЃС‚РІРёРµ
+	//ID персонажа который иницировал действие
 	u16							m_iCurrentParentID;
 	
 	//bool						m_bReadyToExplode;
@@ -88,34 +87,34 @@ protected:
 	Fvector 					m_vExplodeSize;
 	Fvector 					m_vExplodeDir;
 
-	//РїР°СЂР°РјРµС‚СЂС‹ РІР·СЂС‹РІР°
+	//параметры взрыва
 	float 						m_fBlastHit;
 	float 						m_fBlastHitImpulse;
 	float 						m_fBlastRadius;
 	
-	//РїР°СЂР°РјРµС‚СЂС‹ Рё РєРѕР»РёС‡РµСЃС‚РІРѕ РѕСЃРєРѕР»РєРѕРІ
+	//параметры и количество осколков
 	float 						m_fFragsRadius; 
 	float 						m_fFragHit;
 	float 						m_fFragHitImpulse;
 	int	  						m_iFragsNum;
 
-	//С‚РёРїС‹ РЅР°РЅРѕСЃРёРјС‹С… С…РёС‚РѕРІ
+	//типы наносимых хитов
 	ALife::EHitType 			m_eHitTypeBlast;
 	ALife::EHitType 			m_eHitTypeFrag;
 
-	//С„Р°РєС‚РѕСЂ РїРѕРґРїСЂРѕСЃР° РїСЂРµРґРјРµС‚Р° РІРІРµСЂС… РІР·СЂС‹РІРЅРѕР№ РІРѕР»РЅРѕР№ 
+	//фактор подпроса предмета вверх взрывной волной 
 	float						m_fUpThrowFactor;
 
-	//СЃРїРёСЃРѕРє РїРѕСЂР°Р¶РµРЅРЅС‹С… РѕР±СЉРµРєС‚РѕРІ
+	//список пораженных объектов
 	BLASTED_OBJECTS_V			m_blasted_objects;
 
-	//С‚РµРєСѓС‰Р°СЏ РїСЂРѕРґРѕР»Р¶РёС‚РµР»СЊРЅРѕСЃС‚СЊ РІР·СЂС‹РІР°
+	//текущая продолжительность взрыва
 	float						m_fExplodeDuration;
-	//РѕР±С‰РµРµ РІСЂРµРјСЏ РІР·СЂС‹РІР°
+	//общее время взрыва
 	float						m_fExplodeDurationMax;
-	//Р’СЂРµРјСЏ, С‡РµСЂРµР· РєРѕС‚РѕСЂРѕРµ РЅР°РґРѕ СЃРґРµР»Р°С‚СЊ РІР·СЂС‹РІС‡Р°С‚РєСѓ РЅРµРІРёРёРјРѕР№, РµСЃР»Рё РѕРЅР° РЅРµ СЃС‚Р°РЅРѕРІРёС‚СЃСЏ РЅРµРІРёРґРёРјРѕР№ РІРѕ РІСЂРµРјСЏ РІР·СЂС‹РІР°
+	//Время, через которое надо сделать взрывчатку невиимой, если она не становится невидимой во время взрыва
 	float						m_fExplodeHideDurationMax;
-	//С„Р»Р°Рі СЃРѕСЃС‚РѕСЏРЅРёСЏ РІР·СЂС‹РІР°
+	//флаг состояния взрыва
 	enum{
 		flExploding				=1<<0	,
 		flExplodEventSent		=1<<1	,
@@ -124,7 +123,7 @@ protected:
 	};
 	Flags8						m_explosion_flags;
 	///////////////////////////////////////////////
-	//Р”РѕР»Р¶РµРЅ Р»Рё РѕР±СЉРµРєС‚ Р±С‹С‚СЊ СЃРєСЂС‹С‚ РїРѕСЃР»Рµ РІР·СЂС‹РІР°: true - РґР»СЏ РІСЃРµС… РєСЂРѕРјРµ РґС‹РјРѕРІРѕР№ РіСЂР°РЅР°С‚С‹
+	//Должен ли объект быть скрыт после взрыва: true - для всех кроме дымовой гранаты
 	BOOL						m_bHideInExplosion;
 	bool						m_bAlreadyHidden;
 	virtual void				HideExplosive	();
@@ -132,20 +131,20 @@ protected:
 	//bool						m_bExplodeEventSent;
 
 	//////////////////////////////////////////////
-	//РґР»СЏ СЂР°Р·Р»РµС‚Р° РѕСЃРєРѕР»РєРѕРІ
+	//для разлета осколков
 	float						m_fFragmentSpeed;
 	
-	//Р·РІСѓРєРё
+	//звуки
 	ref_sound					sndExplode;
 	ESoundTypes					m_eSoundExplode;
 
-	//СЂР°Р·РјРµСЂ РѕС‚РјРµС‚РєРё РЅР° СЃС‚РµРЅР°С…
+	//размер отметки на стенах
 	float						fWallmarkSize;
 	
-	//СЌС„С„РµРєС‚С‹ Рё РїРѕРґСЃРІРµС‚РєР°
+	//эффекты и подсветка
 	shared_str					m_sExplodeParticles;
 	
-	//РїРѕРґСЃРІРµС‚РєР° РІР·СЂС‹РІР°
+	//подсветка взрыва
 	ref_light					m_pLight;
 	Fcolor						m_LightColor;
 	float						m_fLightRange;
@@ -158,7 +157,7 @@ protected:
 	CParticlesObject*			m_pExpParticle;
 	virtual void				UpdateExplosionParticles ();	
 
-	// СЌС„С„РµРєС‚РѕСЂ
+	// эффектор
 	struct {
 		shared_str				effect_sect_name;
 	} effector;

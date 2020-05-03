@@ -40,6 +40,11 @@ PROTECT_API void CRenderDevice::Initialize()
     TimerGlobal.Start();
     TimerMM.Start();
 
+#ifdef INGAME_EDITOR
+    if (strstr(Core.Params, "-editor"))
+        initialize_editor();
+#endif // #ifdef INGAME_EDITOR
+
     // Unless a substitute hWnd has been specified, create a window to render into
     if (m_hWnd == NULL)
     {
@@ -55,29 +60,20 @@ PROTECT_API void CRenderDevice::Initialize()
                             };
         RegisterClass(&wndClass);
 
-
         // Set the window's initial style
         m_dwWindowStyle = WS_BORDER | WS_DLGFRAME;
 
         // Set the window's initial width
-        u32 screen_width = GetSystemMetrics(SM_CXSCREEN);
-        u32 screen_height = GetSystemMetrics(SM_CYSCREEN);
-
-        DEVMODE screen_settings;
-        memset(&screen_settings, 0, sizeof(screen_settings));
-        screen_settings.dmSize = sizeof(screen_settings);
-        screen_settings.dmPelsWidth = (unsigned long)screen_width;
-        screen_settings.dmPelsHeight = (unsigned long)screen_height;
-        screen_settings.dmBitsPerPel = 32;
-        screen_settings.dmFields = DM_BITSPERPEL | DM_PELSWIDTH | DM_PELSHEIGHT;
-
-        ChangeDisplaySettings(&screen_settings, CDS_FULLSCREEN);
+        RECT rc;
+        SetRect(&rc, 0, 0, 640, 480);
+        AdjustWindowRect(&rc, m_dwWindowStyle, FALSE);
 
         // Create the render window
-        m_hWnd = CreateWindow(wndclass, "S.T.A.L.K.E.R.: Call of Pripyat", m_dwWindowStyle,
-            /*rc.left, rc.top, */0, 0,
-            screen_width, screen_height, 0L,
-            0, hInstance, 0L);
+        m_hWnd = CreateWindowEx(WS_EX_TOPMOST,
+                                wndclass, "S.T.A.L.K.E.R.: Call of Pripyat", m_dwWindowStyle,
+                                /*rc.left, rc.top, */CW_USEDEFAULT, CW_USEDEFAULT,
+                                (rc.right - rc.left), (rc.bottom - rc.top), 0L,
+                                0, hInstance, 0L);
     }
 
     // Save window properties

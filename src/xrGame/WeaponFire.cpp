@@ -4,8 +4,7 @@
 
 #include "stdafx.h"
 #include "Weapon.h"
-#include "../xrParticles/psystem.h"
-#include "particlesobject.h"
+#include "ParticlesObject.h"
 #include "entity.h"
 #include "actor.h"
 
@@ -69,7 +68,7 @@ void CWeapon::FireTrace		(const Fvector& P, const Fvector& D)
 	if (m_u8TracerColorID != u8(-1))
 		l_cartridge.param_s.u8ColorID	= m_u8TracerColorID;
 	//-------------------------------------------------------------
-	//РїРѕРІС‹СЃРёС‚СЊ РёР·РЅРѕС€РµРЅРЅРѕСЃС‚СЊ РѕСЂСѓР¶РёСЏ СЃ СѓС‡РµС‚РѕРј РІР»РёСЏРЅРёСЏ РєРѕРЅРєСЂРµС‚РЅРѕРіРѕ РїР°С‚СЂРѕРЅР°
+	//повысить изношенность оружия с учетом влияния конкретного патрона
 //	float Deterioration = GetWeaponDeterioration();
 //	Msg("Deterioration = %f", Deterioration);
 	ChangeCondition(-GetWeaponDeterioration()*l_cartridge.param_s.impair);
@@ -109,7 +108,7 @@ void CWeapon::FireTrace		(const Fvector& P, const Fvector& D)
 	
 
 	bool SendHit = SendHitAllowed(H_Parent());
-	//РІС‹СЃС‚РµСЂР»РёС‚СЊ РїСѓР»СЋ (СЃ СѓС‡РµС‚РѕРј РІРѕР·РјРѕР¶РЅРѕР№ СЃС‚СЂРµР»СЊР±С‹ РґСЂРѕР±СЊСЋ)
+	//выстерлить пулю (с учетом возможной стрельбы дробью)
 	for(int i = 0; i < l_cartridge.param_s.buckShot; ++i) 
 	{
 		FireBullet(P, D, fire_disp, l_cartridge, H_Parent()->ID(), ID(), SendHit);
@@ -132,7 +131,7 @@ void CWeapon::StopShooting()
 {
 //	SetPending			(TRUE);
 
-	//РїСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕ РѕСЃС‚Р°РЅР°РІР»РёРІР°С‚СЊ Р·Р°С†РёРєР»РµРЅРЅС‹Рµ РїР°СЂС‚РёРєР»С‹
+	//принудительно останавливать зацикленные партиклы
 	if(m_pFlameParticles && m_pFlameParticles->IsLooped())
 		StopFlameParticles	();	
 

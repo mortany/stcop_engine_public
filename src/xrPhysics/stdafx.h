@@ -20,7 +20,6 @@
 //#include "../xrengine/IGame_Level.h"
 
 #pragma comment( lib, "xrCore.lib"	)
-#pragma comment( lib, "xrParticles.lib")
 
 #include "xrPhysics.h"
 

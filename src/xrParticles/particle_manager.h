@@ -1,31 +1,24 @@
-#pragma once
+//---------------------------------------------------------------------------
+#ifndef particle_managerH
+#define particle_managerH
 //---------------------------------------------------------------------------
 #include "particle_actions.h"
-#include "tbb/concurrent_unordered_map.h"
 
 namespace PAPI{
-    class CParticleManager: public IParticleManager, public pureFrame
+    class CParticleManager: public IParticleManager
     {
 		// These are static because all threads access the same effects.
 		// All accesses to these should be locked.
-        using SharedParticleEffect = std::shared_ptr<ParticleEffect>;
-        using SharedParticleActions = std::shared_ptr<ParticleActions>;
-
-        using ParticleEffectVec = xr_unordered_map<int, SharedParticleEffect>;
-        using ParticleActionsVec = xr_unordered_map<int, SharedParticleActions>;
-        ParticleEffectVec m_effect_map;
-        ParticleActionsVec m_alist_map;
-        xr_atomic_s32 m_effect_counter;
-        xr_atomic_s32 m_action_counter;
-
-        xrCriticalSection m_effect_guard;
-        xrCriticalSection m_action_guard;
+		DEFINE_VECTOR				(ParticleEffect*,ParticleEffectVec,ParticleEffectVecIt);
+		DEFINE_VECTOR				(ParticleActions*,ParticleActionsVec,ParticleActionsVecIt);
+		ParticleEffectVec			effect_vec;
+		ParticleActionsVec			m_alist_vec;
     public:
 		    						CParticleManager	();
         virtual						~CParticleManager	();
 		// Return an index into the list of particle effects where
-        SharedParticleEffect			GetEffectPtr		(int effect_id);
-        SharedParticleActions			GetActionListPtr	(int alist_id);
+		ParticleEffect*				GetEffectPtr		(int effect_id);
+		ParticleActions*			GetActionListPtr	(int alist_id);
 
 		// create&destroy
 		virtual int					CreateEffect		(u32 max_particles);
@@ -53,8 +46,7 @@ namespace PAPI{
         virtual ParticleAction*		CreateAction		(PActionEnum action_id);
         virtual u32					LoadActions			(int alist_id, IReader& R);
         virtual void				SaveActions			(int alist_id, IWriter& W);
-
-        void OnFrame(void) override;
     };
 };
 //---------------------------------------------------------------------------
+#endif

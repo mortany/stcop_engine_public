@@ -7,7 +7,6 @@
 #include "BastArtifact.h"
 #include "../xrphysics/PhysicsShell.h"
 #include "../xrphysics/extendedgeom.h"
-#include "../xrParticles/psystem.h"
 #include "ParticlesObject.h"
 
 

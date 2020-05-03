@@ -14,8 +14,7 @@
 #include "../xrEngine/StatGraph.h"
 #include "PhraseDialogManager.h"
 #include "ui_defs.h"
-#include "ParticlesObject.h"
-#include "../xrParticles/psystem.h"
+
 #include "step_manager.h"
 #include "script_export_space.h"
 

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ParticlesObjectH
+#define ParticlesObjectH
 
 #include "../xrEngine/PS_instance.h"
 
@@ -13,10 +14,12 @@ class CParticlesObject		:	public CPS_Instance
 	void				UpdateSpatial		();
 
 protected:
-	bool				m_bLooped;			//С„Р»Р°Рі, С‡С‚Рѕ СЃРёСЃС‚РµРјР° Р·Р°С†РёРєР»РµРЅР°
-	bool				m_bStopping;		//РІС‹Р·РІР°РЅР° С„СѓРЅРєС†РёСЏ Stop()
-	DWORD				m_lastUpdatedFrame = 0;
-	static				xr_list<CParticlesObject*> AllParticleObjects;
+	bool				m_bLooped;			//флаг, что система зациклена
+	bool				m_bStopping;		//вызвана функция Stop()
+
+protected:
+	u32					mt_dt;
+
 protected:
 	virtual				~CParticlesObject	();
 
@@ -27,7 +30,7 @@ public:
 	virtual float		shedule_Scale		()	;
 	virtual void		shedule_Update		(u32 dt);
 	virtual void		renderable_Render	();
-	void				PerformAllTheWork	();
+	void				PerformAllTheWork	(u32 dt);
 	void	__stdcall	PerformAllTheWork_mt();
 
 	Fvector&			Position			();
@@ -38,6 +41,7 @@ public:
 	void				play_at_pos			(const Fvector& pos, BOOL xform=FALSE);
 	virtual void		Play				(bool bHudMode);
 	void				Stop				(BOOL bDefferedStop=TRUE);
+	virtual BOOL		Locked				()				{ return mt_dt; }
 	
 	bool				IsLooped			() {return m_bLooped;}
 	bool				IsAutoRemove		();
@@ -45,9 +49,6 @@ public:
 	void				SetAutoRemove		(bool auto_remove);
 
 	const shared_str			Name		();
-
-	static void UpdateAllAsync();
-	static void WaitForParticles();
 public:
 	static CParticlesObject*	Create		(LPCSTR p_name, BOOL bAutoRemove=TRUE, bool remove_on_game_load = true)
 	{
@@ -61,3 +62,5 @@ public:
 		}
 	}
 };
+
+#endif /*ParticlesObjectH*/

@@ -375,7 +375,7 @@
     <Link>
       <AdditionalOptions>/MACHINE:X64 %(AdditionalOptions)</AdditionalOptions>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>$(xrSdkDir)libraries;$(xrLibDir);$(xr3rdPartyDir)tbb\lib\intel64\vc14;%(AdditionalLibraryDirectories);$(xrLibDir)$(Platform)\$(Configuration)\;$(xrSdkDir)libraries\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(xrSdkDir)libraries;$(xrLibDir);$(xr3rdPartyDir)tbb\lib\intel64\vc14;%(AdditionalLibraryDirectories);$(xrLibDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
       <OptimizeReferences>
@@ -584,8 +584,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\xrGame\ParticlesObject.h" />
-    <ClInclude Include="..\xrGame\ParticlesPlayer.h" />
     <ClInclude Include="noise.h" />
     <ClInclude Include="particle_actions.h" />
     <ClInclude Include="particle_actions_collection.h" />
@@ -596,8 +594,6 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\xrGame\ParticlesObject.cpp" />
-    <ClCompile Include="..\xrGame\ParticlesPlayer.cpp" />
     <ClCompile Include="noise.cpp" />
     <ClCompile Include="particle_actions.cpp" />
     <ClCompile Include="particle_actions_collection.cpp" />

@@ -6,7 +6,6 @@
 #include "ParticlesPlayer.h"
 #include "../xrEngine/xr_object.h"
 #include "../Include/xrRender/Kinematics.h"
-#include "../xrServerEntities/smart_cast.h"
 //-------------------------------------------------------------------------------------
 static void generate_orthonormal_basis(const Fvector& dir,Fmatrix &result)
 {

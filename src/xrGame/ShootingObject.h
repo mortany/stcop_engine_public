@@ -1,7 +1,7 @@
 //////////////////////////////////////////////////////////////////////
-// ShootingObject.h: РёРЅС‚РµСЂС„РµР№СЃ РґР»СЏ СЃРµРјРµР№СЃС‚РІР° СЃС‚СЂРµР»СЏСЋС‰РёС… РѕР±СЉРµРєС‚РѕРІ 
-//					 (РѕСЂСѓР¶РёРµ Рё РѕСЃРєРѕР»РѕС‡РЅС‹Рµ РіСЂР°РЅР°С‚С‹) 	
-//					 РѕР±РµСЃРїРµС‡РёРІР°РµС‚ РЅР°Р±РѕСЂ С…РёС‚РѕРІ, Р·РІСѓРєРѕРІ СЂРёРєРѕС€РµС‚Рї
+// ShootingObject.h: интерфейс для семейства стреляющих объектов 
+//					 (оружие и осколочные гранаты) 	
+//					 обеспечивает набор хитов, звуков рикошетп
 //////////////////////////////////////////////////////////////////////
 
 #pragma once
@@ -9,8 +9,7 @@
 #include "alife_space.h"
 #include "../xrEngine/render.h"
 #include "anticheat_dumpable_object.h"
-#include "../xrParticles/psystem.h"
-#include "particlesobject.h"
+
 class CCartridge;
 class CParticlesObject;
 class IRender_Sector;
@@ -36,7 +35,7 @@ private:
 	float		m_air_resistance_factor;
 
 protected:
-	//ID РїРµСЂСЃРѕРЅР°Р¶Р° РєРѕС‚РѕСЂС‹Р№ РёРЅРёС†РёСЂРѕРІР°Р» РґРµР№СЃС‚РІРёРµ
+	//ID персонажа который иницировал действие
 	u16			m_iCurrentParentID;
 
 
@@ -44,7 +43,7 @@ protected:
 // Fire Params
 //////////////////////////////////////////////////////////////////////////
 protected:
-	virtual void			LoadFireParams		(LPCSTR section); 		//СЃРёР»Р° РІС‹СЃС‚СЂРµР»Р°
+	virtual void			LoadFireParams		(LPCSTR section); 		//сила выстрела
 	virtual bool			SendHitAllowed		(CObject* pUser);
 	virtual void			FireBullet			(const Fvector& pos, 
         										const Fvector& dir, 
@@ -72,15 +71,15 @@ protected:
 	Fvector4				fvHitPowerCritical;
 	float					fHitImpulse;
 
-	//СЃРєРѕСЂРѕСЃС‚СЊ РІС‹Р»РµС‚Р° РїСѓР»Рё РёР· СЃС‚РІРѕР»Р°
+	//скорость вылета пули из ствола
 	float					m_fStartBulletSpeed;
-	//РјР°РєСЃРёРјР°Р»СЊРЅРѕРµ СЂР°СЃСЃС‚РѕСЏРЅРёРµ СЃС‚СЂРµР»СЊР±С‹
+	//максимальное расстояние стрельбы
 	float					fireDistance;
 
-	//СЂР°СЃСЃРµРёРІР°РЅРёРµ РІРѕ РІСЂРµРјСЏ СЃС‚СЂРµР»СЊР±С‹
+	//рассеивание во время стрельбы
 	float					fireDispersionBase;
 
-	//СЃС‡РµС‚С‡РёРє РІСЂРµРјРµРЅРё, Р·Р°С‚СЂР°С‡РёРІР°РµРјРѕРіРѕ РЅР° РІС‹СЃС‚СЂРµР»
+	//счетчик времени, затрачиваемого на выстрел
 	float					fShotTimeCounter;
 
 	struct SilencerKoeffs // value *= koef;
@@ -109,8 +108,8 @@ public:
 	SilencerKoeffs		cur_silencer_koef;
 
 protected:
-	//РґР»СЏ СЃС‚Р°Р»РєРµСЂРѕРІ, С‡С‚РѕР± РѕРЅРё Р·РЅР°Р»Рё СЌС„С„РµРєС‚РёРІРЅС‹Рµ РіСЂР°РЅРёС†С‹ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ 
-	//РѕСЂСѓР¶РёСЏ
+	//для сталкеров, чтоб они знали эффективные границы использования 
+	//оружия
 	float					m_fMinRadius;
 	float					m_fMaxRadius;
 
@@ -125,7 +124,7 @@ protected:
 	float					light_lifetime;
 	u32						light_frame;
 	float					light_time;
-	//РІРєР»СЋС‡РµРЅРёРµ РїРѕРґСЃРІРµС‚РєРё РІРѕ РІСЂРµРјСЏ РІС‹СЃС‚СЂРµР»Р°
+	//включение подсветки во время выстрела
 	bool					m_bLightShotEnabled;
 protected:
 	void					Light_Create		();
@@ -140,16 +139,16 @@ protected:
 	virtual void			StopLight			();
 	virtual bool			IsHudModeNow		()=0;
 //////////////////////////////////////////////////////////////////////////
-// РїР°СЂС‚РёРєР»РѕРІР°СЏ СЃРёСЃС‚РµРјР°
+// партикловая система
 //////////////////////////////////////////////////////////////////////////
 protected:
-	//С„СѓРЅРєС†РёРё СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ РѕР±СЉРµРєС‚Р°
+	//функции родительского объекта
 	virtual const Fvector&	get_CurrentFirePoint()		= 0;
 	virtual const Fmatrix&	get_ParticlesXFORM()		= 0;
 	virtual void			ForceUpdateFireParticles	(){};
 	
 	////////////////////////////////////////////////
-	//РѕР±С‰РёРµ С„СѓРЅРєС†РёРё РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РїР°СЂС‚РёРєР»Р°РјРё РѕСЂСѓР¶РёСЏ
+	//общие функции для работы с партиклами оружия
 			void			StartParticles		(CParticlesObject*& pParticles, LPCSTR particles_name, const Fvector& pos, const Fvector& vel = zero_vel, bool auto_remove_flag = false);
 			void			StopParticles		(CParticlesObject*& pParticles);
 			void			UpdateParticles		(CParticlesObject*& pParticles, const Fvector& pos, const  Fvector& vel = zero_vel);
@@ -158,22 +157,22 @@ protected:
 			void			LoadFlameParticles	(LPCSTR section, LPCSTR prefix);
 	
 	////////////////////////////////////////////////
-	//СЃРїРµС†РµС„РёС‡РµСЃРєРёРµ С„СѓРЅРєС†РёРё РґР»СЏ РїР°СЂС‚РёРєР»РѕРІ
-	//РїР°СЂС‚РёРєР»С‹ РѕРіРЅСЏ
+	//спецефические функции для партиклов
+	//партиклы огня
 			void			StartFlameParticles	();
 			void			StopFlameParticles	();
 			void			UpdateFlameParticles();
 
-	//РїР°СЂС‚РёРєР»С‹ РґС‹РјР°
+	//партиклы дыма
 			void			StartSmokeParticles	(const Fvector& play_pos, const Fvector& parent_vel);
 
-	//РїР°СЂС‚РёРєР»С‹ РїРѕР»РѕСЃС‹ РѕС‚ РїСѓР»Рё
+	//партиклы полосы от пули
 			void			StartShotParticles	();
 
-	//РїР°СЂС‚РёРєР»С‹ РіРёР»СЊР·
+	//партиклы гильз
 			void			OnShellDrop			(const Fvector& play_pos, const Fvector& parent_vel);
 protected:
-	//РёРјСЏ РїСЂР°С‚РёРєР»РѕРІ РґР»СЏ РіРёР»СЊР·
+	//имя пратиклов для гильз
 	shared_str				m_sShellParticles;
 public:
 	Fvector					vLoadedShellPoint;
@@ -181,18 +180,18 @@ public:
 	float					m_fTimeToAim;
 	BOOL					m_bUseAimBullet;
 protected:
-	//РёРјСЏ РїСЂР°С‚РёРєР»РѕРІ РґР»СЏ РѕРіРЅСЏ
+	//имя пратиклов для огня
 	shared_str				m_sFlameParticlesCurrent;
-	//РґР»СЏ РІС‹СЃС‚СЂРµР»Р° 1Рј Рё 2Рј РІРёРґРѕРј СЃС‚СЂРµР»СЊР±С‹
+	//для выстрела 1м и 2м видом стрельбы
 	shared_str				m_sFlameParticles;
-	//РѕР±СЉРµРєС‚ РїР°СЂС‚РёРєР»РѕРІ РѕРіРЅСЏ
+	//объект партиклов огня
 	CParticlesObject*		m_pFlameParticles;
 
-	//РёРјСЏ РїСЂР°С‚РёРєР»РѕРІ РґР»СЏ РґС‹РјР°
+	//имя пратиклов для дыма
 	shared_str				m_sSmokeParticlesCurrent;
 	shared_str				m_sSmokeParticles;
 	
-	//РёРјСЏ РїР°СЂС‚РёРєР»РѕРІ СЃР»РµРґР° РѕС‚ РїСѓР»Рё
+	//имя партиклов следа от пули
 	shared_str				m_sShotParticles;
 public:
 	virtual void				DumpActiveParams		(shared_str const & section_name, CInifile & dst_ini) const;

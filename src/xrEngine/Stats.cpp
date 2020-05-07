@@ -497,6 +497,8 @@ void CStats::OnDeviceDestroy()
     xr_delete(fpsFont);
 }
 
+
+
 void CStats::OnRender()
 {
 #ifdef DEBUG
@@ -540,4 +542,19 @@ void CStats::OnRender()
         }
     }
 #endif
+}
+
+//for total process ram usage
+#include "windows.h"
+#include "psapi.h"
+#pragma comment( lib, "psapi.lib" )
+
+u64 CStats::GetTotalRAMConsumption()
+{
+    PROCESS_MEMORY_COUNTERS pmc;
+    GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+
+    u64 RAMUsed = pmc.WorkingSetSize;
+
+    return RAMUsed;
 }

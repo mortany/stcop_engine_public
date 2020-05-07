@@ -40,7 +40,7 @@ IC u64 GetCLK(void)
 }
 #pragma warning(default:4035)
 #else
-IC u64 GetCLK(void)
+IC u64 GetCLK()
 {
     return __rdtsc();
 }

@@ -137,19 +137,11 @@ void initialize()
 
 namespace CPU
 {
-XRCORE_API u64 clk_per_second;
-XRCORE_API u64 clk_per_milisec;
-XRCORE_API u64 clk_per_microsec;
-XRCORE_API u64 clk_overhead;
-XRCORE_API float clk_to_seconds;
-XRCORE_API float clk_to_milisec;
-XRCORE_API float clk_to_microsec;
 XRCORE_API u64 qpc_freq = 0;
-XRCORE_API u64 qpc_overhead = 0;
 XRCORE_API u32 qpc_counter = 0;
-
 XRCORE_API _processor_info ID;
 
+XRCORE_API u64 clk_per_second;
 XRCORE_API u64 QPC()
 {
     u64 _dest;
@@ -176,7 +168,7 @@ u64 __fastcall GetCLK(void)
 
 void Detect()
 {
-    // General CPU identification
+
     if (!_cpuid(&ID))
     {
         // Core.Fatal ("Fatal error: can't detect CPU/FPU.");
@@ -185,57 +177,31 @@ void Detect()
 
     // Timers & frequency
     u64 start, end;
-    u32 dwStart, dwTest;
 
     SetPriorityClass(GetCurrentProcess(), REALTIME_PRIORITY_CLASS);
 
-    // Detect Freq
-    dwTest = timeGetTime();
-    do { dwStart = timeGetTime(); }
-    while (dwTest == dwStart);
     start = GetCLK();
-    while (timeGetTime() - dwStart < 1000);
+    while (GetCLK() - start < 1000);
     end = GetCLK();
     clk_per_second = end - start;
 
     // Detect RDTSC Overhead
-    clk_overhead = 0;
-    u64 dummy = 0;
-    for (int i = 0; i < 256; i++)
+    u64 clk_overhead = 0;
+    for (u32 i = 0; i < 256; i++)
     {
         start = GetCLK();
-        clk_overhead += GetCLK() - start - dummy;
+        clk_overhead += GetCLK() - start;
     }
     clk_overhead /= 256;
-
-    // Detect QPC Overhead
-    QueryPerformanceFrequency((PLARGE_INTEGER)&qpc_freq);
-    qpc_overhead = 0;
-    for (i = 0; i < 256; i++)
-    {
-        start = QPC();
-        qpc_overhead += QPC() - start - dummy;
-    }
-    qpc_overhead /= 256;
-
-    SetPriorityClass(GetCurrentProcess(), NORMAL_PRIORITY_CLASS);
-
     clk_per_second -= clk_overhead;
-    clk_per_milisec = clk_per_second / 1000;
-    clk_per_microsec = clk_per_milisec / 1000;
 
-    _control87(_PC_64, MCW_PC);
-    // _control87 ( _RC_CHOP, MCW_RC );
-    double a, b;
-    a = 1;
-    b = double(clk_per_second);
-    clk_to_seconds = float(double(a / b));
-    a = 1000;
-    b = double(clk_per_second);
-    clk_to_milisec = float(double(a / b));
-    a = 1000000;
-    b = double(clk_per_second);
-    clk_to_microsec = float(double(a / b));
+    // Detect QPC
+    LARGE_INTEGER Freq;
+    QueryPerformanceFrequency(&Freq);
+    qpc_freq = Freq.QuadPart;
+
+    // Restore normal priority
+    SetPriorityClass(GetCurrentProcess(), NORMAL_PRIORITY_CLASS);
 }
 };
 
@@ -244,26 +210,11 @@ bool g_initialize_cpu_called = false;
 //------------------------------------------------------------------------------------
 void _initialize_cpu(void)
 {
-    Msg("* Detected CPU: %s [%s], F%d/M%d/S%d, %.2f mhz, %d-clk 'rdtsc'",
-        CPU::ID.model_name, CPU::ID.v_name,
-        CPU::ID.family, CPU::ID.model, CPU::ID.stepping,
-        float(CPU::clk_per_second / u64(1000000)),
-        u32(CPU::clk_overhead)
-       );
+    Msg("* Vendor CPU: %s", CPU::ID.v_name);
+
+    Msg("* Detected CPU: %s", CPU::ID.model_name);
 
     // DUMP_PHASE;
-
-    if (strstr(Core.Params, "-x86"))
-    {
-        CPU::ID.feature &= ~_CPU_FEATURE_MMX;
-        CPU::ID.feature &= ~_CPU_FEATURE_3DNOW;
-        CPU::ID.feature &= ~_CPU_FEATURE_SSE;
-        CPU::ID.feature &= ~_CPU_FEATURE_SSE2;
-        CPU::ID.feature &= ~_CPU_FEATURE_SSE3;
-        CPU::ID.feature &= ~_CPU_FEATURE_SSSE3;
-        CPU::ID.feature &= ~_CPU_FEATURE_SSE4_1;
-        CPU::ID.feature &= ~_CPU_FEATURE_SSE4_2;
-    };
 
     string256 features;
     xr_strcpy(features, sizeof(features), "RDTSC");

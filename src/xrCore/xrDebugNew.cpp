@@ -373,19 +373,18 @@ void SetupExceptionHandler	(const bool &dedicated)
 	BT_SetActivityType		(BTA_SAVEREPORT);
 #endif // USE_OWN_ERROR_MESSAGE_WINDOW
 
-	BT_SetDialogMessage				(
+	BT_SetDialogMessage(
 		BTDM_INTRO2,
 		"\
-This is X-Ray Engine v1.5 crash reporting client. \
+Hey! I am FFT engine x64 crash reporting client. \
 To help the development process, \
-please Submit Bug or save report and email it manually (button More...).\
-\r\nMany thanks in advance and sorry for the inconvenience."
-	);
+please save report and send it to developer.\
+\r\nMany thanks in advance and sorry for the inconvenience.");
 
 	BT_SetPreErrHandler		(PreErrorHandler,0);
-	BT_SetAppName			("XRay Engine");
+	BT_SetAppName			("FFT engine x64");
 	BT_SetReportFormat		(BTRF_TEXT);
-	BT_SetFlags				(/**/BTF_DETAILEDMODE | /**BTF_EDIETMAIL | /**/BTF_ATTACHREPORT /**| BTF_LISTPROCESSES /**| BTF_SHOWADVANCEDUI /**| BTF_SCREENCAPTURE/**/);
+	BT_SetFlags				(0/*BTF_DETAILEDMODE |*/ /**BTF_EDIETMAIL | /*BTF_ATTACHREPORT*/ /**| BTF_LISTPROCESSES /**| BTF_SHOWADVANCEDUI /**| BTF_SCREENCAPTURE/**/);
 
 	u32 const minidump_flags	=
 #ifndef MASTER_GOLD

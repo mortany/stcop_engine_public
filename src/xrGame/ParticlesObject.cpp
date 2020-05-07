@@ -63,7 +63,7 @@ void CParticlesObject::Init	(LPCSTR p_name, IRender_Sector* S, BOOL bAutoRemove)
 	
 	// sheduled
 	shedule.t_min			= 20;
-	shedule.t_max			= 50;
+	shedule.t_max			= 100;
 	shedule_register		();
 
 	dwLastTime				= Device.dwTimeGlobal;
@@ -236,7 +236,7 @@ float CParticlesObject::shedule_Scale		()
 { 
 	if(g_dedicated_server)		return 5.0f;
 
-	return Device.vCameraPosition.distance_to(Position())/200.f; 
+	return Device.vCameraPosition.distance_to(Position())/100.f; 
 }
 
 void CParticlesObject::renderable_Render	()
@@ -264,8 +264,8 @@ void CParticlesObject::SetAutoRemove		(bool auto_remove)
 	m_bAutoRemove = auto_remove;
 }
 
-//играются ли партиклы, отличается от PSI_Alive, тем что после
-//остановки Stop партиклы могут еще доигрывать анимацию IsPlaying = true
+//РёРіСЂР°СЋС‚СЃСЏ Р»Рё РїР°СЂС‚РёРєР»С‹, РѕС‚Р»РёС‡Р°РµС‚СЃСЏ РѕС‚ PSI_Alive, С‚РµРј С‡С‚Рѕ РїРѕСЃР»Рµ
+//РѕСЃС‚Р°РЅРѕРІРєРё Stop РїР°СЂС‚РёРєР»С‹ РјРѕРіСѓС‚ РµС‰Рµ РґРѕРёРіСЂС‹РІР°С‚СЊ Р°РЅРёРјР°С†РёСЋ IsPlaying = true
 bool CParticlesObject::IsPlaying()
 {
 	if(g_dedicated_server)		return false;

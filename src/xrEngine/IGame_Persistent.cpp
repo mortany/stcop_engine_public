@@ -148,7 +148,7 @@ void IGame_Persistent::Prefetch()
 {
     // prefetch game objects & models
     float p_time = 1000.f*Device.GetTimerGlobal()->GetElapsed_sec();
-	size_t mem_0 = Memory.mem_usage();
+    u64 before_memory = Device.Statistic->GetTotalRAMConsumption();
 
     Log("Loading sounds...");
     ::Sound->prefetch();
@@ -156,14 +156,12 @@ void IGame_Persistent::Prefetch()
     ObjectPool.prefetch();
     Log("Loading models...");
     Render->models_Prefetch();
-    //Device.Resources->DeferredUpload ();
     Device.m_pRender->ResourcesDeferredUpload();
-
+    s64 memory_used = (s64)Device.Statistic->GetTotalRAMConsumption() - (s64)before_memory;
     p_time = 1000.f*Device.GetTimerGlobal()->GetElapsed_sec() - p_time;
-	size_t p_mem = Memory.mem_usage() - mem_0;
 
-    Msg("* [prefetch] time:   %d ms", iFloor(p_time));
-	Msg("* [prefetch] memory: %lldKb", p_mem / 1024);
+    Msg("* [prefetch] Time:   [%d ms]", iFloor(p_time));
+	Msg("* [prefetch] Memory: [%u K]", memory_used / 1024);
 }
 #endif
 

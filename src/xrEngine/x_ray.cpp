@@ -193,7 +193,6 @@ void InitEngine()
     Engine.Initialize();
     while (!g_bIntroFinished) Sleep(100);
     Device.Initialize();
-    CheckCopyProtection();
 }
 
 struct path_excluder_predicate

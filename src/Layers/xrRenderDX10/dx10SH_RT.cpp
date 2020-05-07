@@ -44,21 +44,11 @@ void CRT::create	(LPCSTR Name, u32 w, u32 h,	D3DFORMAT f, u32 SampleCount )
 	rtName = Name;
 
 	R_ASSERT(HW.pDevice && Name && Name[0]);
-	_order		= CPU::QPC()	;	//Device.GetTimerGlobal()->GetElapsed_clk();
-
-	//HRESULT		_hr;
+	_order		= CPU::GetCLK()	;	//Device.GetTimerGlobal()->GetElapsed_clk();
 
 	creationParams = vp_params; // for device reset
 
-	//dwWidth	= w;
-	//dwHeight	= h;
 	fmt			= f;
-
-
-
-	// Check width-and-height of render target surface
-	//if (w>D3D_REQ_TEXTURE2D_U_OR_V_DIMENSION)		return;
-	//if (h>D3D_REQ_TEXTURE2D_U_OR_V_DIMENSION)		return;
 
 	// Select usage
 	u32 usage	= 0;

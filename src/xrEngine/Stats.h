@@ -108,6 +108,7 @@ public:
     virtual void OnRender();
     void OnDeviceCreate(void);
     void OnDeviceDestroy(void);
+    u64 GetTotalRAMConsumption();
 public:
     xr_vector <shared_str> errors;
     CRegistrator <pureStats> seqStats;

@@ -6,6 +6,8 @@
 
 #include "../xrRender/QueryHelper.h"
 
+float CPU_wait_GPU_lastFrame_ = 0.f;
+
 IC	bool	pred_sp_sort	(ISpatial*	_1, ISpatial* _2)
 {
 	float	d1		= _1->spatial.sphere.P.distance_to_sqr	(Device.vCameraPosition);
@@ -282,6 +284,9 @@ void CRender::Render		()
 	//*******
 	// Sync point
 	Device.Statistic->RenderDUMP_Wait_S.Begin	();
+
+	CTimer	T1;							T1.Start();
+
 	if (currentViewPort == MAIN_VIEWPORT)
 	{
 		CTimer	T;							T.Start	();
@@ -301,6 +306,7 @@ void CRender::Render		()
 	}
 	Device.Statistic->RenderDUMP_Wait_S.End		();
 
+	CPU_wait_GPU_lastFrame_ = T1.GetElapsed_sec() * 1000.f;
 
 	//******* Main calc - DEFERRER RENDERER
 	// Main calc

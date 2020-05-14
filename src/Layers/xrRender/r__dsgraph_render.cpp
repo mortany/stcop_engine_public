@@ -27,7 +27,7 @@ IC	bool	cmp_normal_items		(const _NormalItem& N1, const _NormalItem& N2)
 void __fastcall mapNormal_Render	(mapNormalItems& N)
 {
 	// *** DIRECT ***
-	std::sort				(N.begin(),N.end(),cmp_normal_items);
+	//std::sort				(N.begin(),N.end(),cmp_normal_items);
 	_NormalItem				*I=&*N.begin(), *E = &*N.end();
 	for (; I!=E; I++)		{
 		_NormalItem&		Ni	= *I;
@@ -46,7 +46,7 @@ IC	bool	cmp_matrix_items		(const _MatrixItem& N1, const _MatrixItem& N2)
 void __fastcall mapMatrix_Render	(mapMatrixItems& N)
 {
 	// *** DIRECT ***
-	std::sort				(N.begin(),N.end(),cmp_matrix_items);
+	//std::sort				(N.begin(),N.end(),cmp_matrix_items);
 	_MatrixItem				*I=&*N.begin(), *E = &*N.end();
 	for (; I!=E; I++)		{
 		_MatrixItem&	Ni				= *I;

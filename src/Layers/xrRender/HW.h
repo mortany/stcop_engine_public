@@ -8,6 +8,7 @@
 
 #include "hwcaps.h"
 
+
 #ifndef _MAYA_EXPORT
 #include "stats_manager.h"
 #endif
@@ -75,6 +76,8 @@ public:
 	void	Validate(void)	{};
 #endif
 
+//#include <dxgi1_2.h>
+
 //	Variables section
 #if defined(USE_DX10) || defined(USE_DX11)
 public:
@@ -88,6 +91,7 @@ public:
 	ID3D11Device*			pDevice;	//	combine with DX9 pDevice via typedef
 	ID3D11DeviceContext*    pContext;	//	combine with DX9 pDevice via typedef
 	IDXGISwapChain*         m_pSwapChain;
+	//IDXGISwapChain1*        m_pSwapChain1;
 	ID3D11RenderTargetView*	pBaseRT;	//	combine with DX9 pBaseRT via typedef
 	ID3D11DepthStencilView*	pBaseZB;
 
@@ -95,6 +99,7 @@ public:
 
 	D3D_DRIVER_TYPE			m_DriverType;	//	DevT equivalent
 	DXGI_SWAP_CHAIN_DESC	m_ChainDesc;	//	DevPP equivalent
+	//DXGI_SWAP_CHAIN_DESC1	m_ChainDesc1;	//	DevPP equivalent
 	bool					m_bUsePerfhud;
 	D3D_FEATURE_LEVEL		FeatureLevel;
 #elif defined(USE_DX10)

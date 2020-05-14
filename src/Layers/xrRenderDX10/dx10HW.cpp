@@ -138,16 +138,25 @@ void CHW::CreateDevice( HWND m_hWnd, bool move_window )
 
 	selectResolution	(sd.BufferDesc.Width, sd.BufferDesc.Height, bWindowed);
 
+	UINT buffers_count = bWindowed ? 1 : 2;
+
 	sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	sd.BufferCount = 1;
+	sd.BufferCount = buffers_count;
 
 	// Multisample
 	sd.SampleDesc.Count = 1;
 	sd.SampleDesc.Quality = 0;
 
-	sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+	//sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	sd.OutputWindow = m_hWnd;
 	sd.Windowed = bWindowed;
+	sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;;
+
+	if (buffers_count > 1)
+		sd.SwapEffect = DXGI_SWAP_EFFECT_SEQUENTIAL;
+	else
+		sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+
 
 	if (bWindowed)
 	{
@@ -163,13 +172,7 @@ void CHW::CreateDevice( HWND m_hWnd, bool move_window )
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 
 	UINT createDeviceFlags = 0;
-#ifdef DEBUG
-	//createDeviceFlags |= D3Dxx_CREATE_DEVICE_DEBUG;
-#endif
    HRESULT R;
-	// Create the device
-	//	DX10 don't need it?
-	//u32 GPU		= selectGPU();
 #ifdef USE_DX11
     D3D_FEATURE_LEVEL pFeatureLevels[] =
     {

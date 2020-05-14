@@ -16,7 +16,9 @@ class R_occlusion
 {
 private:
 	struct	_Q	{
+		_Q() :status(0) {}
 		u32					order;
+		u32                 status;
 		ID3DQuery*	Q;
 	};
 

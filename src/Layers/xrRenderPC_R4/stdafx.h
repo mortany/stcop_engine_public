@@ -18,6 +18,11 @@
 #include <D3Dx11core.h>
 #include <D3DCompiler.h>
 
+//#if __has_include(<dxgi1_4.h>)
+//#include <dxgi1_4.h>
+//#define HAS_DXGI1_4
+//#endif
+
 #include "../xrRender/xrD3DDefs.h"
 
 #include "../xrRender/Debug/dxPixEventWrapper.h"

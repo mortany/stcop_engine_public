@@ -251,9 +251,6 @@ void CRenderDevice::on_idle()
         return;
     }
 
-#ifdef DEDICATED_SERVER
-    u32 FrameStartTime = TimerGlobal.GetElapsed_ms();
-#endif
     if (psDeviceFlags.test(rsStatistic)) g_bEnableStatGather = TRUE;
     else g_bEnableStatGather = FALSE;
     if (g_loading_events.size())
@@ -304,15 +301,9 @@ void CRenderDevice::on_idle()
 	Statistic->RenderTOTAL_Real.FrameStart();
 	Statistic->RenderTOTAL_Real.Begin();
 
-#ifdef MOVE_CURRENT_FRAME_COUNTR
-	u32 stored_cur_frame = dwFrame;
-#endif
     u32 t_width = Device.dwWidth, t_height = Device.dwHeight;
 	for (size_t i = 0; i < Render->viewPortsThisFrame.size(); i++)
 	{
-#ifdef MOVE_CURRENT_FRAME_COUNTR
-		dwFrame += 1;
-#endif
 		Render->currentViewPort = Render->viewPortsThisFrame[i];
 		Render->needPresenting = (Render->currentViewPort == MAIN_VIEWPORT) ? true : false;
 
@@ -328,8 +319,6 @@ void CRenderDevice::on_idle()
 		// Matrices
 		mFullTransform.mul(mProject, mView);
 		m_pRender->SetCacheXform(mView, mProject);
-		//RCache.set_xform_view ( mView );
-		//RCache.set_xform_project ( mProject );
 		D3DXMatrixInverse((D3DXMATRIX*)&mInvFullTransform, 0, (D3DXMATRIX*)&mFullTransform);
 
 		if (Render->currentViewPort == MAIN_VIEWPORT && Device.m_SecondViewport.IsSVPActive()) // need to save main vp stuff for next frame
@@ -394,11 +383,6 @@ void CRenderDevice::on_idle()
 	
 	if (g_pGameLevel) // reapply camera params as for the main vp, for next frame stuff(we dont want to use last vp camera in next frame possible usages)
 		g_pGameLevel->ApplyCamera();
-
-	
-#ifdef MOVE_CURRENT_FRAME_COUNTR
-	dwFrame += stored_cur_frame;
-#endif
 
     // *** Suspend threads
     // Capture startup point

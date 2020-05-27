@@ -362,8 +362,8 @@ IReader* IReader::open_chunk(u32 ID)
 };
 void IReader::close()
 {
-	this->~IReader();
-	Memory.mem_free(this);
+    IReader* self = this;
+    xr_delete(self);
 }
 
 #include "FS_impl.h"

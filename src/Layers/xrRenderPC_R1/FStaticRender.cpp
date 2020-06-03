@@ -84,11 +84,6 @@ void					CRender::create					()
 	o.forceskinw				= (strstr(Core.Params,"-skinw"))?		TRUE	:FALSE	;
 	o.no_detail_textures		= !ps_r2_ls_flags.test(R1FLAG_DETAIL_TEXTURES);
 	c_ldynamic_props			= "L_dynamic_props";
-
-	o.managed_tex_disabled = (strstr(Core.Params, "-no_staging")) ? TRUE : psDeviceFlags.test(rsDisableManagedTex);
-	if (o.managed_tex_disabled)
-		Msg("* Managed textures disabled");
-
 	m_bMakeAsyncSS				= false;
 
 //---------

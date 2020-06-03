@@ -318,18 +318,6 @@ void R_dsgraph_structure::r_dsgraph_insert_static	(dxRender_Visual *pVisual)
 		SPass&						pass	= *sh->passes[iPass];
 		mapNormal_T&				map		= mapNormalPasses[sh->flags.iPriority/2][iPass];
 
-//#ifdef USE_RESOURCE_DEBUGGER
-//	mapNormalVS::TNode*			Nvs		= map.insert		(pass.vs);
-//	mapNormalPS::TNode*			Nps		= Nvs->val.insert	(pass.ps);
-//#else
-//#if defined(USE_DX10) || defined(USE_DX11)
-//	mapNormalVS::TNode*			Nvs		= map.insert		(&*pass.vs);
-//#else	//	USE_DX10
-//	mapNormalVS::TNode*			Nvs		= map.insert		(pass.vs->vs);
-//#endif	//	USE_DX10
-//	mapNormalPS::TNode*			Nps		= Nvs->val.insert	(pass.ps->ps);
-//#endif
-
 #ifdef USE_RESOURCE_DEBUGGER
 #	if defined(USE_DX10) || defined(USE_DX11)
 		mapNormalVS::TNode*			Nvs		= map.insert		(pass.vs);
@@ -378,8 +366,7 @@ void R_dsgraph_structure::r_dsgraph_insert_static	(dxRender_Visual *pVisual)
 #else
 		if (SSA>Nps->val.ssa)		{ Nps->val.ssa = SSA;
 #endif
-//	if (SSA>Nvs->val.ssa)		{ Nvs->val.ssa = SSA;
-//	} } } } }
+
 #if defined(USE_DX10) || defined(USE_DX11)
 		if (SSA>Ngs->val.ssa)		{ Ngs->val.ssa = SSA;
 #endif	//	USE_DX10
@@ -479,13 +466,13 @@ void CRender::add_leafs_Dynamic	(dxRender_Visual *pVisual, bool bIgnoreOpt)
 	if (0==pVisual)				return;
 
 	// Visual is 100% visible - simply add it
-#if RENDER!=R_R1
+/*#if RENDER!=R_R1
 	if (!bIgnoreOpt && !IsValuableToRenderDyn(pVisual, *val_pTransform, phase == PHASE_SMAP))
 		return;
 #else
 	if (!bIgnoreOpt && !IsValuableToRenderDyn(pVisual, *val_pTransform, false))
 		return;
-#endif
+#endif*/
 
 	xr_vector<dxRender_Visual*>::iterator I,E;	// it may be useful for 'hierrarhy' visual
 
@@ -652,13 +639,13 @@ void CRender::add_leafs_Static(dxRender_Visual *pVisual)
 	if (VIS == fcvNone)
 		return;
 
-#if RENDER!=R_R1
+/*#if RENDER!=R_R1
 	if (!IsValuableToRender(pVisual, phase == PHASE_SMAP))
 		return;
 #else
 	if (!IsValuableToRender(pVisual, false))
 		return;
-#endif
+#endif*/
 
 	if (!HOM.visible(pVisual->vis))		return;
 
@@ -746,13 +733,13 @@ void CRender::add_leafs_Static(dxRender_Visual *pVisual)
 BOOL CRender::add_Dynamic(dxRender_Visual *pVisual, u32 planes)
 {
 
-#if RENDER!=R_R1
+/*#if RENDER!=R_R1
 	if (!IsValuableToRenderDyn(pVisual, *val_pTransform, phase == PHASE_SMAP))
 		return FALSE;
 #else
 	if (!IsValuableToRenderDyn(pVisual, *val_pTransform, false))
 		return FALSE;
-#endif
+#endif*/
 
 	// Check frustum visibility and calculate distance to visual's center
 	Fvector		Tpos;	// transformed position
@@ -846,16 +833,45 @@ BOOL CRender::add_Dynamic(dxRender_Visual *pVisual, u32 planes)
 	return TRUE;
 }
 
+void CRender::add_StaticForCulling(dxRender_Visual* pVisual, CSector* sector)
+{
+	//Нужно проверить производиельность такого метода, может быть с ним будет хуже
+	//Чем в оригинале
+
+	for (u32 v_it = 0; v_it < sector->r_frustums.size(); v_it++)
+	{
+		u32 plane = sector->r_frustums[v_it].getMask();
+
+		if(pVisual->Type == MT_PARTICLE_GROUP || pVisual->Type == MT_LOD)
+			add_Static(pVisual, plane);
+		
+		switch (pVisual->Type) 
+		{
+			case MT_HIERRARHY:
+			{
+				// Add all children
+				FHierrarhyVisual* pV = (FHierrarhyVisual*)pVisual;
+				for (auto it : pV->children)
+				{
+
+				}
+			}break;
+		}
+
+	}
+	
+}
+
 void CRender::add_Static(dxRender_Visual *pVisual, u32 planes)
 {
 
-#if RENDER!=R_R1
+/*#if RENDER!=R_R1
 	if (!IsValuableToRender(pVisual, phase == PHASE_SMAP))
 		return;
 #else
 	if (!IsValuableToRender(pVisual, false))
 		return;
-#endif
+#endif*/
 
 	// Check frustum visibility and calculate distance to visual's center
 	EFC_Visible	VIS;

@@ -183,7 +183,7 @@ void	uber_deffer	(CBlender_Compile& C, bool hq, LPCSTR _vspec, LPCSTR _pspec, BO
 		C.r_dx10Sampler	("smp_rtlinear");
 	}
 #else	//	USE_DX10
-	C.r_Pass		(vs,ps,	FALSE);
+	C.r_Pass(vs, ps, FALSE);
 	VERIFY(C.L_textures[0].size());
 	if(bump)
 	{

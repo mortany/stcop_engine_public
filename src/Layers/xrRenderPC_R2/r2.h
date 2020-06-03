@@ -132,6 +132,9 @@ public:
 	IDirect3DQuery9*											q_sync_point[CHWCaps::MAX_GPUS];
 	u32															q_sync_count	;
 
+	xr_vector<dxRender_Visual*>                                 StaticGeoAll;
+
+
 	bool														m_bMakeAsyncSS;
 	bool														m_bFirstFrameAfterReset;	// Determines weather the frame is the first after resetting device.
 
@@ -148,6 +151,7 @@ private:
 
 	BOOL							add_Dynamic					(dxRender_Visual*pVisual, u32 planes);		// normal processing
 	void							add_Static					(dxRender_Visual*pVisual, u32 planes);
+	void                            add_StaticForCulling		(dxRender_Visual*pVisual, CSector* sector);
 	void							add_leafs_Dynamic			(dxRender_Visual*pVisual, bool bIgnoreOpt = false);	// if detected node's full visibility
 	void							add_leafs_Static			(dxRender_Visual*pVisual);					// if detected node's full visibility
 

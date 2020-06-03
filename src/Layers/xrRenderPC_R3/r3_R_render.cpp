@@ -3,7 +3,8 @@
 #include "../xrRender/FBasicVisual.h"
 #include "../../xrEngine/customhud.h"
 #include "../../xrEngine/xr_object.h"
-
+#include "tbb/parallel_sort.h"
+#include "tbb/concurrent_vector.h"
 #include "../xrRender/QueryHelper.h"
 
 IC	bool	pred_sp_sort	(ISpatial*	_1, ISpatial* _2)
@@ -35,7 +36,7 @@ void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
 				);
 
 			// (almost) Exact sorting order (front-to-back)
-			std::sort			(lstRenderables.begin(),lstRenderables.end(),pred_sp_sort);
+			std::sort(lstRenderables.begin(),lstRenderables.end(),pred_sp_sort);
 
 			// Determine visibility for dynamic part of scene
 			set_Object							(0);
@@ -85,56 +86,89 @@ void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
 			}
 		}
 
-		// Traverse frustums
-		for (u32 o_it=0; o_it<lstRenderables.size(); o_it++)
+		tbb::concurrent_vector<IRenderable*> renderable_objects;
+		tbb::concurrent_vector<light*> renderable_lights;
+
+		for (size_t i = 0; i < lstRenderables.size(); ++i)
 		{
-			ISpatial*	spatial		= lstRenderables[o_it];		spatial->spatial_updatesector	();
-			CSector*	sector		= (CSector*)spatial->spatial.sector;
-			if	(0==sector)										continue;	// disassociated from S/P structure
-
-			if (spatial->spatial.type & STYPE_LIGHTSOURCE)		{
-				// lightsource
-				light*			L				= (light*)	(spatial->dcast_Light());
-				VERIFY							(L);
-				float	lod		= L->get_LOD	();
-				if (lod>EPS_L)	{
-					vis_data&		vis		= L->get_homdata	( );
-					if	(HOM.visible(vis))	Lights.add_light	(L);
-				}
-				continue					;
-			}
-
-			if	(PortalTraverser.i_marker != sector->r_marker)	continue;	// inactive (untouched) sector
-			for (u32 v_it=0; v_it<sector->r_frustums.size(); v_it++)	{
-				CFrustum&	view	= sector->r_frustums[v_it];
-				if (!view.testSphere_dirty(spatial->spatial.sphere.P,spatial->spatial.sphere.R))	continue;
-
-				if (spatial->spatial.type & STYPE_RENDERABLE)
-				{
-					// renderable
-					IRenderable*	renderable		= spatial->dcast_Renderable	();
-					VERIFY							(renderable);
-
-					// Occlusion
-					//	casting is faster then using getVis method
-					vis_data&		v_orig			= ((dxRender_Visual*)renderable->renderable.visual)->vis;
-					vis_data		v_copy			= v_orig;
-					v_copy.box.xform				(renderable->renderable.xform);
-					BOOL			bVisible		= HOM.visible(v_copy);
-					v_orig.marker					= v_copy.marker;
-					v_orig.accept_frame				= v_copy.accept_frame;
-					v_orig.hom_frame				= v_copy.hom_frame;
-					v_orig.hom_tested				= v_copy.hom_tested;
-					if (!bVisible)					break;	// exit loop on frustums
-
-					// Rendering
-					set_Object						(renderable);
-					renderable->renderable_Render	();
-					set_Object						(0);
-				}
-				break;	// exit loop on frustums
-			}
+			ISpatial* spatial = lstRenderables[i];
+			spatial->spatial_updatesector();
 		}
+
+		FOR_START(size_t, 0, lstRenderables.size(), i)
+		{
+			ISpatial* spatial = lstRenderables[i];
+			CSector* sector = (CSector*)spatial->spatial.sector;
+
+			if (sector)
+			{
+				if (spatial->spatial.type & STYPE_LIGHTSOURCE)
+				{
+					// lightsource
+					light* L = (light*)(spatial->dcast_Light());
+
+					VERIFY(L);
+
+					float	lod = L->get_LOD();
+					if (lod > EPS_L)
+					{
+						vis_data& vis = L->get_homdata();
+						if (HOM.visible(vis))	renderable_lights.push_back(L);
+					}
+				}
+				else if (spatial->spatial.type & STYPE_RENDERABLE && PortalTraverser.i_marker == sector->r_marker)
+				{
+					bool vis_frust = false;
+
+					for (u32 v_it = 0; v_it < sector->r_frustums.size(); v_it++)
+					{
+						CFrustum& view = sector->r_frustums[v_it];
+						if (view.testSphere_dirty(spatial->spatial.sphere.P, spatial->spatial.sphere.R))
+						{
+							vis_frust = true;
+							break;
+						}
+					}
+
+					if (vis_frust)
+					{
+						IRenderable* renderable = spatial->dcast_Renderable();
+						if (renderable)
+						{
+							vis_data& v_orig = ((dxRender_Visual*)renderable->renderable.visual)->vis;
+							vis_data v_copy = v_orig;
+							v_copy.box.xform(renderable->renderable.xform);
+							BOOL			bVisible = HOM.visible(v_copy);
+
+							v_orig.marker = v_copy.marker;
+							v_orig.accept_frame = v_copy.accept_frame;
+							v_orig.hom_frame = v_copy.hom_frame;
+							v_orig.hom_tested = v_copy.hom_tested;
+
+							if (bVisible)
+							{
+								renderable_objects.push_back(renderable);
+							}
+						}
+					}
+				}
+			}
+
+		}
+		FOR_END
+
+			for (size_t i = 0; i < renderable_objects.size(); i++)
+			{
+				set_Object(renderable_objects[i]);
+				renderable_objects[i]->renderable_Render();
+				set_Object(0);
+			}
+
+		for (size_t i = 0; i < renderable_lights.size(); i++)
+		{
+			Lights.add_light(renderable_lights[i]);
+		}
+
 		if (g_pGameLevel && (phase==PHASE_NORMAL))	g_hud->Render_Last();		// HUD
 	}
 	else

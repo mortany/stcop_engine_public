@@ -73,7 +73,7 @@ public:
 	ref_rt						rt_Generic_1_r;   // MRT generic 1
 	ref_rt						rt_Generic;
 	ref_rt						rt_Position;		// 64bit,	fat	(x,y,z,?)				(eye-space)
-	ref_rt						rt_Normal;			// 64bit,	fat	(x,y,z,hemi)			(eye-space)
+	ref_rt						rt_Misc;			// 64bit,	fat	(x,y,z,hemi)			(eye-space)
 	ref_rt						rt_Color;			// 64/32bit,fat	(r,g,b,specular-gloss)	(or decompressed MET-8-8-8-8)
 
 	ref_rt                      rt_temp;

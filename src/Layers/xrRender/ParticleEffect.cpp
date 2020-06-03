@@ -275,7 +275,63 @@ __forceinline void fsincos( const float angle , float &sine , float &cosine )
 
 xrCriticalSection	m_sprite_section;
 
-IC void FillSprite	(FVF::LIT*& pv, const Fvector& T, const Fvector& R, const Fvector& pos, const Fvector2& lt, const Fvector2& rb, float r1, float r2, u32 clr, float sina , float cosa )
+IC void FillSprite(FVF::LIT*& pv, const Fvector& T, const Fvector& R, const Fvector& pos, const Fvector2& lt, const Fvector2& rb, float r1, float r2, u32 clr, float angle)
+{
+	m_sprite_section.Enter();
+
+	float sa = _sin(angle);
+	float ca = _cos(angle);
+	Fvector Vr, Vt;
+	Vr.x = T.x * r1 * sa + R.x * r1 * ca;
+	Vr.y = T.y * r1 * sa + R.y * r1 * ca;
+	Vr.z = T.z * r1 * sa + R.z * r1 * ca;
+	Vt.x = T.x * r2 * ca - R.x * r2 * sa;
+	Vt.y = T.y * r2 * ca - R.y * r2 * sa;
+	Vt.z = T.z * r2 * ca - R.z * r2 * sa;
+
+	Fvector 	a, b, c, d;
+	a.sub(Vt, Vr);
+	b.add(Vt, Vr);
+	c.invert(a);
+	d.invert(b);
+	pv->set(d.x + pos.x, d.y + pos.y, d.z + pos.z, clr, lt.x, rb.y);	pv++;
+	pv->set(a.x + pos.x, a.y + pos.y, a.z + pos.z, clr, lt.x, lt.y);	pv++;
+	pv->set(c.x + pos.x, c.y + pos.y, c.z + pos.z, clr, rb.x, rb.y);	pv++;
+	pv->set(b.x + pos.x, b.y + pos.y, b.z + pos.z, clr, rb.x, lt.y);	pv++;
+
+	m_sprite_section.Leave();
+}
+
+IC void FillSprite(FVF::LIT*& pv, const Fvector& pos, const Fvector& dir, const Fvector2& lt, const Fvector2& rb, float r1, float r2, u32 clr, float angle)
+{
+	m_sprite_section.Enter();
+
+	float sa = _sin(angle);
+	float ca = _cos(angle);
+	const Fvector& T = dir;
+	Fvector R; 	R.crossproduct(T, RDEVICE.vCameraDirection).normalize_safe();
+	Fvector Vr, Vt;
+	Vr.x = T.x * r1 * sa + R.x * r1 * ca;
+	Vr.y = T.y * r1 * sa + R.y * r1 * ca;
+	Vr.z = T.z * r1 * sa + R.z * r1 * ca;
+	Vt.x = T.x * r2 * ca - R.x * r2 * sa;
+	Vt.y = T.y * r2 * ca - R.y * r2 * sa;
+	Vt.z = T.z * r2 * ca - R.z * r2 * sa;
+
+	Fvector 	a, b, c, d;
+	a.sub(Vt, Vr);
+	b.add(Vt, Vr);
+	c.invert(a);
+	d.invert(b);
+	pv->set(d.x + pos.x, d.y + pos.y, d.z + pos.z, clr, lt.x, rb.y);	pv++;
+	pv->set(a.x + pos.x, a.y + pos.y, a.z + pos.z, clr, lt.x, lt.y);	pv++;
+	pv->set(c.x + pos.x, c.y + pos.y, c.z + pos.z, clr, rb.x, rb.y);	pv++;
+	pv->set(b.x + pos.x, b.y + pos.y, b.z + pos.z, clr, rb.x, lt.y);	pv++;
+
+	m_sprite_section.Leave();
+}
+
+/*IC void FillSprite	(FVF::LIT*& pv, const Fvector& T, const Fvector& R, const Fvector& pos, const Fvector2& lt, const Fvector2& rb, float r1, float r2, u32 clr, float sina , float cosa )
 {
 	m_sprite_section.Enter();
 
@@ -386,7 +442,7 @@ IC void FillSprite	(FVF::LIT*& pv, const Fvector& pos, const Fvector& dir, const
 	_mm_storeh_pi( (__m64*) &R.y , _t1 );
 
 	FillSprite( pv , T , R , pos , lt , rb , r1 , r2 , clr , sina , cosa );
-}
+}*/
 
 extern ENGINE_API float		psHUD_FOV;
 
@@ -467,11 +523,12 @@ void ParticleRenderStream(FVF::LIT* pv, u32 count, PAPI::Particle* particles, CP
 					Fvector p;
 					pPE->m_XFORM.transform_tiny(p, m.pos);
 					M.mulA_43(pPE->m_XFORM);
-					FillSprite(pv, M.k, M.i, p, lt, rb, r_x, r_y, m.color, sina, cosa);
+					//FillSprite(pv, M.k, M.i, p, lt, rb, r_x, r_y, m.color, sina, cosa);
+					FillSprite(pv, M.k, M.i, p, lt, rb, r_x, r_y, m.color, m.rot.x);
 				}
 				else
 				{
-					FillSprite(pv, M.k, M.i, m.pos, lt, rb, r_x, r_y, m.color, sina, cosa);
+					FillSprite(pv, M.k, M.i, m.pos, lt, rb, r_x, r_y, m.color, m.rot.x);
 				}
 			}
 			else if ((speed >= EPS_S) && pPE->m_Def->m_Flags.is(CPEDef::dfFaceAlign))
@@ -491,11 +548,11 @@ void ParticleRenderStream(FVF::LIT* pv, u32 count, PAPI::Particle* particles, CP
 					Fvector p;
 					pPE->m_XFORM.transform_tiny(p, m.pos);
 					M.mulA_43(pPE->m_XFORM);
-					FillSprite(pv, M.j, M.i, p, lt, rb, r_x, r_y, m.color, sina, cosa);
+					FillSprite(pv, M.j, M.i, p, lt, rb, r_x, r_y, m.color, m.rot.x);
 				}
 				else
 				{
-					FillSprite(pv, M.j, M.i, m.pos, lt, rb, r_x, r_y, m.color, sina, cosa);
+					FillSprite(pv, M.j, M.i, m.pos, lt, rb, r_x, r_y, m.color, m.rot.x);
 				}
 			}
 			else
@@ -510,11 +567,11 @@ void ParticleRenderStream(FVF::LIT* pv, u32 count, PAPI::Particle* particles, CP
 					Fvector p, d;
 					pPE->m_XFORM.transform_tiny(p, m.pos);
 					pPE->m_XFORM.transform_dir(d, dir);
-					FillSprite(pv, p, d, lt, rb, r_x, r_y, m.color, sina, cosa);
+					FillSprite(pv, p, d, lt, rb, r_x, r_y, m.color, m.rot.x);
 				}
 				else
 				{
-					FillSprite(pv, m.pos, dir, lt, rb, r_x, r_y, m.color, sina, cosa);
+					FillSprite(pv, m.pos, dir, lt, rb, r_x, r_y, m.color, m.rot.x);
 				}
 			}
 		}
@@ -524,11 +581,11 @@ void ParticleRenderStream(FVF::LIT* pv, u32 count, PAPI::Particle* particles, CP
 			{
 				Fvector p;
 				pPE->m_XFORM.transform_tiny(p, m.pos);
-				FillSprite(pv, RDEVICE.vCameraTop, RDEVICE.vCameraRight, p, lt, rb, r_x, r_y, m.color, sina, cosa);
+				FillSprite(pv, RDEVICE.vCameraTop, RDEVICE.vCameraRight, p, lt, rb, r_x, r_y, m.color, m.rot.x);
 			}
 			else
 			{
-				FillSprite(pv, RDEVICE.vCameraTop, RDEVICE.vCameraRight, m.pos, lt, rb, r_x, r_y, m.color, sina, cosa);
+				FillSprite(pv, RDEVICE.vCameraTop, RDEVICE.vCameraRight, m.pos, lt, rb, r_x, r_y, m.color, m.rot.x);
 			}
 			}
 		}

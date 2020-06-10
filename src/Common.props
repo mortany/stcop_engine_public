@@ -19,6 +19,14 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
+	  <AdditionalIncludeDirectories>
+        .;
+        $(SolutionDir);
+        $(ProjectDir);
+        $(xrSdkDir)include;
+        $(xrSdkDir)DXSDK/Include;
+        %(AdditionalIncludeDirectories)
+      </AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>USE_LUAJIT_ONE</UndefinePreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <Optimization>Full</Optimization>
@@ -27,10 +35,28 @@
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <MinimalRebuild>true</MinimalRebuild>
     </ClCompile>
+	
     <Link>
+	  <AdditionalLibraryDirectories>
+        $(xrSdkDir)libraries;
+        $(xrSdkDir)libraries/x64;
+        $(xrLibDir);$(xrSdkDir)DXSDK/Lib/x64;
+        %(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>	
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+	  <LargeAddressAware>true</LargeAddressAware>
+      <SubSystem>Windows</SubSystem>
     </Link>
+
+	<Lib>
+      <AdditionalLibraryDirectories>
+        $(xrSdkDir)libraries/x64;
+        $(xrLibDir);
+        $(xrSdkDir)DXSDK/Lib/x64;
+        %(AdditionalLibraryDirectories)
+      </AdditionalLibraryDirectories>
+    </Lib>
+		
   </ItemDefinitionGroup>
   <ItemGroup>
     <BuildMacro Include="xrBinRootDir">

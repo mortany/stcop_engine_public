@@ -18,10 +18,27 @@
     <ClCompile Include="dxerr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dxerr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DXGetErrorString.inl">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="DXTrace.inl">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="DXGetErrorDescription.inl">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -604,7 +604,7 @@
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <AdditionalIncludeDirectories>.;$(SolutionDir);$(SolutionDir)xrServerEntities;$(SolutionDir)3rd party\luajit-2\src\;$(SolutionDir)3rd party\luabind\;$(xrSdkDir)include;$(SolutionDir)3rd party\CxImage;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <PreprocessorDefinitions>DEBUG;MIXED;WIN32;_WINDOWS;_USRDLL;XRGAME_EXPORTS;dSINGLE;MSVC;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DEBUG;MIXED;WIN64;_WINDOWS;_USRDLL;XRGAME_EXPORTS;dSINGLE;MSVC;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>
       </StringPooling>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -1831,10 +1831,6 @@
     <ClInclude Include="script_binder_object_wrapper.h" />
     <ClInclude Include="script_bind_macroses.h" />
     <ClInclude Include="script_callback_ex.h" />
-    <ClInclude Include="script_callback_ex_generators.h" />
-    <ClInclude Include="script_callback_ex_inline.h" />
-    <ClInclude Include="script_callback_ex_nonvoid.h" />
-    <ClInclude Include="script_callback_ex_void.h" />
     <ClInclude Include="script_effector.h" />
     <ClInclude Include="script_effector_inline.h" />
     <ClInclude Include="script_effector_wrapper.h" />
@@ -2242,7 +2238,6 @@
     <ClInclude Include="visual_memory_params.h" />
     <ClInclude Include="wallmark_manager.h" />
     <ClInclude Include="Weapon.h" />
-    <ClInclude Include="WeaponAddons.h" />
     <ClInclude Include="WeaponAK74.h" />
     <ClInclude Include="WeaponAmmo.h" />
     <ClInclude Include="WeaponAutomaticShotgun.h" />
@@ -4406,8 +4401,6 @@
     <ClCompile Include="visual_memory_params.cpp" />
     <ClCompile Include="wallmark_manager.cpp" />
     <ClCompile Include="Weapon.cpp" />
-    <ClCompile Include="WeaponAddonsLogic.cpp" />
-    <ClCompile Include="WeaponVanilaAddons.cpp" />
     <ClCompile Include="WeaponAK74.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
@@ -4448,7 +4441,6 @@
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="WeaponInertion.cpp" />
     <ClCompile Include="WeaponKnife.cpp" />
     <ClCompile Include="WeaponKnife_script.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
@@ -4468,7 +4460,6 @@
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="WeaponRendering.cpp" />
     <ClCompile Include="WeaponRG6.cpp" />
     <ClCompile Include="WeaponRG6_script.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
@@ -4479,7 +4470,6 @@
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="WeaponScopeControler.cpp" />
     <ClCompile Include="WeaponShotgun.cpp" />
     <ClCompile Include="weaponshotgun_script.cpp">
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
@@ -4513,7 +4503,6 @@
       <PrecompiledHeaderFile>pch_script.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(ProjectName)_script.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="WeaponZOOM.cpp" />
     <ClCompile Include="weapon_ammo_dump_impl.cpp" />
     <ClCompile Include="weapon_dump_impl.cpp" />
     <ClCompile Include="Wound.cpp" />

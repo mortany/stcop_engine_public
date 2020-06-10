@@ -46,9 +46,10 @@ void	CRenderTarget::phase_scene_prepare	()
          HW.pContext->ClearDepthStencilView(HW.pBaseZB, D3D_CLEAR_DEPTH|D3D_CLEAR_STENCIL, 1.0f, 0);
       else
       {
-         HW.pContext->ClearRenderTargetView(rt_Color->pRT, ColorRGBA);
-				 HW.pContext->ClearRenderTargetView(rt_Accumulator->pRT, ColorRGBA);
-				 HW.pContext->ClearDepthStencilView(rt_MSAADepth->pZRT, D3D_CLEAR_DEPTH|D3D_CLEAR_STENCIL, 1.0f, 0);
+		HW.pContext->ClearRenderTargetView(rt_Color->pRT, ColorRGBA);
+		HW.pContext->ClearRenderTargetView(rt_Misc->pRT, ColorRGBA);
+		HW.pContext->ClearRenderTargetView(rt_Accumulator->pRT, ColorRGBA);
+		HW.pContext->ClearDepthStencilView(rt_MSAADepth->pZRT, D3D_CLEAR_DEPTH|D3D_CLEAR_STENCIL, 1.0f, 0);
          HW.pContext->ClearDepthStencilView(HW.pBaseZB, D3D_CLEAR_DEPTH|D3D_CLEAR_STENCIL, 1.0f, 0);
       }
    }
@@ -83,17 +84,8 @@ void	CRenderTarget::phase_scene_begin	()
       pZB = rt_MSAADepth->pZRT;
 
 	// Targets, use accumulator for temporary storage
-   if( !RImplementation.o.dx10_gbuffer_opt )
-   {
-   	if (RImplementation.o.albedo_wo)	u_setrt		(rt_Position,	rt_Normal,	rt_Accumulator,	pZB);
-	   else								u_setrt		(rt_Position,	rt_Normal,	rt_Color,		pZB);
-   }
-   else
-   {
-   	if (RImplementation.o.albedo_wo)	u_setrt		(rt_Position, rt_Accumulator,	pZB);
-	   else								u_setrt		(rt_Position,	rt_Color,		pZB);
-	   //else								u_setrt		(rt_Position,	rt_Color, rt_Normal,		pZB);
-   }
+   	if (RImplementation.o.albedo_wo)	u_setrt		(rt_Position, rt_Accumulator, rt_Misc,	pZB);
+	   else								u_setrt		(rt_Position,	rt_Color, rt_Misc,		pZB);
 
 	// Stencil - write 0x1 at pixel pos
 	RCache.set_Stencil					( TRUE,D3DCMP_ALWAYS,0x01,0xff,0x7f,D3DSTENCILOP_KEEP,D3DSTENCILOP_REPLACE,D3DSTENCILOP_KEEP);

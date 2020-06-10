@@ -282,8 +282,7 @@ CRenderTarget::CRenderTarget		()
 	Msg			("MSAA samples = %d", SampleCount );
 	if( RImplementation.o.dx10_msaa_opt )
 		Msg		("dx10_MSAA_opt = on" );
-	if( RImplementation.o.dx10_gbuffer_opt )
-		Msg		("dx10_gbuffer_opt = on" );
+
 #endif // DEBUG
 	param_blur			= 0.f;
 	param_gray			= 0.f;
@@ -375,8 +374,7 @@ CRenderTarget::CRenderTarget		()
 		if( RImplementation.o.dx10_msaa )
 			rt_MSAADepth.create(r2_RT_MSAAdepth, vp_params_main_secondary, D3DFMT_D24S8, SampleCount);
 
-		if( !RImplementation.o.dx10_gbuffer_opt )
-			rt_Normal.create			(r2_RT_N, vp_params_main_secondary,D3DFMT_A16B16G16R16F, SampleCount );
+			rt_Misc.create			(r2_RT_M, vp_params_main_secondary,D3DFMT_A8R8G8B8, SampleCount );
 
 		// select albedo & accum
 		if (RImplementation.o.mrtmixdepth)	
@@ -390,16 +388,8 @@ CRenderTarget::CRenderTarget		()
 			// can't - mix-depth
 			if (RImplementation.o.fp16_blend) {
 				// NV40
-				if( !RImplementation.o.dx10_gbuffer_opt )
-				{
-					rt_Color.create				(r2_RT_albedo, vp_params_main_secondary,D3DFMT_A16B16G16R16F, SampleCount );	// expand to full
-					rt_Accumulator.create		(r2_RT_accum,  vp_params_main_secondary,D3DFMT_A16B16G16R16F, SampleCount );
-				}
-				else
-				{
 					rt_Color.create				(r2_RT_albedo, vp_params_main_secondary,D3DFMT_A8R8G8B8,       SampleCount );	// expand to full
 					rt_Accumulator.create		(r2_RT_accum,  vp_params_main_secondary,D3DFMT_A16B16G16R16F,  SampleCount );
-				}
 			} else {
 				// R4xx, no-fp-blend,-> albedo_wo
 				VERIFY						(RImplementation.o.albedo_wo);

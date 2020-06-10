@@ -43,7 +43,6 @@ enum
     rsR4 = (1ul << 21ul),
 
     rsFPS = (1ul << 22ul),
-    rsDisableManagedTex = (1ul << 23ul),
     // 24-32 bit - reserved to Editor
 };
 

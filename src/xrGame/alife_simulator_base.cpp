@@ -95,6 +95,41 @@ void CALifeSimulatorBase::reload			(LPCSTR section)
 	m_initialized				= true;
 }
 
+CSE_Abstract* CALifeSimulatorBase::spawn_item_2(LPCSTR section, const Fvector& position, u32 level_vertex_id, GameGraph::_GRAPH_ID game_vertex_id, u16 parent_id)
+{
+	if (parent_id == ALife::_OBJECT_ID(-1))
+		return (spawn_item(section, position, level_vertex_id, game_vertex_id, parent_id));
+
+	CSE_ALifeDynamicObject* object = objects().object(parent_id, true);
+
+	if (!object)
+	{
+		Msg("! invalid parent id [%d] specified", parent_id);
+		return (0);
+	}
+
+	if (!object->m_bOnline)
+		return (spawn_item(section, position, level_vertex_id, game_vertex_id, parent_id));
+
+	NET_Packet packet;
+	packet.w_begin(M_SPAWN);
+	packet.w_stringZ(section);
+
+	CSE_Abstract* item = spawn_item(section, position, level_vertex_id, game_vertex_id, parent_id, false);
+	item->Spawn_Write(packet, FALSE);
+	server().FreeID(item->ID, 0);
+	F_entity_Destroy(item);
+
+	ClientID clientID;
+	clientID.set(0xffff);
+
+	u16 dummy;
+	packet.r_begin(dummy);
+	VERIFY(dummy == M_SPAWN);
+	return (server().Process_spawn(packet, clientID));
+}
+
+
 CSE_Abstract *CALifeSimulatorBase::spawn_item	(LPCSTR section, const Fvector &position, u32 level_vertex_id, GameGraph::_GRAPH_ID game_vertex_id, u16 parent_id, bool registration)
 {
 	CSE_Abstract				*abstract = F_entity_Create(section);
@@ -124,7 +159,7 @@ CSE_Abstract *CALifeSimulatorBase::spawn_item	(LPCSTR section, const Fvector &po
 	CSE_ALifeDynamicObject		*dynamic_object = smart_cast<CSE_ALifeDynamicObject*>(abstract);
 	VERIFY						(dynamic_object);
 
-	//оружие спавним с полным магазинои
+	//РѕСЂСѓР¶РёРµ СЃРїР°РІРЅРёРј СЃ РїРѕР»РЅС‹Рј РјР°РіР°Р·РёРЅРѕРё
 	CSE_ALifeItemWeapon* weapon = smart_cast<CSE_ALifeItemWeapon*>(dynamic_object);
 	if(weapon)
 		weapon->a_elapsed		= weapon->get_ammo_magsize();

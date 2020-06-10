@@ -20,9 +20,9 @@ class CScriptThread;
 #endif // #ifndef MASTER_GOLD
 
 #ifdef XRGAME_EXPORTS
-#	ifndef MASTER_GOLD
+//#	ifndef MASTER_GOLD
 #		define PRINT_CALL_STACK
-#	endif // #ifndef MASTER_GOLD
+//#	endif // #ifndef MASTER_GOLD
 #else // #ifdef XRGAME_EXPORTS
 #	ifndef NDEBUG
 #		define PRINT_CALL_STACK

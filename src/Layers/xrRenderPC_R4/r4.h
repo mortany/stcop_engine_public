@@ -106,8 +106,6 @@ public:
 		
 	  u32		dx11_enable_tessellation : 1;
 
-	  u32		managed_tex_disabled	 : 1; // don't keep textures in RAM
-
 		u32		forcegloss			: 1;
 		u32		forceskinw			: 1;
 		float	forcegloss_v		;
@@ -180,6 +178,7 @@ private:
 
 	BOOL							add_Dynamic					(dxRender_Visual*pVisual, u32 planes);		// normal processing
 	void							add_Static					(dxRender_Visual*pVisual, u32 planes);
+	void                            add_StaticForCulling		(dxRender_Visual* pVisual, CSector* sector);
 	void							add_leafs_Dynamic			(dxRender_Visual*pVisual, bool bIgnoreOpt = false);	// if detected node's full visibility
 	void							add_leafs_Static			(dxRender_Visual*pVisual);					// if detected node's full visibility
 

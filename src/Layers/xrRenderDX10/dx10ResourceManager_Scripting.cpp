@@ -160,11 +160,6 @@ static void lua_cast_failed(lua_State* L, LUABIND_TYPE_INFO info)
 //#	endif // USE_MEMORY_MONITOR
 #endif // PURE_ALLOC
 
-static void *lua_alloc		(void *ud, void *ptr, size_t osize, size_t nsize) 
-{
-
-}
-
 // export
 void	CResourceManager::LS_Load			()
 {

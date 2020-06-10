@@ -29,7 +29,7 @@ bool CWeapon::install_upgrade_impl( LPCSTR section, bool test )
 	result |= install_upgrade_ammo_class( section, test );
 	result |= install_upgrade_disp      ( section, test );
 	result |= install_upgrade_hit       ( section, test );
-	result |= install_upgrade_addon     ( section, test );
+	result |= install_upgrade_addon_old ( section, test );
 	return result;
 }
 
@@ -195,8 +195,14 @@ bool CWeapon::install_upgrade_hit( LPCSTR section, bool test )
 	return result;
 }
 
+bool CWeapon::install_upgrade_addon(LPCSTR section, bool test)
+{
+	bool result = false;
 
-bool CWeapon::install_upgrade_addon( LPCSTR section, bool test )
+	//upgardes()
+}
+
+bool CWeapon::install_upgrade_addon_old( LPCSTR section, bool test )
 {
 	bool result = false;
 	//LPCSTR weapon_section = cNameSect().c_str(); 

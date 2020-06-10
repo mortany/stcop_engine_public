@@ -329,10 +329,6 @@ int CScriptStorage::vscript_log		(ScriptStorage::ELuaMessageType tLuaMessageType
 #ifndef PRINT_CALL_STACK
 	return		(0);
 #else // #ifdef PRINT_CALL_STACK
-#	ifndef NO_XRGAME_SCRIPT_ENGINE
-		if (!psAI_Flags.test(aiLua) && (tLuaMessageType != ScriptStorage::eLuaMessageTypeError))
-			return(0);
-#	endif // #ifndef NO_XRGAME_SCRIPT_ENGINE
 
 	LPCSTR		S = "", SS = "";
 	LPSTR		S1;

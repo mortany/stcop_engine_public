@@ -13,6 +13,7 @@
 
 u32 hud_adj_mode		= 0;
 u32 hud_adj_item_idx	= 0;
+u8 hud_addon_index      = 0;
 // "press SHIFT+NUM 0-return 1-hud_pos 2-hud_rot 3-itm_pos 4-itm_rot 5-fire_point 6-fire_2_point 7-shell_point";
 
 extern ENGINE_API float hud_adj_delta_pos, hud_adj_delta_rot;
@@ -203,6 +204,65 @@ void attachable_hud_item::debug_draw_firedeps()
 	}
 }
 
+
+void player_hud::AddonTune(Ivector _values, Fvector& pos_, Fvector& rot_, shared_str addon_name)
+{
+	Ivector				values;
+	tune_remap(_values, values);
+
+	bool is_16x9 = UI().is_widescreen();
+
+	if (hud_adj_mode == 8 || hud_adj_mode == 9)
+	{
+		Fvector			diff;
+		diff.set(0, 0, 0);
+
+		float _curr_dr = hud_adj_delta_rot;
+
+		if (hud_adj_mode == 8)
+		{
+			if (values.x)	diff.x = (values.x < 0) ? hud_adj_delta_pos : -hud_adj_delta_pos;
+			if (values.y)	diff.y = (values.y > 0) ? hud_adj_delta_pos : -hud_adj_delta_pos;
+			if (values.z)	diff.z = (values.z > 0) ? hud_adj_delta_pos : -hud_adj_delta_pos;
+
+			pos_.add(diff);
+		}
+
+		if (hud_adj_mode == 9)
+		{
+			if (values.x)	diff.x = (values.x > 0) ? _curr_dr : -_curr_dr;
+			if (values.y)	diff.y = (values.y > 0) ? _curr_dr : -_curr_dr;
+			if (values.z)	diff.z = (values.z > 0) ? _curr_dr : -_curr_dr;
+
+			rot_.add(diff);
+		}
+
+		if ((values.x) || (values.y) || (values.z))
+		{
+			Msg("[%s]", addon_name.c_str());
+			Msg("hud_addon_pos			= %f,%f,%f",  pos_.x, pos_.y, pos_.z);
+			Msg("hud_addon_rot			= %f,%f,%f", rot_.x, rot_.y, rot_.z);
+			Log("-----------");
+		}
+	}
+
+	if (pInput->iGetAsyncKeyState(DIK_LSHIFT) && pInput->iGetAsyncKeyState(DIK_RETURN))
+	{
+		LPCSTR sect_name = addon_name.c_str();
+		string_path fname;
+		FS.update_path(fname, "$game_data$", make_string("addons_config\\%s.ltx", sect_name).c_str());
+
+		CInifile* pHudCfg = new CInifile(fname, FALSE, FALSE, TRUE);
+
+		pHudCfg->w_string(sect_name,"hud_addon_pos",make_string("%f,%f,%f",pos_.x,pos_.y,pos_.z).c_str());
+		pHudCfg->w_string(sect_name,"hud_addon_rot",make_string("%f,%f,%f",rot_.x,rot_.y,rot_.z).c_str());
+
+		//-----------------//
+		xr_delete(pHudCfg);
+		Msg("-HUD data saved to %s", fname);
+		Sleep(250);
+	}
+}
 
 void player_hud::tune(Ivector _values)
 {
@@ -406,10 +466,10 @@ void hud_draw_adjust_mode()
 			_text = "adjusting SHELL POINT";
 			break;
 		case 8:
-			_text = "adjusting pos STEP";
+			_text = "adjusting ADDON POSITION";
 			break;
 		case 9:
-			_text = "adjusting rot STEP";
+			_text = "adjusting ADDON ROTATION";
 			break;
 
 		};
@@ -448,15 +508,16 @@ void hud_adjust_mode_keyb(int dik)
 		if(dik==DIK_NUMPAD7)
 			hud_adj_mode = 7;
 		if(dik==DIK_NUMPAD8)
-			hud_adj_mode = 8;
+			hud_adj_mode = 8; // Заменено для настройки аддонов!!!
 		if(dik==DIK_NUMPAD9)
-			hud_adj_mode = 9;
+			hud_adj_mode = 9; // 
 	}
 	if(pInput->iGetAsyncKeyState(DIK_LCONTROL))
 	{
-		if(dik==DIK_NUMPAD0)
+		if (dik == DIK_NUMPAD0)
 			hud_adj_item_idx = 0;
-		if(dik==DIK_NUMPAD1)
+		if (dik == DIK_NUMPAD1)
 			hud_adj_item_idx = 1;
+
 	}
 }

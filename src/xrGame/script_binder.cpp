@@ -36,6 +36,7 @@ void CScriptBinder::init			()
 
 void CScriptBinder::clear			()
 {
+
 	try {
 		xr_delete			(m_object);
 	}

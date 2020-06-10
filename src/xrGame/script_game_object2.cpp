@@ -129,7 +129,7 @@ void CScriptGameObject::play_cycle(LPCSTR anim, bool mix_in)
 	}
 	else
 	{
-		ai().script_engine().script_log		(ScriptStorage::eLuaMessageTypeError,"CGameObject : is not animated object");
+		ai().script_engine().script_log(ScriptStorage::eLuaMessageTypeError, "%s : is not animated object", object().cNameVisual().c_str());
 	}
 }
 

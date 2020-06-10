@@ -432,6 +432,8 @@ public:
 	virtual void			IR_OnKeyboardRelease	(int dik);
 	virtual void			IR_OnKeyboardHold		(int dik);
 	virtual void			IR_OnMouseWheel			(int direction);
+	void					custom_tune_adjust		(Ivector _values);
+	void					set_addon_for_adjust	(bool up);
 	virtual	float			GetLookFactor			();
 
 public:

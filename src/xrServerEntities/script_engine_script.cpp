@@ -31,7 +31,8 @@ void ErrorLog(LPCSTR caMessage)
 {
 	ai().script_engine().error_log("%s",caMessage);
 #ifdef PRINT_CALL_STACK
-	ai().script_engine().print_stack();
+	if(strstr(Core.Params, "-lua_error"))
+		ai().script_engine().print_stack();
 #endif // #ifdef PRINT_CALL_STACK
 	
 #ifdef USE_DEBUGGER

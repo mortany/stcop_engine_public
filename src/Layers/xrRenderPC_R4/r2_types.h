@@ -5,7 +5,7 @@
 #define		r2_RT_depth			"$user$depth"			      // MRT
 #define		r2_RT_MSAAdepth	"$user$msaadepth"	         // MRT
 #define		r2_RT_P				"$user$position"		      // MRT
-#define		r2_RT_M				"$user$misc"			      // MRT
+#define		r2_RT_N				"$user$normal"			      // MRT
 #define		r2_RT_albedo		"$user$albedo"			      // MRT
 
 // other

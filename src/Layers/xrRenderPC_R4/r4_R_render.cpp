@@ -4,8 +4,10 @@
 #include "../../xrEngine/customhud.h"
 #include "../../xrEngine/xr_object.h"
 #include "tbb/parallel_sort.h"
-#include "tbb/concurrent_vector.h"
 #include "../xrRender/QueryHelper.h"
+
+#include "tbb/task.h"
+#include "tbb/task_group.h"
 
 float CPU_wait_GPU_lastFrame_ = 0.f;
 
@@ -14,6 +16,74 @@ IC	bool	pred_sp_sort	(ISpatial*	_1, ISpatial* _2)
 	float	d1		= _1->spatial.sphere.P.distance_to_sqr	(Device.vCameraPosition);
 	float	d2		= _2->spatial.sphere.P.distance_to_sqr	(Device.vCameraPosition);
 	return	d1<d2	;
+}
+
+void CRender::dynamics_visible_check(const size_t * p_from, const size_t * p_to)
+{
+	//Msg("* Thread: [%d] [%d]", p_from, p_to);
+
+	size_t i = *p_from;
+
+	for(i; i<*p_to; i++)
+	{
+		ISpatial* spatial = lstRenderables[i];
+		CSector* sector = (CSector*)spatial->spatial.sector;
+
+		if (sector)
+		{
+			if (spatial->spatial.type & STYPE_LIGHTSOURCE)
+			{
+				// lightsource
+				light* L = (light*)(spatial->dcast_Light());
+
+				VERIFY(L);
+
+				float	lod = L->get_LOD();
+				if (lod > EPS_L)
+				{
+					vis_data& vis = L->get_homdata();
+					if (HOM.visible(vis))	renderable_lights.push_back(L);
+				}
+			}
+			else if (spatial->spatial.type & STYPE_RENDERABLE && PortalTraverser.i_marker == sector->r_marker)
+			{
+				bool vis_frust = false;
+
+				for (u32 v_it = 0; v_it < sector->r_frustums.size(); v_it++)
+				{
+					CFrustum& view = sector->r_frustums[v_it];
+					if (view.testSphere_dirty(spatial->spatial.sphere.P, spatial->spatial.sphere.R))
+					{
+						vis_frust = true;
+						break;
+					}
+				}
+
+				if (vis_frust)
+				{
+					IRenderable* renderable = spatial->dcast_Renderable();
+					if (renderable)
+					{
+						vis_data& v_orig = ((dxRender_Visual*)renderable->renderable.visual)->vis;
+						vis_data v_copy = v_orig;
+						v_copy.box.xform(renderable->renderable.xform);
+						BOOL			bVisible = HOM.visible(v_copy);
+
+						v_orig.marker = v_copy.marker;
+						v_orig.accept_frame = v_copy.accept_frame;
+						v_orig.hom_frame = v_copy.hom_frame;
+						v_orig.hom_tested = v_copy.hom_tested;
+
+						if (bVisible)
+						{
+							renderable_objects.push_back(renderable);
+						}
+					}
+				}
+			}
+		}
+
+	}
 }
 
 void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
@@ -42,7 +112,7 @@ void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
 
 			// Determine visibility for dynamic part of scene
 			set_Object							(0);
-			u32 uID_LTRACK						= 0xffffffff;
+			u32 uID_LTRACK						= u32(-1);
 			if (phase==PHASE_NORMAL)			{
 				uLastLTRACK	++;
 				if (lstRenderables.size())		uID_LTRACK	= uLastLTRACK%lstRenderables.size();
@@ -88,8 +158,8 @@ void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
 			}
 		}
 
-		tbb::concurrent_vector<IRenderable*> renderable_objects;
-		tbb::concurrent_vector<light*> renderable_lights;
+		renderable_objects.clear();
+		renderable_lights.clear();
 
 		for (size_t i = 0; i < lstRenderables.size(); ++i)
 		{
@@ -97,78 +167,49 @@ void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
 			spatial->spatial_updatesector();
 		}
 
-		FOR_START(size_t, 0, lstRenderables.size(), i)
-		{
-			ISpatial* spatial = lstRenderables[i];
-			CSector* sector = (CSector*)spatial->spatial.sector;
+		size_t p_cnt = lstRenderables.size();
 
-			if (sector)
+		tbb::task_group ObjectsTasks;
+		size_t nWorkers = CPU::ID.n_threads;
+
+		constexpr u32 SkinParamSize = 64;
+		DYN_PARAMS prsParams[SkinParamSize];
+		R_ASSERT(SkinParamSize > nWorkers);
+
+		size_t nSlice = p_cnt / 32;
+		size_t nStep = ((p_cnt - nSlice) / nWorkers);
+
+		for (size_t i = 0; i < nWorkers; ++i)
+		{
+			size_t p_from = i * nStep;
+			size_t p_to = (i == (nWorkers - 1)) ? p_cnt : (p_from + nStep);
+
+			//Msg("* Thread create: [%d] [%d] [%d]", i, p_from, p_to);
+
+			ObjectsTasks.run([&, p_from, p_to]()
+				{
+					dynamics_visible_check(&p_from, &p_to);
+				});
+		}
+
+		ObjectsTasks.wait();
+
+		if (!renderable_objects.empty())
+		{
+			for (IRenderable* renderable : renderable_objects)
 			{
-				if (spatial->spatial.type & STYPE_LIGHTSOURCE)
-				{
-					// lightsource
-					light* L = (light*)(spatial->dcast_Light());
-
-					VERIFY(L);
-
-					float	lod = L->get_LOD();
-					if (lod > EPS_L)
-					{
-						vis_data& vis = L->get_homdata();
-						if (HOM.visible(vis))	renderable_lights.push_back(L);
-					}
-				}
-				else if (spatial->spatial.type & STYPE_RENDERABLE && PortalTraverser.i_marker == sector->r_marker)
-				{
-					bool vis_frust = false;
-
-					for (u32 v_it = 0; v_it < sector->r_frustums.size(); v_it++)
-					{
-						CFrustum& view = sector->r_frustums[v_it];
-						if (view.testSphere_dirty(spatial->spatial.sphere.P, spatial->spatial.sphere.R))
-						{
-							vis_frust = true;
-							break;
-						}
-					}
-
-					if (vis_frust)
-					{
-						IRenderable* renderable = spatial->dcast_Renderable();
-						if (renderable)
-						{
-							vis_data& v_orig = ((dxRender_Visual*)renderable->renderable.visual)->vis;
-							vis_data v_copy = v_orig;
-							v_copy.box.xform(renderable->renderable.xform);
-							BOOL			bVisible = HOM.visible(v_copy);
-
-							v_orig.marker = v_copy.marker;
-							v_orig.accept_frame = v_copy.accept_frame;
-							v_orig.hom_frame = v_copy.hom_frame;
-							v_orig.hom_tested = v_copy.hom_tested;
-
-							if (bVisible)
-							{
-								renderable_objects.push_back(renderable);
-							}
-						}
-					}
-				}
+				set_Object(renderable);
+				renderable->renderable_Render();
+				set_Object(0);
 			}
-
-		}
-		FOR_END
-
-		for (size_t i = 0; i < renderable_objects.size(); i++)
-		{
-			set_Object(renderable_objects[i]);
-			renderable_objects[i]->renderable_Render();
-			set_Object(0);
 		}
 
-		for (size_t i = 0; i < renderable_lights.size(); i++)
+		if (!renderable_lights.empty())
 		{
-			Lights.add_light(renderable_lights[i]);
+			for (light* light : renderable_lights)
+			{
+				Lights.add_light(light);
+			}
 		}
 
 		if (g_pGameLevel && (phase==PHASE_NORMAL))	g_hud->Render_Last();		// HUD
@@ -387,7 +428,7 @@ void CRender::Render		()
 	{
 		PIX_EVENT(DEFER_TEST_LIGHT_VIS);
 		// perform tests
-		u32	count			= 0;
+		auto	count			= 0;
 		light_Package&	LP	= Lights.package;
 
 		// stats
@@ -396,9 +437,9 @@ void CRender::Render		()
 		stats.l_total		= stats.l_shadowed + stats.l_unshadowed;
 
 		// perform tests
-		count				= std::max	((size_t)count,LP.v_point.size());
-		count				= std::max	((size_t)count,LP.v_spot.size());
-		count				= std::max	((size_t)count,LP.v_shadowed.size());
+		count				= _max(count,LP.v_point.size());
+		count				= _max(count,LP.v_spot.size());
+		count				= _max(count,LP.v_shadowed.size());
 		for (u32 it=0; it<count; it++)	{
 			if (it<LP.v_point.size())		{
 				light*	L			= LP.v_point	[it];

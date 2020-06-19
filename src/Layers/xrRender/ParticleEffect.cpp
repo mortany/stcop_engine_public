@@ -5,6 +5,8 @@
 
 #include "tbb/parallel_for.h"
 #include "tbb/blocked_range.h"
+#include "tbb/task.h"
+#include "tbb/task_group.h"
 
 #ifndef _EDITOR
 #include <xmmintrin.h>
@@ -469,15 +471,20 @@ __forceinline void magnitude_sse( Fvector &vec , float &res )
 	_mm_store_ss( (float*) &res , tv );
 }
 
-void ParticleRenderStream(FVF::LIT* pv, u32 count, PAPI::Particle* particles, CParticleEffect* pPE)
+void ParticleRenderStream(PRS_PARAMS* pParams)
 {
 	float sina = 0.0f, cosa = 0.0f;
 	// Xottab_DUTY: changed angle to be float instead of DWORD
 	// But it must be 0xFFFFFFFF or otherwise some particles won't play
 	float angle = 0xFFFFFFFF;
 
-	FOR_START(u32, 0, count, i)
-	{
+	FVF::LIT* pv = pParams->pv;
+	u32 p_from = pParams->p_from;
+	u32 p_to = pParams->p_to;
+	PAPI::Particle* particles = pParams->particles;
+	CParticleEffect& pPE = *pParams->pPE;
+
+	for (u32 i = p_from; i < p_to; i++) {
 		PAPI::Particle& m = particles[i];
 		Fvector2 lt, rb;
 		lt.set(0.f, 0.f);
@@ -485,174 +492,185 @@ void ParticleRenderStream(FVF::LIT* pv, u32 count, PAPI::Particle* particles, CP
 
 		_mm_prefetch((char*)&particles[i + 1], _MM_HINT_NTA);
 
-		if (angle != m.rot.x)
-		{
+		if (angle != m.rot.x) {
 			angle = m.rot.x;
-			sina = sinf(angle);
-			cosa = cosf(angle);
+			fsincos(angle, sina, cosa);
 		}
 
 		_mm_prefetch(64 + (char*)&particles[i + 1], _MM_HINT_NTA);
 
-		if (pPE->m_Def->m_Flags.is(CPEDef::dfFramed))
-			pPE->m_Def->m_Frame.CalculateTC(iFloor(float(m.frame) / 255.f), lt, rb);
+		if (pPE.m_Def->m_Flags.is(CPEDef::dfFramed))
+			pPE.m_Def->m_Frame.CalculateTC(iFloor(float(m.frame) / 255.f), lt, rb);
 
 		float r_x = m.size.x * 0.5f;
 		float r_y = m.size.y * 0.5f;
-		float speed = 0.f;
-		bool speed_calculated = false;
+		float speed = 0.0f;
+		BOOL speed_calculated = FALSE;
 
-		if (pPE->m_Def->m_Flags.is(CPEDef::dfVelocityScale))
-		{
+		if (pPE.m_Def->m_Flags.is(CPEDef::dfVelocityScale)) {
 			magnitude_sse(m.vel, speed);
-			speed_calculated = true;
-			r_x += speed * pPE->m_Def->m_VelocityScale.x;
-			r_y += speed * pPE->m_Def->m_VelocityScale.y;
+			speed_calculated = TRUE;
+			r_x += speed * pPE.m_Def->m_VelocityScale.x;
+			r_y += speed * pPE.m_Def->m_VelocityScale.y;
 		}
 
-		if (pPE->m_Def->m_Flags.is(CPEDef::dfAlignToPath))
-		{
+		if (pPE.m_Def->m_Flags.is(CPEDef::dfAlignToPath)) {
 			if (!speed_calculated)
 				magnitude_sse(m.vel, speed);
-			if ((speed < EPS_S) && pPE->m_Def->m_Flags.is(CPEDef::dfWorldAlign))
-			{
-				Fmatrix M;
-				M.setXYZ(pPE->m_Def->m_APDefaultRotation);
-				if (pPE->m_RT_Flags.is(CParticleEffect::flRT_XFORM))
-				{
+			if ((speed < EPS_S) && pPE.m_Def->m_Flags.is(CPEDef::dfWorldAlign)) {
+				Fmatrix	M;
+				M.setXYZ(pPE.m_Def->m_APDefaultRotation);
+				if (pPE.m_RT_Flags.is(CParticleEffect::flRT_XFORM)) {
 					Fvector p;
-					pPE->m_XFORM.transform_tiny(p, m.pos);
-					M.mulA_43(pPE->m_XFORM);
-					//FillSprite(pv, M.k, M.i, p, lt, rb, r_x, r_y, m.color, sina, cosa);
+					pPE.m_XFORM.transform_tiny(p, m.pos);
+					M.mulA_43(pPE.m_XFORM);
 					FillSprite(pv, M.k, M.i, p, lt, rb, r_x, r_y, m.color, m.rot.x);
 				}
-				else
-				{
+				else {
 					FillSprite(pv, M.k, M.i, m.pos, lt, rb, r_x, r_y, m.color, m.rot.x);
 				}
 			}
-			else if ((speed >= EPS_S) && pPE->m_Def->m_Flags.is(CPEDef::dfFaceAlign))
-			{
-				Fmatrix M;
-				M.identity();
+			else if ((speed >= EPS_S) && pPE.m_Def->m_Flags.is(CPEDef::dfFaceAlign)) {
+				Fmatrix	M;  		M.identity();
 				M.k.div(m.vel, speed);
-				M.j.set(0, 1, 0);
-				if (_abs(M.j.dotproduct(M.k)) > .99f)
-					M.j.set(0, 0, 1);
-				M.i.crossproduct(M.j, M.k);
-				M.i.normalize();
-				M.j.crossproduct(M.k, M.i);
-				M.j.normalize();
-				if (pPE->m_RT_Flags.is(CParticleEffect::flRT_XFORM))
-				{
+				M.j.set(0, 1, 0);	if (_abs(M.j.dotproduct(M.k)) > .99f)  M.j.set(0, 0, 1);
+				M.i.crossproduct(M.j, M.k);	M.i.normalize();
+				M.j.crossproduct(M.k, M.i);	M.j.normalize();
+				if (pPE.m_RT_Flags.is(CParticleEffect::flRT_XFORM)) {
 					Fvector p;
-					pPE->m_XFORM.transform_tiny(p, m.pos);
-					M.mulA_43(pPE->m_XFORM);
+					pPE.m_XFORM.transform_tiny(p, m.pos);
+					M.mulA_43(pPE.m_XFORM);
 					FillSprite(pv, M.j, M.i, p, lt, rb, r_x, r_y, m.color, m.rot.x);
 				}
-				else
-				{
+				else {
 					FillSprite(pv, M.j, M.i, m.pos, lt, rb, r_x, r_y, m.color, m.rot.x);
 				}
 			}
-			else
-			{
-				Fvector dir;
-				if (speed >= EPS_S)
-					dir.div(m.vel, speed);
-				else
-					dir.setHP(-pPE->m_Def->m_APDefaultRotation.y, -pPE->m_Def->m_APDefaultRotation.x);
-				if (pPE->m_RT_Flags.is(CParticleEffect::flRT_XFORM))
-				{
+			else {
+				Fvector 			dir;
+				if (speed >= EPS_S)	dir.div(m.vel, speed);
+				else				dir.setHP(-pPE.m_Def->m_APDefaultRotation.y, -pPE.m_Def->m_APDefaultRotation.x);
+				if (pPE.m_RT_Flags.is(CParticleEffect::flRT_XFORM)) {
 					Fvector p, d;
-					pPE->m_XFORM.transform_tiny(p, m.pos);
-					pPE->m_XFORM.transform_dir(d, dir);
+					pPE.m_XFORM.transform_tiny(p, m.pos);
+					pPE.m_XFORM.transform_dir(d, dir);
 					FillSprite(pv, p, d, lt, rb, r_x, r_y, m.color, m.rot.x);
 				}
-				else
-				{
+				else {
 					FillSprite(pv, m.pos, dir, lt, rb, r_x, r_y, m.color, m.rot.x);
 				}
 			}
 		}
-		else
-		{
-			if (pPE->m_RT_Flags.is(CParticleEffect::flRT_XFORM))
-			{
+		else {
+			if (pPE.m_RT_Flags.is(CParticleEffect::flRT_XFORM)) {
 				Fvector p;
-				pPE->m_XFORM.transform_tiny(p, m.pos);
+				pPE.m_XFORM.transform_tiny(p, m.pos);
 				FillSprite(pv, RDEVICE.vCameraTop, RDEVICE.vCameraRight, p, lt, rb, r_x, r_y, m.color, m.rot.x);
 			}
-			else
-			{
+			else {
 				FillSprite(pv, RDEVICE.vCameraTop, RDEVICE.vCameraRight, m.pos, lt, rb, r_x, r_y, m.color, m.rot.x);
-			}
-			}
-		}
-	FOR_END
-}
-
-void CParticleEffect::Render(float )
-{
-	#ifdef _GPA_ENABLED	
-		TAL_SCOPED_TASK_NAMED( "CParticleEffect::Render()" );
-	#endif // _GPA_ENABLED
-
-	u32			dwOffset,dwCount;
-	// Get a pointer to the particles in gp memory
-    PAPI::Particle* particles;
-    u32 			p_cnt;
-    ParticleManager()->GetParticles(m_HandleEffect,particles,p_cnt);
-
-	if(p_cnt>0){
-		if (m_Def&&m_Def->m_Flags.is(CPEDef::dfSprite)){
-			FVF::LIT* pv_start	= (FVF::LIT*)RCache.Vertex.Lock(p_cnt*4*4,geom->vb_stride,dwOffset);
-
-			ParticleRenderStream(pv_start, p_cnt, particles, this);
-
-			dwCount = p_cnt<<2;
-
-			RCache.Vertex.Unlock(dwCount,geom->vb_stride);
-			if (dwCount)    
-			{
-#ifndef _EDITOR
-				Fmatrix Pold						= Device.mProject;
-				Fmatrix FTold						= Device.mFullTransform;
-				if(GetHudMode())
-				{
-					RDEVICE.mProject.build_projection(	deg2rad(psHUD_FOV*Device.fFOV), 
-														Device.fASPECT, 
-														0.05f, 
-														g_pGamePersistent->Environment().CurrentEnv->far_plane);
-
-					Device.mFullTransform.mul	(Device.mProject, Device.mView);
-					RCache.set_xform_project	(Device.mProject);
-					RImplementation.rmNear		();
-					ApplyTexgen(Device.mFullTransform);
-				}
-#endif
-
-				RCache.set_xform_world	(Fidentity);
-				RCache.set_Geometry		(geom);
-
-                RCache.set_CullMode		(m_Def->m_Flags.is(CPEDef::dfCulling)?(m_Def->m_Flags.is(CPEDef::dfCullCCW)?CULL_CCW:CULL_CW):CULL_NONE);
-				RCache.Render	   		(D3DPT_TRIANGLELIST,dwOffset,0,dwCount,0,dwCount/2);
-                RCache.set_CullMode		(CULL_CCW	); 
-#ifndef _EDITOR
-				if(GetHudMode())
-				{
-					RImplementation.rmNormal	();
-					Device.mProject				= Pold;
-					Device.mFullTransform		= FTold;
-					RCache.set_xform_project	(Device.mProject);
-					ApplyTexgen(Device.mFullTransform);
-				}
-#endif
 			}
 		}
 	}
 }
 
+void CParticleEffect::Render(float)
+{
+	if (Device.dwPrecacheFrame) return;
+
+	u32 dwOffset, dwCount;
+	// Get a pointer to the particles in gp memory
+	PAPI::Particle* particles;
+	u32 p_cnt;
+
+	ParticleManager()->GetParticles(m_HandleEffect, particles, p_cnt);
+
+	if (p_cnt > 0)
+	{
+		if (m_Def && m_Def->m_Flags.is(CPEDef::dfSprite))
+		{
+			FVF::LIT* pv_start = (FVF::LIT*)RCache.Vertex.Lock(p_cnt * 4 * 4, geom->vb_stride, dwOffset);
+			FVF::LIT* pv = pv_start;
+
+			if (p_cnt < 16)
+			{
+				PRS_PARAMS singleParam;
+				singleParam.pv = pv;
+				singleParam.p_from = 0;
+				singleParam.p_to = p_cnt;
+				singleParam.particles = particles;
+				singleParam.pPE = this;
+				ParticleRenderStream(&singleParam);
+			}
+			else
+			{
+				tbb::task_group ParticleEffectTasks;
+				//u32 nWorkers = CPU::ID.n_threads;
+				u32 nWorkers = CPU::ID.n_threads;
+				constexpr u32 SkinParamSize = 64;
+				PRS_PARAMS prsParams[SkinParamSize];
+				R_ASSERT(SkinParamSize > nWorkers);
+
+				u32 nSlice = p_cnt / 32;
+				u32 nStep = ((p_cnt - nSlice) / nWorkers);
+
+				for (u32 i = 0; i < nWorkers; ++i)
+				{
+					prsParams[i].pv = pv + i * nStep * 4;
+					prsParams[i].p_from = i * nStep;
+					prsParams[i].p_to = (i == (nWorkers - 1)) ? p_cnt : (prsParams[i].p_from + nStep);
+					prsParams[i].particles = particles;
+					prsParams[i].pPE = this;
+
+					ParticleEffectTasks.run([&prsParams, i]()
+						{
+							ParticleRenderStream(&prsParams[i]);
+						});
+				}
+
+				ParticleEffectTasks.wait();
+
+			}
+
+			dwCount = p_cnt << 2;
+
+			RCache.Vertex.Unlock(dwCount, geom->vb_stride);
+			if (dwCount)
+			{
+				Fmatrix Pold = Device.mProject;
+				Fmatrix FTold = Device.mFullTransform;
+				if (GetHudMode())
+				{
+					RDEVICE.mProject.build_projection(deg2rad(psHUD_FOV * Device.fFOV),
+						Device.fASPECT,
+						0.05f,
+						g_pGamePersistent->Environment().CurrentEnv->far_plane);
+
+					Device.mFullTransform.mul(Device.mProject, Device.mView);
+					RCache.set_xform_project(Device.mProject);
+					RImplementation.rmNear();
+					ApplyTexgen(Device.mFullTransform);
+				}
+
+				RCache.set_xform_world(Fidentity);
+				RCache.set_Geometry(geom);
+
+				RCache.set_CullMode(m_Def->m_Flags.is(CPEDef::dfCulling) ? (m_Def->m_Flags.is(CPEDef::dfCullCCW) ? CULL_CCW : CULL_CW) : CULL_NONE);
+				RCache.Render(D3DPT_TRIANGLELIST, dwOffset, 0, dwCount, 0, dwCount / 2);
+				RCache.set_CullMode(CULL_CCW);
+
+				if (GetHudMode())
+				{
+					RImplementation.rmNormal();
+					Device.mProject = Pold;
+					Device.mFullTransform = FTold;
+					RCache.set_xform_project(Device.mProject);
+					ApplyTexgen(Device.mFullTransform);
+				}
+			}
+		}
+	}
+}
 
 #else
 

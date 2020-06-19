@@ -1,6 +1,6 @@
 #pragma once
 
-const		u32					occq_size			= 2*768; //256	;	// queue for occlusion queries
+const		u32					occq_size			= 2048; //256	;	// queue for occlusion queries
 
 // must conform to following order of allocation/free
 // a(A), a(B), a(C), a(D), ....
@@ -22,7 +22,7 @@ private:
 		ID3DQuery*	Q;
 	};
 
-	static const u32		iInvalidHandle = 0xFFFFFFFF;
+	static const u32		iInvalidHandle = u32(-1);
 
 	BOOL					enabled;	// 
 	xr_vector<_Q>			pool;		// sorted (max ... min), insertions are usually at the end

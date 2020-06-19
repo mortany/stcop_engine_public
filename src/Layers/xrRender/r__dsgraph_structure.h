@@ -4,6 +4,9 @@
 #include "../../xrcdb/ispatial.h"
 #include "r__dsgraph_types.h"
 #include "r__sector.h"
+#include "tbb/concurrent_vector.h"
+
+class light;
 
 //////////////////////////////////////////////////////////////////////////
 // feedback	for receiving visuals										//
@@ -76,6 +79,9 @@ public:
 	xr_vector<ISpatial* /**,render_alloc<ISpatial*>/**/>				lstRenderables;
 	xr_vector<ISpatial* /**,render_alloc<ISpatial*>/**/>				lstSpatial	;
 	xr_vector<dxRender_Visual*,render_alloc<dxRender_Visual*> >			lstVisuals	;
+
+	tbb::concurrent_vector<IRenderable*> renderable_objects;
+	tbb::concurrent_vector<light*> renderable_lights;
 
 	xr_vector<dxRender_Visual*,render_alloc<dxRender_Visual*> >			lstRecorded	;
 

@@ -166,6 +166,12 @@ public:
 	bool														m_bFirstFrameAfterReset;	// Determines weather the frame is the first after resetting device.
 	xr_vector<sun::cascade>										m_sun_cascades;
 
+	struct DYN_PARAMS
+	{
+		u32 p_from;
+		u32 p_to;
+	};
+
 private:
 	// Loading / Unloading
 	void							LoadBuffers					(CStreamReader	*fs,	BOOL	_alternative);
@@ -185,6 +191,7 @@ private:
 public:
 	IRender_Sector*					rimp_detectSector			(Fvector& P, Fvector& D);
 	void							render_main					(Fmatrix& mCombined, bool _fportals);
+	void                            dynamics_visible_check		(const size_t *p_from, const size_t *p_to);
 	void							render_forward				();
 	void							render_smap_direct			(Fmatrix& mCombined);
 	void							render_indirect				(light*			L	);

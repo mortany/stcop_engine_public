@@ -300,6 +300,9 @@
     <ClCompile Include="ScopeLock.cpp">
       <Filter>thread</Filter>
     </ClCompile>
+    <ClCompile Include="Threading\Event.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FTimer.h">
@@ -648,6 +651,9 @@
       <Filter>thread</Filter>
     </ClInclude>
     <ClInclude Include="ScopeLock.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="Threading\Event.hpp">
       <Filter>thread</Filter>
     </ClInclude>
   </ItemGroup>

@@ -177,34 +177,23 @@ void CRenderDevice::End(void)
 }
 
 
-volatile u32 mt_Thread_marker = 0x12345678;
-void mt_Thread(void* ptr)
+void CRenderDevice::SecondaryThreadProc(void* context)
 {
+    auto& device = *static_cast<CRenderDevice*>(context);
     while (true)
     {
-        // waiting for Device permission to execute
-        Device.mt_csEnter.Enter();
-
-        if (Device.mt_bMustExit)
+        device.syncProcessFrame.Wait();
+        if (device.mt_bMustExit)
         {
-            Device.mt_bMustExit = FALSE; // Important!!!
-            Device.mt_csEnter.Leave(); // Important!!!
+            device.mt_bMustExit = FALSE;
+            device.syncThreadExit.Set();
             return;
         }
-        // we has granted permission to execute
-        mt_Thread_marker = Device.dwFrame;
-
-        for (u32 pit = 0; pit < Device.seqParallel.size(); pit++)
-            Device.seqParallel[pit]();
-        Device.seqParallel.clear();
-        Device.seqFrameMT.Process(rp_Frame);
-
-        // now we give control to device - signals that we are ended our work
-        Device.mt_csEnter.Leave();
-        // waits for device signal to continue - to start again
-        Device.mt_csLeave.Enter();
-        // returns sync signal to device
-        Device.mt_csLeave.Leave();
+        for (u32 pit = 0; pit < device.seqParallel.size(); pit++)
+            device.seqParallel[pit]();
+        device.seqParallel.clear_not_free();
+        device.seqFrameMT.Process(rp_Frame);
+        device.syncFrameDone.Set();
     }
 }
 
@@ -340,8 +329,7 @@ void CRenderDevice::on_idle()
 		// Release start point - allow thread to run
 		if (Render->currentViewPort == MAIN_VIEWPORT)
 		{
-			mt_csLeave.Enter();
-			mt_csEnter.Leave();
+			syncProcessFrame.Set();
 			Sleep(0);
 		}
 
@@ -353,9 +341,6 @@ void CRenderDevice::on_idle()
 				seqRender.Process(rp_Render);
 				if ((psDeviceFlags.test(rsCameraPos) || psDeviceFlags.test(rsStatistic) || psDeviceFlags.test(rsFPS) || Statistic->errors.size()) && (Render->currentViewPort == MAIN_VIEWPORT || debugSecondVP))
 					Statistic->Show();
-				// TEST!!!
-				//Statistic->RenderTOTAL_Real.End ();
-				// Present goes here
 				End();
 			}
 		}
@@ -383,22 +368,8 @@ void CRenderDevice::on_idle()
 	
 	if (g_pGameLevel) // reapply camera params as for the main vp, for next frame stuff(we dont want to use last vp camera in next frame possible usages)
 		g_pGameLevel->ApplyCamera();
-
-    // *** Suspend threads
-    // Capture startup point
-    // Release end point - allow thread to wait for startup point
-    mt_csEnter.Enter();
-    mt_csLeave.Leave();
-
-    // Ensure, that second thread gets chance to execute anyway
-    if (dwFrame != mt_Thread_marker)
-    {
-        for (u32 pit = 0; pit < Device.seqParallel.size(); pit++)
-            Device.seqParallel[pit]();
-        Device.seqParallel.clear();
-        seqFrameMT.Process(rp_Frame);
-    }
-
+        
+    syncFrameDone.Wait(); // wait until secondary thread finish its job
     if (!b_is_Active)
         Sleep(1);
 }
@@ -440,11 +411,8 @@ void CRenderDevice::Run()
     }
 
     // Start all threads
-    // InitializeCriticalSection (&mt_csEnter);
-    // InitializeCriticalSection (&mt_csLeave);
-    mt_csEnter.Enter();
     mt_bMustExit = FALSE;
-    thread_spawn(mt_Thread, "X-RAY Secondary thread", 0, 0);
+    thread_spawn(SecondaryThreadProc, "X-RAY Secondary thread", 0, this);
 
     // Message cycle
     seqAppStart.Process(rp_AppStart);
@@ -458,7 +426,8 @@ void CRenderDevice::Run()
 
     // Stop Balance-Thread
     mt_bMustExit = TRUE;
-    mt_csEnter.Leave();
+    syncProcessFrame.Set();
+    syncThreadExit.Wait();
     while (mt_bMustExit) Sleep(0);
     // DeleteCriticalSection (&mt_csEnter);
     // DeleteCriticalSection (&mt_csLeave);

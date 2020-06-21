@@ -166,12 +166,6 @@ public:
 	bool														m_bFirstFrameAfterReset;	// Determines weather the frame is the first after resetting device.
 	xr_vector<sun::cascade>										m_sun_cascades;
 
-	struct DYN_PARAMS
-	{
-		u32 p_from;
-		u32 p_to;
-	};
-
 private:
 	// Loading / Unloading
 	void							LoadBuffers					(CStreamReader	*fs,	BOOL	_alternative);

@@ -172,10 +172,6 @@ void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
 		tbb::task_group ObjectsTasks;
 		size_t nWorkers = CPU::ID.n_threads;
 
-		constexpr u32 SkinParamSize = 64;
-		DYN_PARAMS prsParams[SkinParamSize];
-		R_ASSERT(SkinParamSize > nWorkers);
-
 		size_t nSlice = p_cnt / 32;
 		size_t nStep = ((p_cnt - nSlice) / nWorkers);
 
@@ -183,8 +179,6 @@ void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
 		{
 			size_t p_from = i * nStep;
 			size_t p_to = (i == (nWorkers - 1)) ? p_cnt : (p_from + nStep);
-
-			//Msg("* Thread create: [%d] [%d] [%d]", i, p_from, p_to);
 
 			ObjectsTasks.run([&, p_from, p_to]()
 				{

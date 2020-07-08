@@ -17,6 +17,7 @@
 //#include "R_Backend.h"
 
 extern ENGINE_API float VIEWPORT_NEAR;
+extern ENGINE_API int psSVPFrameDelay;
 
 enum ViewPort;
 
@@ -246,7 +247,7 @@ public:
         m_bNearer = FALSE;
 		//--#SM+#-- +SecondVP+
 		m_SecondViewport.SetSVPActive(false);
-		m_SecondViewport.SetSVPFrameDelay(1); // Change it to 2-3, if you want to save perfomance. Will cause skips in updating image in scope
+		m_SecondViewport.SetSVPFrameDelay(psSVPFrameDelay); // Change it to 2-3, if you want to save perfomance. Will cause skips in updating image in scope
 		m_SecondViewport.isCamReady = false;
 		m_SecondViewport.isR1 = false;
 
@@ -265,7 +266,7 @@ public:
     void End();
     void FrameMove();
 
-
+    bool bMainMenuActive();
 
     void overdrawBegin();
     void overdrawEnd();
@@ -388,5 +389,6 @@ extern ENGINE_API float d_material;
 extern ENGINE_API float d_material_weight;
 extern ENGINE_API shared_str d_texture_name;
 extern ENGINE_API bool override_material;
+extern ENGINE_API float fps_limit;
 
 #endif

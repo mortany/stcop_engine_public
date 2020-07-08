@@ -676,7 +676,7 @@ public:
 };
 
 
-ENGINE_API float psHUD_FOV_def = 0.45f; //--#SM+#--	Дефолтный HUD FOV (В % от Camera FOV) [default hud_fov (perc. of g_fov)]
+ENGINE_API float psHUD_FOV_def = 0.6f; //--#SM+#--	Дефолтный HUD FOV (В % от Camera FOV) [default hud_fov (perc. of g_fov)]
 ENGINE_API float psHUD_FOV = psHUD_FOV_def; //--#SM+#-- Текущий HUD FOV (В % от Camera FOV) [current hud_fov (perc. of g_fov)]
 ENGINE_API float VIEWPORT_NEAR = 0.2f; //--#SM+#-- (Old: 0.2f)
 
@@ -687,17 +687,19 @@ ENGINE_API float adj_delta_pos = 0.0005f;
 ENGINE_API float adj_delta_rot = 0.05f;
 
 ENGINE_API float psSVPImageSizeK = 0.7f;
+ENGINE_API int psSVPFrameDelay = 1;
 
-ENGINE_API float devfloat1 = 0.f;
-ENGINE_API float devfloat2 = 0.f;
-ENGINE_API float devfloat3 = 0.f;
-ENGINE_API float devfloat4 = 0.f;
+ENGINE_API float devfloat1 = 0.0f;
+ENGINE_API float devfloat2 = 0.0f;
+ENGINE_API float devfloat3 = 0.0f;
+ENGINE_API float devfloat4 = 0.0f;
 
 ENGINE_API float d_material = 1.0f;
 ENGINE_API float d_material_weight = 0.0f;
 ENGINE_API shared_str d_texture_name = NULL;
 ENGINE_API bool override_material = false;
 
+ENGINE_API float fps_limit = 60.0f;
 
 //extern int psSkeletonUpdate;
 extern int rsDVB_Size;
@@ -772,6 +774,8 @@ void CCC_Register()
     // CMD3(CCC_Mask, "rs_disable_objects_as_crows",&psDeviceFlags, rsDisableObjectsAsCrows );
     CMD3(CCC_Mask, "rs_fullscreen", &psDeviceFlags, rsFullscreen);
     CMD3(CCC_Mask, "rs_refresh_60hz", &psDeviceFlags, rsRefresh60hz);
+    CMD4(CCC_Float, "rs_cap_frame_rate", &fps_limit, 10.f, 900.00f);
+    CMD4(CCC_Integer, "svp_frame_delay", &psSVPFrameDelay, 1, 3);
     CMD3(CCC_Mask, "rs_stats", &psDeviceFlags, rsStatistic);
     CMD3(CCC_Mask, "rs_fps", &psDeviceFlags, rsFPS);
     CMD4(CCC_Float, "rs_vis_distance", &psVisDistance, 0.4f, 1.5f);

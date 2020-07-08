@@ -232,6 +232,11 @@ ENGINE_API xr_list<LOADING_EVENT> g_loading_events;
 
 //#define MOVE_CURRENT_FRAME_COUNTR // This is to determine, if the second vp bugs are happening because there were no frame step
 
+bool CRenderDevice::bMainMenuActive()
+{
+    return  g_pGamePersistent && g_pGamePersistent->m_pMainMenu && g_pGamePersistent->m_pMainMenu->IsActive();
+}
+
 void CRenderDevice::on_idle()
 {
     if (!b_is_Ready)
@@ -239,6 +244,8 @@ void CRenderDevice::on_idle()
         Sleep(100);
         return;
     }
+
+    const u64 frameStartTime = TimerGlobal.GetElapsed_ms();
 
     if (psDeviceFlags.test(rsStatistic)) g_bEnableStatGather = TRUE;
     else g_bEnableStatGather = FALSE;
@@ -368,7 +375,24 @@ void CRenderDevice::on_idle()
 	
 	if (g_pGameLevel) // reapply camera params as for the main vp, for next frame stuff(we dont want to use last vp camera in next frame possible usages)
 		g_pGameLevel->ApplyCamera();
+    
+    const u64 frameEndTime = TimerGlobal.GetElapsed_ms();
+    const u64 frameTime = frameEndTime - frameStartTime;
+
+    float fps_to_rate = 1000.f / fps_limit;
+
+    u32 updateDelta = 1; // 1 ms
+
+    IMainMenu* pMainMenu = g_pGamePersistent ? g_pGamePersistent->m_pMainMenu : 0;
+
+    if (Device.Paused() || bMainMenuActive())
+        updateDelta = 16; // 16 ms, ~60 FPS max while paused
+    else
+        updateDelta = fps_to_rate;
         
+    if (frameTime < updateDelta)
+        Sleep(updateDelta - frameTime);
+
     syncFrameDone.Wait(); // wait until secondary thread finish its job
     if (!b_is_Active)
         Sleep(1);

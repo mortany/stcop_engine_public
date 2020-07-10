@@ -422,8 +422,8 @@ void CRender::Render		()
 	{
 		PIX_EVENT(DEFER_TEST_LIGHT_VIS);
 		// perform tests
-		auto	count			= 0;
-		light_Package&	LP	= Lights.package;
+		u32	count			= 0;
+		light_Package&	LP	= Lights.ldbTargetViewPortBuffer->rawPackageDeffered_;
 
 		// stats
 		stats.l_shadowed	= LP.v_shadowed.size();

@@ -336,10 +336,11 @@ void CRender::Render		()
 				break;
 			}
 		}
+		q_sync_count = (q_sync_count + 1) % HW.Caps.iGPUNum;
+		CHK_DX(q_sync_point[q_sync_count]->Issue(D3DISSUE_END));
 	}
 	Device.Statistic->RenderDUMP_Wait_S.End		();
-	q_sync_count								= (q_sync_count+1)%HW.Caps.iGPUNum;
-	CHK_DX										(q_sync_point[q_sync_count]->Issue(D3DISSUE_END));
+
 
 	//******* Main calc - DEFERRER RENDERER
 	// Main calc
@@ -375,13 +376,14 @@ void CRender::Render		()
 
 	//******* Occlusion testing of volume-limited light-sources
 	Target->phase_occq							();
-	LP_normal.clear								();
-	LP_pending.clear							();
+	actualViewPortBufferNow->LP_normal.clear	();
+	actualViewPortBufferNow->LP_pending.clear	();
 	{
 		// perform tests
+		VERIFY(Lights.ldbTargetViewPortBuffer);
 		size_t	count			= 0;
 		light_Package& LP	= Lights.ldbTargetViewPortBuffer->rawPackageDeffered_;
-
+	
 		// stats
 		stats.l_shadowed	= LP.v_shadowed.size();
 		stats.l_unshadowed	= LP.v_point.size() + LP.v_spot.size();
@@ -395,25 +397,25 @@ void CRender::Render		()
 			if (it<LP.v_point.size())		{
 				light*	L			= LP.v_point	[it];
 				L->vis_prepare		();
-				if (L->vis.pending)	LP_pending.v_point.push_back	(L);
-				else				LP_normal.v_point.push_back		(L);
+				if (L->vis.pending)	actualViewPortBufferNow->LP_pending.v_point.push_back	(L);
+				else				actualViewPortBufferNow->LP_normal.v_point.push_back		(L);
 			}
 			if (it<LP.v_spot.size())		{
 				light*	L			= LP.v_spot		[it];
 				L->vis_prepare		();
-				if (L->vis.pending)	LP_pending.v_spot.push_back		(L);
-				else				LP_normal.v_spot.push_back		(L);
+				if (L->vis.pending)	actualViewPortBufferNow->LP_pending.v_spot.push_back		(L);
+				else				actualViewPortBufferNow->LP_normal.v_spot.push_back		(L);
 			}
 			if (it<LP.v_shadowed.size())	{
 				light*	L			= LP.v_shadowed	[it];
 				L->vis_prepare		();
-				if (L->vis.pending)	LP_pending.v_shadowed.push_back	(L);
-				else				LP_normal.v_shadowed.push_back	(L);
+				if (L->vis.pending)	actualViewPortBufferNow->LP_pending.v_shadowed.push_back	(L);
+				else				actualViewPortBufferNow->LP_normal.v_shadowed.push_back	(L);
 			}
 		}
 	}
-	LP_normal.sort							();
-	LP_pending.sort							();
+	actualViewPortBufferNow->LP_normal.sort							();
+	actualViewPortBufferNow->LP_pending.sort							();
 
 	//******* Main render :: PART-1 (second)
 	if (split_the_scene_to_minimize_wait)	{
@@ -455,16 +457,16 @@ void CRender::Render		()
 	// Update incremental shadowmap-visibility solver
 	{
 		u32 it=0;
-		for (it=0; it<Lights_LastFrame.size(); it++)	{
-			if (0==Lights_LastFrame[it])	continue	;
+		for (it=0; it< actualViewPortBufferNow->Lights_LastFrame.size(); it++)	{
+			if (0== actualViewPortBufferNow->Lights_LastFrame[it])	continue	;
 			try {
-				Lights_LastFrame[it]->svis.flushoccq()	;
+				actualViewPortBufferNow->Lights_LastFrame[it]->svis.flushoccq()	;
 			} catch (...)
 			{
-				Msg	("! Failed to flush-OCCq on light [%d] %X",it,*(u32*)(&Lights_LastFrame[it]));
+				Msg	("! Failed to flush-OCCq on light [%d] %X",it,*(u32*)(&actualViewPortBufferNow->Lights_LastFrame[it]));
 			}
 		}
-		Lights_LastFrame.clear	();
+		actualViewPortBufferNow->Lights_LastFrame.clear	();
 	}
 
 	// Directional light - fucking sun
@@ -503,10 +505,10 @@ void CRender::Render		()
 	// Lighting, non dependant on OCCQ
 	Target->phase_accumulator				();
 	HOM.Disable								();
-	render_lights							(LP_normal);
+	render_lights							(actualViewPortBufferNow->LP_normal);
 	
 	// Lighting, dependant on OCCQ
-	render_lights							(LP_pending);
+	render_lights							(actualViewPortBufferNow->LP_pending);
 
 	// Postprocess
 	Target->phase_combine					();

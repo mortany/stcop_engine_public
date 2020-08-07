@@ -25,6 +25,19 @@
 
 class dxRender_Visual;
 
+class ViewPortBuffers
+{
+public:
+	ViewPortBuffers()
+	{
+
+	}
+
+	xr_vector<light*>											Lights_LastFrame;
+	light_Package												LP_normal;
+	light_Package												LP_pending;
+};
+
 // definition
 class CRender	:	public R_dsgraph_structure
 {
@@ -143,12 +156,14 @@ public:
 
 	CRenderTarget*												Target;			// Render-target
 
+	ViewPortBuffers												viewPortBuffer1;
+	ViewPortBuffers												viewPortBuffer2;
+
+	ViewPortBuffers*											actualViewPortBufferNow;
+
 	CLight_DB													Lights;
 	CLight_Compute_XFORM_and_VIS								LR;
-	xr_vector<light*>											Lights_LastFrame;
 	SMAP_Allocator												LP_smap_pool;
-	light_Package												LP_normal;
-	light_Package												LP_pending;
 
 	xr_vector<Fbox3,render_alloc<Fbox3> >						main_coarse_structure;
 

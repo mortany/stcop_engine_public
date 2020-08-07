@@ -13,6 +13,13 @@ extern float		r_ssaGLOD_start,	r_ssaGLOD_end;
 
 void CRender::Calculate		()
 {
+	if (currentViewPort == MAIN_VIEWPORT)
+		actualViewPortBufferNow = &viewPortBuffer1;
+	else if (currentViewPort == SECONDARY_WEAPON_SCOPE)
+		actualViewPortBufferNow = &viewPortBuffer2;
+	else
+		R_ASSERT(false);
+
 	// Transfer to global space to avoid deep pointer access
 	IRender_Target* T				=	getTarget	();
 	float	fov_factor				=	_sqr		(90.f / Device.fFOV);

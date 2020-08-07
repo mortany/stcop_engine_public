@@ -311,16 +311,16 @@ void CRender::reset_begin()
 	// BUG-ID: 10646
 	{
 		u32 it=0;
-		for (it=0; it<Lights_LastFrame.size(); it++)	{
-			if (0==Lights_LastFrame[it])	continue	;
+		for (it=0; it< actualViewPortBufferNow->Lights_LastFrame.size(); it++)	{
+			if (0== actualViewPortBufferNow->Lights_LastFrame[it])	continue	;
 			try {
-				Lights_LastFrame[it]->svis.resetoccq ()	;
+				actualViewPortBufferNow->Lights_LastFrame[it]->svis.resetoccq ()	;
 			} catch (...)
 			{
-				Msg	("! Failed to flush-OCCq on light [%d] %X",it,*(u32*)(&Lights_LastFrame[it]));
+				Msg	("! Failed to flush-OCCq on light [%d] %X",it,*(u32*)(&actualViewPortBufferNow->Lights_LastFrame[it]));
 			}
 		}
-		Lights_LastFrame.clear	();
+		actualViewPortBufferNow->Lights_LastFrame.clear	();
 	}
 
 	//AVO: let's reload details while changed details options on vid_restart

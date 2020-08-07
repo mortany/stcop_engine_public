@@ -17,6 +17,7 @@
 //#include "R_Backend.h"
 
 extern ENGINE_API float VIEWPORT_NEAR;
+#define VIEWPORT_NEAR_HUD 0.01f
 extern ENGINE_API int psSVPFrameDelay;
 
 enum ViewPort;

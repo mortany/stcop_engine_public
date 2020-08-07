@@ -43,7 +43,7 @@ enum
     rsR4 = (1ul << 21ul),
 
     rsFPS = (1ul << 22ul),
-    // 24-32 bit - reserved to Editor
+    // 23-32 bit - reserved to Editor
 };
 
 

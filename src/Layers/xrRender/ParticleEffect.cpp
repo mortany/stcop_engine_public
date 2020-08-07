@@ -643,7 +643,7 @@ void CParticleEffect::Render(float)
 				{
 					RDEVICE.mProject.build_projection(deg2rad(psHUD_FOV * Device.fFOV),
 						Device.fASPECT,
-						0.05f,
+						VIEWPORT_NEAR_HUD,
 						g_pGamePersistent->Environment().CurrentEnv->far_plane);
 
 					Device.mFullTransform.mul(Device.mProject, Device.mView);

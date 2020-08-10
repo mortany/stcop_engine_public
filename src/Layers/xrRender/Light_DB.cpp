@@ -261,7 +261,6 @@ void			CLight_DB::Update			()
 	ldbTargetViewPortBuffer->rawPackageDeffered_ = ldbTargetViewPortBuffer->rawPackage_;
 
 	//actualViewPortBufferNow
-	RImplementation.actualViewPortBufferNow->bFirstRendering = false;
 	// Clear selection
 	ldbTargetViewPortBuffer->rawPackage_.clear();
 }

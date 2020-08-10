@@ -9,7 +9,6 @@ IC		bool	pred_area		(light* _1, light* _2)
 
 void	CRender::render_lights(light_Package& LP)
 {
-	if (actualViewPortBufferNow->bFirstRendering) return;
 	//////////////////////////////////////////////////////////////////////////
 	// Refactor order based on ability to pack shadow-maps
 	// 1. calculate area + sort in descending order

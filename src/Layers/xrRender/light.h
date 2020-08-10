@@ -1,20 +1,13 @@
-#pragma once
+#ifndef LAYERS_XRRENDER_LIGHT_H_INCLUDED
+#define LAYERS_XRRENDER_LIGHT_H_INCLUDED
 
 #include "../../xrcdb/ispatial.h"
 
+#if (RENDER==R_R2) || (RENDER==R_R3) || (RENDER==R_R4)
 #	include "light_package.h"
 #	include "light_smapvis.h"
 #	include "light_GI.h"
-
-struct LightViewProtbuffer
-{
-	LightViewProtbuffer()
-	{
-		frame_render = 0;
-	}
-
-	u32				frame_render;
-};
+#endif //(RENDER==R_R2) || (RENDER==R_R3) || (RENDER==R_R4)
 
 class	light		:	public IRender_Light, public ISpatial
 {
@@ -43,13 +36,11 @@ public:
 	float			m_volumetric_intensity;
 	float			m_volumetric_distance;
 
+#if (RENDER==R_R2) || (RENDER==R_R3) || (RENDER==R_R4)
 	float			falloff;			// precalc to make light equal to zero at light range
 	float	        attenuation0;		// Constant attenuation		
 	float	        attenuation1;		// Linear attenuation		
 	float	        attenuation2;		// Quadratic attenuation	
-
-	LightViewProtbuffer	lightViewPortBuffer1;
-	LightViewProtbuffer	lightViewPortBuffer2;
 
 	light*						omnipart	[6]	;
 	xr_vector<light_indirect>	indirect		;
@@ -61,9 +52,11 @@ public:
 	ref_shader		s_point;
 	ref_shader		s_volumetric;
 
+#if (RENDER==R_R3) || (RENDER==R_R4)
 	ref_shader		s_spot_msaa[8];
 	ref_shader		s_point_msaa[8];
 	ref_shader		s_volumetric_msaa[8];
+#endif	//	(RENDER==R_R3) || (RENDER==R_R4)
 
 	u32				m_xform_frame;
 	Fmatrix			m_xform;
@@ -100,6 +93,7 @@ public:
 			BOOL						transluent	;
 		}	S;
 	}	X;
+#endif	//	(RENDER==R_R2) || (RENDER==R_R3) || (RENDER==R_R4)
 
 public:
 	virtual void	set_type				(LT type)						{ flags.type = type;		}
@@ -135,6 +129,7 @@ public:
 	virtual IRender_Light*	dcast_Light		()	{ return this; }
 
 	vis_data&		get_homdata				();
+#if (RENDER==R_R2) || (RENDER==R_R3) || (RENDER==R_R4)
 	void			gi_generate				();
 	void			xform_calc				();
 	void			vis_prepare				();
@@ -142,9 +137,12 @@ public:
 	void			vis_update				();
 	void			Export 					(light_Package& dest);
 	void			set_attenuation_params	(float a0, float a1, float a2, float fo);
+#endif // (RENDER==R_R2) || (RENDER==R_R3) || (RENDER==R_R4)
 
 	float			get_LOD					();
 
 	light();
 	virtual ~light();
 };
+
+#endif // #define LAYERS_XRRENDER_LIGHT_H_INCLUDED

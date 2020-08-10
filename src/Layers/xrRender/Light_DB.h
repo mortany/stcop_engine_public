@@ -3,12 +3,6 @@
 #include "light.h"
 #include "light_package.h"
 
-struct LDBViewPortBuffers
-{
-	light_Package			rawPackage_;
-	light_Package			rawPackageDeffered_;
-};
-
 class	CLight_DB
 {
 private:
@@ -17,11 +11,7 @@ private:
 public:
 	ref_light				sun_original;
 	ref_light				sun_adapted;
-
-	LDBViewPortBuffers		ldbViewPortBuffer1;
-	LDBViewPortBuffers		ldbViewPortBuffer2;
-	LDBViewPortBuffers*		ldbTargetViewPortBuffer;
-
+	light_Package			package;
 public:
 	void					add_light			(light*		L	);
 

@@ -422,7 +422,7 @@ void CRender::Render		()
 	{
 		PIX_EVENT(DEFER_TEST_LIGHT_VIS);
 		// perform tests
-		size_t	count			= 0;
+		u32	count			= 0;
 		light_Package&	LP	= Lights.ldbTargetViewPortBuffer->rawPackageDeffered_;
 
 		// stats
@@ -434,7 +434,7 @@ void CRender::Render		()
 		count				= _max(count,LP.v_point.size());
 		count				= _max(count,LP.v_spot.size());
 		count				= _max(count,LP.v_shadowed.size());
-		for (size_t  it=0; it<count; it++)	{
+		for (u32 it=0; it<count; it++)	{
 			if (it<LP.v_point.size())		{
 				light*	L			= LP.v_point	[it];
 				L->vis_prepare		();

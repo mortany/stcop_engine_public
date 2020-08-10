@@ -328,6 +328,7 @@ IC		void			gm_SetNearer		(BOOL bNearer)
 CRender::CRender	()
 :m_bFirstFrameAfterReset(false)
 {
+	
 }
 
 CRender::~CRender	()

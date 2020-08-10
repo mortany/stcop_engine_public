@@ -49,6 +49,8 @@ light::~light	()
 
 	// remove from Lights_LastFrame
 #if (RENDER==R_R2) || (RENDER==R_R3) || (RENDER==R_R4)
+	if (RImplementation.actualViewPortBufferNow == NULL) 
+		return;
 	for (u32 it=0; it<RImplementation.actualViewPortBufferNow->Lights_LastFrame.size(); it++)
 		if (this==RImplementation.actualViewPortBufferNow->Lights_LastFrame[it])	RImplementation.actualViewPortBufferNow->Lights_LastFrame[it]=0;
 #endif // (RENDER==R_R2) || (RENDER==R_R3) || (RENDER==R_R4)

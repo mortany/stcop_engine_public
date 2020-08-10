@@ -29,12 +29,13 @@ class ViewPortBuffers
 public:
 	ViewPortBuffers()
 	{
-
+		bFirstRendering = true;
 	}
 
 	xr_vector<light*>											Lights_LastFrame;
 	light_Package												LP_normal;
 	light_Package												LP_pending;
+	bool                                                        bFirstRendering;
 };
 
 // definition

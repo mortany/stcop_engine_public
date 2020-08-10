@@ -417,13 +417,14 @@ void CRender::Render		()
 	Target->phase_occq							();
 	actualViewPortBufferNow->LP_normal.clear();
 	actualViewPortBufferNow->LP_pending.clear();
+	actualViewPortBufferNow->Lights_LastFrame.clear();
    if( RImplementation.o.dx10_msaa )
       RCache.set_ZB( RImplementation.Target->rt_MSAADepth->pZRT );
 	{
 		PIX_EVENT(DEFER_TEST_LIGHT_VIS);
 		// perform tests
 		VERIFY(Lights.ldbTargetViewPortBuffer);
-		size_t	count			= 0;
+		auto	count			= 0;
 		light_Package&	LP	= Lights.ldbTargetViewPortBuffer->rawPackageDeffered_;
 
 		// stats
@@ -432,10 +433,10 @@ void CRender::Render		()
 		stats.l_total		= stats.l_shadowed + stats.l_unshadowed;
 
 		// perform tests
-		count				= std::max(count,LP.v_point.size());
-		count				= std::max(count,LP.v_spot.size());
-		count				= std::max(count,LP.v_shadowed.size());
-		for (u32 it=0; it<count; it++)	{
+		count				= _max(count,LP.v_point.size());
+		count				= _max(count,LP.v_spot.size());
+		count				= _max(count,LP.v_shadowed.size());
+		for (auto  it=0; it<count; it++)	{
 			if (it<LP.v_point.size())		{
 				light*	L			= LP.v_point	[it];
 				L->vis_prepare		();

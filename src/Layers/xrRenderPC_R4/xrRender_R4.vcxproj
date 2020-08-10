@@ -39,6 +39,7 @@
     <RootNamespace>xrRender_R4</RootNamespace>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+	<PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -487,7 +488,7 @@
       <AdditionalOptions>-Zm113 %(AdditionalOptions)</AdditionalOptions>
       <UndefinePreprocessorDefinitions>USE_LUAJIT_ONE</UndefinePreprocessorDefinitions>
       <DisableSpecificWarnings>4005;4099</DisableSpecificWarnings>
-      <MinimalRebuild>true</MinimalRebuild>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <AdditionalDependencies>dxguid.lib;d3dx11.lib;oalib.lib;D3DCompiler.lib;d3d11.lib;dxgi.lib;nvapi.lib;dxerr.lib;d3d10.lib;luabind.beta7-devel.rc4.lib;%(AdditionalDependencies)</AdditionalDependencies>

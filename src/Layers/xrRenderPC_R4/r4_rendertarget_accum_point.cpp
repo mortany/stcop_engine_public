@@ -5,6 +5,11 @@ void CRenderTarget::accum_point		(light* L)
 	phase_accumulator				();
 	RImplementation.stats.l_visible	++;
 
+	if (L->s_point == NULL)
+	{
+		L->s_point = s_accum_point;
+	}
+
 	ref_shader		shader	    = L->s_point;
 	ref_shader*    shader_msaa  = L->s_point_msaa;
 	if (!shader)

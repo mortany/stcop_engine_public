@@ -8,6 +8,9 @@ IC bool		pred_LI			(const light_indirect& A, const light_indirect& B)
 
 void	light::gi_generate	()
 {
+
+	return;
+
 	indirect.clear		();
 	indirect_photons	= ps_r2_ls_flags.test(R2FLAG_GI)?ps_r2_GI_photons:0;
 

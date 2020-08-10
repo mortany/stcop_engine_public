@@ -9,6 +9,7 @@ IC		bool	pred_area		(light* _1, light* _2)
 
 void	CRender::render_lights(light_Package& LP)
 {
+	if (actualViewPortBufferNow->bFirstRendering) return;
 	//////////////////////////////////////////////////////////////////////////
 	// Refactor order based on ability to pack shadow-maps
 	// 1. calculate area + sort in descending order
@@ -102,7 +103,7 @@ void	CRender::render_lights(light_Package& LP)
 			else							r_pmask(true, false);
 			L->svis.begin();
 			PIX_EVENT(SHADOWED_LIGHTS_RENDER_SUBSPACE);
-			L->spatial_updatesector();
+			//L->spatial_updatesector();
 			r_dsgraph_render_subspace(L->spatial.sector, L->X.S.combine, L->position, TRUE);
 			bool	bNormal = mapNormalPasses[0][0].size() || mapMatrixPasses[0][0].size();
 			bool	bSpecial = mapNormalPasses[1][0].size() || mapMatrixPasses[1][0].size() || mapSorted.size();
@@ -187,11 +188,17 @@ void	CRender::render_lights(light_Package& LP)
 	// Point lighting (unshadowed, if left)
 	if (!LP.v_point.empty()) {
 		xr_vector<light*>& Lvec = LP.v_point;
-		for (u32 pid = 0; pid < Lvec.size(); pid++) {
+		for (u32 pid = 0; pid < Lvec.size(); pid++) 
+		{
 			Lvec[pid]->vis_update();
-			if (Lvec[pid]->vis.visible) {
-				render_indirect(Lvec[pid]);
-				Target->accum_point(Lvec[pid]);
+			if (Lvec[pid]->vis.visible) 
+			{
+				if (Lvec[pid] != NULL)
+				{
+					render_indirect(Lvec[pid]);
+					Target->accum_point(Lvec[pid]);
+				}
+				
 			}
 		}
 		Lvec.clear();

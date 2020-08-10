@@ -198,7 +198,7 @@ bool CWeapon::install_upgrade_hit( LPCSTR section, bool test )
 bool CWeapon::install_upgrade_addon(LPCSTR section, bool test)
 {
 	bool result = false;
-
+	return false;
 	//upgardes()
 }
 

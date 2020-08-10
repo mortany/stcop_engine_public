@@ -12,6 +12,7 @@
     <xrSdkDir>$(SolutionDir)..\sdk\</xrSdkDir>
     <dxSdkDir>$(xrSdkDir)include\dxsdk\</dxSdkDir>
     <xr3rdPartyDir>$(SolutionDir)3rd party\</xr3rdPartyDir>
+	<PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <PropertyGroup>
     <IncludePath>$(SolutionDir)..\src\3rd party;$(IncludePath);$(xrSdkDir)include;$(xrSdkDir)include\OpenAutomate;$(xrSdkDir)include\nvapi;$(xrSdkDir)include\dxsdk</IncludePath>

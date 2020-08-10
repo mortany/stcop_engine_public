@@ -139,6 +139,7 @@ public:
 	void			gi_generate				();
 	void			xform_calc				();
 	void			vis_prepare				();
+	void            vis_legal_check			();
 	void			vis_update				();
 	void			Export 					(light_Package& dest);
 	void			set_attenuation_params	(float a0, float a1, float a2, float fo);

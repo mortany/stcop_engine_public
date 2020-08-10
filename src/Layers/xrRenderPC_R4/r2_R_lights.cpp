@@ -95,7 +95,7 @@ void	CRender::render_lights(light_Package& LP)
 			L = source.back();
 			if (L->vis.smap_ID != sid)	break;
 			source.pop_back();
-			actualViewPortBufferNow->Lights_LastFrame.push_back(L);
+			Lights_LastFrame.push_back(L);
 
 			// render
 			phase = PHASE_SMAP;
@@ -103,7 +103,7 @@ void	CRender::render_lights(light_Package& LP)
 			else							r_pmask(true, false);
 			L->svis.begin();
 			PIX_EVENT(SHADOWED_LIGHTS_RENDER_SUBSPACE);
-			//L->spatial_updatesector();
+			L->spatial_updatesector();
 			r_dsgraph_render_subspace(L->spatial.sector, L->X.S.combine, L->position, TRUE);
 			bool	bNormal = mapNormalPasses[0][0].size() || mapMatrixPasses[0][0].size();
 			bool	bSpecial = mapNormalPasses[1][0].size() || mapMatrixPasses[1][0].size() || mapSorted.size();

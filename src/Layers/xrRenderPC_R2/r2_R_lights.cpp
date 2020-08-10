@@ -91,14 +91,13 @@ void	CRender::render_lights	(light_Package& LP)
 			L	= source.back			();
 			if	(L->vis.smap_ID!=sid)	break;
 			source.pop_back				();
-			actualViewPortBufferNow->Lights_LastFrame.push_back	(L);
+			Lights_LastFrame.push_back	(L);
 
 			// render
 			phase									= PHASE_SMAP;
 			if (RImplementation.o.Tshadows)	r_pmask	(true,true	);
 			else							r_pmask	(true,false	);
 			L->svis.begin							();
-			L->spatial_updatesector					();
 			r_dsgraph_render_subspace				(L->spatial.sector, L->X.S.combine, L->position, TRUE);
 			bool	bNormal							= mapNormalPasses[0][0].size() || mapMatrixPasses[0][0].size();
 			bool	bSpecial						= mapNormalPasses[1][0].size() || mapMatrixPasses[1][0].size() || mapSorted.size();

@@ -23,18 +23,6 @@ X-Ray Engine 1.6 x64 for Forward Frontier Team
 * Возможность создавать автоматическое оружие на классе пистолетов
 * Множество звуковых фиксов и правок
 * Поддержка системы прицелов "STCoP WP"
-
-Свежие релизы всегда можете найти в разделе "Релизы" <br>
-## Особая благодарность
-* [isobolevskiy](https://github.com/BearIvan/) За неоценимый вклад и множество полезных советов
-## Использованные материалы
-* [Mpnolith](https://bitbucket.org/SeargeDP/coc-1.4-xray-64/src/coc-1.4-xray-64/) За отличный пример перехода к x64
-* [OpenXRay](https://github.com/openxray) Всеотец прародитель
-* [Oxygen](https://github.com/xrOxygen/xray-oxygen) Часть правок была взята отсюда
-* [Shoker](https://github.com/ShokerStlk/xray-16-SWM) SWM 3.0 который подарил нам много вкусностей
-* [abramcumner](https://github.com/abramcumner/xray15) Часть правок была взята отсюда
-* EMS Team - Наши друзья и товарищи, так же авторы некоторых ключевых фишек типа оптимизации PiP прицелов
-* IDAVOLL - за новый логотип
 ## Donate
 [![](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://paypal.me/mortany?locale.x=ru_RU)
 

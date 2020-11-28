@@ -98,6 +98,7 @@ void	CRender::render_lights	(light_Package& LP)
 			if (RImplementation.o.Tshadows)	r_pmask	(true,true	);
 			else							r_pmask	(true,false	);
 			L->svis.begin							();
+			L->spatial_updatesector();
 			r_dsgraph_render_subspace				(L->spatial.sector, L->X.S.combine, L->position, TRUE);
 			bool	bNormal							= mapNormalPasses[0][0].size() || mapMatrixPasses[0][0].size();
 			bool	bSpecial						= mapNormalPasses[1][0].size() || mapMatrixPasses[1][0].size() || mapSorted.size();

@@ -382,8 +382,11 @@ void CDetailManager::Render	()
 	if (!psDeviceFlags.is(rsDetails))	return;
 
 	// MT
-	//MT_SYNC					();
+#if RENDER==R_R1
+	MT_SYNC();
+#else
 	WaitForCalc();
+#endif
 
 	RDEVICE.Statistic->RenderDUMP_DT_Render.Begin	();
 	g_pGamePersistent->m_pGShaderConstants->m_blender_mode.w = 1.0f; //--#SM+#-- Флаг начала рендера травы [begin of grass render]
@@ -419,7 +422,7 @@ void __stdcall	CDetailManager::MT_CALC		()
 	if (0 == RImplementation.Details)	return;	// possibly deleted
 	if (0 == dtFS)						return;
 	if (!psDeviceFlags.is(rsDetails))	return;
-
+	MT.Enter();
 	if (m_frame_calc != RDEVICE.dwFrame && (m_frame_rendered + 1) == RDEVICE.dwFrame)
 	{
 		Fvector		EYE = RDEVICE.vCameraPosition_saved;
@@ -434,4 +437,5 @@ void __stdcall	CDetailManager::MT_CALC		()
 		UpdateVisibleM();
 		m_frame_calc = RDEVICE.dwFrame;
 	}
+	MT.Leave();
 }

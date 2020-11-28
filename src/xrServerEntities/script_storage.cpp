@@ -475,74 +475,58 @@ bool CScriptStorage::parse_namespace(LPCSTR caNamespaceName, LPSTR b, u32 const 
 	return			(true);
 }
 
-bool CScriptStorage::load_buffer	(lua_State *L, LPCSTR caBuffer, size_t tSize, LPCSTR caScriptName, LPCSTR caNameSpaceName)
+bool CScriptStorage::load_buffer(lua_State* L, LPCSTR caBuffer, size_t tSize, LPCSTR caScriptName, LPCSTR caNameSpaceName)
 {
-	int					l_iErrorCode;
-	if (caNameSpaceName && xr_strcmp("_G",caNameSpaceName)) {
+	int l_iErrorCode;
+
+	if (caNameSpaceName && xr_strcmp("_G", caNameSpaceName))
+	{
 		string512		insert, a, b;
 
 		LPCSTR			header = file_header;
 
-		if (!parse_namespace(caNameSpaceName,a,sizeof(a),b,sizeof(b)))
-			return		(false);
+		if (!parse_namespace(caNameSpaceName, a, sizeof(a), b, sizeof(b)))
+			return(false);
 
-		xr_sprintf		(insert,header,caNameSpaceName,a,b);
-		u32				str_len = xr_strlen(insert);
-		u32 const total_size = str_len + tSize;
-		LPSTR			script = 0;
-		bool dynamic_allocation	= false;
+		xr_sprintf(insert, header, caNameSpaceName, a, b);
 
-		__try {
-			if (total_size < 768*1024)
-				script					= (LPSTR)_alloca(total_size);
-			else {
-#ifdef DEBUG
-				script					= (LPSTR)Memory.mem_alloc(total_size, "lua script file");
-#else //#ifdef DEBUG
-				script					= (LPSTR)Memory.mem_alloc(total_size);
-#endif //#ifdef DEBUG
-				dynamic_allocation		= true;
-			}
-		}
-		__except(GetExceptionCode() == STATUS_STACK_OVERFLOW)
+		u32 str_len = xr_strlen(insert);
+		LPSTR script = xr_alloc<char>(str_len + tSize);
+
+		xr_strcpy(script, str_len + tSize, insert);
+
+		CopyMemory(script + str_len, caBuffer, u32(tSize));
+		//		try
 		{
-			int							errcode = _resetstkoflw();
-			R_ASSERT2					(errcode, "Could not reset the stack after \"Stack overflow\" exception!");
-#ifdef DEBUG
-			script					= (LPSTR)Memory.mem_alloc(total_size, "lua script file (after exception)");
-#else //#ifdef DEBUG
-			script					= (LPSTR)Memory.mem_alloc(total_size);
-#endif //#ifdef DEBUG			
-			dynamic_allocation			= true;
-		};
-
-		xr_strcpy		(script, total_size, insert);
-		CopyMemory		(script + str_len,caBuffer,u32(tSize));
-
-		l_iErrorCode	= luaL_loadbuffer(L,script,tSize + str_len,caScriptName);
-
-		if ( dynamic_allocation )
-			xr_free		(script);
-	}
-	else {
-//		try
-		{
-			l_iErrorCode= luaL_loadbuffer(L,caBuffer,tSize,caScriptName);
+			l_iErrorCode = luaL_loadbuffer(L, script, tSize + str_len, caScriptName);
 		}
-//		catch(...) {
-//			l_iErrorCode= LUA_ERRSYNTAX;
-//		}
+		//		catch(...) {
+		//			l_iErrorCode= LUA_ERRSYNTAX;
+		//		}
+
+		xr_free(script);
+	}
+	else
+	{
+		//		try
+		{
+			l_iErrorCode = luaL_loadbuffer(L, caBuffer, tSize, caScriptName);
+	}
+		//		catch(...) {
+		//			l_iErrorCode= LUA_ERRSYNTAX;
+		//		}
 	}
 
-	if (l_iErrorCode) {
-#ifdef DEBUG
-		print_output	(L,caScriptName,l_iErrorCode);
-#endif
-		on_error		(L);
-		return			(false);
+	if (l_iErrorCode)
+	{
+		print_output(L, caScriptName, l_iErrorCode);
+
+		return(false);
 	}
-	return				(true);
+
+	return(true);
 }
+
 
 bool CScriptStorage::do_file	(LPCSTR caScriptName, LPCSTR caNameSpaceName)
 {

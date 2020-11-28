@@ -537,6 +537,7 @@ void CScriptEngine::collect_all_garbage()
 {
 	lua_gc(lua(), LUA_GCCOLLECT, 0);
 	lua_gc(lua(), LUA_GCCOLLECT, 0);
+	lua_gc(lua(), LUA_GCCOLLECT, 0);
 }
 
 void CScriptEngine::on_error(lua_State* state)

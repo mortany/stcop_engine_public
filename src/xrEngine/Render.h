@@ -316,6 +316,8 @@ public:
 
 	xr_vector<ViewPort> viewPortsThisFrame;
 
+    u8 getVP() { return currentViewPort == MAIN_VIEWPORT ? 0 : 1; };
+
 	bool needPresenting;
 
     // Constructor/destructor

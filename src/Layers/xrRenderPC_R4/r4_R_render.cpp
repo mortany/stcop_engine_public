@@ -112,7 +112,7 @@ void CRender::render_main	(Fmatrix&	m_ViewProjection, bool _fportals)
 
 			// Determine visibility for dynamic part of scene
 			set_Object							(0);
-			u32 uID_LTRACK						= u32(-1);
+			u32 uID_LTRACK						= 0xffffffff;
 			if (phase==PHASE_NORMAL)			{
 				uLastLTRACK	++;
 				if (lstRenderables.size())		uID_LTRACK	= uLastLTRACK%lstRenderables.size();
@@ -422,8 +422,8 @@ void CRender::Render		()
 	{
 		PIX_EVENT(DEFER_TEST_LIGHT_VIS);
 		// perform tests
-		auto	count			= 0;
-		light_Package&	LP	= Lights.package;
+		u32	count			= 0;
+		light_Package&	LP	= Lights.package[RImplementation.getVP()];
 
 		// stats
 		stats.l_shadowed	= LP.v_shadowed.size();
@@ -431,9 +431,9 @@ void CRender::Render		()
 		stats.l_total		= stats.l_shadowed + stats.l_unshadowed;
 
 		// perform tests
-		count				= _max(count,LP.v_point.size());
-		count				= _max(count,LP.v_spot.size());
-		count				= _max(count,LP.v_shadowed.size());
+		count				= std::max((size_t)count,LP.v_point.size());
+		count				= std::max((size_t)count,LP.v_spot.size());
+		count				= std::max((size_t)count,LP.v_shadowed.size());
 		for (u32 it=0; it<count; it++)	{
 			if (it<LP.v_point.size())		{
 				light*	L			= LP.v_point	[it];

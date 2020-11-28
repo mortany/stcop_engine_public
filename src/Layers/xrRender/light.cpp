@@ -27,7 +27,7 @@ light::light		(void)	: ISpatial(g_SpatialSpace)
 	m_volumetric_distance	= 1;
 
 	frame_render	= 0;
-	vp_render		= MAIN_VIEWPORT;
+	vp_render = 0;
 #if (RENDER==R_R2) || (RENDER==R_R3) || (RENDER==R_R4)
 	ZeroMemory		(omnipart,sizeof(omnipart));
 	s_spot			= NULL;

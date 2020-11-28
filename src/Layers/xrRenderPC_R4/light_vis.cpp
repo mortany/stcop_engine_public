@@ -64,14 +64,6 @@ void	light::vis_prepare()
 	RImplementation.occq_end(vis.query_id);
 }
 
-void  light::vis_legal_check()
-{
-	if (!s_point == NULL) return;
-
-	vis.visible = false;
-	vis.pending = false;
-}
-
 void	light::vis_update()
 {
 	//	. not pending	->>> return (early out)
@@ -97,6 +89,4 @@ void	light::vis_update()
 	{
 		vis.frame2test = frame + 1;
 	}
-
-	vis_legal_check();
 }

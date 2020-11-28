@@ -143,11 +143,6 @@ void					CRender::reset_end				()
 void					CRender::OnFrame				()
 {
 	Models->DeleteQueue	();
-
-	if (Details != NULL)
-	{
-		Details->StartCalcAsync();
-	}
 }
 
 // Implementation

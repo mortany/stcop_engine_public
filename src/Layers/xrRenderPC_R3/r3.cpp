@@ -677,8 +677,6 @@ CRender::CRender()
 :m_bFirstFrameAfterReset(false)
 {
 	init_cacades();
-
-	actualViewPortBufferNow = NULL;
 }
 
 CRender::~CRender()

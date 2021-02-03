@@ -13,11 +13,11 @@
 
 //AVO: lua re-org
 #include "lua.hpp"
-/*extern "C" {
-	#include <lua/lua.h>
-	#include <lua/lualib.h>
-	#include <lua/lauxlib.h>
-}*/
+extern "C" {
+	#include <lua.h>
+	#include <lualib.h>
+	#include <lauxlib.h>
+}
 //-AVO
 
 #pragma warning(push)
@@ -32,5 +32,4 @@
 #include <luabind/return_reference_to_policy.hpp>
 #include <luabind/out_value_policy.hpp>
 #include <luabind/iterator_policy.hpp>
-
 #endif // PCH_SCRIPT_H

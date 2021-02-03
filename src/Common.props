@@ -20,14 +20,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>
-        .;
-        $(SolutionDir);
-        $(ProjectDir);
-        $(xrSdkDir)include;
-        $(xrSdkDir)DXSDK/Include;
-        %(AdditionalIncludeDirectories)
-      </AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(SolutionDir);$(ProjectDir);$(xrSdkDir)include;$(xrSdkDir)DXSDK/Include;$(SolutionDir)3rd party\imdexlib;$(SolutionDir)3rd party\luabind\include;$(SolutionDir)3rd party\tbb\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>USE_LUAJIT_ONE</UndefinePreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <Optimization>Full</Optimization>

@@ -476,7 +476,7 @@
       </OmitFramePointers>
       <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>.;$(SolutionDir);$(SolutionDir)xrServerEntities;$(SolutionDir)3rd party\luajit-2\src\;$(SolutionDir)3rd party\luabind\;$(xrSdkDir)include;$(XRAY_16X_LIBS)OpenAutomate\inc;$(SolutionDir)3rd party\CxImage;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(SolutionDir);$(SolutionDir)xrServerEntities;$(SolutionDir)3rd party\luajit-2\src\;$(SolutionDir)3rd party\luabind\include;$(xrSdkDir)include;$(XRAY_16X_LIBS)OpenAutomate\inc;$(SolutionDir)3rd party\CxImage;$(SolutionDir)3rd party\imdexlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;XRGAME_EXPORTS;dSINGLE;MSVC;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>
       </StringPooling>
@@ -1762,6 +1762,7 @@
     <ClInclude Include="profiler.h" />
     <ClInclude Include="profiler_inline.h" />
     <ClInclude Include="profile_data_types.h" />
+    <ClInclude Include="profile_data_types_script.h" />
     <ClInclude Include="profile_store.h" />
     <ClInclude Include="PropertiesListHelper.h" />
     <ClInclude Include="property_evaluator.h" />
@@ -4558,10 +4559,6 @@
       <Project>{fa169092-ea3e-40c1-8e5a-a2b575700fe8}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="$(SolutionDir)3rd party\luabind\luabind.beta7-devel.rc4.vcxproj">
-      <Project>{cc52e0b3-cc35-4934-9302-035b748f3f2c}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
     <ProjectReference Include="$(SolutionDir)3rd party\ode\contrib\msvc7\ode_default\default.vcxproj">
       <Project>{1bf75feb-87dd-486c-880b-227987d191c2}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -4589,6 +4586,15 @@
     <ProjectReference Include="$(SolutionDir)xrXMLParser\xrXMLParser.vcxproj">
       <Project>{94a1c366-3d19-48e6-8170-4adc2e70df98}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\..\sdk\include\jpeg\vs2013\libjpeg.vcxproj">
+      <Project>{938c5808-85a1-4b5a-8cb4-d2d9d7851cb8}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\3rd party\cximage\cximage.vcxproj">
+      <Project>{880cd250-ba77-4daf-a8d4-552f12dd3ae4}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\3rd party\luabind\luabind.vcxproj">
+      <Project>{252e63ce-f4ee-4358-b10d-eb2c508a264d}</Project>
     </ProjectReference>
     <ProjectReference Include="..\xrCDB\xrCDB.vcxproj">
       <Project>{a19b1df2-82ec-4364-8bdf-85d13a1c89b5}</Project>

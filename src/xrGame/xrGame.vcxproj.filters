@@ -7354,6 +7354,9 @@
     <ClInclude Include="Weapon.h">
       <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Weapon Generic\Refactored</Filter>
     </ClInclude>
+    <ClInclude Include="profile_data_types_script.h">
+      <Filter>Core\Server\Games\PlayerAccounts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="damage_manager.cpp">

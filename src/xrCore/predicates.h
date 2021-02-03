@@ -3,7 +3,7 @@
 #include <string.h>
 #include "xrstring.h"
 
-struct pred_str : public std::binary_function<char*, char*, bool>
+struct pred_str
 {
     bool operator()(const char* x, const char* y) const
     {
@@ -11,7 +11,7 @@ struct pred_str : public std::binary_function<char*, char*, bool>
     }
 };
 
-struct pred_stri : public std::binary_function<char*, char*, bool>
+struct pred_stri
 {
     bool operator()(const char* x, const char* y) const
     {

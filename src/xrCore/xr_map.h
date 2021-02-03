@@ -2,14 +2,14 @@
 #include <map>
 #include "xalloc.h"
 
-template <typename K, class V, class P = std::less<K>, typename allocator = xalloc<std::pair<K, V>>>
+template <typename K, class V, class P = std::less<K>, typename allocator = xalloc<std::pair<const K, V>>>
 class xr_map : public std::map<K, V, P, allocator>
 {
 public:
     u32 size() const { return (u32)std::map<K, V, P, allocator>::size(); }
 };
 
-template <typename K, class V, class P = std::less<K>, typename allocator = xalloc<std::pair<K, V>>>
+template <typename K, class V, class P = std::less<K>, typename allocator = xalloc<std::pair<const K, V>>>
 class xr_multimap : public std::multimap<K, V, P, allocator>
 {
 public:

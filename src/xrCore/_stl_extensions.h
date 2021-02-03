@@ -54,7 +54,7 @@ template <typename K, class V, class _HashFcn = std::hash<K>, class _EqualKey = 
 #endif
 #include <hash_map>
 template <typename K, class V, class _Traits = stdext::hash_compare<K, std::less<K>>,
-    typename allocator = xalloc<std::pair<K, V>>>
+    typename allocator = xalloc<std::pair<const K, V>>>
     class xr_hash_map : public stdext::hash_map<K, V, _Traits, allocator>
 {
 public:

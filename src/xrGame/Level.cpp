@@ -614,7 +614,7 @@ void CLevel::OnRender()
 	::Render->BeforeWorldRender();	//--#SM+#-- +SecondVP+
 
 	//Level().rend
-
+	//debug_renderer().render();
     inherited::OnRender();
     if (!game)
         return;

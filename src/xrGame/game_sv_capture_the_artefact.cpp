@@ -22,7 +22,7 @@
 #include "UIGameCTA.h"
 #include "string_table.h"
 #include "../xrEngine/xr_ioconsole.h"
-
+using namespace std::placeholders;
 //-------------------------------------------------------------
 u32			g_sv_cta_dwInvincibleTime		=		5;	//5 seconds
 //u32			g_sv_cta_dwAnomalySetLengthTime	=		3;	//3 seconds
@@ -453,7 +453,7 @@ void game_sv_CaptureTheArtefact::OnPlayerDisconnect(ClientID id_who, LPSTR Name,
 	
 	TeamsMap::iterator te = teams.end();
 	TeamsMap::iterator artefactOwnerTeam = std::find_if(teams.begin(), te, 
-        [&](const TeamPair& tp) { return SearchOwnerIdFunctor()(tp, GameID); });
+		std::bind(SearchOwnerIdFunctor(), _1, GameID));
 	if (artefactOwnerTeam != te)
 	{
 		DropArtefact(artefactOwnerTeam->second.artefactOwner, artefactOwnerTeam->second.artefact);
@@ -1224,18 +1224,18 @@ void game_sv_CaptureTheArtefact::LoadSkinsForTeam(const shared_str& caSection, T
 	string256			SkinSingleName;
 	string4096			Skins;
 
-	// Поле strSectionName должно содержать имя секции
+	// РџРѕР»Рµ strSectionName РґРѕР»Р¶РЅРѕ СЃРѕРґРµСЂР¶Р°С‚СЊ РёРјСЏ СЃРµРєС†РёРё
 	VERIFY(xr_strcmp(caSection,""));
 
 	pTeamSkins->clear();
 
-	// Имя поля
+	// РРјСЏ РїРѕР»СЏ
 	if (!pSettings->line_exist(caSection, "skins")) return;
 
-	// Читаем данные этого поля
+	// Р§РёС‚Р°РµРј РґР°РЅРЅС‹Рµ СЌС‚РѕРіРѕ РїРѕР»СЏ
 	xr_strcpy(Skins, pSettings->r_string(caSection, "skins"));
 	u32 count	= _GetItemCount(Skins);
-	// теперь для каждое имя оружия, разделенные запятыми, заносим в массив
+	// С‚РµРїРµСЂСЊ РґР»СЏ РєР°Р¶РґРѕРµ РёРјСЏ РѕСЂСѓР¶РёСЏ, СЂР°Р·РґРµР»РµРЅРЅС‹Рµ Р·Р°РїСЏС‚С‹РјРё, Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
 	for (u32 i = 0; i < count; ++i)
 	{
 		_GetItem(Skins, i, SkinSingleName);
@@ -1248,18 +1248,18 @@ void game_sv_CaptureTheArtefact::LoadDefItemsForTeam(const shared_str& caSection
 	string256			ItemName;
 	string4096			DefItems;
 
-	// Поле strSectionName должно содержать имя секции
+	// РџРѕР»Рµ strSectionName РґРѕР»Р¶РЅРѕ СЃРѕРґРµСЂР¶Р°С‚СЊ РёРјСЏ СЃРµРєС†РёРё
 	VERIFY(xr_strcmp(caSection,""));
 
 	pDefItems->clear();
 
-	// Имя поля
+	// РРјСЏ РїРѕР»СЏ
 	if (!pSettings->line_exist(caSection, "default_items")) return;
 
-	// Читаем данные этого поля
+	// Р§РёС‚Р°РµРј РґР°РЅРЅС‹Рµ СЌС‚РѕРіРѕ РїРѕР»СЏ
 	xr_strcpy(DefItems, pSettings->r_string(caSection, "default_items"));
 	u32 count	= _GetItemCount(DefItems);
-	// теперь для каждое имя оружия, разделенные запятыми, заносим в массив
+	// С‚РµРїРµСЂСЊ РґР»СЏ РєР°Р¶РґРѕРµ РёРјСЏ РѕСЂСѓР¶РёСЏ, СЂР°Р·РґРµР»РµРЅРЅС‹Рµ Р·Р°РїСЏС‚С‹РјРё, Р·Р°РЅРѕСЃРёРј РІ РјР°СЃСЃРёРІ
 	for (u32 i = 0; i < count; ++i)
 	{
 		_GetItem(DefItems, i, ItemName);
@@ -1576,7 +1576,7 @@ void game_sv_CaptureTheArtefact::ProcessPlayerDeath(game_PlayerState *playerStat
 	}
 	TeamsMap::iterator te = teams.end();
 	TeamsMap::iterator childArtefactTeam = std::find_if(teams.begin(), te, 
-        [&](const TeamPair& tp) { return SearchOwnerIdFunctor()(tp, playerState->GameID); });
+		std::bind(SearchOwnerIdFunctor(), _1, playerState->GameID));
 	if (childArtefactTeam != te)
 	{
 		DropArtefact(childArtefactTeam->second.artefactOwner, childArtefactTeam->second.artefact);
@@ -1640,7 +1640,7 @@ BOOL game_sv_CaptureTheArtefact::OnTouch(u16 eid_who, u16 eid_target, BOOL bForc
 	/*VERIFY(e_what	); // <- not used because IMHO next code work faster...*/
 	TeamsMap::iterator te = teams.end();
 	TeamsMap::iterator artefactOfTeam = std::find_if(teams.begin(), te, 
-		[&](const TeamPair& tp) { return SearchArtefactIdFunctor()(tp, eid_target); });
+		std::bind(SearchArtefactIdFunctor(), _1, eid_target));
 	if (artefactOfTeam != te)
 	{
 		CSE_ALifeItemArtefact *tempArtefact = artefactOfTeam->second.artefact;
@@ -1686,7 +1686,7 @@ BOOL game_sv_CaptureTheArtefact::OnTouch(u16 eid_who, u16 eid_target, BOOL bForc
 					return FALSE;
 				}
 				if (std::find_if(teams.begin(), te,
-                    [&](const TeamPair& tp) { return SearchOwnerIdFunctor()(tp, e_who->ID); }) != te)
+					std::bind(SearchOwnerIdFunctor(), _1, e_who->ID)) != te)
 				{
 					return FALSE;
 				}
@@ -1697,7 +1697,7 @@ BOOL game_sv_CaptureTheArtefact::OnTouch(u16 eid_who, u16 eid_target, BOOL bForc
 		} else
 		{
 			if (std::find_if(teams.begin(), te,
-                [&](const TeamPair& tp) { return SearchOwnerIdFunctor()(tp, e_who->ID); }) != te)
+				std::bind(SearchOwnerIdFunctor(), _1, e_who->ID)) != te)
 			{
 				return FALSE;
 			}
@@ -1780,7 +1780,7 @@ void game_sv_CaptureTheArtefact::OnDetach(u16 eid_who, u16 eid_target)
 {
 	TeamsMap::iterator te = teams.end();
 	TeamsMap::iterator artefactOfTeam = std::find_if(teams.begin(), te, 
-        [&](const TeamPair& tp) { return SearchArtefactIdFunctor()(tp, eid_target); });
+		std::bind(SearchArtefactIdFunctor(), _1, eid_target));
 	
 	CSE_ActorMP *e_who = smart_cast<CSE_ActorMP*>(m_server->ID_to_entity(eid_who));
 	CSE_Abstract *e_item = m_server->ID_to_entity(eid_target);
@@ -1817,7 +1817,7 @@ BOOL game_sv_CaptureTheArtefact::OnActivate(u16 eid_who, u16 eid_target)
 {
 	TeamsMap::iterator te = teams.end();
 	TeamsMap::iterator artefactOfTeam = std::find_if(teams.begin(), te, 
-        [&](const TeamPair& tp) { return SearchArtefactIdFunctor()(tp, eid_target); });
+		std::bind(SearchArtefactIdFunctor(), _1, eid_target));
 	
 	CSE_ActorMP *e_who = smart_cast<CSE_ActorMP*>(m_server->ID_to_entity(eid_who));
 	CSE_Abstract *e_item = m_server->ID_to_entity(eid_target);

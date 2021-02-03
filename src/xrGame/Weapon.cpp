@@ -257,7 +257,9 @@ void CWeapon::UpdateXForm()
 	if ((HandDependence() == hd1Hand) || (GetState() == eReload) || (!E->g_Alive()))
 		boneL = boneR2;
 
-	V->CalculateBones();
+	V->CalculateBones_Invalidate();
+	V->CalculateBones(TRUE);
+	
 	Fmatrix& mL = V->LL_GetTransform(u16(boneL));
 	Fmatrix& mR = V->LL_GetTransform(u16(boneR));
 	// Calculate
@@ -2125,14 +2127,13 @@ void CWeapon::UpdateHudAdditonal(Fmatrix& trans)
 		hud_rotation.translate_over(curr_offs);
 		trans.mulB_43(hud_rotation);
 
-		if (pActor->IsZoomAimingMode())
-			m_zoom_params.m_fZoomRotationFactor += Device.fTimeDelta / m_zoom_params.m_fZoomRotateTime;
-		else
-			m_zoom_params.m_fZoomRotationFactor -= Device.fTimeDelta / m_zoom_params.m_fZoomRotateTime;
-
-		clamp(m_zoom_params.m_fZoomRotationFactor, 0.f, 1.f);
+		float src = 10 * Device.fTimeDelta * 0.65;
+		float target = pActor->IsZoomAimingMode() ? 1.3f : -0.3f;
+		clamp(src, 0.f, 1.f);
+		m_zoom_params.m_fZoomRotationFactor = _lerp(m_zoom_params.m_fZoomRotationFactor, target, src);
+		clamp(m_zoom_params.m_fZoomRotationFactor, 0.f, 1.0f);
 	}
-
+	
 	//============= Подготавливаем общие переменные =============//
 
 	clamp(idx, u8(0), u8(1));
@@ -2537,6 +2538,7 @@ bool CWeapon::ZoomHideCrosshair()
 	return m_zoom_params.m_bHideCrosshairInZoom || ZoomTexture();
 }
 
+#include "debug_renderer.h"
 void CWeapon::debug_draw_firedeps()
 {
 	if (hud_adj_mode == 5 || hud_adj_mode == 6 || hud_adj_mode == 7)
@@ -2545,7 +2547,7 @@ void CWeapon::debug_draw_firedeps()
 
 		if (hud_adj_mode == 5)
 			render.draw_aabb(get_LastFP(), 0.005f, 0.005f, 0.005f, D3DCOLOR_XRGB(255, 0, 0));
-
+			
 		if (hud_adj_mode == 6)
 			render.draw_aabb(get_LastFP2(), 0.005f, 0.005f, 0.005f, D3DCOLOR_XRGB(0, 0, 255));
 

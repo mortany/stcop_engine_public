@@ -29,6 +29,8 @@
 #define LUAJIT_ARCH_mips32	6
 #define LUAJIT_ARCH_MIPS64	7
 #define LUAJIT_ARCH_mips64	7
+#define LUAJIT_ARCH_E2K		8
+#define LUAJIT_ARCH_e2k		8
 
 /* Target OS. */
 #define LUAJIT_OS_OTHER		0
@@ -55,6 +57,8 @@
 #define LUAJIT_TARGET	LUAJIT_ARCH_MIPS64
 #elif defined(__mips__) || defined(__mips) || defined(__MIPS__) || defined(__MIPS)
 #define LUAJIT_TARGET	LUAJIT_ARCH_MIPS32
+#elif defined(__e2k__)
+#define LUAJIT_TARGET	LUAJIT_ARCH_E2K
 #else
 #error "No support for this architecture (yet)"
 #endif
@@ -382,6 +386,18 @@
 #else
 #define LJ_ARCH_VERSION		10
 #endif
+
+#elif LUAJIT_TARGET == LUAJIT_ARCH_E2K
+#define LJ_ARCH_NAME		"e2k"
+#define LJ_ARCH_BITS		64
+#define LJ_ARCH_ENDIAN		LUAJIT_LE
+#define LJ_ARCH_NOJIT		1 // TODO: not implemented
+#define LJ_TARGET_X64		1
+#define LJ_TARGET_X86ORX64	1
+#define LJ_TARGET_EHRETREG	0
+#define LJ_TARGET_MASKSHIFT	1
+#define LJ_TARGET_MASKROT	1
+#define LJ_TARGET_UNALIGNED	1
 
 #else
 #error "No target architecture defined"

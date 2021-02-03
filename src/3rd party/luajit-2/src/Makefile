@@ -475,7 +475,7 @@ BUILDVM_X= $(BUILDVM_T)
 HOST_O= $(MINILUA_O) $(BUILDVM_O)
 HOST_T= $(MINILUA_T) $(BUILDVM_T)
 
-LJVM_S= lj_vm.S
+LJVM_S= lj_vm.sx
 LJVM_O= lj_vm.o
 LJVM_BOUT= $(LJVM_S)
 LJVM_MODE= elfasm

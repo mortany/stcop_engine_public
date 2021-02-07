@@ -185,8 +185,6 @@ void xrDebug::backend	(const char *expression, const char *description, const ch
 	MessageBox			(NULL,assertion_info,"X-Ray error",MB_OK|MB_ICONERROR|MB_SYSTEMMODAL);
 #else
 	HWND wnd = GetActiveWindow();
-	if (wnd == NULL)
-		wnd = GetForegroundWindow();
 	ShowWindow(wnd, SW_MINIMIZE);
 	while (ShowCursor(TRUE) < 0);
 #	ifdef USE_OWN_ERROR_MESSAGE_WINDOW
@@ -642,23 +640,12 @@ LONG WINAPI UnhandledFilter	(_EXCEPTION_POINTERS *pExceptionInfo)
 	}
 #endif // USE_OWN_ERROR_MESSAGE_WINDOW
 
-	if (!previous_filter) {
-#ifdef USE_OWN_ERROR_MESSAGE_WINDOW
-		if (Debug.get_on_dialog())
-			Debug.get_on_dialog()	(false);
-#endif // USE_OWN_ERROR_MESSAGE_WINDOW
-
-		return				(EXCEPTION_CONTINUE_SEARCH) ;
-	}
-
-	previous_filter			(pExceptionInfo);
-
 #ifdef USE_OWN_ERROR_MESSAGE_WINDOW
 	if (Debug.get_on_dialog())
 		Debug.get_on_dialog()		(false);
 #endif // USE_OWN_ERROR_MESSAGE_WINDOW
 
-	return					(EXCEPTION_CONTINUE_SEARCH) ;
+	return					(EXCEPTION_EXECUTE_HANDLER) ;
 }
 #endif
 

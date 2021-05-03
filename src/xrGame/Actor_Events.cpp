@@ -54,16 +54,9 @@ void CActor::OnEvent(NET_Packet& P, u16 type)
 			if( inventory().CanTakeItem(smart_cast<CInventoryItem*>(_GO)) )
 			{
 				Obj->H_SetParent		(smart_cast<CObject*>(this));
-				
-#ifdef MP_LOGGING
-				string64 act;
-				xr_strcpy( act, (type == GE_TRADE_BUY)? "buys" : "takes" );
-				Msg("--- Actor [%d][%s]  %s  [%d][%s]", ID(), Name(), act, _GO->ID(), _GO->cNameSect().c_str());
-#endif // MP_LOGGING
-				
-				inventory().Take	(_GO, false, true);
-			
-				SelectBestWeapon(Obj);
+				//Msg("--- Actor [%d][%s]  takes  [%d][%s]", ID(), Name(), _GO->ID(), _GO->cNameSect().c_str());			
+				inventory().Take	(_GO, false, true);			
+				//SelectBestWeapon(Obj);
 			}
 			else
 			{

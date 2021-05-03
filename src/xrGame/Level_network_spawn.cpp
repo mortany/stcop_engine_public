@@ -16,6 +16,8 @@ void CLevel::cl_Process_Spawn(NET_Packet& P)
 	shared_str			s_name;
 	P.r_stringZ			(s_name);
 
+	//Msg("Spawn object %s [%d]b", s_name.c_str(), P.B.count);
+
 	// Create DC (xrSE)
 	CSE_Abstract*	E	= F_entity_Create	(*s_name);
 	R_ASSERT2(E, *s_name);

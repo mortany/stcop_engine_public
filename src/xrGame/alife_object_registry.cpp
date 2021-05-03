@@ -43,6 +43,8 @@ void CALifeObjectRegistry::save				(IWriter &memory_stream, CSE_ALifeDynamicObje
 	memory_stream.w_u16			(u16(tNetPacket.B.count));
 	memory_stream.w				(tNetPacket.B.data,tNetPacket.B.count);
 
+	//Msg("Save object %s [%d]b", object->s_name.c_str(), tNetPacket.B.count);
+
 	ALife::OBJECT_VECTOR::const_iterator	I = object->children.begin();
 	ALife::OBJECT_VECTOR::const_iterator	E = object->children.end();
 	for ( ; I != E; ++I) {
@@ -52,7 +54,6 @@ void CALifeObjectRegistry::save				(IWriter &memory_stream, CSE_ALifeDynamicObje
 
 		if (!child->can_save())
 			continue;
-
 		save					(memory_stream,child,object_count);
 	}
 }
@@ -108,6 +109,7 @@ CSE_ALifeDynamicObject *CALifeObjectRegistry::get_object		(IReader &file_stream)
 		Msg					("Loading object %s [%d]b", s_name, tNetPacket.B.count);
 	}
 #endif
+	//Msg("Loading object %s [%d]b", s_name, tNetPacket.B.count);
 	// create entity
 	CSE_Abstract			*tpSE_Abstract = F_entity_Create	(s_name);
 	R_ASSERT2				(tpSE_Abstract,"Can't create entity.");

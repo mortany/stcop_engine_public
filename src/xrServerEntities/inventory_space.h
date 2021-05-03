@@ -35,7 +35,8 @@ enum eItemPlace
 	eItemPlaceUndefined = 0,
 	eItemPlaceSlot,
 	eItemPlaceBelt,
-	eItemPlaceRuck
+	eItemPlaceRuck,
+	eItemPlaceFloor
 };
 
 struct SInvItemPlace

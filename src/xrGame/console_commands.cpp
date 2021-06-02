@@ -92,7 +92,7 @@ extern	BOOL	g_show_wnd_rect2			;
 extern	float	g_fTimeFactor;
 extern	BOOL	b_toggle_weapon_aim;
 //extern  BOOL	g_old_style_ui_hud;
-
+extern BOOL		escapeSequences;
 extern float	g_smart_cover_factor;
 extern int		g_upgrades_log;
 extern float	g_smart_cover_animation_speed_factor;
@@ -1813,10 +1813,14 @@ public:
 	}
 };
 
+
+
 void CCC_RegisterCommands()
 {
 	// options
 	g_OptConCom.Init();
+
+	CMD4(CCC_Integer,           "lj_escapeSequences", &escapeSequences, FALSE, TRUE);
 
 	CMD1(CCC_MemStats,			"stat_memory"			);
 #ifdef DEBUG

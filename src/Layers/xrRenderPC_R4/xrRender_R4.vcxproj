@@ -378,7 +378,7 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>.;$(SolutionDir)3rd party\luajit-2\src\;$(SolutionDir)3rd party\tbb\include\;$(SolutionDir)3rd party\luabind\include;$(xrSdkDir)include;$(SolutionDir)3rd party\imdexlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(xrExternals)luajit\src;$(SolutionDir)3rd party\tbb\include\;$(SolutionDir)3rd party\luabind\include;$(xrSdkDir)include;$(SolutionDir)3rd party\imdexlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>USE_DX11;WIN32;NDEBUG;_WINDOWS;_USRDLL;XRRENDER_R4_EXPORTS;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>
       </StringPooling>
@@ -401,7 +401,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>dxguid.lib;d3dx11.lib;oalib.lib;D3DCompiler.lib;d3d11.lib;dxgi.lib;nvapi.lib;dxerr.lib;d3d10.lib;luabind.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(xr3rdPartyDir)tbb\lib\intel64\vc14;$(xrSdkDir)libraries\x64;$(xrLibDir);%(AdditionalLibraryDirectories);$(xrLibDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(xr3rdPartyDir)tbb\lib\intel64\vc14;$(xrSdkDir)libraries\x64;$(xrLibDir)$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories);$(xrLibDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
       <OptimizeReferences>

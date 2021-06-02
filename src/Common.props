@@ -12,6 +12,7 @@
     <xrSdkDir>$(SolutionDir)..\sdk\</xrSdkDir>
     <dxSdkDir>$(xrSdkDir)include\dxsdk\</dxSdkDir>
     <xr3rdPartyDir>$(SolutionDir)3rd party\</xr3rdPartyDir>
+	<xrExternals>$(SolutionDir)..\Externals\</xrExternals>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <PropertyGroup>

@@ -91,6 +91,9 @@ static doug_lea_allocator	s_allocator( s_fake_array, s_arena_size, "lua" );
 static doug_lea_allocator	s_allocator( 0, 0, "lua" );
 #endif // #ifdef USE_ARENA_ALLOCATOR
 
+
+BOOL escapeSequences = false;
+
 static void *lua_alloc		(void *ud, void *ptr, size_t osize, size_t nsize) {
 #ifndef USE_MEMORY_MONITOR
 	(void)ud;
@@ -264,6 +267,21 @@ static void put_function	(lua_State* state, u8 const* buffer, u32 const buffer_s
 }
 #endif // #ifndef DEBUG
 
+// initialize lua standard library functions 
+struct luajit
+{
+	static void open_lib(lua_State* L, pcstr module_name, lua_CFunction function)
+	{
+		lua_pushcfunction(L, function);
+		lua_pushstring(L, module_name);
+		lua_call(L, 1, 0);
+	}
+	static void allow_escape_sequences(bool allowed)
+	{
+		lj_allow_escape_sequences(allowed ? 1 : 0);
+	}
+}; // struct lua;
+
 void CScriptStorage::reinit	()
 {
 	if (m_virtual_machine)
@@ -280,15 +298,7 @@ void CScriptStorage::reinit	()
 
 	//luabind::open(lua());
 
-	// initialize lua standard library functions 
-	struct luajit {
-		static void open_lib	(lua_State *L, pcstr module_name, lua_CFunction function)
-		{
-			lua_pushcfunction	(L, function);
-			lua_pushstring		(L, module_name);
-			lua_call			(L, 1, 0);
-		}
-	}; // struct lua;
+	
 
 	luajit::open_lib	(lua(),	"",					luaopen_base);
 	luajit::open_lib	(lua(),	LUA_LOADLIBNAME,	luaopen_package);
@@ -301,6 +311,9 @@ void CScriptStorage::reinit	()
 #ifdef DEBUG
 	luajit::open_lib	(lua(),	LUA_DBLIBNAME,		luaopen_debug);
 #endif // #ifdef DEBUG
+
+	luajit::allow_escape_sequences(escapeSequences);
+
 
 	if (!strstr(Core.Params,"-nojit")) {
 		luajit::open_lib(lua(),	LUA_JITLIBNAME,		luaopen_jit);

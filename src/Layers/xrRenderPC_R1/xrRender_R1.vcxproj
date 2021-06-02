@@ -373,7 +373,7 @@
       <OmitFramePointers>true</OmitFramePointers>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>.;$(SolutionDir)3rd party\luajit-2\src\;$(SolutionDir)3rd party\tbb\include\;$(SolutionDir)3rd party\luabind\include;$(xrSdkDir)include;$(XRAY_16X_LIBS)OpenAutomate\inc;$(XRAY_16X_LIBS)nvapi;$(DXSDK_DIR)Include;$(SolutionDir)3rd party\imdexlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(xrExternals)luajit\src;$(SolutionDir)3rd party\tbb\include\;$(SolutionDir)3rd party\luabind\include;$(xrSdkDir)include;$(XRAY_16X_LIBS)OpenAutomate\inc;$(XRAY_16X_LIBS)nvapi;$(DXSDK_DIR)Include;$(SolutionDir)3rd party\imdexlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;XRRENDER_R1_EXPORTS;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>
       </StringPooling>
@@ -394,7 +394,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>d3dx9.lib;nvapi.lib;oalib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(xr3rdPartyDir)tbb\lib\intel64\vc14;$(xrSdkDir)libraries\x64;$(xrLibDir);$(DXSDK_DIR)Lib\x86;$(SolutionDir)x64\Release;%(AdditionalLibraryDirectories);$(xrLibDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(xr3rdPartyDir)tbb\lib\intel64\vc14;$(xrSdkDir)libraries\x64;$(xrLibDir)$(Platform)\$(Configuration)\;$(DXSDK_DIR)Lib\x86;$(SolutionDir)x64\Release;%(AdditionalLibraryDirectories);$(xrLibDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
       <OptimizeReferences>

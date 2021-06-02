@@ -41,7 +41,8 @@ public:
         void open();
         void close();
     };
-    DEFINE_VECTOR(archive, archives_vec, archives_it);
+    using archives_vec = xr_vector<archive>;
+    using archives_it = archives_vec::iterator;
     archives_vec m_archives;
     void LoadArchive(archive& A, LPCSTR entrypoint = NULL);
 
@@ -53,12 +54,14 @@ private:
             return xr_strcmp(x.name, y.name) < 0;
         }
     };
-    DEFINE_MAP_PRED(LPCSTR, FS_Path*, PathMap, PathPairIt, pred_str);
+    using PathMap = xr_map<LPCSTR, FS_Path*, pred_str>;
     PathMap pathes;
 
-    DEFINE_SET_PRED(file, files_set, files_it, file_pred);
+    using files_set = xr_set<file, file_pred>;
+    using files_it = files_set::iterator;
 
-    DEFINE_VECTOR(_finddata_t, FFVec, FFIt);
+    using FFVec = xr_vector< _finddata_t>;
+
     FFVec rec_files;
 
     int m_iLockRescan;

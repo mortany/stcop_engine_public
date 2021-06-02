@@ -42,7 +42,9 @@ public:
 		u16				bone_id	[3][2];
 		float			weight	[3];
 	};
-	DEFINE_VECTOR		(WMFace,WMFacesVec,WMFacesVecIt);
+	using WMFacesVec = xr_vector<WMFace>;
+	using WMFacesVecIt = WMFacesVec::iterator;
+
 	WMFacesVec			m_Faces;		// 16 
 public:
 	Fsphere				m_Bounds;		// 16		world space

@@ -79,7 +79,9 @@ private:
 		shared_motions							motions;
 		BoneMotionsVec							bone_motions;
 	};
-	DEFINE_VECTOR(SMotionsSlot,MotionsSlotVec,MotionsSlotVecIt);
+	using MotionsSlotVec = xr_vector<SMotionsSlot>;
+	using MotionsSlotVecIt = MotionsSlotVec::iterator;
+
 	MotionsSlotVec								m_Motions;
 
     CPartition*									m_Partition;
@@ -126,8 +128,8 @@ public:
 	const shared_motions&		LL_MotionsSlot	(u16 idx){return m_Motions[idx].motions;}
 
 	IC CMotionDef*				LL_GetMotionDef	(MotionID id){return m_Motions[id.slot].motions.motion_def(id.idx);}
-	IC CMotion*					LL_GetRootMotion(MotionID id){return &m_Motions[id.slot].bone_motions[iRoot]->at(id.idx);}
-	IC CMotion*					LL_GetMotion	(MotionID id, u16 bone_id){return &m_Motions[id.slot].bone_motions[bone_id]->at(id.idx);}
+	IC CMotion*					LL_GetRootMotion(MotionID id){return &m_Motions[id.slot].bone_motions[iRoot].at(id.idx);}
+	IC CMotion*					LL_GetMotion	(MotionID id, u16 bone_id){return &m_Motions[id.slot].bone_motions[bone_id].at(id.idx);}
 
 	virtual IBlendDestroyCallback	*GetBlendDestroyCallback	( );
 	virtual void					SetBlendDestroyCallback		( IBlendDestroyCallback	*cb );

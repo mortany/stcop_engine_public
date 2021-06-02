@@ -98,6 +98,9 @@ namespace collide
 	};
 	DEFINE_VECTOR	(rq_result,rqVec,rqIt);
 	
+	using rqVec = xr_vector< rq_result>;
+	using rqIt = rqVec::iterator;
+
 	class			rq_results
 	{
 	protected:

@@ -258,7 +258,7 @@ float CKinematicsAnimated::get_animation_length (MotionID motion_ID)
 
 	VERIFY							( LL_GetBoneRoot() < slot.bone_motions.size() );
 
-	MotionVec*	bone_motions	=	slot.bone_motions[LL_GetBoneRoot()];
+	MotionVec	bone_motions	=	slot.bone_motions[LL_GetBoneRoot()];
 
 	VERIFY							(motion_ID.idx < bone_motions->size());
 
@@ -266,7 +266,7 @@ float CKinematicsAnimated::get_animation_length (MotionID motion_ID)
 	
 	float const	anim_speed		=	m_def ? m_def->Speed() : 1.f;
 
-	return							bone_motions->at(motion_ID.idx).GetLength() / anim_speed;
+	return							bone_motions.at(motion_ID.idx).GetLength() / anim_speed;
 }
 
 void CKinematicsAnimated::IBlendSetup(CBlend& B,u16 part,u8 channel, MotionID motion_ID, BOOL  bMixing, float blendAccrue, float blendFalloff, float Speed, BOOL noloop, PlayCallback Callback, LPVOID CallbackParam)
@@ -289,7 +289,7 @@ void CKinematicsAnimated::IBlendSetup(CBlend& B,u16 part,u8 channel, MotionID mo
 	B.speed			= Speed;
 	B.motionID		= motion_ID;
 	B.timeCurrent	= 0;
-	B.timeTotal		= m_Motions[B.motionID.slot].bone_motions[LL_GetBoneRoot()]->at(motion_ID.idx).GetLength();
+	B.timeTotal		= m_Motions[B.motionID.slot].bone_motions[LL_GetBoneRoot()].at(motion_ID.idx).GetLength();
 	B.bone_or_part	= part;
 	B.stop_at_end	= noloop;
 	B.playing		= TRUE;
@@ -311,7 +311,7 @@ void CKinematicsAnimated::IFXBlendSetup(CBlend &B, MotionID motion_ID, float ble
 	B.speed			= Speed;
 	B.motionID		= motion_ID;
 	B.timeCurrent	= 0;
-	B.timeTotal		= m_Motions[B.motionID.slot].bone_motions[bone]->at(motion_ID.idx).GetLength();
+	B.timeTotal		= m_Motions[B.motionID.slot].bone_motions[bone].at(motion_ID.idx).GetLength();
 	B.bone_or_part	= bone;
 
 	B.playing		= TRUE;
@@ -780,7 +780,7 @@ void CKinematicsAnimated::Load(const char* N, IReader *data, u32 dwFlags)
 		MS.bone_motions.resize(bones->size());
 		for (u32 i=0; i<bones->size(); i++){
 			CBoneData* BD		= (*bones)[i];
-			MS.bone_motions[i]	= MS.motions.bone_motions(BD->name);
+			MS.bone_motions[i]	= *MS.motions.bone_motions(BD->name);
 		}
 	}
 

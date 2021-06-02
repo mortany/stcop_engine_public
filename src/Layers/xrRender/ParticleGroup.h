@@ -35,7 +35,8 @@ namespace PS
             BOOL			Equal				(const SEffect&);
 #endif
 		};
-		DEFINE_VECTOR(SEffect*,EffectVec,EffectIt);
+		using EffectVec = xr_vector<SEffect*>;
+		using EffectIt = EffectVec::iterator;
 		EffectVec			m_Effects;
 #ifdef _EDITOR
 // change Equal if variables changed 
@@ -103,7 +104,8 @@ namespace PS
             void			Play			();
             void			Stop			(BOOL def_stop);
         };
-        DEFINE_VECTOR(SItem,SItemVec,SItemVecIt)
+		using SItemVec = xr_vector<SItem>;
+		using SItemVecIt = SItemVec::iterator;
 		SItemVec			items;
 	public:
 		enum{

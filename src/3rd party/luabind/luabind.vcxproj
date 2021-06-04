@@ -237,6 +237,9 @@
       <AdditionalLibraryDirectories>$(xrSdkDir)libraries\x64;$(xrLibDir)$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <ImportLibrary>$(xrLibDir)$(Platform)\$(Configuration)\$(TargetName).lib</ImportLibrary>
     </Link>
+    <PreBuildEvent>
+      <Command>copy /Y "$(xrSdkDir)libraries\x64\lua51.lib" "$(xrLibDir)$(Platform)\$(Configuration)\lua51.lib"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Mixed|x64'">
     <ClCompile>

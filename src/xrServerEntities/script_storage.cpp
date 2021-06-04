@@ -276,10 +276,6 @@ struct luajit
 		lua_pushstring(L, module_name);
 		lua_call(L, 1, 0);
 	}
-	static void allow_escape_sequences(bool allowed)
-	{
-		lj_allow_escape_sequences(allowed ? 1 : 0);
-	}
 }; // struct lua;
 
 void CScriptStorage::reinit	()
@@ -311,9 +307,6 @@ void CScriptStorage::reinit	()
 #ifdef DEBUG
 	luajit::open_lib	(lua(),	LUA_DBLIBNAME,		luaopen_debug);
 #endif // #ifdef DEBUG
-
-	luajit::allow_escape_sequences(escapeSequences);
-
 
 	if (!strstr(Core.Params,"-nojit")) {
 		luajit::open_lib(lua(),	LUA_JITLIBNAME,		luaopen_jit);

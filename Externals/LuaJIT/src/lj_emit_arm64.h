@@ -1,6 +1,6 @@
 /*
 ** ARM64 instruction emitter.
-** Copyright (C) 2005-2021 Mike Pall. See Copyright Notice in luajit.h
+** Copyright (C) 2005-2017 Mike Pall. See Copyright Notice in luajit.h
 **
 ** Contributed by Djordje Kovacevic and Stefan Pejic from RT-RK.com.
 ** Sponsored by Cisco Systems, Inc.
@@ -8,9 +8,8 @@
 
 /* -- Constant encoding --------------------------------------------------- */
 
-static uint64_t get_k64val(ASMState *as, IRRef ref)
+static uint64_t get_k64val(IRIns *ir)
 {
-  IRIns *ir = IR(ref);
   if (ir->o == IR_KINT64) {
     return ir_kint64(ir)->u64;
   } else if (ir->o == IR_KGC) {
@@ -18,8 +17,7 @@ static uint64_t get_k64val(ASMState *as, IRRef ref)
   } else if (ir->o == IR_KPTR || ir->o == IR_KKPTR) {
     return (uint64_t)ir_kptr(ir);
   } else {
-    lj_assertA(ir->o == IR_KINT || ir->o == IR_KNULL,
-	       "bad 64 bit const IR op %d", ir->o);
+    lua_assert(ir->o == IR_KINT || ir->o == IR_KNULL);
     return ir->i;  /* Sign-extended. */
   }
 }
@@ -124,7 +122,7 @@ static int emit_checkofs(A64Ins ai, int64_t ofs)
 static void emit_lso(ASMState *as, A64Ins ai, Reg rd, Reg rn, int64_t ofs)
 {
   int ot = emit_checkofs(ai, ofs), sc = (ai >> 30) & 3;
-  lj_assertA(ot, "load/store offset %d out of range", ofs);
+  lua_assert(ot);
   /* Combine LDR/STR pairs to LDP/STP. */
   if ((sc == 2 || sc == 3) &&
       (!(ai & 0x400000) || rd != rn) &&
@@ -168,10 +166,10 @@ static int emit_kdelta(ASMState *as, Reg rd, uint64_t k, int lim)
   while (work) {
     Reg r = rset_picktop(work);
     IRRef ref = regcost_ref(as->cost[r]);
-    lj_assertA(r != rd, "dest reg %d not free", rd);
+    lua_assert(r != rd);
     if (ref < REF_TRUE) {
       uint64_t kx = ra_iskref(ref) ? (uint64_t)ra_krefk(as, ref) :
-				     get_k64val(as, ref);
+				     get_k64val(IR(ref));
       int64_t delta = (int64_t)(k - kx);
       if (delta == 0) {
 	emit_dm(as, A64I_MOVx, rd, r);
@@ -314,7 +312,7 @@ static void emit_cond_branch(ASMState *as, A64CC cond, MCode *target)
 {
   MCode *p = --as->mcp;
   ptrdiff_t delta = target - p;
-  lj_assertA(A64F_S_OK(delta, 19), "branch target out of range");
+  lua_assert(A64F_S_OK(delta, 19));
   *p = A64I_BCC | A64F_S19(delta) | cond;
 }
 
@@ -322,7 +320,7 @@ static void emit_branch(ASMState *as, A64Ins ai, MCode *target)
 {
   MCode *p = --as->mcp;
   ptrdiff_t delta = target - p;
-  lj_assertA(A64F_S_OK(delta, 26), "branch target out of range");
+  lua_assert(A64F_S_OK(delta, 26));
   *p = ai | A64F_S26(delta);
 }
 
@@ -330,8 +328,7 @@ static void emit_tnb(ASMState *as, A64Ins ai, Reg r, uint32_t bit, MCode *target
 {
   MCode *p = --as->mcp;
   ptrdiff_t delta = target - p;
-  lj_assertA(bit < 63, "bit number out of range");
-  lj_assertA(A64F_S_OK(delta, 14), "branch target out of range");
+  lua_assert(bit < 63 && A64F_S_OK(delta, 14));
   if (bit > 31) ai |= A64I_X;
   *p = ai | A64F_BIT(bit & 31) | A64F_S14(delta) | r;
 }
@@ -340,7 +337,7 @@ static void emit_cnb(ASMState *as, A64Ins ai, Reg r, MCode *target)
 {
   MCode *p = --as->mcp;
   ptrdiff_t delta = target - p;
-  lj_assertA(A64F_S_OK(delta, 19), "branch target out of range");
+  lua_assert(A64F_S_OK(delta, 19));
   *p = ai | A64F_S19(delta) | r;
 }
 

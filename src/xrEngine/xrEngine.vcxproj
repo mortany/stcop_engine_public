@@ -507,6 +507,12 @@
     <Manifest>
       <AdditionalManifestFiles>as-invoker-manifest-part.xml;%(AdditionalManifestFiles)</AdditionalManifestFiles>
     </Manifest>
+    <PostBuildEvent>
+      <Command>copy /Y "$(xrSdkDir)binaries\x64\lua51.dll" "$(OutputPath)lua51.dll"
+copy /Y "$(xrSdkDir)binaries\x64\tbb.dll" "$(OutputPath)tbb.dll"
+
+copy /Y "$(xrSdkDir)binaries\x64\BugTrap-x64.dll" "$(OutputPath)BugTrap-x64.dll"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX|x64'">
     <ClCompile>

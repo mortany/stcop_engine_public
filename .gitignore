@@ -2,6 +2,15 @@
 .*
 !.gitignore
 
+# exclude file extensions
+*.VC.db
+*.VC.opendb
+*.user
+*.log
+*.pdb
+*.exp
+*.exe
+
 # exclude binaries and temporary files
 bin/
 bin_plugs/
@@ -9,22 +18,6 @@ intermediate/
 intermediate_plugs/
 /lib/
 _build/
-libraries/
 /src/*.tss
-/**/x64/
-**/.vs/
-*.VC.db
-*.VC.opendb
-*.user
-*.log
-lua51.dll
-lua51.exp
-lua51.lib
-luajit.exe
-*.log
-*.log
-*.log
-src/3rd party/luajit-2/src/luajit.pdb
-src/3rd party/luajit-2/src/lua51.pdb
-src/3rd party/luajit-2/src/vc140.pdb
-*.exp
+*/.vs/
+

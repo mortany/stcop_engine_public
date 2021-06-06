@@ -2,29 +2,27 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <xrBinRootDir>$(SolutionDir)..\bin\</xrBinRootDir>
-    <xrBinPlugRootDir>$(SolutionDir)..\bin_plugs\</xrBinPlugRootDir>
-    <xrLibRootDir>$(SolutionDir)..\lib\</xrLibRootDir>
-    <xrBinDir>$(SolutionDir)..\bin\</xrBinDir>
-    <xrBinPlugDir>$(SolutionDir)..\bin_plugs\</xrBinPlugDir>
-    <xrLibDir>$(SolutionDir)..\lib\</xrLibDir>
-    <xrIntDir>$(SolutionDir)..\intermediate\</xrIntDir>
-    <xrSdkDir>$(SolutionDir)..\sdk\</xrSdkDir>
-    <dxSdkDir>$(xrSdkDir)include\dxsdk\</dxSdkDir>
-    <xr3rdPartyDir>$(SolutionDir)3rd party\</xr3rdPartyDir>
-	<xrExternals>$(SolutionDir)..\Externals\</xrExternals>
+    <xrExternals>$(SolutionDir)..\Externals\</xrExternals>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+    <xrRoot>$(SolutionDir)..\</xrRoot>
+    <xrBinDir>$(xrRoot)bin\</xrBinDir>
+    <xrBinPlugDir>$(xrRoot)bin_plugs\</xrBinPlugDir>
+    <xrLibDir>$(xrRoot)lib\</xrLibDir>
+    <xrIntDir>$(xrRoot)intermediate\</xrIntDir>
+    <xrSdkDir>$(xrRoot)sdk\</xrSdkDir>
+    <dxSdkDir>$(xrSdkDir)include\dxsdk\</dxSdkDir>
+    <xr3rdPartyDir>$(xrRoot)src\3rd party\</xr3rdPartyDir>
   </PropertyGroup>
   <PropertyGroup>
-    <IncludePath>$(SolutionDir)..\src\3rd party;$(IncludePath);$(xrSdkDir)include;$(xrSdkDir)include\OpenAutomate;$(xrSdkDir)include\nvapi;$(xrSdkDir)include\dxsdk</IncludePath>
+    <IncludePath>$(IncludePath);$(SolutionDir)3rd party;$(xrSdkDir)include;$(xrSdkDir)include\OpenAutomate;$(xrSdkDir)include\nvapi;$(xrSdkDir)include\dxsdk</IncludePath>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup>
     <PreferredToolArchitecture>x64</PreferredToolArchitecture>
-</PropertyGroup>
+  </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>.;$(SolutionDir);$(ProjectDir);$(xrSdkDir)include;$(xrSdkDir)DXSDK/Include;$(SolutionDir)3rd party\imdexlib;$(SolutionDir)3rd party\luabind\include;$(SolutionDir)3rd party\tbb\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(SolutionDir);$(ProjectDir);$(xrSdkDir)include;$(xrSdkDir)DXSDK\Include;$(SolutionDir)3rd party\imdexlib;$(SolutionDir)3rd party\luabind\include;$(SolutionDir)3rd party\tbb\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>USE_LUAJIT_ONE</UndefinePreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <Optimization>Full</Optimization>
@@ -35,36 +33,19 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>
-        $(xrSdkDir)libraries;
-        $(xrSdkDir)libraries/x64;
-        $(xrLibDir);$(xrSdkDir)DXSDK/Lib/x64;
-        %(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(xrLibDir);$(xrLibDir)$(PlatformTarget)\$(Configuration)\;$(xrSdkDir)libraries\;$(xrSdkDir)libraries\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <LargeAddressAware>true</LargeAddressAware>
       <SubSystem>Windows</SubSystem>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>
-        $(xrSdkDir)libraries/x64;
-        $(xrLibDir);
-        $(xrSdkDir)DXSDK/Lib/x64;
-        %(AdditionalLibraryDirectories)
-      </AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(xrLibDir);$(xrLibDir)$(PlatformTarget)\$(Configuration)\;$(xrSdkDir)libraries\;$(xrSdkDir)libraries\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <BuildMacro Include="xrBinRootDir">
-      <Value>$(xrBinRootDir)</Value>
-      <EnvironmentVariable>true</EnvironmentVariable>
-    </BuildMacro>
-    <BuildMacro Include="xrBinPlugRootDir">
-      <Value>$(xrBinPlugRootDir)</Value>
-      <EnvironmentVariable>true</EnvironmentVariable>
-    </BuildMacro>
-    <BuildMacro Include="xrLibRootDir">
-      <Value>$(xrLibRootDir)</Value>
+    <BuildMacro Include="xrRoot">
+      <Value>$(xrRoot)</Value>
       <EnvironmentVariable>true</EnvironmentVariable>
     </BuildMacro>
     <BuildMacro Include="xrBinDir">

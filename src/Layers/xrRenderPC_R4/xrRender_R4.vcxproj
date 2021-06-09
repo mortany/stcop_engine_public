@@ -397,7 +397,7 @@
       <AdditionalOptions>-Zm113 %(AdditionalOptions)</AdditionalOptions>
       <UndefinePreprocessorDefinitions>USE_LUAJIT_ONE</UndefinePreprocessorDefinitions>
       <DisableSpecificWarnings>4005;4099</DisableSpecificWarnings>
-      <MinimalRebuild>true</MinimalRebuild>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <AdditionalDependencies>dxguid.lib;d3dx11.lib;d3d11.lib;d3dcompiler.lib;dxgi.lib;nvapi.lib;xrEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>

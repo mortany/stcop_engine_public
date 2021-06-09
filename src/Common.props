@@ -14,7 +14,7 @@
     <xr3rdPartyDir>$(xrRoot)src\3rd party\</xr3rdPartyDir>
   </PropertyGroup>
   <PropertyGroup>
-    <IncludePath>$(IncludePath);$(SolutionDir)3rd party;$(xrSdkDir)include;$(xrSdkDir)include\OpenAutomate;$(xrSdkDir)include\nvapi;$(xrSdkDir)include\dxsdk</IncludePath>
+    <IncludePath>$(IncludePath)</IncludePath>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup>
@@ -22,7 +22,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>.;$(SolutionDir);$(ProjectDir);$(xrSdkDir)include;$(xrSdkDir)DXSDK\Include;$(SolutionDir)3rd party\imdexlib;$(SolutionDir)3rd party\luabind\include;$(SolutionDir)3rd party\tbb\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(SolutionDir);$(xrSdkDir)include;$(xrSdkDir)include\nvapi;$(xrSdkDir)include\dxsdk;$(xrSdkDir)include\OpenAutomate;$(xr3rdPartyDir);$(xr3rdPartyDir)imdexlib;$(xr3rdPartyDir)luabind\include;$(xr3rdPartyDir)tbb\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <UndefinePreprocessorDefinitions>USE_LUAJIT_ONE</UndefinePreprocessorDefinitions>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <Optimization>Full</Optimization>

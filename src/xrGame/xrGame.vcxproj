@@ -477,7 +477,7 @@
       </OmitFramePointers>
       <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>.;$(SolutionDir);$(SolutionDir)xrServerEntities;$(xrExternals)luajit\src;$(SolutionDir)3rd party\luabind\include;$(xrSdkDir)include;$(XRAY_16X_LIBS)OpenAutomate\inc;$(SolutionDir)3rd party\CxImage;$(SolutionDir)3rd party\imdexlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;$(xrExternals)luajit\src;$(SolutionDir)xrServerEntities;$(xr3rdPartyDir)CxImage;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;XRGAME_EXPORTS;dSINGLE;MSVC;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>
       </StringPooling>
@@ -511,7 +511,7 @@
     <Link>
       <AdditionalOptions>/ignore:4099</AdditionalOptions>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>$(xrIntDir)$(Platform)\$(Configuration)\xrPhysics;$(xrSdkDir)libraries\x64;$(xrSdkDir)libraries;$(XRAY_16X_LIBS)OpenAutomate\libraries;$(XRAY_16X_LIBS)jpeg\libraries\Release;$(SolutionDir)$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories);$(xrLibDir)$(Platform)\$(Configuration)\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <LargeAddressAware>true</LargeAddressAware>
       <OptimizeReferences>
@@ -522,6 +522,7 @@
       <RandomizedBaseAddress>true</RandomizedBaseAddress>
       <ImportLibrary>$(xrLibDir)$(Platform)\$(Configuration)\$(TargetName).lib</ImportLibrary>
       <ProgramDatabaseFile>$(OutDir)$(ProjectName).pdb</ProgramDatabaseFile>
+      <AdditionalDependencies>shell32.lib;xrEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_AVX|x64'">
@@ -4556,40 +4557,22 @@
     <ClCompile Include="ZudaArtifact.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="$(SolutionDir)3rd party\crypto\crypto.vcxproj">
-      <Project>{fa169092-ea3e-40c1-8e5a-a2b575700fe8}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="$(SolutionDir)3rd party\ode\contrib\msvc7\ode_default\default.vcxproj">
-      <Project>{1bf75feb-87dd-486c-880b-227987d191c2}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="$(SolutionDir)Layers\xrAPI\xrAPI.vcxproj">
-      <Project>{1daec516-e52c-4a3c-a4da-ae3553e6e0f8}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
     <ProjectReference Include="$(SolutionDir)xrEngine\xrEngine.vcxproj">
       <Project>{2578c6d8-660d-48ae-9322-7422f8664f06}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
     </ProjectReference>
     <ProjectReference Include="$(SolutionDir)xrGameSpy\xrGameSpy.vcxproj">
       <Project>{5535f6b4-7ae6-4b66-8aea-cc31c14d7ab7}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="$(SolutionDir)xrNetServer\xrNetServer.vcxproj">
-      <Project>{435bac9a-b225-457d-ab40-c9bd0cc8838c}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="$(SolutionDir)xrPhysics\xrPhysics.vcxproj">
       <Project>{98d24a3d-7666-4c11-9d6e-b10393ce8cba}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="$(SolutionDir)xrXMLParser\xrXMLParser.vcxproj">
-      <Project>{94a1c366-3d19-48e6-8170-4adc2e70df98}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="..\..\sdk\include\jpeg\vs2013\libjpeg.vcxproj">
-      <Project>{938c5808-85a1-4b5a-8cb4-d2d9d7851cb8}</Project>
+    <ProjectReference Include="..\3rd party\crypto\crypto.vcxproj">
+      <Project>{fa169092-ea3e-40c1-8e5a-a2b575700fe8}</Project>
     </ProjectReference>
     <ProjectReference Include="..\3rd party\cximage\cximage.vcxproj">
       <Project>{880cd250-ba77-4daf-a8d4-552f12dd3ae4}</Project>
@@ -4597,11 +4580,14 @@
     <ProjectReference Include="..\3rd party\luabind\luabind.vcxproj">
       <Project>{252e63ce-f4ee-4358-b10d-eb2c508a264d}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\Layers\xrAPI\xrAPI.vcxproj">
+      <Project>{1daec516-e52c-4a3c-a4da-ae3553e6e0f8}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\xrCDB\xrCDB.vcxproj">
       <Project>{a19b1df2-82ec-4364-8bdf-85d13a1c89b5}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\xrCore\xrCore.vcxproj">
-      <Project>{a0f7d1fb-59a7-4717-a7e4-96f37e91998e}</Project>
+    <ProjectReference Include="..\xrSound\xrSound.vcxproj">
+      <Project>{ccca7859-eb86-493e-9b53-c4235f45b3c5}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

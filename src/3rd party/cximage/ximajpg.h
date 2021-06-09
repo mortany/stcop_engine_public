@@ -37,8 +37,6 @@ extern "C" {
 #undef HAVE_BOOLEAN
 #undef XMD_H
 
-#pragma comment(lib, "libjpeg.lib")
-
 class DLL_EXP CxImageJPG: public CxImage
 {
 public:

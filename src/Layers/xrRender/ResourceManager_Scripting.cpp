@@ -2,7 +2,6 @@
 #pragma hdrstop
 
 //AVO: lua re-org
-#pragma comment(lib, "lua51.lib" )
 //#include "lua/library_linkage.h"
 //-AVO
 

@@ -552,7 +552,7 @@ void NvStripInfo::Combine(const NvFaceInfoVec &forward, const NvFaceInfoVec &bac
 		m_faces.push_back(backward[i]);
 	
 	// add forward faces
-	numFaces = forward.size();
+	numFaces = static_cast<int>(forward.size());
 	for (u32 i = 0; i < numFaces; i++)
 		m_faces.push_back(forward[i]);
 }

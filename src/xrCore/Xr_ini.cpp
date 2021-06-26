@@ -303,7 +303,7 @@ void CInifile::Load(IReader* F, LPCSTR path
                     string512 tmp;
                     _GetItem(inherited_names, k, tmp);
                     Sect& inherited_section = r_section(tmp);
-                    total_count += inherited_section.Data.size();
+                    total_count += static_cast<u32>(inherited_section.Data.size());
                 }
 
                 Current->Data.reserve(Current->Data.size() + total_count);
@@ -484,7 +484,7 @@ u32 CInifile::line_count(LPCSTR Sname)const
 
 u32 CInifile::section_count()const
 {
-    return DATA.size();
+    return static_cast<u32>(DATA.size());
 }
 
 

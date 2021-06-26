@@ -260,7 +260,7 @@ float CKinematicsAnimated::get_animation_length (MotionID motion_ID)
 
 	MotionVec	bone_motions	=	slot.bone_motions[LL_GetBoneRoot()];
 
-	VERIFY							(motion_ID.idx < bone_motions->size());
+	VERIFY							(motion_ID.idx < bone_motions.size());
 
     CMotionDef* const m_def		=	slot.motions.motion_def(motion_ID.idx);
 	

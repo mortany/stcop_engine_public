@@ -36,7 +36,7 @@ public:
         return *this;
     }
 
-    static pointer allocate(const size_type n, const void* p = nullptr) { return xr_alloc<T>(n); }
+    static pointer allocate(const size_type n, const void* p = nullptr) { return xr_alloc<T>(static_cast<u32>(n)); }
     static void deallocate(pointer p, const size_type /*n*/) { xr_free(p); }
     static void deallocate(void* p, const size_type /*n*/) { xr_free(p); }
 

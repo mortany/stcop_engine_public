@@ -68,7 +68,7 @@ void __fastcall mapMatrix_Render	(mapMatrixItems& N)
 template<class T>
 void __fastcall sorted_L1		(const T& N)
 {
-	VERIFY (N);
+	VERIFY (&N);
 	dxRender_Visual *V				= N.second.pVisual;
 	VERIFY (V && V->shader._get());
 	RCache.set_Element				(N.second.se);

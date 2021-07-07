@@ -547,7 +547,6 @@ void CStats::OnRender()
 //for total process ram usage
 #include "windows.h"
 #include "psapi.h"
-#pragma comment( lib, "psapi.lib" )
 
 u64 CStats::GetTotalRAMConsumption()
 {

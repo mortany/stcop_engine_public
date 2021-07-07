@@ -169,7 +169,7 @@ void GenerateStrips(const u16* in_indices, const s32 in_numIndices, xr_vector<Pr
 				stripLength = i - startingLoc;
 			}
 			else
-				stripLength = stripIndices.size();
+				stripLength = static_cast<int>(stripIndices.size());
 			
 			primGroups[stripCtr].type       = PT_STRIP;
 			primGroups[stripCtr].indices    = xr_alloc<u16>	(stripLength);

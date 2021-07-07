@@ -452,7 +452,7 @@ void CLocatorAPI::ProcessArchive(LPCSTR _path)
 
     m_archives.push_back(archive());
     archive& A = m_archives.back();
-    A.vfs_idx = m_archives.size() - 1;
+    A.vfs_idx = static_cast<u32>(m_archives.size() - 1);
     A.path = path;
 
     A.open();
@@ -1045,7 +1045,7 @@ int CLocatorAPI::file_list(FS_FileSet& dest, LPCSTR path, u32 flags, LPCSTR mask
             dest.insert(FS_File(entry_begin, entry.size_real, entry.modif, fl));
         }
     }
-    return dest.size();
+    return static_cast<int>(dest.size());
 }
 
 void CLocatorAPI::check_cached_files(LPSTR fname, const u32& fname_size, const file& desc, LPCSTR& source_name)

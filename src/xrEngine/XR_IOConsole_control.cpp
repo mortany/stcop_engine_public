@@ -36,7 +36,7 @@ void CConsole::prev_cmd_history_idx()
     ++m_cmd_history_idx;
     if (m_cmd_history_idx >= (int)m_cmd_history.size())
     {
-        m_cmd_history_idx = m_cmd_history.size() - 1;
+        m_cmd_history_idx = static_cast<int>(m_cmd_history.size() - 1);
     }
 }
 
@@ -55,7 +55,7 @@ void CConsole::check_next_selected_tip()
 {
     if (m_select_tip >= (int)m_tips.size())
     {
-        m_select_tip = m_tips.size() - 1;
+        m_select_tip = static_cast<int>(m_tips.size() - 1);
     }
 
     int sel_dif = m_select_tip - VIEW_TIPS_COUNT + 1;

@@ -46,7 +46,7 @@ void CConsole::Prev_log() // DIK_PRIOR=PAGE_UP
     scroll_delta++;
     if (scroll_delta > int(LogFile->size()) - 1)
     {
-        scroll_delta = LogFile->size() - 1;
+        scroll_delta = static_cast<int>(LogFile->size() - 1);
     }
 }
 
@@ -61,7 +61,7 @@ void CConsole::Next_log() // DIK_NEXT=PAGE_DOWN
 
 void CConsole::Begin_log() // PAGE_UP+Ctrl
 {
-    scroll_delta = LogFile->size() - 1;
+    scroll_delta = static_cast<int>(LogFile->size() - 1);
 }
 
 void CConsole::End_log() // PAGE_DOWN+Ctrl
@@ -144,7 +144,7 @@ void CConsole::Begin_tips()
 
 void CConsole::End_tips()
 {
-    m_select_tip = m_tips.size() - 1;
+    m_select_tip = static_cast<int>(m_tips.size() - 1);
     m_start_tip = m_select_tip - VIEW_TIPS_COUNT + 1;
     check_next_selected_tip();
 }

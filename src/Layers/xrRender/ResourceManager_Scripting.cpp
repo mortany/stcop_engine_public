@@ -115,14 +115,23 @@ static void lua_cast_failed(lua_State* L, LUABIND_TYPE_INFO info)
 #define USE_DL_ALLOCATOR
 #endif // PURE_ALLOC
 
-static void *lua_alloc		(void *ud, void *ptr, size_t osize, size_t nsize) 
-{
-
+static void* lua_alloc(void* ud, void* ptr, size_t osize, size_t nsize) {
+	(void)ud;
+	(void)osize;
+	if (!nsize)
+	{
+		xr_free(ptr);
+		return	NULL;
+	}
+	else
+		return xr_realloc(ptr, nsize);
 }
 
 // export
 void	CResourceManager::LS_Load			()
 {
+	
+	
 	Msg("[CResourceManager] Starting LuaJIT");
 
 	//R_ASSERT2(!LSVM, "! LuaJIT is already running"); //На всякий случай
@@ -145,7 +154,7 @@ void	CResourceManager::LS_Load			()
 	//if (0==luabind::get_error_callback())
 	//	luabind::set_error_callback		(LuaError);
 #endif
-
+	
 	function		(LSVM, "log",	LuaLog);
 
 	module			(LSVM)

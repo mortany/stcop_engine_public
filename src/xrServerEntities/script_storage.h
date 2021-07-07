@@ -51,7 +51,7 @@ protected:
 	static	int					vscript_log					(ScriptStorage::ELuaMessageType tLuaMessageType, LPCSTR caFormat, va_list marker);
 			bool				parse_namespace				(LPCSTR caNamespaceName, LPSTR b, u32 const b_size, LPSTR c, u32 const c_size);
 			bool				do_file						(LPCSTR	caScriptName, LPCSTR caNameSpaceName);
-			void				reinit						();
+			void				reinit						(lua_State* LSVM);
 
 public:
 #ifdef PRINT_CALL_STACK

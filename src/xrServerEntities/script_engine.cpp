@@ -14,6 +14,18 @@
 //#include "../build_config_defines.h"
 #include "script_storage.h"
 
+static void* lua_alloc(void* ud, void* ptr, size_t osize, size_t nsize) {
+	(void)ud;
+	(void)osize;
+	if (!nsize)
+	{
+		xr_free(ptr);
+		return	NULL;
+	}
+	else
+		return xr_realloc(ptr, nsize);
+}
+
 #ifdef USE_DEBUGGER
 #	ifndef USE_LUA_STUDIO
 #		include "script_debugger.h"
@@ -284,50 +296,29 @@ extern void export_classes(lua_State* L);
 
 void CScriptEngine::init()
 {
-#ifdef USE_LUA_STUDIO
-	bool lua_studio_connected = !!m_lua_studio_world;
-	if (lua_studio_connected)
-		m_lua_studio_world->remove(lua());
-#endif // #ifdef USE_LUA_STUDIO
-
-	CScriptStorage::reinit();
-
-#ifdef USE_LUA_STUDIO
-	if (m_lua_studio_world || strstr(Core.Params, "-lua_studio")) {
-		if (!lua_studio_connected)
-			try_connect_to_debugger();
-		else {
-#ifdef USE_LUAJIT_ONE
-			jit_command(lua(), "debug=2");
-			jit_command(lua(), "off");
-#else
-			luaJIT_setmode(lua(), 0, LUAJIT_MODE_ENGINE | LUAJIT_MODE_OFF);
+	lua_State* LSVM = luaL_newstate();//luaL_newstate(); //Запускаем LuaJIT. Память себе он выделит сам.
+	R_ASSERT2(LSVM, "! ERROR : Cannot initialize LUA VM!");
+	CScriptStorage::reinit(LSVM);
+#ifdef LUABIND_09
+	luabind::disable_super_deprecation();
 #endif
-			m_lua_studio_world->add(lua());
-		}
-	}
-#endif // #ifdef USE_LUA_STUDIO
-
 	luabind::open(lua());
-	setup_callbacks();
-	export_classes(lua());
-	setup_auto_load();
+#ifdef LUABIND_NO_EXCEPTIONS
+	luabind::set_error_callback(lua_error);
+	luabind::set_cast_failed_callback(lua_cast_failed);
+#endif
+	luabind::set_pcall_callback(lua_pcall_failed); //KRodin: НЕ ЗАКОММЕНТИРОВАТЬ НИ В КОЕМ СЛУЧАЕ!!!
+	lua_atpanic(LSVM, lua_panic);
+
+	//-----------------------------------------------------//
+	export_classes(LSVM); //Тут регистрируются все движковые функции, импортированные в скрипты
+	luaL_openlibs(LSVM); //Инициализация функций LuaJIT
+	setup_auto_load(); //Построение метатаблицы
 
 #ifdef DEBUG
 	m_stack_is_ready = true;
 #endif
-
-#ifndef USE_LUA_STUDIO
-#	ifdef DEBUG
-#		if defined(USE_DEBUGGER) && !defined(USE_LUA_STUDIO)
-	if (!debugger() || !debugger()->Active())
-#		endif // #if defined(USE_DEBUGGER) && !defined(USE_LUA_STUDIO)
-		lua_sethook(lua(), lua_hook_call, LUA_MASKLINE | LUA_MASKCALL | LUA_MASKRET, 0);
-#	endif // #ifdef DEBUG
-#endif // #ifndef USE_LUA_STUDIO
-	//	lua_sethook							(lua(), lua_hook_call,	LUA_MASKLINE|LUA_MASKCALL|LUA_MASKRET,	0);
-
-	bool								save = m_reload_modules;
+	bool save = m_reload_modules;
 	m_reload_modules = true;
 	process_file_if_exists("_G", false);
 	m_reload_modules = save;

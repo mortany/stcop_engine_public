@@ -16,6 +16,10 @@
 #include "gamefont.h"
 #include "render.h"
 
+#pragma warning(disable:4995)
+#include <D3DX10Math.h>
+#pragma warning(default:4995)
+
 float psCamInert = 0.f;
 float psCamSlideInert = 0.25f;
 
@@ -486,6 +490,12 @@ void CCameraManager::ApplyDeviceInternal(float _viewport_near)
 		Device.m_SecondViewport.isCamReady = false;
 
 	Device.mProject.build_projection(deg2rad(Device.fFOV), aspect, _viewport_near, m_cam_info.fFar);
+
+    if (Render->currentViewPort == MAIN_VIEWPORT)
+    {
+        Device.mFullTransform.mul(Device.mProject, Device.mView);
+        D3DXMatrixInverse((D3DXMATRIX*)&Device.mInvFullTransform, 0, (D3DXMATRIX*)&Device.mFullTransform);
+    }
 
 	/*if (Render->currentViewPort == SECONDARY_WEAPON_SCOPE)
 	{

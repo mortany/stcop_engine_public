@@ -688,8 +688,7 @@ void CWeaponMagazined::OnAnimationEnd(u32 state)
 	{
 		case eReload:
 		{
-			CheckMagazine(); // Основано на механизме из Lost Alpha: New Project
-							 // Авторы: rafa & Kondr48
+			CheckMagazine();
 
 			CCartridge FirstBulletInGun;
 
@@ -1310,11 +1309,11 @@ void CWeaponMagazined::PlayAnimShoot()
 	VERIFY(GetState()==eFire);
 
 	if (IsZoomed() && psWpnAnimsFlag.test(ANM_SHOT_AIM) && IsScopeAttached())
-		PlayHUDMotion("anm_shots_when_aim", FALSE, this, GetState());
+		PlayHUDMotion("anm_shots_when_aim", TRUE, this, GetState());
 	else if(iAmmoElapsed == 1 && psWpnAnimsFlag.test(ANM_SHOT_EMPTY))
-		PlayHUDMotion("anm_shot_l", FALSE, this, GetState());
+		PlayHUDMotion("anm_shot_l", TRUE, this, GetState());
 	else
-		PlayHUDMotion("anm_shots", FALSE, this, GetState());
+		PlayHUDMotion("anm_shots", TRUE, this, GetState());
 }
 
 void CWeaponMagazined::OnZoomIn			()

@@ -627,12 +627,15 @@ void CWeaponMagazinedWGrenade::PlayAnimReload()
 
 void CWeaponMagazinedWGrenade::PlayAnimIdle()
 {
+	if (GetState() == eSwitch)
+		return;
+
 	if(IsGrenadeLauncherAttached())
 	{
 		if(IsZoomed())
 		{
 			if(m_bGrenadeMode)
-				PlayHUDMotion("anm_idle_g_aim", FALSE, NULL, GetState());
+				PlayHUDMotion("anm_idle_g_aim", TRUE, NULL, GetState());
 			else
 				PlayHUDMotion("anm_idle_w_gl_aim", TRUE, NULL, GetState());
 		}else
@@ -656,7 +659,7 @@ void CWeaponMagazinedWGrenade::PlayAnimIdle()
 			if(m_bGrenadeMode)
 			{
 				if(act_state==0)
-					PlayHUDMotion("anm_idle_g", FALSE, NULL, GetState());
+					PlayHUDMotion("anm_idle_g", TRUE, NULL, GetState());
 				else
 				if(act_state==1)
 					PlayHUDMotion("anm_idle_sprint_g", TRUE, NULL,GetState());
@@ -667,7 +670,7 @@ void CWeaponMagazinedWGrenade::PlayAnimIdle()
 			}else
 			{
 				if(act_state==0)
-					PlayHUDMotion("anm_idle_w_gl", FALSE, NULL, GetState());
+					PlayHUDMotion("anm_idle_w_gl", TRUE, NULL, GetState());
 				else
 				if(act_state==1)
 					PlayHUDMotion("anm_idle_sprint_w_gl", TRUE, NULL,GetState());
@@ -686,7 +689,7 @@ void CWeaponMagazinedWGrenade::PlayAnimShoot()
 {
 	if(m_bGrenadeMode)
 	{
-		PlayHUDMotion("anm_shots_g" ,FALSE, this, eFire);
+		PlayHUDMotion("anm_shots_g" , TRUE, this, eFire);
 	}
 	else
 	{
@@ -694,9 +697,9 @@ void CWeaponMagazinedWGrenade::PlayAnimShoot()
 		if (IsGrenadeLauncherAttached())
 		{
 			if (IsZoomed() && psWpnAnimsFlag.test(ANM_SHOT_AIM_GL) && IsScopeAttached())
-				PlayHUDMotion("anm_shots_w_gl_when_aim", FALSE, this, GetState());
+				PlayHUDMotion("anm_shots_w_gl_when_aim", TRUE, this, GetState());
 			else
-				PlayHUDMotion("anm_shots_w_gl", FALSE, this, GetState());
+				PlayHUDMotion("anm_shots_w_gl", TRUE, this, GetState());
 		}
 		else
 			inherited::PlayAnimShoot();
@@ -706,9 +709,9 @@ void CWeaponMagazinedWGrenade::PlayAnimShoot()
 void  CWeaponMagazinedWGrenade::PlayAnimModeSwitch()
 {
 	if(m_bGrenadeMode)
-		PlayHUDMotion("anm_switch_g" , FALSE, this, eSwitch);
+		PlayHUDMotion("anm_switch_g" , TRUE, this, eSwitch);
 	else 
-		PlayHUDMotion("anm_switch" , FALSE, this, eSwitch);
+		PlayHUDMotion("anm_switch" , TRUE, this, eSwitch);
 }
 
 void CWeaponMagazinedWGrenade::PlayAnimBore()

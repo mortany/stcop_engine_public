@@ -1,4 +1,4 @@
-X-Ray Engine 1.6 x64 for Forward Frontier Team
+X-Ray Engine 1.6 x64
 ==========================
 
 ## Изменения :

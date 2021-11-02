@@ -38,6 +38,7 @@ public:
 	virtual	bool    bMarkCanShow() { return IsZoomed(); }
 	virtual void    CheckMagazine();
 	virtual void	UnloadMagazine(bool spawn_ammo = true);
+	virtual void	OnMotionMark(u32 state, const motion_marks&);
 
 	bool            m_bNeedBulletInGun;
 

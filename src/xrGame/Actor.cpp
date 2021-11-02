@@ -1060,9 +1060,10 @@ void CActor::UpdateCL	()
 			bool bNVEnbl  = !!pWeapon->bNVsecondVPstatus;
 
 			// Обновляем информацию об оружии в шейдерах
-			g_pGamePersistent->m_pGShaderConstants->hud_params.x = bInZoom;  //--#SM+#--
+			g_pGamePersistent->m_pGShaderConstants->hud_params.x = pWeapon->GetZRotatingFactor(); //bInZoom;  //--#SM+#--
 			g_pGamePersistent->m_pGShaderConstants->hud_params.y = pWeapon->GetSecondVPFov(); //--#SM+#--
 			g_pGamePersistent->m_pGShaderConstants->hud_params.z = bUseMark; //--#SM+#--
+			g_pGamePersistent->m_pGShaderConstants->hud_params.w = pWeapon->m_nearwall_last_hud_fov;; //--#SM+#--
 			g_pGamePersistent->m_pGShaderConstants->m_blender_mode.x = bNVEnbl;  //--#SM+#--
 		}
 

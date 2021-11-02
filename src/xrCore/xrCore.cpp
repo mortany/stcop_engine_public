@@ -119,7 +119,7 @@ void xrCore::_initialize(LPCSTR _ApplicationName, LogCallback cb, BOOL init_fs, 
 #endif
         FS._initialize(flags, 0, fs_fname);
 		Msg("Build: %d\nBuild date: %s\n", build_id, build_date);
-		Msg("Forward Frontier Engine: https://discord.gg/YDWHe25");
+		Msg("Engine & Mod Discord: https://discord.gg/sRzN8EKXGk");
         EFS._initialize();
 #ifdef DEBUG
 #ifndef _EDITOR

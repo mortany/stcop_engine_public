@@ -221,6 +221,10 @@ void CWeaponMagazined::Reload()
 	TryReload();
 }
 
+void CWeaponMagazined::OnMotionMark(u32 state, const motion_marks& M)
+{
+	inherited::OnMotionMark(state, M);
+}
 
 bool CWeaponMagazined::TryReload() 
 {

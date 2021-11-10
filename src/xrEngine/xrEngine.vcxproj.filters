@@ -982,6 +982,10 @@
     <Image Include="stalker_cs.ico">
       <Filter>General\Resources</Filter>
     </Image>
+    <Image Include="bitmap4.bmp" />
+    <Image Include="stcop engine splash.png" />
+    <Image Include="forward_frontier_splash.bmp" />
+    <Image Include="icon2.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="My Amplifier Results\r000hs\r000hs.ampl">

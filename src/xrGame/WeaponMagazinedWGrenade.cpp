@@ -689,7 +689,7 @@ void CWeaponMagazinedWGrenade::PlayAnimShoot()
 {
 	if(m_bGrenadeMode)
 	{
-		PlayHUDMotion("anm_shots_g" , TRUE, this, eFire);
+		PlayHUDMotion("anm_shots_g" , FALSE, this, eFire);
 	}
 	else
 	{
@@ -697,9 +697,9 @@ void CWeaponMagazinedWGrenade::PlayAnimShoot()
 		if (IsGrenadeLauncherAttached())
 		{
 			if (IsZoomed() && psWpnAnimsFlag.test(ANM_SHOT_AIM_GL) && IsScopeAttached())
-				PlayHUDMotion("anm_shots_w_gl_when_aim", TRUE, this, GetState());
+				PlayHUDMotion("anm_shots_w_gl_when_aim", FALSE, this, GetState());
 			else
-				PlayHUDMotion("anm_shots_w_gl", TRUE, this, GetState());
+				PlayHUDMotion("anm_shots_w_gl", FALSE, this, GetState());
 		}
 		else
 			inherited::PlayAnimShoot();

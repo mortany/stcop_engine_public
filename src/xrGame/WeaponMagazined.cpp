@@ -1313,11 +1313,11 @@ void CWeaponMagazined::PlayAnimShoot()
 	VERIFY(GetState()==eFire);
 
 	if (IsZoomed() && psWpnAnimsFlag.test(ANM_SHOT_AIM) && IsScopeAttached())
-		PlayHUDMotion("anm_shots_when_aim", TRUE, this, GetState());
+		PlayHUDMotion("anm_shots_when_aim", FALSE, this, GetState());
 	else if(iAmmoElapsed == 1 && psWpnAnimsFlag.test(ANM_SHOT_EMPTY))
-		PlayHUDMotion("anm_shot_l", TRUE, this, GetState());
+		PlayHUDMotion("anm_shot_l", FALSE, this, GetState());
 	else
-		PlayHUDMotion("anm_shots", TRUE, this, GetState());
+		PlayHUDMotion("anm_shots", FALSE, this, GetState());
 }
 
 void CWeaponMagazined::OnZoomIn			()

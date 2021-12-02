@@ -31,14 +31,6 @@ IDI_ICON1               ICON                    "stalker_cs.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
-// Bitmap
-//
-
-IDB_BITMAP1             BITMAP                  "forward_frontier_splash.bmp"
-
-
-/////////////////////////////////////////////////////////////////////////////
-//
 // Version
 //
 
@@ -81,7 +73,8 @@ END
 // PNG
 //
 
-IDB_PNG1 PNG "stcop engine splash.png"
+IDB_PNG1                PNG                     "stcop engine splash.png"
+
 #endif    // Russian (Russia) resources
 /////////////////////////////////////////////////////////////////////////////
 

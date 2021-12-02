@@ -34,10 +34,9 @@ void					CSoundRender_Core::i_destroy_source		(CSoundRender_Source*  S)
 
 void CSoundRender_Core::i_create_all_sources()
 {
-#ifndef MASTER_GOLD
+
     CTimer T;
     T.Start();
-#endif
 
     FS_FileSet flist;
     FS.file_list(flist, "$game_sounds$", FS_ListFiles, "*.ogg");
@@ -70,8 +69,8 @@ void CSoundRender_Core::i_create_all_sources()
 
     DO_MT_PROCESS_RANGE(flist, processFile);
 
-#ifndef MASTER_GOLD
+
     Msg("Finished creating %d sound sources. Duration: %d ms",
         s_sources.size() - sizeBefore, T.GetElapsed_ms());
-#endif
+
 }

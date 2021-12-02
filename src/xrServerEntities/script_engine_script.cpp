@@ -109,64 +109,74 @@ void prefetch_module(LPCSTR file_name)
 	ai().script_engine().process_file(file_name);
 }
 
-#include <chrono>
-
-struct profile_timer_script
-{
-	using Clock = std::chrono::high_resolution_clock;
-	using Time = Clock::time_point;
-	using Duration = Clock::duration;
-
-	Time start_time;
-	Duration accumulator;
-	u64 count = 0;
-	int recurse_mark = 0;
-
-	profile_timer_script() : start_time(), accumulator(), count(0), recurse_mark(0) {}
-
-	bool operator< (const profile_timer_script& profile_timer) const
+struct profile_timer_script {
+	CTimer						measure;
+	u64							m_accumulator;
+	u64							m_count;
+	int							m_recurse_mark;
+	
+	IC								profile_timer_script	()
 	{
-		return accumulator < profile_timer.accumulator;
+		m_accumulator			= 0;
+		m_count					= 0;
+		m_recurse_mark			= 0;
 	}
 
-	void start()
+	IC								profile_timer_script	(const profile_timer_script &profile_timer)
 	{
-		if (recurse_mark)
-		{
-			++recurse_mark;
+		*this					= profile_timer;
+	}
+
+	IC		profile_timer_script&	operator=				(const profile_timer_script &profile_timer)
+	{
+		measure					= profile_timer.measure;
+		m_accumulator			= profile_timer.m_accumulator;
+		m_count					= profile_timer.m_count;
+		m_recurse_mark			= profile_timer.m_recurse_mark;
+		return					(*this);
+	}
+
+	IC		bool					operator<				(const profile_timer_script &profile_timer) const
+	{
+		return					(m_accumulator < profile_timer.m_accumulator);
+	}
+
+	IC		void					start					()
+	{
+		if (m_recurse_mark) {
+			++m_recurse_mark;
 			return;
 		}
 
-		++recurse_mark;
-		++count;
-		start_time = Clock::now();
+		++m_recurse_mark;
+		++m_count;
+		measure.Start();
 	}
 
-	IC void stop()
+	IC		void					stop					()
 	{
-		--recurse_mark;
-
-		if (recurse_mark)
+		THROW					(m_recurse_mark);
+		--m_recurse_mark;
+		
+		if (m_recurse_mark)
 			return;
-
-		const auto finish = Clock::now();
-		if (finish > start_time)
-			accumulator += finish - start_time;
+		
+		m_accumulator += measure.GetElapsed_mcs();
 	}
 
-	float time() const
+	IC		float					time					() const
 	{
-		using namespace std::chrono;
-		return (float)duration_cast<microseconds>(accumulator).count();
+		float result = float(double(m_accumulator));
+		return					(result);
 	}
 };
 
-IC	profile_timer_script operator+(const profile_timer_script& portion0, const profile_timer_script& portion1)
+IC	profile_timer_script	operator+	(const profile_timer_script &portion0, const profile_timer_script &portion1)
 {
-	profile_timer_script result;
-	result.accumulator = portion0.accumulator + portion1.accumulator;
-	result.count = portion0.count + portion1.count;
-	return (result);
+	profile_timer_script	result;
+	result.m_accumulator	= portion0.m_accumulator + portion1.m_accumulator;
+	result.m_count			= portion0.m_count + portion1.m_count;
+	return					(result);
 }
 
 // IC	std::ostream& operator<<(std::ostream &stream, profile_timer_script &timer)

@@ -17,7 +17,7 @@ XRCORE_API LPCSTR build_date;
 
 namespace CPU
 {
-//extern void Detect();
+extern void Detect();
 };
 
 static u32 init_counter = 0;
@@ -75,13 +75,8 @@ void xrCore::_initialize(LPCSTR _ApplicationName, LogCallback cb, BOOL init_fs, 
         GetComputerName(CompName, &sz_comp);
 
         // Mathematics & PSI detection
-        //CPU::Detect();
-        if (!_cpuid(&CPU::ID))
-        {
-            // Core.Fatal ("Fatal error: can't detect CPU/FPU.");
-            abort();
-        }
-        
+        CPU::Detect();
+
         Memory._initialize(strstr(Params, "-mem_debug") ? TRUE : FALSE);
 
         DUMP_PHASE;

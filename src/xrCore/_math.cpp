@@ -137,7 +137,7 @@ void initialize()
 
 namespace CPU
 {
-//XRCORE_API u64 qpc_freq = 0;
+XRCORE_API u64 qpc_freq = 0;
 XRCORE_API u32 qpc_counter = 0;
 XRCORE_API _processor_info ID;
 
@@ -152,11 +152,9 @@ XRCORE_API u64 QPC()
 
 XRCORE_API u64 QPC_Freq()
 {
-    //u64 qpc_freq;
-    //QueryPerformanceFrequency((PLARGE_INTEGER)&qpc_freq);
-    LARGE_INTEGER Freq;
-    QueryPerformanceFrequency(&Freq);
-    return Freq.QuadPart;;
+    u64 qpc_freq;
+    QueryPerformanceFrequency((PLARGE_INTEGER)&qpc_freq);
+    return qpc_freq;
 }
 
 
@@ -168,43 +166,43 @@ u64 __fastcall GetCLK(void)
 }
 #endif
 
-//void Detect()
-//{
-//
-//    if (!_cpuid(&ID))
-//    {
-//        // Core.Fatal ("Fatal error: can't detect CPU/FPU.");
-//        abort();
-//    }
-//
-//    // Timers & frequency
-//    u64 start, end;
-//
-//    SetPriorityClass(GetCurrentProcess(), REALTIME_PRIORITY_CLASS);
-//
-//    start = GetCLK();
-//    while (GetCLK() - start < 1000);
-//    end = GetCLK();
-//    clk_per_second = end - start;
-//
-//    // Detect RDTSC Overhead
-//    u64 clk_overhead = 0;
-//    for (u32 i = 0; i < 256; i++)
-//    {
-//        start = GetCLK();
-//        clk_overhead += GetCLK() - start;
-//    }
-//    clk_overhead /= 256;
-//    clk_per_second -= clk_overhead;
-//
-//    // Detect QPC
-//    LARGE_INTEGER Freq;
-//    QueryPerformanceFrequency(&Freq);
-//    qpc_freq = Freq.QuadPart;
-//
-//    // Restore normal priority
-//    SetPriorityClass(GetCurrentProcess(), NORMAL_PRIORITY_CLASS);
-//}
+void Detect()
+{
+
+    if (!_cpuid(&ID))
+    {
+        // Core.Fatal ("Fatal error: can't detect CPU/FPU.");
+        abort();
+    }
+
+    // Timers & frequency
+    u64 start, end;
+
+    SetPriorityClass(GetCurrentProcess(), REALTIME_PRIORITY_CLASS);
+
+    start = GetCLK();
+    while (GetCLK() - start < 1000);
+    end = GetCLK();
+    clk_per_second = end - start;
+
+    // Detect RDTSC Overhead
+    u64 clk_overhead = 0;
+    for (u32 i = 0; i < 256; i++)
+    {
+        start = GetCLK();
+        clk_overhead += GetCLK() - start;
+    }
+    clk_overhead /= 256;
+    clk_per_second -= clk_overhead;
+
+    // Detect QPC
+    LARGE_INTEGER Freq;
+    QueryPerformanceFrequency(&Freq);
+    qpc_freq = Freq.QuadPart;
+
+    // Restore normal priority
+    SetPriorityClass(GetCurrentProcess(), NORMAL_PRIORITY_CLASS);
+}
 };
 
 bool g_initialize_cpu_called = false;

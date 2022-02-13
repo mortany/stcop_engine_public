@@ -98,8 +98,8 @@ SERVER_ENTITY_DECLARE_BEGIN2(CSE_ALifeItem,CSE_ALifeDynamicObjectVisual,CSE_ALif
 	virtual CSE_Abstract			*init					();
 	virtual CSE_Abstract			*cast_abstract			() {return this;};
 #ifdef XRGAME_EXPORTS
-	virtual void add_offline(const xr_vector<ALife::_OBJECT_ID>& saved_children, const bool& update_registries);
-	virtual void add_online(const bool& update_registries);
+	//virtual void add_offline(const xr_vector<ALife::_OBJECT_ID>& saved_children, const bool& update_registries);
+	//virtual void add_online(const bool& update_registries);
 #endif
 	virtual CSE_ALifeInventoryItem	*cast_inventory_item	() {return this;};
 	virtual BOOL					Net_Relevant			();

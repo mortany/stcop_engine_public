@@ -3,7 +3,7 @@
 #include "weapon.h"
 #include "hudsound.h"
 #include "ai_sounds.h"
-
+#include "hud_item_object.h"
 class ENGINE_API CMotionDef;
 
 //размер очереди считается бесконечность
@@ -39,11 +39,10 @@ public:
 	virtual void    CheckMagazine();
 	virtual void	UnloadMagazine(bool spawn_ammo = true);
 	virtual void	OnMotionMark(u32 state, const motion_marks& M);
+	virtual int     CheckAmmoBeforeReload(u8 &v_ammoType);
 
 	bool            m_bNeedBulletInGun;
-
 	bool            m_bCustomShotSounds;
-
 protected:
 
 	virtual void	OnMagazineEmpty	();

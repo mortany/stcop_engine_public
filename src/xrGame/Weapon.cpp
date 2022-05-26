@@ -99,6 +99,9 @@ CWeapon::CWeapon()
 
 	m_fSecondRTZoomFactor = -1.0f;
 
+	bHasBulletsToHide   = false;
+	bullet_cnt = 0;
+
 	NeedUpdateHudParams = false;
 }
 
@@ -1592,6 +1595,36 @@ void CWeapon::UpdateHUDAddonsVisibility()
 		if (m_eGrenadeLauncherStatus == ALife::eAddonPermanent)
 			HudItemData()->set_bone_visible(wpn_grenade_launcher, TRUE, TRUE);
 
+}
+void CWeapon::HUD_VisualBulletUpdate(bool force, int force_idx)
+{
+	if (!bHasBulletsToHide) 
+		return;
+
+	/*if (m_pInventory->ModifyFrame() <= m_BriefInfo_CalcFrame)
+	{
+		return;
+	}*/
+
+	if (!GetHUDmode())	return;
+
+	//return;
+
+	bool hide = true;
+
+	Msg("Print %d bullets", last_hide_bullet);
+
+	if (last_hide_bullet == bullet_cnt || force) hide = false;
+
+	for (u8 b = 0; b < bullet_cnt; b++)
+	{
+		u16 bone_id = HudItemData()->m_model->LL_BoneID(bullets_bones[b]);
+
+		if (bone_id != BI_NONE)
+			HudItemData()->set_bone_visible(bullets_bones[b], !hide);
+
+		if (b == last_hide_bullet) hide = false;
+	}
 }
 
 void CWeapon::UpdateAddonsVisibility()

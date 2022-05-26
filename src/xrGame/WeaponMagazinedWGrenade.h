@@ -53,6 +53,7 @@ public:
 	virtual void	state_Fire		(float dt);
 	virtual void	OnShot			();
 	virtual void	OnEvent			(NET_Packet& P, u16 type);
+	virtual void	OnMotionMark(u32 state, const motion_marks& M);
 	virtual void	ReloadMagazine	();
 
 	virtual bool	Action			(u16 cmd, u32 flags);

@@ -34,11 +34,12 @@ public:
 	CWeapon();
 	virtual					~CWeapon();
 
-	// [FFT++]: аддоны и управление аддонами
+	// аддоны и управление аддонами
 	bool			bUseAltScope;
 	bool			bScopeIsHasTexture;
 	bool            bNVsecondVPavaible;
 	bool            bNVsecondVPstatus;
+
 
 	virtual	bool			bInZoomRightNow() const { return m_zoom_params.m_fZoomRotationFactor > 0.05; }
 	IC		bool			bIsSecondVPZoomPresent() const { return GetSecondVPZoomFactor() > 0.000f; }
@@ -58,6 +59,16 @@ public:
 	void			GetZoomData(const float scope_factor, float& delta, float& min_zoom_factor);
 	void			ZoomDynamicMod(bool bIncrement, bool bForceLimit);
 	void			UpdateAltScope();
+
+
+	// Up
+	// Magazine system & etc
+	xr_vector<shared_str> bullets_bones;
+	int bullet_cnt;
+	int last_hide_bullet;
+	bool bHasBulletsToHide;
+
+	virtual void HUD_VisualBulletUpdate(bool force = false, int force_idx = -1);
 
 	virtual float			GetControlInertionFactor() const;
 	IC		float			GetZRotatingFactor()    const { return m_zoom_params.m_fZoomRotationFactor; }

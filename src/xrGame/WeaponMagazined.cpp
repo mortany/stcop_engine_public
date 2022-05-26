@@ -1257,8 +1257,11 @@ void CWeaponMagazined::InitAddons()
 
 		m_fSecondRTZoomFactor = -1.0f;
 
-		if ( IsZoomEnabled() )
-			m_zoom_params.m_fIronSightZoomFactor = pSettings->r_float( cNameSect(), "scope_zoom_factor" );
+		if (IsZoomEnabled())
+		{
+			m_zoom_params.m_bUseDynamicZoom = READ_IF_EXISTS(pSettings, r_bool, cNameSect(), "scope_dynamic_zoom", FALSE);
+			m_zoom_params.m_fIronSightZoomFactor = pSettings->r_float(cNameSect(), "scope_zoom_factor");
+		}
 	}
 
 	if ( IsSilencerAttached()/* && SilencerAttachable() */)

@@ -56,7 +56,7 @@ public:
 	void			Load3DScopeParams(LPCSTR section);
 	void			LoadOriginalScopesParams(LPCSTR section);
 	void			LoadCurrentScopeParams(LPCSTR section);
-	void			GetZoomData(const float scope_factor, float& delta, float& min_zoom_factor);
+	virtual void	GetZoomData(const float scope_factor, float& delta, float& min_zoom_factor);
 	void			ZoomDynamicMod(bool bIncrement, bool bForceLimit);
 	void			UpdateAltScope();
 

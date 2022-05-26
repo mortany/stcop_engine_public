@@ -1601,18 +1601,9 @@ void CWeapon::HUD_VisualBulletUpdate(bool force, int force_idx)
 	if (!bHasBulletsToHide) 
 		return;
 
-	/*if (m_pInventory->ModifyFrame() <= m_BriefInfo_CalcFrame)
-	{
-		return;
-	}*/
-
 	if (!GetHUDmode())	return;
 
-	//return;
-
 	bool hide = true;
-
-	Msg("Print %d bullets", last_hide_bullet);
 
 	if (last_hide_bullet == bullet_cnt || force) hide = false;
 
@@ -1768,12 +1759,13 @@ void CWeapon::OnZoomIn()
 	m_zoom_params.m_bIsZoomModeNow = true;
 	psActorFlags.set(AF_ZOOM_NEW_FD, true);
 
-	if (m_fSecondRTZoomFactor == -1)
+	if (m_fSecondRTZoomFactor == -1 && bIsSecondVPZoomPresent())
 		ZoomDynamicMod(true, true);
 
 	if (!m_zoom_params.m_bUseDynamicZoom)
 		SetZoomFactor(CurrentZoomFactor());
-	else SetZoomFactor(psActorFlags.test(AF_3DSCOPE_ENABLE) ? m_zoom_params.m_f3dZoomFactor : m_fRTZoomFactor);
+	else 
+		SetZoomFactor(psActorFlags.test(AF_3DSCOPE_ENABLE) && bIsSecondVPZoomPresent() ? m_zoom_params.m_f3dZoomFactor : m_fRTZoomFactor);
 
 	// Отключаем инерцию (Заменено GetInertionFactor())
 	// EnableHudInertion(FALSE);
@@ -1811,7 +1803,7 @@ void CWeapon::OnZoomIn()
 
 void CWeapon::OnZoomOut()
 {
-	if (!bIsSecondVPZoomPresent() && !psActorFlags.test(AF_3DSCOPE_ENABLE))
+	if (!bIsSecondVPZoomPresent() && psActorFlags.test(AF_3DSCOPE_ENABLE))
 		m_fRTZoomFactor = GetZoomFactor(); // Сохраняем текущий динамический зум
 	m_zoom_params.m_bIsZoomModeNow = false;
 	SetZoomFactor(g_fov);

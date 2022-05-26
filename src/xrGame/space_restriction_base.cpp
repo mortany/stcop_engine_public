@@ -33,6 +33,10 @@ IC	bool CSpaceRestrictionBase_inside	(CSpaceRestrictionBase *self, const Fvector
 
 bool CSpaceRestrictionBase::inside	(u32 level_vertex_id, bool partially_inside, float radius)
 {
+	if (!ai().level_graph().valid_vertex_id(level_vertex_id)) return false;
+
+
+
 	const Fvector					&position = ai().level_graph().vertex_position(level_vertex_id);
 	float							offset = ai().level_graph().header().cell_size()*.5f - EPS_L;
 	if (partially_inside)
